@@ -14,6 +14,8 @@
 #import "AVCamUtilities.h"
 
 #import "STCreateStatusViewController.h"
+#import "STStatusFeedViewController.h"
+#import "STStatus.h"
 
 static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
@@ -124,6 +126,11 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 	}
 
     [super viewDidLoad];
+    
+    self.view.backgroundColor = JNBlackColor;
+    
+    self.progressView.progress = 0.0;
+    self.progressView.alpha = 0.0;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -134,6 +141,20 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 	} else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewWillDisppear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    self.navigationController.navigationBarHidden = NO;
 }
 
 #pragma mark Toolbar Actions
@@ -176,6 +197,65 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
                          [flashView removeFromSuperview];
                      }
      ];
+}
+
+#pragma mark - Captured Image
+
+- (void)didCaptureImage:(UIImage*)capturedImage
+{
+    [self createStatusWithImage:capturedImage];
+}
+
+#pragma mark - Create Status
+
+- (void)createStatusWithImage:(UIImage*)image
+{
+    NSData *imageData = UIImagePNGRepresentation(image);
+    PFFile *imageFile = [PFFile fileWithName:@"img" data:imageData];
+    
+    // ui update
+    [UIView animateWithBlock:^{
+        self.progressView.alpha = 1.0;
+        self.videoPreviewView.alpha = 0.0;
+        self.stillButton.alpha = 0.0;
+        self.cameraToggleButton.alpha = 0.0;
+    }];
+    
+    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        // ui update
+        [UIView animateWithBlock:^{
+            self.progressView.alpha = 0.0;
+        }];
+        
+        STStatus *status = [STStatus new];
+        status[@"image"] = imageFile;
+        status[@"userFBId"] = [[PFUser currentUser] objectForKey:@"fbId"];
+        status[@"user"] = [PFUser currentUser].username;
+        
+        [status saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            
+            [self didCreateStatus:status];
+            
+        }];
+        
+    } progressBlock:^(int percentDone) {
+        
+        JNLogPrimitive(percentDone);
+        [self.progressView setProgress:((float) percentDone * 0.01) animated:YES];
+        
+    }];
+}
+
+- (void)didCreateStatus:(STStatus*)status
+{
+    [self pushToStatusFeed];
+}
+
+- (void)pushToStatusFeed
+{
+    STStatusFeedViewController *statusFeedViewController = [[STStatusFeedViewController alloc] initWithNib];
+    [self.navigationController pushViewController:statusFeedViewController animated:YES];
 }
 
 @end
@@ -341,6 +421,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopCommonModes, ^(void) {
         [[self stillButton] setEnabled:YES];
     });
+    
+    [self didCaptureImage:captureManager.lastCapturedImage];
 }
 
 - (void)captureManagerDeviceConfigurationChanged:(AVCamCaptureManager *)captureManager

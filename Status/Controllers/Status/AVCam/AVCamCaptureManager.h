@@ -65,6 +65,8 @@
 @property (nonatomic,assign) UIBackgroundTaskIdentifier backgroundRecordingID;
 @property (nonatomic,assign) id <AVCamCaptureManagerDelegate> delegate;
 
+@property (nonatomic, retain) UIImage *lastCapturedImage;
+
 - (BOOL) setupSession;
 - (void) startRecording;
 - (void) stopRecording;

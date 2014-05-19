@@ -11,6 +11,12 @@
 #import "STCreateStatusViewController.h"
 #import "STLoginViewController.h"
 
+@interface STAppDelegate ()
+
+@property (nonatomic, strong) UINavigationController *statusNavigationController;
+
+@end
+
 @implementation STAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -40,11 +46,13 @@
 
 - (void)showCreateStatusAsRootViewController
 {
-    
     JNLogObject([PFUser currentUser]);
     
     STCreateStatusViewController *createStatusViewController = [[STCreateStatusViewController alloc] initWithNib];
-    self.window.rootViewController = createStatusViewController;
+    
+    self.statusNavigationController = [[UINavigationController alloc] initWithRootViewController:createStatusViewController];
+    
+    self.window.rootViewController = self.statusNavigationController;
 }
 
 #pragma mark - App Enter / Exit

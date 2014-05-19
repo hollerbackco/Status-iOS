@@ -161,6 +161,8 @@
     [stillImageOutput release];
     [recorder release];
     
+    [self.lastCapturedImage release];
+    
     [super dealloc];
 }
 
@@ -195,6 +197,7 @@
     AVCaptureStillImageOutput *newStillImageOutput = [[AVCaptureStillImageOutput alloc] init];
     NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:
                                     AVVideoCodecJPEG, AVVideoCodecKey,
+                                    @(1/3), AVVideoQualityKey,
                                     nil];
     [newStillImageOutput setOutputSettings:outputSettings];
     [outputSettings release];
@@ -203,7 +206,7 @@
     // Create session (use default AVCaptureSessionPresetHigh)
     AVCaptureSession *newCaptureSession = [[AVCaptureSession alloc] init];
     
-    
+//    
     // Add inputs and output to the capture session
     if ([newCaptureSession canAddInput:newVideoInput]) {
         [newCaptureSession addInput:newVideoInput];
@@ -296,6 +299,9 @@
 																 [library writeImageToSavedPhotosAlbum:[image CGImage]
 																						   orientation:(ALAssetOrientation)[image imageOrientation]
 																					   completionBlock:completionBlock];
+                                                                 
+                                                                 self.lastCapturedImage = image;
+                                                                 
 																 [image release];
 																 
 																 [library release];

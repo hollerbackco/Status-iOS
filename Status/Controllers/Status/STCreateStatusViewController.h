@@ -19,10 +19,15 @@
 //@property (nonatomic, strong) IBOutlet UIBarButtonItem *recordButton;
 @property (nonatomic, strong) IBOutlet UIButton *stillButton;
 @property (nonatomic, strong) IBOutlet UILabel *focusModeLabel;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
 #pragma mark Toolbar Actions
 //- (IBAction)toggleRecording:(id)sender;
 - (IBAction)captureStillImage:(id)sender;
 - (IBAction)toggleCamera:(id)sender;
+
+#pragma mark - Captured Image
+
+- (void)didCaptureImage:(UIImage*)capturedImage;
 
 @end
