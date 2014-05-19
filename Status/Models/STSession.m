@@ -39,10 +39,23 @@
 				NSLog(@"User logged in through Facebook!");
 			}
             
-			// Callback - login successful
-			if ([delegate respondsToSelector:@selector(didLogin:)]) {
-				[delegate didLogin:YES];
-			}
+			[FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                if (!error) {
+                    NSDictionary<FBGraphUser> *me = (NSDictionary<FBGraphUser> *)result;
+                    // Store the Facebook Id
+                    [[PFUser currentUser] setObject:me.objectID forKey:@"fbId"];
+                    [[PFUser currentUser] setObject:me.name forKey:@"fbName"];
+                    [[PFUser currentUser] setObject:me.first_name forKey:@"fbFirstName"];
+                    [[PFUser currentUser] setObject:me.last_name forKey:@"fbLastName"];
+                    
+                    [[PFUser currentUser] saveInBackground];
+                }
+                
+                // Callback - login successful
+                if ([delegate respondsToSelector:@selector(didLogin:)]) {
+                    [delegate didLogin:YES];
+                }
+            }];
 		}
 	}];
 }

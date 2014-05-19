@@ -28,8 +28,6 @@
     
     if ([STSession isLoggedIn]) {
         
-        JNLogObject([PFUser currentUser]);
-        
         [self showCreateStatusAsRootViewController];
         
     } else {
@@ -42,6 +40,9 @@
 
 - (void)showCreateStatusAsRootViewController
 {
+    
+    JNLogObject([PFUser currentUser]);
+    
     STCreateStatusViewController *createStatusViewController = [[STCreateStatusViewController alloc] initWithNib];
     self.window.rootViewController = createStatusViewController;
 }
