@@ -8,6 +8,21 @@
 
 #import "JNViewController.h"
 
-@interface STCreateStatusViewController : JNViewController
+@class AVCamCaptureManager, AVCamPreviewView, AVCaptureVideoPreviewLayer;
+
+@interface STCreateStatusViewController : JNViewController <UIImagePickerControllerDelegate>
+
+@property (nonatomic, strong) AVCamCaptureManager *captureManager;
+@property (nonatomic, strong) IBOutlet UIView *videoPreviewView;
+@property (nonatomic, strong) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
+@property (nonatomic, strong) IBOutlet UIButton *cameraToggleButton;
+//@property (nonatomic, strong) IBOutlet UIBarButtonItem *recordButton;
+@property (nonatomic, strong) IBOutlet UIButton *stillButton;
+@property (nonatomic, strong) IBOutlet UILabel *focusModeLabel;
+
+#pragma mark Toolbar Actions
+//- (IBAction)toggleRecording:(id)sender;
+- (IBAction)captureStillImage:(id)sender;
+- (IBAction)toggleCamera:(id)sender;
 
 @end
