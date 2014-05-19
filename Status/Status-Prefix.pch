@@ -14,11 +14,13 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 
+#import <Parse/Parse.h>
+
 #import "STConstants.h"
 #import "JNLogger.h"
 #import "CGUtils.h"
 #import "NSObject+JNHelper.h"
 
-#import <Parse/Parse.h>
+#import "STSession.h"
 
 #endif

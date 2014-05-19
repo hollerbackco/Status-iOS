@@ -8,6 +8,7 @@
 
 #import "STAppDelegate.h"
 
+#import "STCreateStatusViewController.h"
 #import "STLoginViewController.h"
 
 @implementation STAppDelegate
@@ -25,13 +26,27 @@
     // Initialize Parse's Facebook Utilities singleton. This uses the FacebookAppID we specified in our App bundle's plist.
     [PFFacebookUtils initializeFacebook];
     
-    STLoginViewController *loginViewController = [[STLoginViewController alloc] initWithNib];
-    self.window.rootViewController = loginViewController;
+    if ([STSession isLoggedIn]) {
+        
+        JNLogObject([PFUser currentUser]);
+        
+        [self showCreateStatusAsRootViewController];
+        
+    } else {
+        STLoginViewController *loginViewController = [[STLoginViewController alloc] initWithNib];
+        self.window.rootViewController = loginViewController;
+    }
     
     return YES;
 }
 
+- (void)showCreateStatusAsRootViewController
+{
+    STCreateStatusViewController *createStatusViewController = [[STCreateStatusViewController alloc] initWithNib];
+    self.window.rootViewController = createStatusViewController;
+}
 
+#pragma mark - App Enter / Exit
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -52,7 +67,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -62,14 +77,13 @@
 
 #pragma mark - FB
 
-- (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    return [FBAppCall handleOpenURL:url sourceApplication:@"Status" withSession:[PFFacebookUtils session]];
-}
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:[PFFacebookUtils session]];
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [FBAppCall handleOpenURL:url
+                  sourceApplication:sourceApplication
+                        withSession:[PFFacebookUtils session]];
 }
 
 @end

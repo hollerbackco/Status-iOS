@@ -7,32 +7,69 @@
 //
 
 #import "STLoginViewController.h"
+#import "STAppDelegate.h"
 
-@interface STLoginViewController ()
+@interface STLoginViewController () <STSessionDelegate>
+
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loginSpinnerView;
+
+- (IBAction)loginAction:(id)sender;
 
 @end
 
 @implementation STLoginViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+#pragma mark - Views
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    self.loginSpinnerView.alpha = 0.0;
+    [self.loginSpinnerView stopAnimating];
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - Actions
+
+- (IBAction)loginAction:(id)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [UIView animateWithBlock:^{
+        self.loginButton.alpha = 1.0;
+    }];
+    
+    [self.loginSpinnerView startAnimating];
+    
+    // Do the login
+    [STSession login:self];
+}
+
+#pragma mark - STSessionDelegate
+
+- (void)didLogin:(BOOL)loggedIn
+{
+    [self.loginButton setTitle:@"Logged in." forState:UIControlStateNormal];
+    
+    [UIView animateWithBlock:^{
+        self.loginButton.alpha = 0.0;
+    }];
+    
+    [self.loginSpinnerView stopAnimating];
+    
+	// Did we login successfully ?
+	if (loggedIn) {
+        
+        [((STAppDelegate*) [UIApplication sharedApplication].delegate) showCreateStatusAsRootViewController];
+        
+	} else {
+		// Show error alert
+		[[[UIAlertView alloc] initWithTitle:@"Login Failed"
+                                    message:@"Facebook Login failed. Please try again"
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles:nil] show];
+	}
 }
 
 @end
+

@@ -53,6 +53,8 @@
 		0DB0BE1B192A9D8F002F568F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BE1A192A9D8F002F568F /* SystemConfiguration.framework */; };
 		0DB0BE1D192A9E53002F568F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BE1C192A9E53002F568F /* Security.framework */; };
 		0DB0BE1F192A9E97002F568F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BE1E192A9E97002F568F /* Social.framework */; };
+		0DB0BE23192AA1CA002F568F /* STSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE22192AA1CA002F568F /* STSession.m */; };
+		0DB0BE27192AA60B002F568F /* fb-login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DB0BE26192AA60B002F568F /* fb-login@2x.png */; };
 		17CDFD3B33074CD4810ECC5A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A25DF608A844329BCEAFF56 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -136,6 +138,9 @@
 		0DB0BE1A192A9D8F002F568F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0DB0BE1C192A9E53002F568F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0DB0BE1E192A9E97002F568F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		0DB0BE21192AA1CA002F568F /* STSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STSession.h; path = Models/STSession.h; sourceTree = "<group>"; };
+		0DB0BE22192AA1CA002F568F /* STSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STSession.m; path = Models/STSession.m; sourceTree = "<group>"; };
+		0DB0BE26192AA60B002F568F /* fb-login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-login@2x.png"; sourceTree = "<group>"; };
 		2A25DF608A844329BCEAFF56 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5FC65DAE5A546C2823505C1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -224,6 +229,7 @@
 		0DB0BD95192A85C9002F568F /* Status */ = {
 			isa = PBXGroup;
 			children = (
+				0DB0BE20192AA1B3002F568F /* Models */,
 				0DB0BE05192A9813002F568F /* Helpers */,
 				0DB0BDBE192A95BB002F568F /* Controllers */,
 				0DB0BDBF192A9605002F568F /* JNHelpers */,
@@ -233,6 +239,7 @@
 				0DB0BD9E192A85C9002F568F /* STAppDelegate.h */,
 				0DB0BD9F192A85C9002F568F /* STAppDelegate.m */,
 				0DB0BDA1192A85C9002F568F /* Images.xcassets */,
+				0DB0BE24192AA60B002F568F /* Resources */,
 				0DB0BD96192A85C9002F568F /* Supporting Files */,
 			);
 			path = Status;
@@ -366,6 +373,31 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		0DB0BE20192AA1B3002F568F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0DB0BE21192AA1CA002F568F /* STSession.h */,
+				0DB0BE22192AA1CA002F568F /* STSession.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		0DB0BE24192AA60B002F568F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0DB0BE25192AA60B002F568F /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0DB0BE25192AA60B002F568F /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0DB0BE26192AA60B002F568F /* fb-login@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -446,6 +478,7 @@
 			files = (
 				0DB0BD9A192A85C9002F568F /* InfoPlist.strings in Resources */,
 				0DB0BE01192A968F002F568F /* STLoginViewController.xib in Resources */,
+				0DB0BE27192AA60B002F568F /* fb-login@2x.png in Resources */,
 				0DB0BDFC192A966C002F568F /* STStatusFeedViewController.xib in Resources */,
 				0DB0BDF7192A9658002F568F /* STCreateStatusViewController.xib in Resources */,
 				0DB0BDA2192A85C9002F568F /* Images.xcassets in Resources */,
@@ -505,6 +538,7 @@
 				0DB0BDE6192A9605002F568F /* NSObject+JNHelper.m in Sources */,
 				0DB0BD9C192A85C9002F568F /* main.m in Sources */,
 				0DB0BDED192A9605002F568F /* JNLogger.m in Sources */,
+				0DB0BE23192AA1CA002F568F /* STSession.m in Sources */,
 				0DB0BDEB192A9605002F568F /* UIView+JNHelper.m in Sources */,
 				0DB0BDE8192A9605002F568F /* UIColor+JNHelper.m in Sources */,
 				0DB0BDE7192A9605002F568F /* NSString+MD5.m in Sources */,
