@@ -55,6 +55,10 @@
 		0DB0BE1F192A9E97002F568F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BE1E192A9E97002F568F /* Social.framework */; };
 		0DB0BE23192AA1CA002F568F /* STSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE22192AA1CA002F568F /* STSession.m */; };
 		0DB0BE27192AA60B002F568F /* fb-login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DB0BE26192AA60B002F568F /* fb-login@2x.png */; };
+		0DB0BE31192AB322002F568F /* AVCamCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE2A192AB322002F568F /* AVCamCaptureManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0DB0BE32192AB322002F568F /* AVCamRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE2C192AB322002F568F /* AVCamRecorder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0DB0BE33192AB322002F568F /* AVCamUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE2E192AB322002F568F /* AVCamUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0DB0BE34192AB322002F568F /* AVCamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE30192AB322002F568F /* AVCamViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		17CDFD3B33074CD4810ECC5A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A25DF608A844329BCEAFF56 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -141,6 +145,14 @@
 		0DB0BE21192AA1CA002F568F /* STSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STSession.h; path = Models/STSession.h; sourceTree = "<group>"; };
 		0DB0BE22192AA1CA002F568F /* STSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STSession.m; path = Models/STSession.m; sourceTree = "<group>"; };
 		0DB0BE26192AA60B002F568F /* fb-login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-login@2x.png"; sourceTree = "<group>"; };
+		0DB0BE29192AB322002F568F /* AVCamCaptureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamCaptureManager.h; sourceTree = "<group>"; };
+		0DB0BE2A192AB322002F568F /* AVCamCaptureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamCaptureManager.m; sourceTree = "<group>"; };
+		0DB0BE2B192AB322002F568F /* AVCamRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamRecorder.h; sourceTree = "<group>"; };
+		0DB0BE2C192AB322002F568F /* AVCamRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamRecorder.m; sourceTree = "<group>"; };
+		0DB0BE2D192AB322002F568F /* AVCamUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamUtilities.h; sourceTree = "<group>"; };
+		0DB0BE2E192AB322002F568F /* AVCamUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamUtilities.m; sourceTree = "<group>"; };
+		0DB0BE2F192AB322002F568F /* AVCamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamViewController.h; sourceTree = "<group>"; };
+		0DB0BE30192AB322002F568F /* AVCamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamViewController.m; sourceTree = "<group>"; };
 		2A25DF608A844329BCEAFF56 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5FC65DAE5A546C2823505C1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -344,6 +356,7 @@
 		0DB0BDF0192A9627002F568F /* Status */ = {
 			isa = PBXGroup;
 			children = (
+				0DB0BE28192AB322002F568F /* AVCam */,
 				0DB0BDF3192A9658002F568F /* STCreateStatusViewController.h */,
 				0DB0BDF4192A9658002F568F /* STCreateStatusViewController.m */,
 				0DB0BDF5192A9658002F568F /* STCreateStatusViewController.xib */,
@@ -396,6 +409,22 @@
 				0DB0BE26192AA60B002F568F /* fb-login@2x.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		0DB0BE28192AB322002F568F /* AVCam */ = {
+			isa = PBXGroup;
+			children = (
+				0DB0BE29192AB322002F568F /* AVCamCaptureManager.h */,
+				0DB0BE2A192AB322002F568F /* AVCamCaptureManager.m */,
+				0DB0BE2B192AB322002F568F /* AVCamRecorder.h */,
+				0DB0BE2C192AB322002F568F /* AVCamRecorder.m */,
+				0DB0BE2D192AB322002F568F /* AVCamUtilities.h */,
+				0DB0BE2E192AB322002F568F /* AVCamUtilities.m */,
+				0DB0BE2F192AB322002F568F /* AVCamViewController.h */,
+				0DB0BE30192AB322002F568F /* AVCamViewController.m */,
+			);
+			name = AVCam;
+			path = Controllers/Status/AVCam;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -538,16 +567,20 @@
 				0DB0BDE6192A9605002F568F /* NSObject+JNHelper.m in Sources */,
 				0DB0BD9C192A85C9002F568F /* main.m in Sources */,
 				0DB0BDED192A9605002F568F /* JNLogger.m in Sources */,
+				0DB0BE34192AB322002F568F /* AVCamViewController.m in Sources */,
 				0DB0BE23192AA1CA002F568F /* STSession.m in Sources */,
 				0DB0BDEB192A9605002F568F /* UIView+JNHelper.m in Sources */,
 				0DB0BDE8192A9605002F568F /* UIColor+JNHelper.m in Sources */,
+				0DB0BE32192AB322002F568F /* AVCamRecorder.m in Sources */,
 				0DB0BDE7192A9605002F568F /* NSString+MD5.m in Sources */,
 				0DB0BDEF192A9605002F568F /* JNSimpleDataStore.m in Sources */,
 				0DB0BDE5192A9605002F568F /* JNViewController.m in Sources */,
 				0DB0BDE3192A9605002F568F /* JNFileUtils.m in Sources */,
 				0DB0BDE9192A9605002F568F /* UIFont+JNHelper.m in Sources */,
 				0DB0BDA0192A85C9002F568F /* STAppDelegate.m in Sources */,
+				0DB0BE33192AB322002F568F /* AVCamUtilities.m in Sources */,
 				0DB0BDEC192A9605002F568F /* UIViewController+JNHelper.m in Sources */,
+				0DB0BE31192AB322002F568F /* AVCamCaptureManager.m in Sources */,
 				0DB0BDEA192A9605002F568F /* UIImage+JNHelper.m in Sources */,
 				0DB0BDEE192A9605002F568F /* JNAppManager.m in Sources */,
 				0DB0BDF6192A9658002F568F /* STCreateStatusViewController.m in Sources */,
