@@ -19,4 +19,6 @@
 #import "CGUtils.h"
 #import "NSObject+JNHelper.h"
 
+#import <Parse/Parse.h>
+
 #endif

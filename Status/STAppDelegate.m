@@ -19,6 +19,12 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+    // Register our Parse Application.
+    [Parse setApplicationId:@"OAawrd6K5rsKQWHGzh0cqtsVz8qnlMQvRewC8E8h" clientKey:@"ANovqbeOyoQ17I6RSGSVTps3FIrWIj9k1jHkMl4R"];
+    
+    // Initialize Parse's Facebook Utilities singleton. This uses the FacebookAppID we specified in our App bundle's plist.
+    [PFFacebookUtils initializeFacebook];
+    
     STLoginViewController *loginViewController = [[STLoginViewController alloc] initWithNib];
     self.window.rootViewController = loginViewController;
     
@@ -52,6 +58,18 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - FB
+
+- (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [FBAppCall handleOpenURL:url sourceApplication:@"Status" withSession:[PFFacebookUtils session]];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:[PFFacebookUtils session]];
 }
 
 @end
