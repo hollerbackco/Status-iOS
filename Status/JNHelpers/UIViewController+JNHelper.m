@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Hollerback. All rights reserved.
 //
 
-#import <SDWebImageManager.h>
+//#import <SDWebImageManager.h>
 #import <NSNotificationCenter+RACSupport.h>
 
 #import "UIFont+JNHelper.h"

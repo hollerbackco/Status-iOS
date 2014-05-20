@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Signal. All rights reserved.
 //
 
-#import <AmazonS3Client.h>
-#import <S3TransferManager.h>
+//#import <AmazonS3Client.h>
+//#import <S3TransferManager.h>
 
 #import "JNLogger.h"
 
@@ -77,11 +77,11 @@ static JNLogger *sharedInstance;
     [self configureFileLogger];
 }
 
-#pragma mark - AmazonServiceRequestDelegate
-
--(void)request:(AmazonServiceRequest *)request didCompleteWithResponse:(AmazonServiceResponse *)response {}
-
--(void)request:(AmazonServiceRequest *)request didFailWithError:(NSError *)error {}
+//#pragma mark - AmazonServiceRequestDelegate
+//
+//-(void)request:(AmazonServiceRequest *)request didCompleteWithResponse:(AmazonServiceResponse *)response {}
+//
+//-(void)request:(AmazonServiceRequest *)request didFailWithError:(NSError *)error {}
 
 @end
 
