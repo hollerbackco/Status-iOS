@@ -21,6 +21,12 @@
 @property (nonatomic, strong) IBOutlet UILabel *focusModeLabel;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
+@property (nonatomic) BOOL shouldLoadCamera;
+
+#pragma mark - Camera
+
+- (void)setupCamera;
+
 #pragma mark Toolbar Actions
 //- (IBAction)toggleRecording:(id)sender;
 - (IBAction)captureStillImage:(id)sender;

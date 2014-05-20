@@ -55,76 +55,81 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)dealloc
 {
-    [self removeObserver:self forKeyPath:@"captureManager.videoInput.device.focusMode"];
+//    [self removeObserver:self forKeyPath:@"captureManager.videoInput.device.focusMode"];
+}
+
+#pragma mark - Camera
+
+- (void)setupCamera
+{
+    if ([self captureManager] == nil) {
+        AVCamCaptureManager *manager = [[AVCamCaptureManager alloc] init];
+        [self setCaptureManager:manager];
+        
+        [[self captureManager] setDelegate:self];
+        
+        if ([[self captureManager] setupSession]) {
+            // Create video preview layer and add it to the UI
+            AVCaptureVideoPreviewLayer *newCaptureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:[[self captureManager] session]];
+            UIView *view = [self videoPreviewView];
+            CALayer *viewLayer = [view layer];
+            [viewLayer setMasksToBounds:YES];
+            
+            CGRect bounds = [view bounds];
+            [newCaptureVideoPreviewLayer setFrame:bounds];
+            
+            AVCaptureConnection *captureConnection = [AVCamUtilities connectionWithMediaType:AVMediaTypeVideo fromConnections:self.captureManager.stillImageOutput.connections];
+            if ([captureConnection isVideoOrientationSupported]) {
+                captureConnection.videoOrientation = AVCaptureVideoOrientationPortrait;
+            }
+            
+            [newCaptureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+            
+            [viewLayer insertSublayer:newCaptureVideoPreviewLayer below:[[viewLayer sublayers] objectAtIndex:0]];
+            
+            [self setCaptureVideoPreviewLayer:newCaptureVideoPreviewLayer];
+            
+            // Start the session. This is done asychronously since -startRunning doesn't return until the session is running.
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [[[self captureManager] session] startRunning];
+            });
+            
+            [self updateButtonStates];
+            
+            //            // Create the focus mode UI overlay
+            //			UILabel *newFocusModeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, viewLayer.bounds.size.width - 20, 20)];
+            //			[newFocusModeLabel setBackgroundColor:[UIColor clearColor]];
+            //			[newFocusModeLabel setTextColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.50]];
+            //			AVCaptureFocusMode initialFocusMode = [[[[self captureManager] videoInput] device] focusMode];
+            //			[newFocusModeLabel setText:[NSString stringWithFormat:@"focus: %@", [self stringForFocusMode:initialFocusMode]]];
+            //			[view addSubview:newFocusModeLabel];
+            //			[self addObserver:self forKeyPath:@"captureManager.videoInput.device.focusMode" options:NSKeyValueObservingOptionNew context:AVCamFocusModeObserverContext];
+            //			[self setFocusModeLabel:newFocusModeLabel];
+            
+            // Add a single tap gesture to focus on the point tapped, then lock focus
+            UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToAutoFocus:)];
+            [singleTap setDelegate:self];
+            [singleTap setNumberOfTapsRequired:1];
+            [view addGestureRecognizer:singleTap];
+            
+            // Add a double tap gesture to reset the focus mode to continuous auto focus
+            UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToContinouslyAutoFocus:)];
+            [doubleTap setDelegate:self];
+            [doubleTap setNumberOfTapsRequired:2];
+            [singleTap requireGestureRecognizerToFail:doubleTap];
+            [view addGestureRecognizer:doubleTap];
+        }
+    }
 }
 
 #pragma mark - Views
 
 - (void)viewDidLoad
 {
-//    [[self cameraToggleButton] setTitle:NSLocalizedString(@"Camera", @"Toggle camera button title")];
-//    [[self recordButton] setTitle:NSLocalizedString(@"Record", @"Toggle recording button record title")];
-//    [[self stillButton] setTitle:NSLocalizedString(@"Photo", @"Capture still image button title")];
+    if (self.shouldLoadCamera) {
+        [self setupCamera];
+    }
     
-	if ([self captureManager] == nil) {
-		AVCamCaptureManager *manager = [[AVCamCaptureManager alloc] init];
-		[self setCaptureManager:manager];
-		
-		[[self captureManager] setDelegate:self];
-        
-		if ([[self captureManager] setupSession]) {
-            // Create video preview layer and add it to the UI
-			AVCaptureVideoPreviewLayer *newCaptureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:[[self captureManager] session]];
-			UIView *view = [self videoPreviewView];
-			CALayer *viewLayer = [view layer];
-			[viewLayer setMasksToBounds:YES];
-			
-			CGRect bounds = [view bounds];
-			[newCaptureVideoPreviewLayer setFrame:bounds];
-			
-            AVCaptureConnection *captureConnection = [AVCamUtilities connectionWithMediaType:AVMediaTypeVideo fromConnections:self.captureManager.stillImageOutput.connections];
-            if ([captureConnection isVideoOrientationSupported]) {
-                captureConnection.videoOrientation = AVCaptureVideoOrientationPortrait;
-			}
-			
-			[newCaptureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-			
-			[viewLayer insertSublayer:newCaptureVideoPreviewLayer below:[[viewLayer sublayers] objectAtIndex:0]];
-			
-			[self setCaptureVideoPreviewLayer:newCaptureVideoPreviewLayer];
-			
-            // Start the session. This is done asychronously since -startRunning doesn't return until the session is running.
-			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-				[[[self captureManager] session] startRunning];
-			});
-			
-            [self updateButtonStates];
-			
-//            // Create the focus mode UI overlay
-//			UILabel *newFocusModeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, viewLayer.bounds.size.width - 20, 20)];
-//			[newFocusModeLabel setBackgroundColor:[UIColor clearColor]];
-//			[newFocusModeLabel setTextColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.50]];
-//			AVCaptureFocusMode initialFocusMode = [[[[self captureManager] videoInput] device] focusMode];
-//			[newFocusModeLabel setText:[NSString stringWithFormat:@"focus: %@", [self stringForFocusMode:initialFocusMode]]];
-//			[view addSubview:newFocusModeLabel];
-//			[self addObserver:self forKeyPath:@"captureManager.videoInput.device.focusMode" options:NSKeyValueObservingOptionNew context:AVCamFocusModeObserverContext];
-//			[self setFocusModeLabel:newFocusModeLabel];
-            
-            // Add a single tap gesture to focus on the point tapped, then lock focus
-			UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToAutoFocus:)];
-			[singleTap setDelegate:self];
-			[singleTap setNumberOfTapsRequired:1];
-			[view addGestureRecognizer:singleTap];
-			
-            // Add a double tap gesture to reset the focus mode to continuous auto focus
-			UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToContinouslyAutoFocus:)];
-			[doubleTap setDelegate:self];
-			[doubleTap setNumberOfTapsRequired:2];
-			[singleTap requireGestureRecognizerToFail:doubleTap];
-			[view addGestureRecognizer:doubleTap];
-		}
-	}
-
     [super viewDidLoad];
     
     self.view.backgroundColor = JNBlackColor;
@@ -322,6 +327,17 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 {
     STStatusFeedViewController *statusFeedViewController = [[STStatusFeedViewController alloc] initWithStyle:UITableViewStylePlain];
     [self.navigationController pushViewController:statusFeedViewController animated:YES];
+}
+
+- (void)resetCreateStatus
+{
+    // ui update
+    [UIView animateWithBlock:^{
+        self.progressView.alpha = 0.0;
+        self.videoPreviewView.alpha = 1.0;
+        self.stillButton.alpha = 1.0;
+        self.cameraToggleButton.alpha = 1.0;
+    }];
 }
 
 @end

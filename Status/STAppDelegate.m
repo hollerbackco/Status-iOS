@@ -14,6 +14,7 @@
 @interface STAppDelegate ()
 
 @property (nonatomic, strong) UINavigationController *statusNavigationController;
+@property (nonatomic) BOOL shouldRestartCreateStatus;
 
 @end
 
@@ -34,7 +35,7 @@
     
     if ([STSession isLoggedIn]) {
         
-        [self showCreateStatusAsRootViewController];
+        [self showCreateStatusAsRootViewController:YES];
         
     } else {
         STLoginViewController *loginViewController = [[STLoginViewController alloc] initWithNib];
@@ -44,11 +45,13 @@
     return YES;
 }
 
-- (void)showCreateStatusAsRootViewController
+- (void)showCreateStatusAsRootViewController:(BOOL)shouldLoadCamera
 {
     JNLogObject([PFUser currentUser]);
     
     STCreateStatusViewController *createStatusViewController = [[STCreateStatusViewController alloc] initWithNib];
+    
+    createStatusViewController.shouldLoadCamera = shouldLoadCamera;
     
     self.statusNavigationController = [[UINavigationController alloc] initWithRootViewController:createStatusViewController];
     
@@ -67,6 +70,10 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    self.shouldRestartCreateStatus = YES;
+    
+    [self showCreateStatusAsRootViewController:NO];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -77,6 +84,12 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+    
+    if (self.shouldRestartCreateStatus) {
+        self.shouldRestartCreateStatus = NO;
+        
+        [((STCreateStatusViewController*) self.statusNavigationController.topViewController) setupCamera];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
