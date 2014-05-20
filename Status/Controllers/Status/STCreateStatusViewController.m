@@ -244,52 +244,62 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
          [getStatusQuery whereKey:@"user" equalTo:[PFUser currentUser]];
          [getStatusQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
              
-             JNLogObject(object);
-             if (object) {
+             if (error) {
                  
-                 // update the status object
-                 STStatus *status = (STStatus*) object;
-                 status[@"image"] = imageFile;
-                 [status saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                     
-                     if (error) {
-                         
-                         JNLogObject(error);
-                         [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem saving your status. Please try again."];
-                         
-                         [self resetCreateStatus];
-                         
-                     } else {
-                         
-                         JNLog(@"status successfully updated");
-                         [self didCreateStatus:status];
-                     }
-                 }];
+                 JNLogObject(error);
+                 [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem saving your status. Please try again."];
+                 
+                 [self resetCreateStatus];
                  
              } else {
                  
-                 // create a new status object
-                 STStatus *status = [STStatus new];
-                 status[@"image"] = imageFile;
-                 status[@"userFBId"] = [[PFUser currentUser] objectForKey:@"fbId"];
-                 status[@"user"] = [PFUser currentUser];
-                 
-                 [status saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                 JNLogObject(object);
+                 if (object) {
                      
-                     if (error) {
+                     // update the status object
+                     STStatus *status = (STStatus*) object;
+                     status[@"image"] = imageFile;
+                     [status saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                          
-                         JNLogObject(error);
-                         [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem saving your status. Please try again."];
+                         if (error) {
+                             
+                             JNLogObject(error);
+                             [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem saving your status. Please try again."];
+                             
+                             [self resetCreateStatus];
+                             
+                         } else {
+                             
+                             JNLog(@"status successfully updated");
+                             [self didCreateStatus:status];
+                         }
+                     }];
+                     
+                 } else {
+                     
+                     // create a new status object
+                     STStatus *status = [STStatus new];
+                     status[@"image"] = imageFile;
+                     status[@"userFBId"] = [[PFUser currentUser] objectForKey:@"fbId"];
+                     status[@"user"] = [PFUser currentUser];
+                     
+                     [status saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                          
-                         [self resetCreateStatus];
-                         
-                     } else {
-                         
-                         JNLog(@"status successfully saved");
-                         [self didCreateStatus:status];
-                     }
-                 }];
-                 
+                         if (error) {
+                             
+                             JNLogObject(error);
+                             [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem saving your status. Please try again."];
+                             
+                             [self resetCreateStatus];
+                             
+                         } else {
+                             
+                             JNLog(@"status successfully saved");
+                             [self didCreateStatus:status];
+                         }
+                     }];
+                     
+                 }
              }
          }];
      }
