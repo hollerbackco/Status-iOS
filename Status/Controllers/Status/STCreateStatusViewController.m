@@ -133,6 +133,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [super viewDidLoad];
     
     self.view.backgroundColor = JNBlackColor;
+    self.videoPreviewView.backgroundColor = JNBlackColor;
     
     self.progressView.progress = 0.0;
     self.progressView.alpha = 0.0;
@@ -223,6 +224,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         self.progressView.alpha = 1.0;
         self.videoPreviewView.alpha = 0.0;
         self.stillButton.alpha = 0.0;
+        self.promptLabel.alpha = 0.0;
         self.cameraToggleButton.alpha = 0.0;
     }];
     
@@ -336,6 +338,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         self.progressView.alpha = 0.0;
         self.videoPreviewView.alpha = 1.0;
         self.stillButton.alpha = 1.0;
+        self.promptLabel.alpha = 1.0;
         self.cameraToggleButton.alpha = 1.0;
     }];
 }

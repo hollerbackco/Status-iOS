@@ -17,6 +17,7 @@
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
 @property (nonatomic, strong) IBOutlet UIButton *cameraToggleButton;
 //@property (nonatomic, strong) IBOutlet UIBarButtonItem *recordButton;
+@property (weak, nonatomic) IBOutlet UILabel *promptLabel;
 @property (nonatomic, strong) IBOutlet UIButton *stillButton;
 @property (nonatomic, strong) IBOutlet UILabel *focusModeLabel;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;

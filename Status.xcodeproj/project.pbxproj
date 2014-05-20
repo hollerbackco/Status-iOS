@@ -62,6 +62,8 @@
 		0DB0BE3A192AC3EB002F568F /* STStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE39192AC3EB002F568F /* STStatus.m */; };
 		0DB0BE3E192AC821002F568F /* STStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */; };
 		0DB0BE3F192AC821002F568F /* STStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */; };
+		0DFB825F192BD005008CD552 /* camera-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB825D192BD005008CD552 /* camera-button@2x.png */; };
+		0DFB8260192BD005008CD552 /* flip-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB825E192BD005008CD552 /* flip-icon@2x.png */; };
 		17CDFD3B33074CD4810ECC5A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A25DF608A844329BCEAFF56 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -161,6 +163,8 @@
 		0DB0BE3B192AC821002F568F /* STStatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusTableViewCell.h; path = Controllers/Status/STStatusTableViewCell.h; sourceTree = "<group>"; };
 		0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusTableViewCell.m; path = Controllers/Status/STStatusTableViewCell.m; sourceTree = "<group>"; };
 		0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STStatusTableViewCell.xib; path = Controllers/Status/STStatusTableViewCell.xib; sourceTree = "<group>"; };
+		0DFB825D192BD005008CD552 /* camera-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-button@2x.png"; sourceTree = "<group>"; };
+		0DFB825E192BD005008CD552 /* flip-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flip-icon@2x.png"; sourceTree = "<group>"; };
 		2A25DF608A844329BCEAFF56 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5FC65DAE5A546C2823505C1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -420,6 +424,8 @@
 			isa = PBXGroup;
 			children = (
 				0DB0BE26192AA60B002F568F /* fb-login@2x.png */,
+				0DFB825D192BD005008CD552 /* camera-button@2x.png */,
+				0DFB825E192BD005008CD552 /* flip-icon@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -524,6 +530,8 @@
 				0DB0BE27192AA60B002F568F /* fb-login@2x.png in Resources */,
 				0DB0BDFC192A966C002F568F /* STStatusFeedViewController.xib in Resources */,
 				0DB0BDF7192A9658002F568F /* STCreateStatusViewController.xib in Resources */,
+				0DFB8260192BD005008CD552 /* flip-icon@2x.png in Resources */,
+				0DFB825F192BD005008CD552 /* camera-button@2x.png in Resources */,
 				0DB0BDA2192A85C9002F568F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
