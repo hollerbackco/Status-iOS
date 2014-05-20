@@ -19,14 +19,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N1D-Ja-ZsB">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1D-Ja-ZsB">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPb-Gv-Y0k">
-                            <rect key="frame" x="266" y="51" width="44" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPb-Gv-Y0k">
+                            <rect key="frame" x="270" y="80" width="44" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="Hh2-Fa-Vxe"/>
+                                <constraint firstAttribute="height" constant="44" id="idO-5S-Cy5"/>
+                            </constraints>
                             <state key="normal" image="flip-icon.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -34,22 +38,50 @@
                                 <action selector="toggleCamera:" destination="-1" eventType="touchUpInside" id="lXG-wj-gYW"/>
                             </connections>
                         </button>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="set your status to see the status of your friends" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="JNq-md-IOR" userLabel="promptLabel">
+                            <rect key="frame" x="20" y="64" width="280" height="54"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="280" id="ahG-BE-rYA"/>
+                                <constraint firstAttribute="height" constant="54" id="one-3W-1jh"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="JNq-md-IOR" firstAttribute="leading" secondItem="N1D-Ja-ZsB" secondAttribute="leading" constant="20" id="AMT-CX-pfa"/>
+                        <constraint firstAttribute="trailing" secondItem="JNq-md-IOR" secondAttribute="trailing" constant="20" id="UFD-PF-FF3"/>
+                        <constraint firstAttribute="bottom" secondItem="VPb-Gv-Y0k" secondAttribute="bottom" id="f8j-Kt-5XQ"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="250" constant="64" id="oxa-Y9-pzn"/>
+                        <constraint firstAttribute="bottom" secondItem="JNq-md-IOR" secondAttribute="bottom" constant="6" id="r3t-J4-9vV"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" priority="250" constant="124" id="umq-dl-WQI"/>
+                        <constraint firstAttribute="trailing" secondItem="VPb-Gv-Y0k" secondAttribute="trailing" constant="6" id="yDm-nq-3Z1"/>
+                    </constraints>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oey-zA-hJh">
-                    <rect key="frame" x="0.0" y="100" width="320" height="320"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oey-zA-hJh" userLabel="videoPreviewView">
+                    <rect key="frame" x="0.0" y="124" width="320" height="320"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="7S8-27-bRu"/>
+                        <constraint firstAttribute="height" constant="320" id="g1f-Qi-40N"/>
+                    </constraints>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="osy-ZC-hw2">
-                    <rect key="frame" x="0.0" y="420" width="320" height="148"/>
+                <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osy-ZC-hw2">
+                    <rect key="frame" x="0.0" y="444" width="320" height="124"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a28-V9-h6P">
-                            <rect key="frame" x="126" y="70" width="68" height="68"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a28-V9-h6P">
+                            <rect key="frame" x="126" y="28" width="68" height="68"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="68" id="I0B-eg-c6J"/>
+                                <constraint firstAttribute="width" constant="68" id="tFP-hO-95d"/>
+                            </constraints>
                             <state key="normal" image="camera-button.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -57,22 +89,33 @@
                                 <action selector="captureStillImage:" destination="-1" eventType="touchUpInside" id="Vwk-jD-ssJ"/>
                             </connections>
                         </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="set your status to see the status of your friends" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="JNq-md-IOR">
-                            <rect key="frame" x="20" y="6" width="280" height="54"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="250" constant="124" id="6f3-b6-AMZ"/>
+                        <constraint firstAttribute="width" constant="320" id="CLt-fI-Zl0"/>
+                        <constraint firstAttribute="centerY" secondItem="a28-V9-h6P" secondAttribute="centerY" id="cl2-8p-Ssi"/>
+                        <constraint firstAttribute="centerX" secondItem="a28-V9-h6P" secondAttribute="centerX" id="cta-6G-yki"/>
+                    </constraints>
                 </view>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="EyQ-0A-UCC">
-                    <rect key="frame" x="85" y="259" width="150" height="2"/>
+                    <rect key="frame" x="85" y="283" width="150" height="2"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </progressView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="Oey-zA-hJh" secondAttribute="centerX" id="H8H-GT-B00"/>
+                <constraint firstAttribute="trailing" secondItem="osy-ZC-hw2" secondAttribute="trailing" id="KxN-id-DEK"/>
+                <constraint firstAttribute="centerY" secondItem="Oey-zA-hJh" secondAttribute="centerY" id="LX6-74-uuD"/>
+                <constraint firstItem="N1D-Ja-ZsB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Rpc-rG-umy"/>
+                <constraint firstItem="osy-ZC-hw2" firstAttribute="top" secondItem="Oey-zA-hJh" secondAttribute="bottom" id="W75-fl-JGw"/>
+                <constraint firstItem="Oey-zA-hJh" firstAttribute="top" secondItem="N1D-Ja-ZsB" secondAttribute="bottom" id="dFW-WR-9hp"/>
+                <constraint firstAttribute="bottom" secondItem="osy-ZC-hw2" secondAttribute="bottom" id="h0q-Sv-Kev"/>
+                <constraint firstItem="osy-ZC-hw2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iXk-ad-cQs"/>
+                <constraint firstItem="N1D-Ja-ZsB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="qMZ-sq-ZVI"/>
+                <constraint firstAttribute="trailing" secondItem="N1D-Ja-ZsB" secondAttribute="trailing" id="ybY-Ct-wfa"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
