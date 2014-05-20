@@ -308,7 +308,7 @@ static UIImageView *_navigationBarLogoImageView;
 
 - (void)applyCameraNavigationButtonWithTarget:(id)target action:(SEL)action
 {
-    UIImage *cancelImage = [JNIcon cameraImageIconWithSize:34.0 color:JNWhiteColor];
+    UIImage *cancelImage = [JNIcon cameraImageIconWithSize:34.0 color:JNBlackColor];
     UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, cancelImage.size.width, cancelImage.size.height)];
     [cancelButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     [cancelButton setImage:cancelImage forState:UIControlStateNormal];

@@ -6,11 +6,14 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
+#import "UIViewController+JNHelper.h"
+
 #import "JNAlertView.h"
 
 #import "STStatusFeedViewController.h"
 #import "STStatusTableViewCell.h"
 #import "STStatus.h"
+#import "STAppDelegate.h"
 
 @interface STStatusFeedViewController ()
 
@@ -53,8 +56,40 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     
     [super viewDidLoad];
 
+    [self setupNavigationBar];
+    
     [self.tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:nil] forCellReuseIdentifier:CellIdentifier];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+- (void)setupNavigationBar
+{
+    [self applyCameraNavigationButtonWithTarget:self action:@selector(cameraAction:)];
+    
+    [self applyNavigationBarRightButtonWithText:@"feedback"
+                                         target:self
+                                         action:@selector(feedbackAction:)
+                                     edgeInsets:UIEdgeInsetsMake(1.0, -10.0, 0.0, -28.0)];
+
+}
+
+#pragma mark - Actions
+
+- (void)cameraAction:(id)sender
+{
+    [((STAppDelegate*) [UIApplication sharedApplication].delegate) showCreateStatusAsRootViewController:YES];
+}
+
+- (void)feedbackAction:(id)sender
+{
+    // mailto: string
+    NSString *username = [PFUser currentUser][@"fbName"];
+    if (![NSString isNotEmptyString:username]) {
+        username = @"<no username>";
+    }
+    NSString *mailtoString = [NSString stringWithFormat:@"mailto:hello+status@hollerback.co?subject=Status%%20app%%20feedback"];
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mailtoString]];
 }
 
 #pragma mark - PFQueryTableViewController
