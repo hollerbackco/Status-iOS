@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
+#import "JNAlertView.h"
+
 #import "STStatusFeedViewController.h"
 #import "STStatusTableViewCell.h"
 #import "STStatus.h"
@@ -61,6 +63,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 {
     // Issue a Facebook Graph API request to get your user's friend list
     [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        
         if (!error) {
             // result will contain an array with your user's friends in the "data" key
             NSArray *friendObjects = [result objectForKey:@"data"];
@@ -73,6 +76,10 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
             if (completed) {
                 completed(friendIds);
             }
+        } else {
+            
+            JNLogObject(error);
+            [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem getting your friend's statuses. Please try again later."];
         }
     }];
 }
@@ -108,25 +115,26 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     }
     
+    
+    NSString *currentUserFBId = [PFUser currentUser][@"fbId"];
+    JNLogObject(currentUserFBId);
+    
     if ([NSArray isNotEmptyArray:self.friendIds]) {
         
+        JNLogObject(self.friendIds);
+        
         NSMutableArray *allFriendIds = [self.friendIds mutableCopy];
-        
-        NSString *currentUserFBId = [PFUser currentUser][@"fbId"];
-        JNLogObject(currentUserFBId);
-        
         [allFriendIds insertObject:currentUserFBId atIndex:0];
-        
         [query whereKey:@"userFBId" containedIn:allFriendIds];
         
         [query orderByDescending:@"updatedAt"];
         
-        return query;
-        
     } else {
         
-        return nil;
+        [query whereKey:@"userFBId" equalTo:currentUserFBId];
     }
+    
+    return query;
 }
 
 #pragma mark - UITableViewDataSource

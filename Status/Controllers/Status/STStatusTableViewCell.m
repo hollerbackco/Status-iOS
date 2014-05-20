@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UILabel *senderNameLabel;
 
-
 @end
 
 @implementation STStatusTableViewCell
@@ -30,6 +29,7 @@
     [self.footerView applyGradientBackgroundWithTopColor:JNClearColor bottomColor:[JNBlackColor colorWithAlphaComponent:0.5]];
     
     self.senderNameLabel.textColor = JNWhiteColor;
+    self.senderNameLabel.text = nil;
 }
 
 - (void)prepareForReuse
