@@ -210,7 +210,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)createStatusWithImage:(UIImage*)image
 {
-    NSData *imageData = UIImagePNGRepresentation(image);
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.99f);
     PFFile *imageFile = [PFFile fileWithName:@"img" data:imageData];
     
     // ui update
@@ -231,7 +231,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         STStatus *status = [STStatus new];
         status[@"image"] = imageFile;
         status[@"userFBId"] = [[PFUser currentUser] objectForKey:@"fbId"];
-        status[@"user"] = [PFUser currentUser].username;
+        status[@"user"] = [PFUser currentUser];
         
         [status saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             
@@ -254,7 +254,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)pushToStatusFeed
 {
-    STStatusFeedViewController *statusFeedViewController = [[STStatusFeedViewController alloc] initWithNib];
+    STStatusFeedViewController *statusFeedViewController = [[STStatusFeedViewController alloc] initWithStyle:UITableViewStylePlain];
     [self.navigationController pushViewController:statusFeedViewController animated:YES];
 }
 

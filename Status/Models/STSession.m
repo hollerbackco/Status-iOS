@@ -19,7 +19,7 @@
 {
 	// Basic User information and your friends are part of the standard permissions
 	// so there is no reason to ask for additional permissions
-	[PFFacebookUtils logInWithPermissions:nil block:^(PFUser *user, NSError *error) {
+	[PFFacebookUtils logInWithPermissions:@[@"user_friends"] block:^(PFUser *user, NSError *error) {
 		// Was login successful ?
 		if (!user) {
 			if (!error) {

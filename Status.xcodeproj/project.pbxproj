@@ -59,7 +59,9 @@
 		0DB0BE32192AB322002F568F /* AVCamRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE2C192AB322002F568F /* AVCamRecorder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0DB0BE33192AB322002F568F /* AVCamUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE2E192AB322002F568F /* AVCamUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0DB0BE34192AB322002F568F /* AVCamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE30192AB322002F568F /* AVCamViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		0DB0BE37192AB99C002F568F /* STStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE36192AB99C002F568F /* STStatus.m */; };
+		0DB0BE3A192AC3EB002F568F /* STStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE39192AC3EB002F568F /* STStatus.m */; };
+		0DB0BE3E192AC821002F568F /* STStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */; };
+		0DB0BE3F192AC821002F568F /* STStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */; };
 		17CDFD3B33074CD4810ECC5A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A25DF608A844329BCEAFF56 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -154,8 +156,11 @@
 		0DB0BE2E192AB322002F568F /* AVCamUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamUtilities.m; sourceTree = "<group>"; };
 		0DB0BE2F192AB322002F568F /* AVCamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamViewController.h; sourceTree = "<group>"; };
 		0DB0BE30192AB322002F568F /* AVCamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamViewController.m; sourceTree = "<group>"; };
-		0DB0BE35192AB99C002F568F /* STStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatus.h; path = Models/STStatus.h; sourceTree = "<group>"; };
-		0DB0BE36192AB99C002F568F /* STStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatus.m; path = Models/STStatus.m; sourceTree = "<group>"; };
+		0DB0BE38192AC3EB002F568F /* STStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatus.h; path = Models/STStatus.h; sourceTree = "<group>"; };
+		0DB0BE39192AC3EB002F568F /* STStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatus.m; path = Models/STStatus.m; sourceTree = "<group>"; };
+		0DB0BE3B192AC821002F568F /* STStatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusTableViewCell.h; path = Controllers/Status/STStatusTableViewCell.h; sourceTree = "<group>"; };
+		0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusTableViewCell.m; path = Controllers/Status/STStatusTableViewCell.m; sourceTree = "<group>"; };
+		0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STStatusTableViewCell.xib; path = Controllers/Status/STStatusTableViewCell.xib; sourceTree = "<group>"; };
 		2A25DF608A844329BCEAFF56 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5FC65DAE5A546C2823505C1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -366,6 +371,9 @@
 				0DB0BDF8192A966C002F568F /* STStatusFeedViewController.h */,
 				0DB0BDF9192A966C002F568F /* STStatusFeedViewController.m */,
 				0DB0BDFA192A966C002F568F /* STStatusFeedViewController.xib */,
+				0DB0BE3B192AC821002F568F /* STStatusTableViewCell.h */,
+				0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */,
+				0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */,
 			);
 			name = Status;
 			sourceTree = "<group>";
@@ -394,8 +402,8 @@
 			children = (
 				0DB0BE21192AA1CA002F568F /* STSession.h */,
 				0DB0BE22192AA1CA002F568F /* STSession.m */,
-				0DB0BE35192AB99C002F568F /* STStatus.h */,
-				0DB0BE36192AB99C002F568F /* STStatus.m */,
+				0DB0BE38192AC3EB002F568F /* STStatus.h */,
+				0DB0BE39192AC3EB002F568F /* STStatus.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -512,6 +520,7 @@
 			files = (
 				0DB0BD9A192A85C9002F568F /* InfoPlist.strings in Resources */,
 				0DB0BE01192A968F002F568F /* STLoginViewController.xib in Resources */,
+				0DB0BE3F192AC821002F568F /* STStatusTableViewCell.xib in Resources */,
 				0DB0BE27192AA60B002F568F /* fb-login@2x.png in Resources */,
 				0DB0BDFC192A966C002F568F /* STStatusFeedViewController.xib in Resources */,
 				0DB0BDF7192A9658002F568F /* STCreateStatusViewController.xib in Resources */,
@@ -586,12 +595,13 @@
 				0DB0BE33192AB322002F568F /* AVCamUtilities.m in Sources */,
 				0DB0BDEC192A9605002F568F /* UIViewController+JNHelper.m in Sources */,
 				0DB0BE31192AB322002F568F /* AVCamCaptureManager.m in Sources */,
+				0DB0BE3A192AC3EB002F568F /* STStatus.m in Sources */,
 				0DB0BDEA192A9605002F568F /* UIImage+JNHelper.m in Sources */,
 				0DB0BDEE192A9605002F568F /* JNAppManager.m in Sources */,
 				0DB0BDF6192A9658002F568F /* STCreateStatusViewController.m in Sources */,
 				0DB0BE00192A968F002F568F /* STLoginViewController.m in Sources */,
+				0DB0BE3E192AC821002F568F /* STStatusTableViewCell.m in Sources */,
 				0DB0BDE1192A9605002F568F /* CGUtils.m in Sources */,
-				0DB0BE37192AB99C002F568F /* STStatus.m in Sources */,
 				0DB0BDE2192A9605002F568F /* JNAlertView.m in Sources */,
 				0DB0BE04192A980A002F568F /* STConstants.m in Sources */,
 			);

@@ -52,6 +52,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <ImageIO/CGImageProperties.h>
 
+#import "UIImage+JNHelper.h"
+
 @interface AVCamCaptureManager (RecorderDelegate) <AVCamRecorderDelegate>
 @end
 
@@ -197,7 +199,6 @@
     AVCaptureStillImageOutput *newStillImageOutput = [[AVCaptureStillImageOutput alloc] init];
     NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:
                                     AVVideoCodecJPEG, AVVideoCodecKey,
-                                    @(1/3), AVVideoQualityKey,
                                     nil];
     [newStillImageOutput setOutputSettings:outputSettings];
     [outputSettings release];
@@ -205,6 +206,7 @@
     
     // Create session (use default AVCaptureSessionPresetHigh)
     AVCaptureSession *newCaptureSession = [[AVCaptureSession alloc] init];
+    newCaptureSession.sessionPreset = AVCaptureSessionPresetHigh;
     
 //    
     // Add inputs and output to the capture session
@@ -300,7 +302,7 @@
 																						   orientation:(ALAssetOrientation)[image imageOrientation]
 																					   completionBlock:completionBlock];
                                                                  
-                                                                 self.lastCapturedImage = image;
+                                                                 self.lastCapturedImage = [UIImage image:image rotatedBy:0.0];
                                                                  
 																 [image release];
 																 

@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
-#import "JNViewController.h"
-
-@interface STStatusFeedViewController : JNViewController
+@interface STStatusFeedViewController : PFQueryTableViewController
 
 @end
