@@ -13,6 +13,7 @@
 @optional
 
 - (void)didLogin:(BOOL)loggedIn;
+- (void)didNotLogin;
 
 @end
 

@@ -24,14 +24,19 @@
 		if (!user) {
 			if (!error) {
                 NSLog(@"The user cancelled the Facebook login.");
+                
+                if ([delegate respondsToSelector:@selector(didLogin:)]) {
+                    [delegate didLogin:NO];
+                }
+                
             } else {
                 NSLog(@"An error occurred: %@", error.localizedDescription);
+                
+                if ([delegate respondsToSelector:@selector(didNotLogin)]) {
+                    [delegate didNotLogin];
+                }
             }
             
-			// Callback - login failed
-			if ([delegate respondsToSelector:@selector(didLogin:)]) {
-				[delegate didLogin:NO];
-			}
 		} else {
 			if (user.isNew) {
 				NSLog(@"User signed up and logged in through Facebook!");

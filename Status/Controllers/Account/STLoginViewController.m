@@ -35,40 +35,57 @@
 - (IBAction)loginAction:(id)sender
 {
     [UIView animateWithBlock:^{
-        self.loginButton.alpha = 1.0;
+        self.loginButton.alpha = 0.0;
+        self.loginSpinnerView.alpha = 1.0;
     }];
     
     [self.loginSpinnerView startAnimating];
     
-    // Do the login
-    [STSession login:self];
+    [self performBlock:^{
+        
+        // Do the login
+        [STSession login:self];
+        
+    } afterDelay:UINavigationControllerHideShowBarDuration];
 }
 
 #pragma mark - STSessionDelegate
 
 - (void)didLogin:(BOOL)loggedIn
 {
-    [self.loginButton setTitle:@"Logged in." forState:UIControlStateNormal];
-    
-    [UIView animateWithBlock:^{
-        self.loginButton.alpha = 0.0;
-    }];
-    
-    [self.loginSpinnerView stopAnimating];
-    
 	// Did we login successfully ?
 	if (loggedIn) {
         
-        [((STAppDelegate*) [UIApplication sharedApplication].delegate) showCreateStatusAsRootViewController];
+        [self.loginButton setTitle:@"Logged in." forState:UIControlStateNormal];
+        
+        [UIView animateWithBlock:^{
+            self.loginButton.alpha = 1.0;
+            self.loginSpinnerView.alpha = 0.0;
+        }];
+        
+        [self.loginSpinnerView stopAnimating];
+        
+        [((STAppDelegate*) [UIApplication sharedApplication].delegate) showCreateStatusAsRootViewController:YES];
         
 	} else {
-		// Show error alert
-		[[[UIAlertView alloc] initWithTitle:@"Login Failed"
-                                    message:@"Facebook Login failed. Please try again"
-                                   delegate:nil
-                          cancelButtonTitle:@"Ok"
-                          otherButtonTitles:nil] show];
+        
+        [self didNotLogin];
 	}
+}
+
+- (void)didNotLogin
+{
+    // Show error alert
+    [[[UIAlertView alloc] initWithTitle:@"Login Failed"
+                                message:@"Facebook Login failed. Please try again"
+                               delegate:nil
+                      cancelButtonTitle:@"Ok"
+                      otherButtonTitles:nil] show];
+    
+    [UIView animateWithBlock:^{
+        self.loginButton.alpha = 1.0;
+        self.loginSpinnerView.alpha = 0.0;
+    }];
 }
 
 @end

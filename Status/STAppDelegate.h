@@ -12,6 +12,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-- (void)showCreateStatusAsRootViewController;
+- (void)showCreateStatusAsRootViewController:(BOOL)shouldLoadCamera;
 
 @end
