@@ -16,6 +16,9 @@
 
 @property (nonatomic, strong) NSArray *statuses;
 
+@property (nonatomic, strong) NSNumber *didLoadFriendIds;
+@property (nonatomic, strong) NSArray *friendIds;
+
 @end
 
 @implementation STStatusFeedViewController
@@ -29,6 +32,8 @@
         self.pullToRefreshEnabled = YES;
         self.paginationEnabled = YES;
         self.objectsPerPage = 25;
+        
+        self.didLoadFriendIds = @(NO);
     }
     return self;
 }
@@ -45,16 +50,14 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     self.navigationItem.hidesBackButton = YES;
     
     [super viewDidLoad];
-    
+
     [self.tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:nil] forCellReuseIdentifier:CellIdentifier];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    [self fetchFriendsStatuses];
 }
 
-#pragma mark - Fetch
+#pragma mark - PFQueryTableViewController
 
-- (void)fetchFriendsStatuses
+- (void)fetchFriendIdsCompleted:(void(^)(NSArray *friendIds))completed
 {
     // Issue a Facebook Graph API request to get your user's friend list
     [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -67,24 +70,37 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
                 [friendIds addObject:[friendObject objectForKey:@"id"]];
             }
             
-            // Construct a PFUser query that will find friends whose facebook ids
-            // are contained in the current user's friend list.
-            PFQuery *friendQuery = [PFUser query];
-            [friendQuery whereKey:@"fbId" containedIn:friendIds];
-            
-            // findObjects will return a list of PFUsers that are friends
-            // with the current user
-            NSArray *friendUsers = [friendQuery findObjects];
-            JNLogObject(friendUsers);
+            if (completed) {
+                completed(friendIds);
+            }
         }
     }];
 }
 
-#pragma mark - 
-
 - (PFQuery *)queryForTable
 {
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+   
+    if (!self.didLoadFriendIds.boolValue) {
+        [self fetchFriendIdsCompleted:^(NSArray *friendIds) {
+            
+    //        // Construct a PFUser query that will find friends whose facebook ids
+    //        // are contained in the current user's friend list.
+    //        PFQuery *friendQuery = [PFUser query];
+    //        [friendQuery whereKey:@"fbId" containedIn:friendIds];
+    //        
+    //        // findObjects will return a list of PFUsers that are friends
+    //        // with the current user
+    //        NSArray *friendUsers = [friendQuery findObjects];
+    //        JNLogObject(friendUsers);
+            
+            self.friendIds = friendIds;
+            
+            self.didLoadFriendIds = @(YES);
+            
+            [self loadObjects];
+        }];
+    }
     
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.
@@ -92,9 +108,25 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     }
     
-    [query orderByDescending:@"createdAt"];
-    
-    return query;
+    if ([NSArray isNotEmptyArray:self.friendIds]) {
+        
+        NSMutableArray *allFriendIds = [self.friendIds mutableCopy];
+        
+        NSString *currentUserFBId = [PFUser currentUser][@"fbId"];
+        JNLogObject(currentUserFBId);
+        
+        [allFriendIds insertObject:currentUserFBId atIndex:0];
+        
+        [query whereKey:@"userFBId" containedIn:allFriendIds];
+        
+        [query orderByDescending:@"updatedAt"];
+        
+        return query;
+        
+    } else {
+        
+        return nil;
+    }
 }
 
 #pragma mark - UITableViewDataSource

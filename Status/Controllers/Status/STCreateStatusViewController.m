@@ -221,34 +221,100 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         self.cameraToggleButton.alpha = 0.0;
     }];
     
-    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        
-        // ui update
-        [UIView animateWithBlock:^{
-            self.progressView.alpha = 0.0;
-        }];
-        
-        STStatus *status = [STStatus new];
-        status[@"image"] = imageFile;
-        status[@"userFBId"] = [[PFUser currentUser] objectForKey:@"fbId"];
-        status[@"user"] = [PFUser currentUser];
-        
-        [status saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            
-            [self didCreateStatus:status];
-            
-        }];
-        
-    } progressBlock:^(int percentDone) {
-        
-        JNLogPrimitive(percentDone);
-        [self.progressView setProgress:((float) percentDone * 0.01) animated:YES];
-        
-    }];
+    // update file
+    [imageFile
+     saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+         
+         runOnMainQueue(^{
+             // ui update
+             [UIView animateWithBlock:^{
+                 self.progressView.alpha = 0.0;
+             }];
+         });
+         
+         // check if status exists
+         PFQuery *getStatusQuery = [PFQuery queryWithClassName:@"Status"];
+         [getStatusQuery whereKey:@"user" equalTo:[PFUser currentUser]];
+         [getStatusQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+             
+             JNLogObject(object);
+             if (object) {
+                 
+                 // update the status object
+                 STStatus *status = (STStatus*) object;
+                 status[@"image"] = imageFile;
+                 [status saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                     
+                     if (error) {
+                         
+                         JNLogObject(error);
+                         [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem saving your status. Please try again."];
+                         
+                         [self resetCreateStatus];
+                         
+                     } else {
+                         
+                         JNLog(@"status successfully updated");
+                         [self didCreateStatus:status];
+                     }
+                 }];
+                 
+             } else {
+                 
+                 // create a new status object
+                 STStatus *status = [STStatus new];
+                 status[@"image"] = imageFile;
+                 status[@"userFBId"] = [[PFUser currentUser] objectForKey:@"fbId"];
+                 status[@"user"] = [PFUser currentUser];
+                 
+                 [status saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                     
+                     if (error) {
+                         
+                         JNLogObject(error);
+                         [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem saving your status. Please try again."];
+                         
+                         [self resetCreateStatus];
+                         
+                     } else {
+                         
+                         JNLog(@"status successfully saved");
+                         [self didCreateStatus:status];
+                     }
+                 }];
+                 
+             }
+         }];
+     }
+     progressBlock:^(int percentDone) {
+         
+         runOnMainQueue(^{
+             [self.progressView setProgress:((float) percentDone * 0.01) animated:YES];
+         });
+         
+     }];
 }
 
 - (void)didCreateStatus:(STStatus*)status
 {
+    // save to status history
+    PFObject *statusHistory = [PFObject objectWithClassName:@"StatusHistory"];
+    statusHistory[@"image"] = status[@"image"];
+    statusHistory[@"userFBId"] = status[@"userFBId"];
+    statusHistory[@"user"] = status[@"user"];
+    [statusHistory saveEventually:^(BOOL succeeded, NSError *error) {
+        
+        if (error) {
+            
+            JNLogObject(error);
+            
+        } else {
+            
+            JNLog(@"status history successfully saved");
+        }
+    }];
+    
+    // push to feed
     [self pushToStatusFeed];
 }
 
