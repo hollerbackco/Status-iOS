@@ -11,103 +11,32 @@
 #import "JNAlertView.h"
 
 #import "STStatusFeedViewController.h"
+#import "STStatusFeedTableViewController.h"
+
 #import "STStatusTableViewCell.h"
 #import "STStatus.h"
 #import "STAppDelegate.h"
 
-@interface STStatusFeedViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface STStatusFeedViewController ()
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerView;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *tableSpinnerView;
 @property (weak, nonatomic) IBOutlet UILabel *savingLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewTopConstraint;
 
-@property (nonatomic, copy) NSString *parseClassName;
+@property (nonatomic, strong) STStatusFeedTableViewController *tableViewController;
+
 @property (nonatomic, strong) NSArray *statuses;
 
 @end
 
 @implementation STStatusFeedViewController
 
-//- (id)initWithStyle:(UITableViewStyle)style
-//{
-//    self = [super initWithStyle:style];
-//    if (self) {
-//        // This table displays items in the Todo class
-//        self.parseClassName = @"Status";
-//        self.pullToRefreshEnabled = YES;
-//        self.paginationEnabled = YES;
-//        self.objectsPerPage = 25;
-//        
-//        self.didLoadFriendIds = @(NO);
-//    }
-//    return self;
-//}
-
 - (void)initialize
 {
-    self.parseClassName = @"Status";
-}
-
-#pragma mark - Fetch
-
-- (void)performFetch
-{
-    [UIView animateWithBlock:^{
-        self.tableSpinnerView.alpha = 1.0;
-    }];
-    [self.tableSpinnerView startAnimating];
-    
-    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    
-    [self fetchFriendIdsCompleted:^(NSArray *friendIds, NSError *error) {
-        
-        PFUser *currentUser = [PFUser currentUser];
-        currentUser[@"friendIds"] = friendIds;
-        [currentUser saveEventually];
-        
-        NSString *currentUserFBId = currentUser[@"fbId"];
-        JNLogObject(currentUserFBId);
-        
-        JNLogPrimitive(friendIds.count);
-        if ([NSArray isNotEmptyArray:friendIds]) {
-            
-            NSMutableArray *allFriendIds = [friendIds mutableCopy];
-            [allFriendIds insertObject:currentUserFBId atIndex:0];
-            [query whereKey:@"userFBId" containedIn:allFriendIds];
-
-            [query orderByDescending:@"updatedAt"];
-
-        } else {
-            
-            [query whereKey:@"userFBId" equalTo:currentUserFBId];
-        }
-        
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            
-            if (error) {
-                
-                JNLogObject(error);
-                [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem getting statuses. Please try again."];
-                
-            } else {
-                JNLogObject(objects);
-                self.statuses = objects;
-                
-                [self.tableView reloadData];
-                
-            }
-            
-            [self.tableSpinnerView stopAnimating];
-            [UIView animateWithBlock:^{
-                self.tableSpinnerView.alpha = 0.0;
-            }];
-        }];
-    }];
+    ;
 }
 
 #pragma mark - Views
@@ -125,23 +54,16 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
     [self setupNavigationBar];
     
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    [self.tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:nil] forCellReuseIdentifier:CellIdentifier];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    [UIView animateWithBlock:^{
-        self.tableHeaderView.frame = CGRectSetHeight(self.tableHeaderView.frame, 0.0);
-    }];
-    
-    [self performFetch];
-    
     self.tableHeaderView.backgroundColor = JNGrayBackgroundColor;
     self.savingLabel.textColor = JNBlackTextColor;
     self.spinnerView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     self.progressView.progress = 0.0;
     
     [self hideTableHeaderViewAnimated:NO];
+    
+    [self setupTableViewController];
+    
+    [self.tableViewController performFetch];
 }
 
 - (void)setupNavigationBar
@@ -152,6 +74,14 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
                                          target:self
                                          action:@selector(feedbackAction:)
                                      edgeInsets:UIEdgeInsetsMake(1.0, -10.0, 0.0, -28.0)];
+}
+
+- (void)setupTableViewController
+{
+    self.tableViewController = [[STStatusFeedTableViewController alloc] initWithNibName:@"STStatusFeedTableViewController" bundle:nil];
+    [self addChildViewController:self.tableViewController];
+    self.tableViewController.view.frame = self.contentView.bounds;
+    [self.contentView addSubview:self.tableViewController.view];
 }
 
 - (void)showTableHeaderViewAnimated:(BOOL)animated
@@ -189,93 +119,6 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     NSString *mailtoString = [NSString stringWithFormat:@"mailto:hello+status@hollerback.co?subject=Status%%20app%%20feedback"];
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mailtoString]];
-}
-
-#pragma mark - PFQueryTableViewController
-
-- (void)fetchFriendIdsCompleted:(void(^)(NSArray *friendIds, NSError *error))completed
-{
-    // Issue a Facebook Graph API request to get your user's friend list
-    [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        
-        NSMutableArray *friendIds = nil;
-        if (!error) {
-            // result will contain an array with your user's friends in the "data" key
-            NSArray *friendObjects = [result objectForKey:@"data"];
-            friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
-            // Create a list of friends' Facebook IDs
-            for (NSDictionary *friendObject in friendObjects) {
-                [friendIds addObject:[friendObject objectForKey:@"id"]];
-            }
-        } else {
-            
-            JNLogObject(error);
-        }
-        if (completed) {
-            completed(friendIds, error);
-        }
-    }];
-}
-
-#pragma mark - UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.statuses.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    STStatus *status = self.statuses[indexPath.row];
-    
-    STStatusTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    PFUser *user = status[@"user"];
-    if ([user isDataAvailable]) {
-        
-        cell.senderName = user[@"fbName"];
-        
-    } else {
-        
-        [user fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-            
-            cell.senderName = object[@"fbName"];
-            
-        }];
-    }
-    
-    if (self.placeholderImage &&
-        [user.objectId isEqualToString:[PFUser currentUser].objectId]) {
-        
-        cell.photoImage = self.placeholderImage;
-        
-    } else {
-        
-        PFFile *imageFile = status[@"image"];
-        if (imageFile) {
-            [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                UIImage *image = [UIImage imageWithData:data];
-                cell.photoImage = image;
-            } progressBlock:^(int percentDone) {
-                ;
-            }];
-        }
-    }
-    
-    return cell;
-}
-
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 320.0;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
 }
 
 #pragma mark - Create Status
@@ -411,7 +254,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     
     [self finishedCreateStatus];
     
-    [self performFetch];
+    [self.tableViewController performFetch];
 }
 
 - (void)finishedCreateStatus

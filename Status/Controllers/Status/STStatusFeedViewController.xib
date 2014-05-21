@@ -6,13 +6,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="STStatusFeedViewController">
             <connections>
-                <outlet property="headerViewTopConstraint" destination="9qd-rV-yKQ" id="P3t-o5-cJN"/>
+                <outlet property="contentView" destination="URx-sM-VQR" id="8i4-lp-hCn"/>
+                <outlet property="headerViewTopConstraint" destination="9qd-rV-yKQ" id="qgr-PM-Tj7"/>
                 <outlet property="progressView" destination="pCZ-sI-pyu" id="fff-ph-C6E"/>
                 <outlet property="savingLabel" destination="ZfI-by-teh" id="KjR-ca-R5T"/>
                 <outlet property="spinnerView" destination="kj4-Eq-LJw" id="A5C-Mz-pDn"/>
                 <outlet property="tableHeaderView" destination="qKC-Uu-9TR" id="fIC-ra-Ent"/>
-                <outlet property="tableSpinnerView" destination="kTB-wq-FZb" id="G5x-6s-0LH"/>
-                <outlet property="tableView" destination="DpU-D6-uhf" id="4gD-1q-QpG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -71,31 +70,21 @@
                         <constraint firstAttribute="width" constant="320" id="yXB-Ig-8HM"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DpU-D6-uhf">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="URx-sM-VQR">
                     <rect key="frame" x="0.0" y="60" width="320" height="444"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="320" id="dFQ-bb-h89"/>
-                    </constraints>
-                </tableView>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="kTB-wq-FZb">
-                    <rect key="frame" x="150" y="272" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </activityIndicatorView>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="DpU-D6-uhf" secondAttribute="bottom" id="8bE-NB-tNC"/>
                 <constraint firstItem="qKC-Uu-9TR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="9qd-rV-yKQ"/>
-                <constraint firstItem="DpU-D6-uhf" firstAttribute="centerY" secondItem="kTB-wq-FZb" secondAttribute="centerY" id="CQW-TI-eaE"/>
-                <constraint firstItem="DpU-D6-uhf" firstAttribute="top" secondItem="qKC-Uu-9TR" secondAttribute="bottom" id="Q6j-Ob-rTM"/>
+                <constraint firstItem="URx-sM-VQR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Axj-bc-xqH"/>
+                <constraint firstAttribute="bottom" secondItem="URx-sM-VQR" secondAttribute="bottom" id="JzM-rO-aw9"/>
+                <constraint firstAttribute="trailing" secondItem="URx-sM-VQR" secondAttribute="trailing" id="NjM-GC-su8"/>
                 <constraint firstItem="qKC-Uu-9TR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Vli-xF-haZ"/>
-                <constraint firstItem="DpU-D6-uhf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YBQ-Nm-EKv"/>
+                <constraint firstItem="URx-sM-VQR" firstAttribute="top" secondItem="qKC-Uu-9TR" secondAttribute="bottom" id="bi7-Ig-bFB"/>
                 <constraint firstAttribute="trailing" secondItem="qKC-Uu-9TR" secondAttribute="trailing" id="hKW-8h-oA0"/>
-                <constraint firstAttribute="trailing" secondItem="DpU-D6-uhf" secondAttribute="trailing" id="hxL-db-eVE"/>
-                <constraint firstItem="DpU-D6-uhf" firstAttribute="top" secondItem="qKC-Uu-9TR" secondAttribute="bottom" id="i8N-6i-be1"/>
-                <constraint firstItem="DpU-D6-uhf" firstAttribute="centerX" secondItem="kTB-wq-FZb" secondAttribute="centerX" id="oNz-Hy-u4M"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>

@@ -10,8 +10,6 @@
 
 @interface STStatusFeedViewController : JNViewController
 
-@property (nonatomic, strong) UIImage *placeholderImage;
-
 - (void)performCreateStatusWithImage:(UIImage*)image;
 
 @end
