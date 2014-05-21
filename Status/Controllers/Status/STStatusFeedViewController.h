@@ -6,6 +6,12 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
-@interface STStatusFeedViewController : PFQueryTableViewController
+#import "JNViewController.h"
+
+@interface STStatusFeedViewController : JNViewController
+
+@property (nonatomic, strong) UIImage *placeholderImage;
+
+- (void)performCreateStatusWithImage:(UIImage*)image;
 
 @end

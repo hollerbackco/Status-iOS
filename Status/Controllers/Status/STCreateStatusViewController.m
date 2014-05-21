@@ -209,7 +209,10 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)didCaptureImage:(UIImage*)capturedImage
 {
-    [self createStatusWithImage:capturedImage];
+    // push to feed
+    [self pushToStatusFeedWithImage:capturedImage];
+    
+//    [self createStatusWithImage:capturedImage];
 }
 
 #pragma mark - Create Status
@@ -228,16 +231,17 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         self.cameraToggleButton.alpha = 0.0;
     }];
     
+    
     // update file
     [imageFile
      saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
          
-         runOnMainQueue(^{
-             // ui update
-             [UIView animateWithBlock:^{
-                 self.progressView.alpha = 0.0;
-             }];
-         });
+//         runOnMainQueue(^{
+//             // ui update
+//             [UIView animateWithBlock:^{
+//                 self.progressView.alpha = 0.0;
+//             }];
+//         });
          
          // check if status exists
          PFQuery *getStatusQuery = [PFQuery queryWithClassName:@"Status"];
@@ -305,9 +309,9 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
      }
      progressBlock:^(int percentDone) {
          
-         runOnMainQueue(^{
-             [self.progressView setProgress:((float) percentDone * 0.01) animated:YES];
-         });
+//         runOnMainQueue(^{
+//             [self.progressView setProgress:((float) percentDone * 0.01) animated:YES];
+//         });
          
      }];
 }
@@ -331,14 +335,16 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         }
     }];
     
-    // push to feed
-    [self pushToStatusFeed];
+//    // push to feed
+//    [self pushToStatusFeed];
 }
 
-- (void)pushToStatusFeed
+- (void)pushToStatusFeedWithImage:(UIImage*)image
 {
-    STStatusFeedViewController *statusFeedViewController = [[STStatusFeedViewController alloc] initWithStyle:UITableViewStylePlain];
+    STStatusFeedViewController *statusFeedViewController = [[STStatusFeedViewController alloc] initWithNib];
     [self.navigationController pushViewController:statusFeedViewController animated:YES];
+    
+    [statusFeedViewController performCreateStatusWithImage:image];
 }
 
 - (void)resetCreateStatus
