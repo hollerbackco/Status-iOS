@@ -11,6 +11,7 @@
                 <outlet property="savingLabel" destination="ZfI-by-teh" id="KjR-ca-R5T"/>
                 <outlet property="spinnerView" destination="kj4-Eq-LJw" id="A5C-Mz-pDn"/>
                 <outlet property="tableHeaderView" destination="qKC-Uu-9TR" id="fIC-ra-Ent"/>
+                <outlet property="tableSpinnerView" destination="kTB-wq-FZb" id="G5x-6s-0LH"/>
                 <outlet property="tableView" destination="DpU-D6-uhf" id="4gD-1q-QpG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -32,7 +33,7 @@
                                 <constraint firstAttribute="height" constant="21" id="oOw-ih-YEN"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pCZ-sI-pyu">
@@ -43,7 +44,7 @@
                                 <constraint firstAttribute="height" constant="2" id="cvQ-uf-NIT"/>
                             </constraints>
                         </progressView>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="kj4-Eq-LJw">
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="kj4-Eq-LJw">
                             <rect key="frame" x="150" y="31" width="20" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
@@ -52,7 +53,7 @@
                             </constraints>
                         </activityIndicatorView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="pCZ-sI-pyu" firstAttribute="top" secondItem="ZfI-by-teh" secondAttribute="bottom" constant="6" id="43A-uz-w9t"/>
                         <constraint firstAttribute="bottom" secondItem="pCZ-sI-pyu" secondAttribute="bottom" constant="18" id="AZg-rI-pKo"/>
@@ -78,17 +79,23 @@
                         <constraint firstAttribute="width" constant="320" id="dFQ-bb-h89"/>
                     </constraints>
                 </tableView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="kTB-wq-FZb">
+                    <rect key="frame" x="150" y="272" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="DpU-D6-uhf" secondAttribute="bottom" id="8bE-NB-tNC"/>
                 <constraint firstItem="qKC-Uu-9TR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="9qd-rV-yKQ"/>
+                <constraint firstItem="DpU-D6-uhf" firstAttribute="centerY" secondItem="kTB-wq-FZb" secondAttribute="centerY" id="CQW-TI-eaE"/>
                 <constraint firstItem="DpU-D6-uhf" firstAttribute="top" secondItem="qKC-Uu-9TR" secondAttribute="bottom" id="Q6j-Ob-rTM"/>
                 <constraint firstItem="qKC-Uu-9TR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Vli-xF-haZ"/>
                 <constraint firstItem="DpU-D6-uhf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YBQ-Nm-EKv"/>
                 <constraint firstAttribute="trailing" secondItem="qKC-Uu-9TR" secondAttribute="trailing" id="hKW-8h-oA0"/>
                 <constraint firstAttribute="trailing" secondItem="DpU-D6-uhf" secondAttribute="trailing" id="hxL-db-eVE"/>
                 <constraint firstItem="DpU-D6-uhf" firstAttribute="top" secondItem="qKC-Uu-9TR" secondAttribute="bottom" id="i8N-6i-be1"/>
+                <constraint firstItem="DpU-D6-uhf" firstAttribute="centerX" secondItem="kTB-wq-FZb" secondAttribute="centerX" id="oNz-Hy-u4M"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>

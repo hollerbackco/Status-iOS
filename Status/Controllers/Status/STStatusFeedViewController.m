@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *tableSpinnerView;
 @property (weak, nonatomic) IBOutlet UILabel *savingLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewTopConstraint;
 
@@ -55,6 +56,11 @@
 
 - (void)performFetch
 {
+    [UIView animateWithBlock:^{
+        self.tableSpinnerView.alpha = 1.0;
+    }];
+    [self.tableSpinnerView startAnimating];
+    
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     
@@ -83,10 +89,23 @@
         
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
-            JNLogObject(objects);
-            self.statuses = objects;
+            if (error) {
+                
+                JNLogObject(error);
+                [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem getting statuses. Please try again."];
+                
+            } else {
+                JNLogObject(objects);
+                self.statuses = objects;
+                
+                [self.tableView reloadData];
+                
+            }
             
-            [self.tableView reloadData];
+            [self.tableSpinnerView stopAnimating];
+            [UIView animateWithBlock:^{
+                self.tableSpinnerView.alpha = 0.0;
+            }];
         }];
     }];
 }
@@ -117,6 +136,9 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     
     [self performFetch];
     
+    self.tableHeaderView.backgroundColor = JNGrayBackgroundColor;
+    self.savingLabel.textColor = JNBlackTextColor;
+    self.spinnerView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     self.progressView.progress = 0.0;
     
     [self hideTableHeaderViewAnimated:NO];
