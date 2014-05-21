@@ -24,6 +24,7 @@
                         <constraint firstAttribute="height" constant="46" id="8GX-ki-VQt"/>
                         <constraint firstAttribute="width" constant="202" id="Xli-NR-Ql8"/>
                     </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                     <state key="normal" title="Login with Facebook">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -39,13 +40,40 @@
                         <constraint firstAttribute="width" constant="20" id="NfU-3Y-3mf"/>
                     </constraints>
                 </activityIndicatorView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*We'll never post anything on your Facebook wall." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYF-xH-4BQ">
+                    <rect key="frame" x="9" y="315" width="302" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="pCX-Fp-Qnu"/>
+                        <constraint firstAttribute="width" constant="302" id="xkj-Ob-ify"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRa-Al-NWa">
+                    <rect key="frame" x="35" y="156" width="250" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="JIQ-hZ-LoZ"/>
+                        <constraint firstAttribute="height" constant="60" id="np4-k9-XQH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="42"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="iRa-Al-NWa" secondAttribute="trailing" constant="35" id="DnG-UR-Yuf"/>
                 <constraint firstAttribute="centerX" secondItem="NyM-DZ-thH" secondAttribute="centerX" id="OXA-B7-iwa"/>
                 <constraint firstAttribute="centerX" secondItem="NPK-Zq-pJ9" secondAttribute="centerX" id="W4p-OJ-cnC"/>
+                <constraint firstItem="iRa-Al-NWa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="Y7e-oO-OTM"/>
                 <constraint firstAttribute="centerY" secondItem="NPK-Zq-pJ9" secondAttribute="centerY" id="dkv-7J-1MA"/>
+                <constraint firstItem="NyM-DZ-thH" firstAttribute="top" secondItem="iRa-Al-NWa" secondAttribute="bottom" constant="45" id="jj2-Fi-unl"/>
+                <constraint firstAttribute="trailing" secondItem="JYF-xH-4BQ" secondAttribute="trailing" constant="9" id="kqg-S5-kBq"/>
+                <constraint firstItem="JYF-xH-4BQ" firstAttribute="top" secondItem="NyM-DZ-thH" secondAttribute="bottom" constant="8" id="uN3-qc-VyC"/>
                 <constraint firstAttribute="centerY" secondItem="NyM-DZ-thH" secondAttribute="centerY" id="v14-th-4kw"/>
+                <constraint firstItem="JYF-xH-4BQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="9" id="yIa-Zn-Idn"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

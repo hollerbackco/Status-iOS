@@ -25,13 +25,13 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saving..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfI-by-teh">
-                            <rect key="frame" x="20" y="13" width="280" height="21"/>
+                            <rect key="frame" x="20" y="11" width="280" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="280" id="E9X-xT-XoD"/>
                                 <constraint firstAttribute="height" constant="21" id="oOw-ih-YEN"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -54,14 +54,14 @@
                     </subviews>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="pCZ-sI-pyu" firstAttribute="top" secondItem="ZfI-by-teh" secondAttribute="bottom" constant="6" id="43A-uz-w9t"/>
+                        <constraint firstItem="pCZ-sI-pyu" firstAttribute="top" secondItem="ZfI-by-teh" secondAttribute="bottom" constant="8" id="43A-uz-w9t"/>
                         <constraint firstAttribute="bottom" secondItem="pCZ-sI-pyu" secondAttribute="bottom" constant="18" id="AZg-rI-pKo"/>
                         <constraint firstAttribute="trailing" secondItem="kj4-Eq-LJw" secondAttribute="trailing" constant="150" id="Fhf-MS-O0s"/>
                         <constraint firstAttribute="height" constant="60" id="I7A-dt-tHH"/>
                         <constraint firstItem="ZfI-by-teh" firstAttribute="leading" secondItem="qKC-Uu-9TR" secondAttribute="leading" constant="20" id="Uiu-hk-CXB"/>
                         <constraint firstAttribute="trailing" secondItem="ZfI-by-teh" secondAttribute="trailing" constant="20" id="awB-DE-ltY"/>
-                        <constraint firstItem="ZfI-by-teh" firstAttribute="top" secondItem="qKC-Uu-9TR" secondAttribute="top" constant="13" id="fPC-Ix-bgo"/>
-                        <constraint firstItem="pCZ-sI-pyu" firstAttribute="top" secondItem="ZfI-by-teh" secondAttribute="bottom" constant="6" id="kzb-HP-0y1"/>
+                        <constraint firstItem="ZfI-by-teh" firstAttribute="top" secondItem="qKC-Uu-9TR" secondAttribute="top" constant="11" id="fPC-Ix-bgo"/>
+                        <constraint firstItem="pCZ-sI-pyu" firstAttribute="top" secondItem="ZfI-by-teh" secondAttribute="bottom" constant="8" id="kzb-HP-0y1"/>
                         <constraint firstAttribute="bottom" secondItem="kj4-Eq-LJw" secondAttribute="bottom" constant="9" id="n7d-iz-57n"/>
                         <constraint firstItem="kj4-Eq-LJw" firstAttribute="leading" secondItem="qKC-Uu-9TR" secondAttribute="leading" constant="150" id="tHk-aV-h7R"/>
                         <constraint firstItem="pCZ-sI-pyu" firstAttribute="leading" secondItem="qKC-Uu-9TR" secondAttribute="leading" constant="20" id="tYg-PK-sWh"/>

@@ -30,7 +30,7 @@
     self.photoImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.photoImageView.layer.masksToBounds = YES;
     
-    [self.footerView applyGradientBackgroundWithTopColor:JNClearColor bottomColor:[JNBlackColor colorWithAlphaComponent:0.5]];
+    [self.footerView applyGradientBackgroundWithTopColor:JNClearColor bottomColor:[JNBlackColor colorWithAlphaComponent:0.6]];
     
     self.senderNameLabel.textColor = JNWhiteColor;
     self.senderNameLabel.text = nil;
