@@ -23,15 +23,17 @@
 
 #pragma mark - Fetch
 
-- (void)performFetch
+- (void)performFetchWithNetworkOnlyCachePolicy
 {
-    [UIView animateWithBlock:^{
-        self.tableSpinnerView.alpha = 1.0;
-    }];
-    [self.tableSpinnerView startAnimating];
+    [self performFetchWithCachePolicy:kPFCachePolicyNetworkOnly];
+}
+
+- (void)performFetchWithCachePolicy:(PFCachePolicy)cachePolicy
+{
+    self.refreshControl.enabled = NO;
     
     PFQuery *query = [PFQuery queryWithClassName:@"Status"];
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    query.cachePolicy = cachePolicy;
     
     [self fetchFriendIdsCompleted:^(NSArray *friendIds, NSError *error) {
         
@@ -74,6 +76,8 @@
             [UIView animateWithBlock:^{
                 self.tableSpinnerView.alpha = 0.0;
             }];
+            
+            self.refreshControl.enabled = YES;
         }];
     }];
     
@@ -94,10 +98,9 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     [super viewDidLoad];
     
     self.tableSpinnerView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.tableSpinnerView.center = CGPointMake(self.tableView.bounds.size.width/2, self.tableView.bounds.size.height/2);
+    self.tableSpinnerView.center = CGPointMake(self.tableView.bounds.size.width/2, 120.0);
     [self.tableView addSubview:self.tableSpinnerView];
     [self.tableSpinnerView startAnimating];
-    self.tableSpinnerView.alpha = 0.0;
     
     [self.tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:nil] forCellReuseIdentifier:CellIdentifier];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -109,7 +112,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 {
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     
-    [refreshControl addTarget:self action:@selector(performFetch) forControlEvents:UIControlEventValueChanged];
+    [refreshControl addTarget:self action:@selector(performFetchWithNetworkOnlyCachePolicy) forControlEvents:UIControlEventValueChanged];
     
     [self setRefreshControl:refreshControl];
 }
@@ -170,12 +173,8 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     
     PFFile *imageFile = status[@"image"];
     if (imageFile) {
-        [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            UIImage *image = [UIImage imageWithData:data];
-            cell.photoImage = image;
-        } progressBlock:^(int percentDone) {
-            ;
-        }];
+        
+        cell.photoImageURL = [NSURL URLWithString:imageFile.url];
     }
     
     return cell;

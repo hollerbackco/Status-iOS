@@ -31,12 +31,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="6jZ-Df-mS3">
+                        <rect key="frame" x="150" y="150" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </activityIndicatorView>
                 </subviews>
+                <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             </tableViewCellContentView>
             <connections>
                 <outlet property="footerView" destination="mX7-NA-Y3C" id="stp-7f-Xjj"/>
                 <outlet property="photoImageView" destination="hy8-EQ-FYN" id="h6X-nv-EPa"/>
                 <outlet property="senderNameLabel" destination="Q2J-Aj-srs" id="akJ-Wv-72r"/>
+                <outlet property="spinnerView" destination="6jZ-Df-mS3" id="8NU-QO-r0q"/>
             </connections>
         </tableViewCell>
     </objects>

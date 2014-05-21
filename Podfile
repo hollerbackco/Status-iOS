@@ -17,7 +17,7 @@ pod 'MHPrettyDate', '~> 1.1'
 pod 'Reachability', '3.1.1'
 pod 'ReactiveCocoa', '~> 2.3'
 # pod 'RHAddressBook', '~> 1.1'
-# pod 'SDWebImage', '3.6'
+pod 'SDWebImage', '3.6'
 pod 'SWFSemanticVersion', '0.2'
 pod 'JDStatusBarNotification', '~> 1.4'
 

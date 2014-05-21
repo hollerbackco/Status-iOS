@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
+#import "UIImageView+WebCache.h"
 #import "UIColor+JNHelper.h"
 #import "UIView+JNHelper.h"
 
@@ -16,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UILabel *senderNameLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerView;
 
 @end
 
@@ -23,6 +25,8 @@
 
 - (void)awakeFromNib
 {
+    self.contentView.backgroundColor = JNGrayBackgroundColor;
+    
     self.photoImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.photoImageView.layer.masksToBounds = YES;
     
@@ -30,6 +34,8 @@
     
     self.senderNameLabel.textColor = JNWhiteColor;
     self.senderNameLabel.text = nil;
+    
+    self.spinnerView.alpha = 0.0;
 }
 
 - (void)prepareForReuse
@@ -59,6 +65,25 @@
     self.photoImageView.image = photoImage;
     self.photoImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.photoImageView.layer.masksToBounds = YES;
+}
+
+- (void)setPhotoImageURL:(NSURL *)photoImageURL
+{
+    if (![[SDWebImageManager sharedManager] diskImageExistsForURL:photoImageURL]) {
+        [UIView animateWithBlock:^{
+            self.spinnerView.alpha = 1.0;
+        }];
+        [self.spinnerView startAnimating];
+    }
+    
+    [self.photoImageView setImageWithURL:photoImageURL placeholderImage:nil options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        ;
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [UIView animateWithBlock:^{
+            self.spinnerView.alpha = 0.0;
+        }];
+        [self.spinnerView stopAnimating];
+    }];
 }
 
 @end

@@ -12,6 +12,6 @@
 
 #pragma mark - Fetch
 
-- (void)performFetch;
+- (void)performFetchWithCachePolicy:(PFCachePolicy)cachePolicy;
 
 @end
