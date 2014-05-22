@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import <FAKIonIcons.h>
+
 @interface JNIcon : NSObject
 
 #pragma mark - UIImages

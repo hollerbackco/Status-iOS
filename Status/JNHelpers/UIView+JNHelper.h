@@ -78,9 +78,9 @@ typedef void(^HBViewComplete)(BOOL finished);
 
 
 
-#pragma mark - HBViewWithTouchableSubviews
+#pragma mark - JNViewWithTouchableSubviews
 
-@interface HBViewWithTouchableSubviews : UIView
+@interface JNViewWithTouchableSubviews : UIView
 
 @end
 

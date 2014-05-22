@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Hollerback. All rights reserved.
 //
 
-#import <FAKIonIcons.h>
-
 #import "JNIcon.h"
 
 @implementation JNIcon

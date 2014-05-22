@@ -7,6 +7,7 @@
 //
 
 #import <AVFoundation/AVFoundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 #import "AVCamViewController.h"
 #import "AVCamCaptureManager.h"
@@ -14,14 +15,19 @@
 #import "AVCamUtilities.h"
 
 #import "STCreateStatusViewController.h"
+#import "STCaptionOverlayViewController.h"
 #import "STStatusFeedViewController.h"
 #import "STStatus.h"
+
+#define kSTAddCaptionToImageHeightOffset 20.0
+#define kSTAddCaptionToImageCenterYOffset 250.0
 
 static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 @interface STCreateStatusViewController () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) STStatusFeedViewController *statusFeedViewController;
+@property (nonatomic, strong) STCaptionOverlayViewController *captionOverlayViewController;
 
 @end
 
@@ -144,6 +150,18 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     self.progressView.progress = 0.0;
     self.progressView.alpha = 0.0;
+    
+    [self setupCaptionOverlay];
+}
+
+- (void)setupCaptionOverlay
+{
+    if (!self.captionOverlayViewController) {
+        self.captionOverlayViewController = [[STCaptionOverlayViewController alloc] initWithNib];
+        [self addChildViewController:self.captionOverlayViewController];
+        self.captionOverlayViewController.view.frame = self.view.bounds;
+        [self.view addSubview:self.captionOverlayViewController.view];
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -195,6 +213,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 {
     // Capture a still image
     [[self stillButton] setEnabled:NO];
+    
     [[self captureManager] captureStillImage];
     
     // Flash the screen white and fade it out to give UI feedback that a still image was taken
@@ -531,18 +550,57 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 //    });
 }
 
-- (void)captureManagerStillImageCaptured:(AVCamCaptureManager *)captureManager
+- (void)captureManagerStillImageCaptured:(AVCamCaptureManager *)captureManager image:(UIImage *)image
 {
     CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopCommonModes, ^(void) {
         [[self stillButton] setEnabled:YES];
     });
     
-    [self didCaptureImage:captureManager.lastCapturedImage];
+    UIImage *finalImage;
+    NSString *caption = [self.captionOverlayViewController getCaption];
+    if ([NSString isNotEmptyString:caption]) {
+        finalImage = [self addCaption:caption toImage:image];
+    } else {
+        finalImage = image;
+    }
+    
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    [library
+     writeImageToSavedPhotosAlbum:finalImage.CGImage
+     orientation:(ALAssetOrientation) finalImage.imageOrientation
+     completionBlock:^(NSURL *assetURL, NSError *error) {
+         JNLogObject(assetURL);
+     }];
+    
+    [self didCaptureImage:finalImage];
 }
 
 - (void)captureManagerDeviceConfigurationChanged:(AVCamCaptureManager *)captureManager
 {
 	[self updateButtonStates];
+}
+
+- (UIImage*)addCaption:(NSString*)caption toImage:(UIImage*)image
+{
+    UIImage *result;
+    
+    UIGraphicsBeginImageContext(image.size);
+    
+	// draw image
+	[image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    
+    // draw text
+    CGFloat fontSize = kSTAttributesForCaptionTextFontSize * 2;
+    CGFloat textDrawHeight = fontSize + kSTAddCaptionToImageHeightOffset;
+    [caption
+     drawInRect:CGRectMake(0.0, image.size.height/2 + kSTAddCaptionToImageCenterYOffset, image.size.width, textDrawHeight)
+     withAttributes:[STCaptionOverlayViewController attributesForCaptionTextWithSize:fontSize]];
+    
+	result = UIGraphicsGetImageFromCurrentImageContext();
+    
+	UIGraphicsEndImageContext();
+    
+	return result;
 }
 
 @end

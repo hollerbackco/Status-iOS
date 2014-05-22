@@ -221,9 +221,9 @@ CGFloat const kHBViewAnimationFastDuration = 0.3;
 
 
 
-#pragma mark - HBViewWithTouchableSubviews
+#pragma mark - JNViewWithTouchableSubviews
 
-@implementation HBViewWithTouchableSubviews : UIView
+@implementation JNViewWithTouchableSubviews : UIView
 
 -(id)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {

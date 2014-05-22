@@ -10,6 +10,8 @@
 		0D2054A8192D745900F584D7 /* STAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2054A7192D745900F584D7 /* STAppManager.m */; };
 		0D5E5AB7192C3B9100F7DA7C /* STStatusFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5E5AB5192C3B9100F7DA7C /* STStatusFeedTableViewController.m */; };
 		0D5E5AB8192C3B9100F7DA7C /* STStatusFeedTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D5E5AB6192C3B9100F7DA7C /* STStatusFeedTableViewController.xib */; };
+		0D641A04192E6A6C002B3FD6 /* STCaptionOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D641A02192E6A6C002B3FD6 /* STCaptionOverlayViewController.m */; };
+		0D641A05192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D641A03192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib */; };
 		0DB0BD90192A85C9002F568F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD8F192A85C9002F568F /* Foundation.framework */; };
 		0DB0BD92192A85C9002F568F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD91192A85C9002F568F /* CoreGraphics.framework */; };
 		0DB0BD94192A85C9002F568F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD93192A85C9002F568F /* UIKit.framework */; };
@@ -86,6 +88,9 @@
 		0D5E5AB4192C3B9100F7DA7C /* STStatusFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusFeedTableViewController.h; path = Controllers/Status/STStatusFeedTableViewController.h; sourceTree = "<group>"; };
 		0D5E5AB5192C3B9100F7DA7C /* STStatusFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusFeedTableViewController.m; path = Controllers/Status/STStatusFeedTableViewController.m; sourceTree = "<group>"; };
 		0D5E5AB6192C3B9100F7DA7C /* STStatusFeedTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STStatusFeedTableViewController.xib; path = Controllers/Status/STStatusFeedTableViewController.xib; sourceTree = "<group>"; };
+		0D641A01192E6A6C002B3FD6 /* STCaptionOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STCaptionOverlayViewController.h; path = Controllers/Status/STCaptionOverlayViewController.h; sourceTree = "<group>"; };
+		0D641A02192E6A6C002B3FD6 /* STCaptionOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STCaptionOverlayViewController.m; path = Controllers/Status/STCaptionOverlayViewController.m; sourceTree = "<group>"; };
+		0D641A03192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STCaptionOverlayViewController.xib; path = Controllers/Status/STCaptionOverlayViewController.xib; sourceTree = "<group>"; };
 		0DB0BD8C192A85C9002F568F /* Status.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Status.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DB0BD8F192A85C9002F568F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0DB0BD91192A85C9002F568F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -390,6 +395,9 @@
 				0DB0BDF3192A9658002F568F /* STCreateStatusViewController.h */,
 				0DB0BDF4192A9658002F568F /* STCreateStatusViewController.m */,
 				0DB0BDF5192A9658002F568F /* STCreateStatusViewController.xib */,
+				0D641A01192E6A6C002B3FD6 /* STCaptionOverlayViewController.h */,
+				0D641A02192E6A6C002B3FD6 /* STCaptionOverlayViewController.m */,
+				0D641A03192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib */,
 				0DB0BDF8192A966C002F568F /* STStatusFeedViewController.h */,
 				0DB0BDF9192A966C002F568F /* STStatusFeedViewController.m */,
 				0DB0BDFA192A966C002F568F /* STStatusFeedViewController.xib */,
@@ -557,6 +565,7 @@
 				0DFB8260192BD005008CD552 /* flip-icon@2x.png in Resources */,
 				0DFB825F192BD005008CD552 /* camera-button@2x.png in Resources */,
 				0D5E5AB8192C3B9100F7DA7C /* STStatusFeedTableViewController.xib in Resources */,
+				0D641A05192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib in Resources */,
 				0DB0BDA2192A85C9002F568F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -611,6 +620,7 @@
 			files = (
 				0DB0BDE4192A9605002F568F /* JNIcon.m in Sources */,
 				0DB0BDFB192A966C002F568F /* STStatusFeedViewController.m in Sources */,
+				0D641A04192E6A6C002B3FD6 /* STCaptionOverlayViewController.m in Sources */,
 				0DB0BDE6192A9605002F568F /* NSObject+JNHelper.m in Sources */,
 				0DB0BD9C192A85C9002F568F /* main.m in Sources */,
 				0DB0BDED192A9605002F568F /* JNLogger.m in Sources */,

@@ -65,8 +65,6 @@
 @property (nonatomic,assign) UIBackgroundTaskIdentifier backgroundRecordingID;
 @property (nonatomic,assign) id <AVCamCaptureManagerDelegate> delegate;
 
-@property (nonatomic, retain) UIImage *lastCapturedImage;
-
 - (BOOL) setupSession;
 - (void) startRecording;
 - (void) stopRecording;
@@ -85,6 +83,7 @@
 - (void) captureManager:(AVCamCaptureManager *)captureManager didFailWithError:(NSError *)error;
 - (void) captureManagerRecordingBegan:(AVCamCaptureManager *)captureManager;
 - (void) captureManagerRecordingFinished:(AVCamCaptureManager *)captureManager;
-- (void) captureManagerStillImageCaptured:(AVCamCaptureManager *)captureManager;
+- (void) captureManagerStillImageCaptured:(AVCamCaptureManager *)captureManager image:(UIImage*)image;
 - (void) captureManagerDeviceConfigurationChanged:(AVCamCaptureManager *)captureManager;
+
 @end

@@ -8,8 +8,8 @@
 
 #import "UIFont+JNHelper.h"
 
-NSString * const kJNPrimaryFontName = @"Helvetica";
-NSString * const kJNPrimaryBoldFontName = @"Helvetica-Bold";
+NSString * const kJNPrimaryFontName = @"HelveticaNeue-Thin";
+NSString * const kJNPrimaryBoldFontName = @"HelveticaNeue-Bold";
 CGFloat const kJNPrimaryFontSize = 14.0;
 CGFloat const kJNTitleFontSize = 15.0;
 CGFloat const kJNSectionTitleFontSize = 12.0;

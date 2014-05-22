@@ -163,8 +163,6 @@
     [stillImageOutput release];
     [recorder release];
     
-    [self.lastCapturedImage release];
-    
     [super dealloc];
 }
 
@@ -277,7 +275,7 @@
 }
 
 - (void) captureStillImage
-{
+{   
     AVCaptureConnection *stillImageConnection = [AVCamUtilities connectionWithMediaType:AVMediaTypeVideo fromConnections:[[self stillImageOutput] connections]];
     if ([stillImageConnection isVideoOrientationSupported])
         [stillImageConnection setVideoOrientation:orientation];
@@ -293,27 +291,38 @@
 																 }
 															 };
 															 
+                                                             UIImage *image;
+                                                             
 															 if (imageDataSampleBuffer != NULL) {
 																 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-																 ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+//																 ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 																 
-                                                                 UIImage *image = [[UIImage alloc] initWithData:imageData];
-																 [library writeImageToSavedPhotosAlbum:[image CGImage]
-																						   orientation:(ALAssetOrientation)[image imageOrientation]
-																					   completionBlock:completionBlock];
+                                                                 image = [[UIImage alloc] initWithData:imageData];
                                                                  
-                                                                 self.lastCapturedImage = [UIImage image:image rotatedBy:0.0];
-                                                                 
-																 [image release];
-																 
-																 [library release];
+//                                                                 if ([self.delegate respondsToSelector:@selector(captureManagerWillSaveStillImageCaptured:image:)]) {
+//                                                                     image = [self.delegate captureManagerWillSaveStillImageCaptured:self image:image];
+//                                                                 }
+//                                                                 
+//																 [library writeImageToSavedPhotosAlbum:[image CGImage]
+//																						   orientation:(ALAssetOrientation)[image imageOrientation]
+//																					   completionBlock:completionBlock];
+//                                                                 
+//                                                                 self.lastCapturedImage = [UIImage image:image rotatedBy:0.0];
+//                                                                 
+//
+//																 [library release];
 															 }
-															 else
+															 else {
 																 completionBlock(nil, error);
+                                                             }
 															 
-															 if ([[self delegate] respondsToSelector:@selector(captureManagerStillImageCaptured:)]) {
-																 [[self delegate] captureManagerStillImageCaptured:self];
+															 if ([[self delegate] respondsToSelector:@selector(captureManagerStillImageCaptured:image:)]) {
+																 [[self delegate] captureManagerStillImageCaptured:self image:image];
 															 }
+                                                             
+                                                             if (image) {
+                                                                 [image release];
+                                                             }
                                                          }];
 }
 
