@@ -39,6 +39,15 @@
     ;
 }
 
+#pragma mark - 
+
+- (void)performFetch
+{
+    [self setupTableViewController];
+    
+    [self.tableViewController performFetchWithCachePolicy:kPFCachePolicyCacheThenNetwork];
+}
+
 #pragma mark - Views
 
 static NSString *CellIdentifier = @"STStatusTableViewCell";
@@ -63,6 +72,8 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     
     [self setupTableViewController];
     
+    [self addTableViewControllerToContentView];
+    
     [self.tableViewController performFetchWithCachePolicy:kPFCachePolicyCacheThenNetwork];
 }
 
@@ -78,8 +89,14 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)setupTableViewController
 {
-    self.tableViewController = [[STStatusFeedTableViewController alloc] initWithNibName:@"STStatusFeedTableViewController" bundle:nil];
-    [self addChildViewController:self.tableViewController];
+    if (!self.tableViewController) {
+        self.tableViewController = [[STStatusFeedTableViewController alloc] initWithNibName:@"STStatusFeedTableViewController" bundle:nil];
+        [self addChildViewController:self.tableViewController];
+    }
+}
+
+- (void)addTableViewControllerToContentView
+{
     self.tableViewController.view.frame = self.contentView.bounds;
     [self.contentView addSubview:self.tableViewController.view];
 }

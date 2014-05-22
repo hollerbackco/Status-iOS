@@ -20,6 +20,9 @@
 static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 @interface STCreateStatusViewController () <UIGestureRecognizerDelegate>
+
+@property (nonatomic, strong) STStatusFeedViewController *statusFeedViewController;
+
 @end
 
 @interface STCreateStatusViewController (InternalMethods)
@@ -33,6 +36,17 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 @end
 
 @implementation STCreateStatusViewController
+
+#pragma mark -
+
+- (void)initialize
+{
+    [self setupStatusFeed];
+    
+    [self.statusFeedViewController performFetch];
+}
+
+#pragma mark - Camera
 
 - (NSString *)stringForFocusMode:(AVCaptureFocusMode)focusMode
 {
@@ -52,13 +66,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 	
 	return focusString;
 }
-
-- (void)dealloc
-{
-//    [self removeObserver:self forKeyPath:@"captureManager.videoInput.device.focusMode"];
-}
-
-#pragma mark - Camera
 
 - (void)setupCamera
 {
@@ -334,17 +341,15 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
             JNLog(@"status history successfully saved");
         }
     }];
-    
-//    // push to feed
-//    [self pushToStatusFeed];
 }
 
 - (void)pushToStatusFeedWithImage:(UIImage*)image
 {
-    STStatusFeedViewController *statusFeedViewController = [[STStatusFeedViewController alloc] initWithNib];
-    [self.navigationController pushViewController:statusFeedViewController animated:YES];
+    [self setupStatusFeed];
     
-    [statusFeedViewController performCreateStatusWithImage:image];
+    [self.navigationController pushViewController:self.statusFeedViewController animated:YES];
+    
+    [self.statusFeedViewController performCreateStatusWithImage:image];
 }
 
 - (void)resetCreateStatus
@@ -357,6 +362,15 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         self.promptLabel.alpha = 1.0;
         self.cameraToggleButton.alpha = 1.0;
     }];
+}
+
+#pragma mark - Status Feed
+
+- (void)setupStatusFeed
+{
+    if (!self.statusFeedViewController) {
+        self.statusFeedViewController = [[STStatusFeedViewController alloc] initWithNib];
+    }
 }
 
 @end
