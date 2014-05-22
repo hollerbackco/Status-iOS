@@ -54,7 +54,7 @@
 
 - (void)showCreateStatusAsRootViewController:(BOOL)shouldLoadCamera
 {
-    JNLogObject([PFUser currentUser]);
+//    JNLogObject([PFUser currentUser]);
     
     STCreateStatusViewController *createStatusViewController = [[STCreateStatusViewController alloc] initWithNib];
     

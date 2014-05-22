@@ -44,9 +44,9 @@
         [currentUser saveEventually];
         
         NSString *currentUserFBId = currentUser[@"fbId"];
-        JNLogObject(currentUserFBId);
+//        JNLogObject(currentUserFBId);
         
-        JNLogPrimitive(friendIds.count);
+//        JNLogPrimitive(friendIds.count);
         if ([NSArray isNotEmptyArray:friendIds]) {
             
             NSMutableArray *allFriendIds = [friendIds mutableCopy];
@@ -68,7 +68,7 @@
                 [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem getting statuses. Please try again."];
                 
             } else {
-                JNLogObject(objects);
+//                JNLogObject(objects);
                 self.statuses = objects;
                 
                 runOnAsyncDefaultQueue(^{
@@ -97,17 +97,17 @@
             STStatus *status = (STStatus*) obj;
             PFFile *imageFile = status[@"image"];
             NSURL *imageURL = [NSURL URLWithString:imageFile.url];
-            JNLogObject(imageURL);
+//            JNLogObject(imageURL);
             [[SDWebImageManager sharedManager]
              downloadWithURL:imageURL
              options:0
              progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                 JNLog(@"receivedSize: %@    expectedSize: %@", @(receivedSize), @(expectedSize));
+//                 JNLog(@"receivedSize: %@    expectedSize: %@", @(receivedSize), @(expectedSize));
              }
              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-                 JNLogObject(image);
-                 JNLogObject(error);
-                 JNLogObject(@(cacheType));
+//                 JNLogObject(image);
+//                 JNLogObject(error);
+//                 JNLogObject(@(cacheType));
              }];
         }];
     }

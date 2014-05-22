@@ -190,7 +190,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
                          
                      } else {
                          
-                         JNLog(@"status successfully saved");
+//                         JNLog(@"status successfully saved");
                          [self didCreateStatus:status];
                      }
                  }];
@@ -208,7 +208,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
                          
                      } else {
                          
-                         JNLogObject(object);
+//                         JNLogObject(object);
                          if (object) {
                              
                              // update the status object
@@ -225,7 +225,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
                                      
                                  } else {
                                      
-                                     JNLog(@"status successfully updated");
+//                                     JNLog(@"status successfully updated");
                                      [self didCreateStatus:status];
                                  }
                              }];
@@ -265,7 +265,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
             
         } else {
             
-            JNLog(@"status history successfully saved");
+//            JNLog(@"status history successfully saved");
         }
     }];
     
