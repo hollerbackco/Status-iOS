@@ -13,7 +13,6 @@
 @interface STCaptionOverlayViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *captionTextField;
-@property (weak, nonatomic) IBOutlet UIButton *captionButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *captionTextFieldBottomSpacingConstraint;
 
 - (IBAction)captionAction:(id)sender;
@@ -89,10 +88,6 @@
                                                    attributes:[self.class attributesForPlaceholderCaptionText]];
     self.captionTextField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     self.captionTextField.alpha = 0.0;
-    
-    FAKIonIcons *captionIcon = [FAKIonIcons ios7ComposeOutlineIconWithSize:40.0];
-    [captionIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
-    [self.captionButton setAttributedTitle:captionIcon.attributedString forState:UIControlStateNormal];
 }
 
 #pragma mark - Actions

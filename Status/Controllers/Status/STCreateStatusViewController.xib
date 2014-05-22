@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="STCreateStatusViewController">
             <connections>
                 <outlet property="cameraToggleButton" destination="VPb-Gv-Y0k" id="EY0-kT-Q2U"/>
+                <outlet property="captionButton" destination="XRL-Wa-2mC" id="l2a-C6-tjO"/>
                 <outlet property="progressView" destination="EyQ-0A-UCC" id="92I-j6-Lzp"/>
                 <outlet property="promptLabel" destination="JNq-md-IOR" id="2EK-Wh-ezZ"/>
                 <outlet property="stillButton" destination="a28-V9-h6P" id="c7A-l4-2NJ"/>
@@ -23,42 +24,32 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPb-Gv-Y0k">
-                            <rect key="frame" x="270" y="80" width="44" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="44" id="Hh2-Fa-Vxe"/>
-                                <constraint firstAttribute="height" constant="44" id="idO-5S-Cy5"/>
-                            </constraints>
-                            <state key="normal" image="flip-icon.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="toggleCamera:" destination="-1" eventType="touchUpInside" id="lXG-wj-gYW"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="set your status to see the status of your friends" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="JNq-md-IOR" userLabel="promptLabel">
-                            <rect key="frame" x="20" y="64" width="280" height="54"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="JNq-md-IOR" userLabel="promptLabel">
+                            <rect key="frame" x="20" y="38" width="280" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="280" id="ahG-BE-rYA"/>
-                                <constraint firstAttribute="height" constant="54" id="one-3W-1jh"/>
+                                <constraint firstAttribute="height" constant="80" id="2I5-9z-Rf0"/>
+                                <constraint firstAttribute="width" constant="280" id="ULS-Dc-q4K"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="16"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <attributedString key="attributedText">
+                                <fragment content="Set your status to see your friends' statuses. Your new status replaces your last.">
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="16" name="HelveticaNeue-Thin"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="JNq-md-IOR" firstAttribute="leading" secondItem="N1D-Ja-ZsB" secondAttribute="leading" constant="20" id="AMT-CX-pfa"/>
-                        <constraint firstAttribute="trailing" secondItem="JNq-md-IOR" secondAttribute="trailing" constant="20" id="UFD-PF-FF3"/>
-                        <constraint firstAttribute="bottom" secondItem="VPb-Gv-Y0k" secondAttribute="bottom" id="f8j-Kt-5XQ"/>
+                        <constraint firstAttribute="bottom" secondItem="JNq-md-IOR" secondAttribute="bottom" constant="6" id="HaH-dJ-cgO"/>
+                        <constraint firstAttribute="trailing" secondItem="JNq-md-IOR" secondAttribute="trailing" constant="20" id="KrX-WJ-dE4"/>
+                        <constraint firstItem="JNq-md-IOR" firstAttribute="leading" secondItem="N1D-Ja-ZsB" secondAttribute="leading" constant="20" id="Rcm-u9-I08"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="250" constant="64" id="oxa-Y9-pzn"/>
-                        <constraint firstAttribute="bottom" secondItem="JNq-md-IOR" secondAttribute="bottom" constant="6" id="r3t-J4-9vV"/>
                         <constraint firstAttribute="height" relation="lessThanOrEqual" priority="250" constant="124" id="umq-dl-WQI"/>
-                        <constraint firstAttribute="trailing" secondItem="VPb-Gv-Y0k" secondAttribute="trailing" constant="6" id="yDm-nq-3Z1"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oey-zA-hJh" userLabel="videoPreviewView">
@@ -74,6 +65,21 @@
                     <rect key="frame" x="0.0" y="444" width="320" height="124"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPb-Gv-Y0k">
+                            <rect key="frame" x="235" y="40" width="44" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="9Jl-w9-kWS"/>
+                                <constraint firstAttribute="width" constant="44" id="tz4-fD-h7b"/>
+                            </constraints>
+                            <state key="normal" image="flip-icon.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="toggleCamera:" destination="-1" eventType="touchUpInside" id="lXG-wj-gYW"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a28-V9-h6P">
                             <rect key="frame" x="126" y="28" width="68" height="68"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -89,13 +95,33 @@
                                 <action selector="captureStillImage:" destination="-1" eventType="touchUpInside" id="Vwk-jD-ssJ"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XRL-Wa-2mC">
+                            <rect key="frame" x="38" y="37" width="50" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="8Kz-jM-RNF"/>
+                                <constraint firstAttribute="width" constant="50" id="GWX-kO-McW"/>
+                            </constraints>
+                            <state key="normal" title="Button">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="captionAction:" destination="-1" eventType="touchUpInside" id="zmh-H2-p7b"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" priority="250" constant="124" id="6f3-b6-AMZ"/>
+                        <constraint firstAttribute="trailing" secondItem="VPb-Gv-Y0k" secondAttribute="trailing" constant="41" id="9Ev-gg-ysH"/>
                         <constraint firstAttribute="width" constant="320" id="CLt-fI-Zl0"/>
+                        <constraint firstItem="a28-V9-h6P" firstAttribute="leading" secondItem="XRL-Wa-2mC" secondAttribute="trailing" constant="38" id="Dtc-zG-yYK"/>
+                        <constraint firstItem="VPb-Gv-Y0k" firstAttribute="centerY" secondItem="XRL-Wa-2mC" secondAttribute="centerY" id="Sfq-Ud-XEq"/>
                         <constraint firstAttribute="centerY" secondItem="a28-V9-h6P" secondAttribute="centerY" id="cl2-8p-Ssi"/>
                         <constraint firstAttribute="centerX" secondItem="a28-V9-h6P" secondAttribute="centerX" id="cta-6G-yki"/>
+                        <constraint firstItem="XRL-Wa-2mC" firstAttribute="leading" secondItem="osy-ZC-hw2" secondAttribute="leading" constant="38" id="dyG-pT-ggA"/>
+                        <constraint firstItem="VPb-Gv-Y0k" firstAttribute="centerY" secondItem="a28-V9-h6P" secondAttribute="centerY" id="mCw-rR-5O0"/>
+                        <constraint firstItem="VPb-Gv-Y0k" firstAttribute="leading" secondItem="a28-V9-h6P" secondAttribute="trailing" constant="41" id="skM-bM-pY1"/>
                     </constraints>
                 </view>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="EyQ-0A-UCC">

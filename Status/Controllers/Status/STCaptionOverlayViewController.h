@@ -26,4 +26,8 @@
 
 - (NSString*)getCaption;
 
+#pragma mark - Actions
+
+- (IBAction)captionAction:(id)sender;
+
 @end

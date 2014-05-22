@@ -21,6 +21,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *stillButton;
 @property (nonatomic, strong) IBOutlet UILabel *focusModeLabel;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
+@property (weak, nonatomic) IBOutlet UIButton *captionButton;
 
 @property (nonatomic) BOOL shouldLoadCamera;
 
@@ -28,10 +29,11 @@
 
 - (void)setupCamera;
 
-#pragma mark Toolbar Actions
-//- (IBAction)toggleRecording:(id)sender;
+#pragma mark - Actions
+
 - (IBAction)captureStillImage:(id)sender;
 - (IBAction)toggleCamera:(id)sender;
+- (IBAction)captionAction:(id)sender;
 
 #pragma mark - Captured Image
 

@@ -14,6 +14,8 @@
 #import "AVCamRecorder.h"
 #import "AVCamUtilities.h"
 
+#import "JNIcon.h"
+
 #import "STCreateStatusViewController.h"
 #import "STCaptionOverlayViewController.h"
 #import "STStatusFeedViewController.h"
@@ -151,6 +153,10 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     self.progressView.progress = 0.0;
     self.progressView.alpha = 0.0;
     
+    FAKIonIcons *captionIcon = [FAKIonIcons ios7ComposeOutlineIconWithSize:40.0];
+    [captionIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+    [self.captionButton setAttributedTitle:captionIcon.attributedString forState:UIControlStateNormal];
+    
     [self setupCaptionOverlay];
 }
 
@@ -188,7 +194,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     self.navigationController.navigationBarHidden = NO;
 }
 
-#pragma mark Toolbar Actions
+#pragma mark - Actions
 
 - (IBAction)toggleCamera:(id)sender
 {
@@ -229,6 +235,13 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
                          [flashView removeFromSuperview];
                      }
      ];
+}
+
+- (IBAction)captionAction:(id)sender
+{
+    if (self.captionOverlayViewController) {
+        [self.captionOverlayViewController captionAction:sender];
+    }
 }
 
 #pragma mark - Captured Image
