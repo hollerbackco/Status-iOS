@@ -87,6 +87,8 @@
                                                    initWithString:@"SAY SOMETHING"
                                                    attributes:[self.class attributesForPlaceholderCaptionText]];
     self.captionTextField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    self.captionTextField.minimumFontSize = 10.0;
+    self.captionTextField.adjustsFontSizeToFitWidth = YES;
     self.captionTextField.alpha = 0.0;
 }
 

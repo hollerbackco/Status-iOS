@@ -572,7 +572,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     UIImage *finalImage;
     NSString *caption = [self.captionOverlayViewController getCaption];
     if ([NSString isNotEmptyString:caption]) {
-        finalImage = [self addCaption:caption toImage:image];
+        finalImage = [self addCaptionToImage:image];
     } else {
         finalImage = image;
     }
@@ -582,7 +582,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
      writeImageToSavedPhotosAlbum:finalImage.CGImage
      orientation:(ALAssetOrientation) finalImage.imageOrientation
      completionBlock:^(NSURL *assetURL, NSError *error) {
-//         JNLogObject(assetURL);
+         //         JNLogObject(assetURL);
      }];
     
     [self didCaptureImage:finalImage];
@@ -590,30 +590,47 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)captureManagerDeviceConfigurationChanged:(AVCamCaptureManager *)captureManager
 {
-	[self updateButtonStates];
+    [self updateButtonStates];
 }
 
-- (UIImage*)addCaption:(NSString*)caption toImage:(UIImage*)image
+- (UIImage*)addCaptionToImage:(UIImage*)image
 {
+    // get caption image
+    UIImage *captionImage = [self getCaptionImage];
+    
     UIImage *result;
     
     UIGraphicsBeginImageContext(image.size);
     
-	// draw image
-	[image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    // draw image
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     
-    // draw text
-    CGFloat fontSize = kSTAttributesForCaptionTextFontSize * 2;
-    CGFloat textDrawHeight = fontSize + kSTAddCaptionToImageHeightOffset;
-    [caption
-     drawInRect:CGRectMake(0.0, image.size.height/2 + kSTAddCaptionToImageCenterYOffset, image.size.width, textDrawHeight)
-     withAttributes:[STCaptionOverlayViewController attributesForCaptionTextWithSize:fontSize]];
+    [captionImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     
-	result = UIGraphicsGetImageFromCurrentImageContext();
+    result = UIGraphicsGetImageFromCurrentImageContext();
     
-	UIGraphicsEndImageContext();
+    UIGraphicsEndImageContext();
     
-	return result;
+    return result;
+}
+
+- (UIImage*)getCaptionImage
+{
+    UIImage *captionImage;
+    
+    UIGraphicsBeginImageContextWithOptions(self.captionOverlayViewController.view.bounds.size, NO, 0.0f);
+    
+    CGContextRef contextRef = UIGraphicsGetCurrentContext();
+    
+    CGContextClearRect(contextRef, self.captionOverlayViewController.view.bounds);
+    
+    [self.captionOverlayViewController.view drawViewHierarchyInRect:self.captionOverlayViewController.view.bounds afterScreenUpdates:NO];
+    
+    captionImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return captionImage;
 }
 
 @end
