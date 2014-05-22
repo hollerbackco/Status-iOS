@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D2054A8192D745900F584D7 /* STAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2054A7192D745900F584D7 /* STAppManager.m */; };
 		0D5E5AB7192C3B9100F7DA7C /* STStatusFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5E5AB5192C3B9100F7DA7C /* STStatusFeedTableViewController.m */; };
 		0D5E5AB8192C3B9100F7DA7C /* STStatusFeedTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D5E5AB6192C3B9100F7DA7C /* STStatusFeedTableViewController.xib */; };
 		0DB0BD90192A85C9002F568F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD8F192A85C9002F568F /* Foundation.framework */; };
@@ -80,6 +81,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D2054A6192D745900F584D7 /* STAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STAppManager.h; path = Managers/STAppManager.h; sourceTree = "<group>"; };
+		0D2054A7192D745900F584D7 /* STAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STAppManager.m; path = Managers/STAppManager.m; sourceTree = "<group>"; };
 		0D5E5AB4192C3B9100F7DA7C /* STStatusFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusFeedTableViewController.h; path = Controllers/Status/STStatusFeedTableViewController.h; sourceTree = "<group>"; };
 		0D5E5AB5192C3B9100F7DA7C /* STStatusFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusFeedTableViewController.m; path = Controllers/Status/STStatusFeedTableViewController.m; sourceTree = "<group>"; };
 		0D5E5AB6192C3B9100F7DA7C /* STStatusFeedTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STStatusFeedTableViewController.xib; path = Controllers/Status/STStatusFeedTableViewController.xib; sourceTree = "<group>"; };
@@ -211,6 +214,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D2054A5192D743800F584D7 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				0D2054A6192D745900F584D7 /* STAppManager.h */,
+				0D2054A7192D745900F584D7 /* STAppManager.m */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
 		0DB0BD83192A85C9002F568F = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +272,7 @@
 			children = (
 				0DB0BE20192AA1B3002F568F /* Models */,
 				0DB0BE05192A9813002F568F /* Helpers */,
+				0D2054A5192D743800F584D7 /* Managers */,
 				0DB0BDBE192A95BB002F568F /* Controllers */,
 				0DB0BDBF192A9605002F568F /* JNHelpers */,
 				0DB0BDD8192A9605002F568F /* JNLogger */,
@@ -612,6 +625,7 @@
 				0DB0BDE5192A9605002F568F /* JNViewController.m in Sources */,
 				0DB0BDE3192A9605002F568F /* JNFileUtils.m in Sources */,
 				0DB0BDE9192A9605002F568F /* UIFont+JNHelper.m in Sources */,
+				0D2054A8192D745900F584D7 /* STAppManager.m in Sources */,
 				0DB0BDA0192A85C9002F568F /* STAppDelegate.m in Sources */,
 				0DB0BE33192AB322002F568F /* AVCamUtilities.m in Sources */,
 				0DB0BDEC192A9605002F568F /* UIViewController+JNHelper.m in Sources */,
@@ -742,7 +756,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Will Dennis (28S6U8566M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -763,7 +777,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: moziy, inc.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -773,7 +787,7 @@
 				GCC_PREFIX_HEADER = "Status/Status-Prefix.pch";
 				INFOPLIST_FILE = "Status/Status-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "47A10AB5-AE28-4E5D-9857-CE8A18B4BCBA";
+				PROVISIONING_PROFILE = "9E77AE37-523F-4D24-AAA1-87FEF0689E92";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

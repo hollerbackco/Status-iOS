@@ -10,6 +10,7 @@
 
 #import "STCreateStatusViewController.h"
 #import "STLoginViewController.h"
+#import "STAppManager.h"
 
 @interface STAppDelegate ()
 
@@ -96,6 +97,8 @@
         
         [((STCreateStatusViewController*) self.statusNavigationController.topViewController) setupCamera];
     }
+    
+    [STAppManager updateAppVersion];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
