@@ -63,7 +63,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     
     [self setupTableViewController];
     
-    [self.tableViewController performFetchWithCachePolicy:kPFCachePolicyCacheElseNetwork];
+    [self.tableViewController performFetchWithCachePolicy:kPFCachePolicyCacheThenNetwork];
 }
 
 - (void)setupNavigationBar
