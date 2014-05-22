@@ -9,6 +9,8 @@
 #import "UIView+JNHelper.h"
 #import "JNAlertView.h"
 
+#import <SDWebImageManager.h>
+
 #import "STStatusFeedTableViewController.h"
 #import "STStatus.h"
 #import "STStatusTableViewCell.h"
@@ -69,6 +71,10 @@
                 JNLogObject(objects);
                 self.statuses = objects;
                 
+                runOnAsyncDefaultQueue(^{
+                    [self predownloadStatusData];
+                });
+                
                 [self reloadTableView];
             }
             
@@ -82,6 +88,29 @@
     }];
     
     [self.refreshControl endRefreshing];
+}
+
+- (void)predownloadStatusData
+{
+    if (self.statuses) {
+        [self.statuses enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            STStatus *status = (STStatus*) obj;
+            PFFile *imageFile = status[@"image"];
+            NSURL *imageURL = [NSURL URLWithString:imageFile.url];
+            JNLogObject(imageURL);
+            [[SDWebImageManager sharedManager]
+             downloadWithURL:imageURL
+             options:0
+             progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                 JNLog(@"receivedSize: %@    expectedSize: %@", @(receivedSize), @(expectedSize));
+             }
+             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+                 JNLogObject(image);
+                 JNLogObject(error);
+                 JNLogObject(@(cacheType));
+             }];
+        }];
+    }
 }
 
 - (void)reloadTableView
