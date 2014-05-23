@@ -89,6 +89,7 @@
     self.captionTextField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     self.captionTextField.minimumFontSize = 10.0;
     self.captionTextField.adjustsFontSizeToFitWidth = YES;
+    self.captionTextField.returnKeyType = UIReturnKeyDone;
     self.captionTextField.alpha = 0.0;
 }
 
@@ -102,24 +103,32 @@
         
         if (captionTextFieldWasHidden) {
             self.captionTextField.alpha = 1.0;
-        } else {
-            self.captionTextField.alpha = 0.0;
         }
     }];
+        
+    [self.captionTextField becomeFirstResponder];
     
-    if (captionTextFieldWasHidden) {
-        
-        [self.captionTextField becomeFirstResponder];
-        
-        [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextField duration:UINavigationControllerHideShowBarDuration animations:^{
-            self.captionTextFieldBottomSpacingConstraint.constant = kSTCaptionTextFieldBottomSpacingConstraint;
-        } completion:^(BOOL finished) {
-            ;
-        }];
-    }
+    [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextField duration:UINavigationControllerHideShowBarDuration animations:^{
+        self.captionTextFieldBottomSpacingConstraint.constant = kSTCaptionTextFieldBottomSpacingConstraint;
+    } completion:^(BOOL finished) {
+        ;
+    }];
 }
 
 #pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSString *caption = textField.text;
+    
+    if ([NSString isNullOrEmptyString:caption]) {
+        
+        [UIView animateWithBlock:^{
+            
+            self.captionTextField.alpha = 0.0;
+        }];
+    }
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
