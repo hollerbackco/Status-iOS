@@ -25,7 +25,7 @@
 
 - (void)awakeFromNib
 {
-    self.contentView.backgroundColor = JNGrayBackgroundColor;
+    self.contentView.backgroundColor = JNBlackColor;
     
     self.photoImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.photoImageView.layer.masksToBounds = YES;

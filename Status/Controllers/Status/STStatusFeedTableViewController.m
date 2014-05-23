@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
+#import <SDWebImageManager.h>
+
 #import "UIView+JNHelper.h"
 #import "JNAlertView.h"
 
-#import <SDWebImageManager.h>
 
 #import "STStatusFeedTableViewController.h"
 #import "STStatus.h"
@@ -32,6 +33,7 @@
 
 - (void)performFetchWithCachePolicy:(PFCachePolicy)cachePolicy
 {
+    JNLog();
     self.refreshControl.enabled = NO;
     
     PFQuery *query = [PFQuery queryWithClassName:@"Status"];
@@ -53,13 +55,15 @@
             [allFriendIds insertObject:currentUserFBId atIndex:0];
             [query whereKey:@"userFBId" containedIn:allFriendIds];
             
-            [query orderByDescending:@"updatedAt"];
+            [query addDescendingOrder:@"sentAt"];
+            [query addDescendingOrder:@"updatedAt"];
             
         } else {
             
             [query whereKey:@"userFBId" equalTo:currentUserFBId];
         }
         
+        JNLog();
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
             if (error) {
@@ -92,23 +96,30 @@
 
 - (void)predownloadStatusData
 {
+    JNLog();
     if (self.statuses) {
+        
         [self.statuses enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
             STStatus *status = (STStatus*) obj;
             PFFile *imageFile = status[@"image"];
             NSURL *imageURL = [NSURL URLWithString:imageFile.url];
-//            JNLogObject(imageURL);
-            [[SDWebImageManager sharedManager]
-             downloadWithURL:imageURL
-             options:0
-             progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+            JNLogObject(imageURL);
+            
+            if (![[SDWebImageManager sharedManager] diskImageExistsForURL:imageURL]) {
+                
+                [[SDWebImageManager sharedManager]
+                 downloadWithURL:imageURL
+                 options:0
+                 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
 //                 JNLog(@"receivedSize: %@    expectedSize: %@", @(receivedSize), @(expectedSize));
-             }
-             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+                 }
+                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
 //                 JNLogObject(image);
 //                 JNLogObject(error);
 //                 JNLogObject(@(cacheType));
-             }];
+                 }];
+            }
         }];
     }
 }
@@ -150,6 +161,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)fetchFriendIdsCompleted:(void(^)(NSArray *friendIds, NSError *error))completed
 {
+    JNLog();
     // Issue a Facebook Graph API request to get your user's friend list
     [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         
@@ -186,18 +198,27 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     
     STStatusTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    PFUser *user = status[@"user"];
-    if ([user isDataAvailable]) {
+    NSString *senderName = status[@"senderName"];
+    if ([NSString isNotEmptyString:senderName]) {
         
-        cell.senderName = user[@"fbName"];
+        cell.senderName = senderName;
         
     } else {
         
-        [user fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        // old code
+        PFUser *user = status[@"user"];
+        if ([user isDataAvailable]) {
             
-            cell.senderName = object[@"fbName"];
+            cell.senderName = user[@"fbName"];
             
-        }];
+        } else {
+            
+            [user fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                
+                cell.senderName = object[@"fbName"];
+                
+            }];
+        }
     }
     
     PFFile *imageFile = status[@"image"];

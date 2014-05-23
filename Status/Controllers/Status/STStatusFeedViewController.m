@@ -43,6 +43,7 @@
 
 - (void)performFetch
 {
+    JNLog();
     [self setupTableViewController];
     
     [self.tableViewController performFetchWithCachePolicy:kPFCachePolicyCacheThenNetwork];
@@ -178,6 +179,8 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
                  status[@"image"] = imageFile;
                  status[@"userFBId"] = [[PFUser currentUser] objectForKey:@"fbId"];
                  status[@"user"] = [PFUser currentUser];
+                 status[@"senderName"] = [PFUser currentUser][@"fbName"];
+                 status[@"sentAt"] = [NSDate date];
                  
                  [status saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                      
@@ -214,6 +217,9 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
                              // update the status object
                              STStatus *status = (STStatus*) object;
                              status[@"image"] = imageFile;
+                             status[@"senderName"] = [PFUser currentUser][@"fbName"];
+                             status[@"sentAt"] = [NSDate date];
+
                              [status saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                                  
                                  if (error) {
@@ -257,6 +263,8 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     statusHistory[@"image"] = status[@"image"];
     statusHistory[@"userFBId"] = status[@"userFBId"];
     statusHistory[@"user"] = status[@"user"];
+    statusHistory[@"sentAt"] = status[@"sentAt"];
+    
     [statusHistory saveEventually:^(BOOL succeeded, NSError *error) {
         
         if (error) {
