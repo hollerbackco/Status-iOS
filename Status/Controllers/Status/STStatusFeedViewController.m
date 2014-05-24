@@ -128,6 +128,8 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = NO;
+    
+    [self.tableViewController.tableView scrollRectToVisible:CGRectMake(0.0, 0.0, 1.0, 1.0) animated:NO];
 }
 
 #pragma mark - Actions
@@ -157,6 +159,8 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     [self showTableHeaderViewAnimated:YES];
     
     self.savingLabel.text = @"Saving...";
+    self.progressView.progress = 0.0;
+    self.progressView.alpha = 1.0;
     
     [self createStatusWithImage:image];
 }
