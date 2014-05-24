@@ -69,6 +69,7 @@
 - (void) startRecording;
 - (void) stopRecording;
 - (void) captureStillImage;
+- (AVCaptureDevicePosition)getDevicePosition;
 - (BOOL) toggleCamera;
 - (NSUInteger) cameraCount;
 - (NSUInteger) micCount;

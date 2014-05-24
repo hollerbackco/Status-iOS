@@ -65,6 +65,14 @@
     return self.captionTextField.text;
 }
 
+- (void)resetCaption
+{
+    self.captionTextFieldBottomSpacingConstraint.constant = kSTCaptionTextFieldBottomSpacingConstraint;
+    self.captionTextField.text = nil;
+    self.captionTextField.attributedText = nil;
+    self.captionTextField.alpha = 0.0;
+}
+
 #pragma mark - Views
 
 - (void)viewDidLoad

@@ -26,6 +26,8 @@
 
 - (NSString*)getCaption;
 
+- (void)resetCaption;
+
 #pragma mark - Actions
 
 - (IBAction)captionAction:(id)sender;

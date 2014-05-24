@@ -54,6 +54,17 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self.statusFeedViewController performFetch];
 }
 
+#pragma mark - Reset
+
+- (void)resetCreateStatus
+{
+    [self.captionOverlayViewController resetCaption];
+    
+    if ([self.captureManager getDevicePosition] == AVCaptureDevicePositionBack) {
+        [self.captureManager toggleCamera];
+    }
+}
+
 #pragma mark - Camera
 
 - (NSString *)stringForFocusMode:(AVCaptureFocusMode)focusMode
@@ -185,6 +196,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = YES;
+    
+    [self resetCreateStatus];
 }
 
 - (void)viewWillDisppear:(BOOL)animated
@@ -261,18 +274,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self.navigationController pushViewController:self.statusFeedViewController animated:YES];
     
     [self.statusFeedViewController performCreateStatusWithImage:image];
-}
-
-- (void)resetCreateStatus
-{
-    // ui update
-    [UIView animateWithBlock:^{
-        self.progressView.alpha = 0.0;
-        self.videoPreviewView.alpha = 1.0;
-        self.stillButton.alpha = 1.0;
-        self.promptLabel.alpha = 1.0;
-        self.cameraToggleButton.alpha = 1.0;
-    }];
 }
 
 #pragma mark - Status Feed

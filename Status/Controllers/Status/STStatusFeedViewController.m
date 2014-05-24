@@ -55,6 +55,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)viewDidLoad
 {
+    JNLog();
     self.title = @"Status";
     
     self.navigationController.navigationBarHidden = NO;
@@ -90,6 +91,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)setupTableViewController
 {
+    JNLog();
     if (!self.tableViewController) {
         self.tableViewController = [[STStatusFeedTableViewController alloc] initWithNibName:@"STStatusFeedTableViewController" bundle:nil];
         [self addChildViewController:self.tableViewController];
@@ -120,11 +122,19 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     }];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    JNLog();
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBarHidden = NO;
+}
+
 #pragma mark - Actions
 
 - (void)cameraAction:(id)sender
 {
-    [((STAppDelegate*) [UIApplication sharedApplication].delegate) showCreateStatusAsRootViewController:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)feedbackAction:(id)sender
@@ -143,6 +153,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)performCreateStatusWithImage:(UIImage*)image
 {
+    JNLog();
     [self showTableHeaderViewAnimated:YES];
     
     self.savingLabel.text = @"Saving...";
@@ -152,6 +163,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)createStatusWithImage:(UIImage*)image
 {
+    JNLog();
     NSData *imageData = UIImageJPEGRepresentation(image, 0.99f);
     PFFile *imageFile = [PFFile fileWithName:@"img" data:imageData];
     
@@ -258,6 +270,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)didCreateStatus:(STStatus*)status
 {
+    JNLog();
     // save to status history
     PFObject *statusHistory = [PFObject objectWithClassName:@"StatusHistory"];
     statusHistory[@"image"] = status[@"image"];

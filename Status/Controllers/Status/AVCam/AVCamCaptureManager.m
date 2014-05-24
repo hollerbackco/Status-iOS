@@ -326,6 +326,11 @@
                                                          }];
 }
 
+- (AVCaptureDevicePosition)getDevicePosition
+{
+    return [[videoInput device] position];
+}
+
 // Toggle between the front and back camera, if both are present.
 - (BOOL) toggleCamera
 {
