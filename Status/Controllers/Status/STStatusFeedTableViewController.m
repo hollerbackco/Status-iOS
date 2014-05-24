@@ -28,6 +28,7 @@
 
 - (void)performFetchWithNetworkOnlyCachePolicy
 {
+    JNLog();
     [self performFetchWithCachePolicy:kPFCachePolicyNetworkOnly];
 }
 
@@ -55,15 +56,20 @@
             [allFriendIds insertObject:currentUserFBId atIndex:0];
             [query whereKey:@"userFBId" containedIn:allFriendIds];
             
-            [query addDescendingOrder:@"sentAt"];
-            [query addDescendingOrder:@"updatedAt"];
-            
         } else {
             
             [query whereKey:@"userFBId" equalTo:currentUserFBId];
         }
         
         JNLog();
+        if ((cachePolicy == kPFCachePolicyCacheThenNetwork ||
+             cachePolicy == kPFCachePolicyCacheElseNetwork ||
+             cachePolicy == kPFCachePolicyCacheOnly) &&
+            !query.hasCachedResult) {
+            
+            query.cachePolicy = kPFCachePolicyNetworkOnly;
+        }
+        
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
             if (error) {
@@ -73,7 +79,7 @@
                 
             } else {
 //                JNLogObject(objects);
-                self.statuses = objects;
+                self.statuses = [self sortedStatues:objects];
                 
                 runOnAsyncDefaultQueue(^{
                     [self predownloadStatusData];
@@ -94,6 +100,38 @@
     [self.refreshControl endRefreshing];
 }
 
+- (NSArray*)sortedStatues:(NSArray*)statuses
+{
+    return [statuses sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        
+        STStatus *status1 = (STStatus*) obj1;
+        STStatus *status2 = (STStatus*) obj2;
+        NSDate *sentAt1 = status1[@"sentAt"];
+        NSDate *sentAt2 = status2[@"sentAt"];
+        NSDate *updatedAt1 = status1.updatedAt;
+        NSDate *updatedAt2 = status2.updatedAt;
+        
+        NSComparisonResult result;
+        if (sentAt1 && sentAt2) {
+            
+            result = [sentAt1 compare:sentAt2];
+            
+        } else if (sentAt1 && updatedAt2) {
+            
+            result = [sentAt1 compare:updatedAt2];
+            
+        } else if (updatedAt1 && sentAt2) {
+            
+            result = [updatedAt1 compare:sentAt2];
+            
+        } else {
+            result = [updatedAt1 compare:updatedAt2];
+        }
+        
+        return -result;
+    }];
+}
+
 - (void)predownloadStatusData
 {
     JNLog();
@@ -104,9 +142,10 @@
             STStatus *status = (STStatus*) obj;
             PFFile *imageFile = status[@"image"];
             NSURL *imageURL = [NSURL URLWithString:imageFile.url];
-            JNLogObject(imageURL);
             
             if (![[SDWebImageManager sharedManager] diskImageExistsForURL:imageURL]) {
+
+                JNLog(@"predownloading: %@", imageURL);
                 
                 [[SDWebImageManager sharedManager]
                  downloadWithURL:imageURL
@@ -126,6 +165,7 @@
 
 - (void)reloadTableView
 {
+    JNLog();
     [self.tableView reloadData];
 }
 
@@ -135,6 +175,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)viewDidLoad
 {
+    JNLog();
     [super viewDidLoad];
     
     self.tableSpinnerView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
