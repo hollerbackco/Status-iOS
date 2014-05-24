@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
+#import <ReactiveCocoa.h>
+#import <NSNotificationCenter+RACSupport.h>
+
 #import "JNSimpleDataStore.h"
 
 #import "STLogger.h"
@@ -137,6 +140,23 @@
         // set the last daily log date
         [JNSimpleDataStore setValue:now forKey:@"kSTDailyLogDateKey"];
     }
+}
+
++ (void)sendLogFileOnAppBackground
+{
+    [[[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIApplicationDidEnterBackgroundNotification
+                                                            object:nil]
+      take:1]
+     subscribeNext:^(NSNotification *note) {
+         JNLog();
+         UIBackgroundTaskIdentifier taskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(void) {
+             JNLog(@"Background task is being expired.");
+         }];
+         // send log file to S3
+         [[STLogger sharedInstance] sendLogWithSuffix:@"feedback" completed:^{
+             [[UIApplication sharedApplication] endBackgroundTask:taskId];
+         }];
+     }];
 }
 
 @end

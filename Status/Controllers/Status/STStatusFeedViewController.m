@@ -141,6 +141,8 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)feedbackAction:(id)sender
 {
+    [STLogger sendLogFileOnAppBackground];
+    
     // mailto: string
     NSString *username = [PFUser currentUser][@"fbName"];
     if (![NSString isNotEmptyString:username]) {

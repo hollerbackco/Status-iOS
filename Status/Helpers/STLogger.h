@@ -26,4 +26,6 @@
 // this uses TransferManager without delegate callbacks
 - (void)sendLogWithSuffix:(NSString*)suffix completed:(void(^)())completed;
 
++ (void)sendLogFileOnAppBackground;
+
 @end
