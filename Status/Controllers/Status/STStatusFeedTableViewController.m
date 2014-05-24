@@ -43,8 +43,8 @@
     [self fetchFriendIdsCompleted:^(NSArray *friendIds, NSError *error) {
         
         PFUser *currentUser = [PFUser currentUser];
-        currentUser[@"friendIds"] = friendIds;
-        [currentUser saveEventually];
+//        currentUser[@"friendIds"] = friendIds;
+//        [currentUser saveEventually];
         
         NSString *currentUserFBId = currentUser[@"fbId"];
 //        JNLogObject(currentUserFBId);
@@ -100,6 +100,31 @@
     }];
     
     [self.refreshControl endRefreshing];
+}
+
+- (void)fetchFriendIdsCompleted:(void(^)(NSArray *friendIds, NSError *error))completed
+{
+    JNLog();
+    // Issue a Facebook Graph API request to get your user's friend list
+    [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        
+        NSMutableArray *friendIds = nil;
+        if (!error) {
+            // result will contain an array with your user's friends in the "data" key
+            NSArray *friendObjects = [result objectForKey:@"data"];
+            friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
+            // Create a list of friends' Facebook IDs
+            for (NSDictionary *friendObject in friendObjects) {
+                [friendIds addObject:[friendObject objectForKey:@"id"]];
+            }
+        } else {
+            
+            JNLogObject(error);
+        }
+        if (completed) {
+            completed(friendIds, error);
+        }
+    }];
 }
 
 - (NSArray*)sortedStatues:(NSArray*)statuses
@@ -198,33 +223,6 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     [refreshControl addTarget:self action:@selector(performFetchWithNetworkOnlyCachePolicy) forControlEvents:UIControlEventValueChanged];
     
     [self setRefreshControl:refreshControl];
-}
-
-#pragma mark - PFQueryTableViewController
-
-- (void)fetchFriendIdsCompleted:(void(^)(NSArray *friendIds, NSError *error))completed
-{
-    JNLog();
-    // Issue a Facebook Graph API request to get your user's friend list
-    [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        
-        NSMutableArray *friendIds = nil;
-        if (!error) {
-            // result will contain an array with your user's friends in the "data" key
-            NSArray *friendObjects = [result objectForKey:@"data"];
-            friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
-            // Create a list of friends' Facebook IDs
-            for (NSDictionary *friendObject in friendObjects) {
-                [friendIds addObject:[friendObject objectForKey:@"id"]];
-            }
-        } else {
-            
-            JNLogObject(error);
-        }
-        if (completed) {
-            completed(friendIds, error);
-        }
-    }];
 }
 
 #pragma mark - UITableViewDataSource
