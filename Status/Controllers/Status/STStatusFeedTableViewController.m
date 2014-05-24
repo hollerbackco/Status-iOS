@@ -61,6 +61,8 @@
             [query whereKey:@"userFBId" equalTo:currentUserFBId];
         }
         
+        [query includeKey:@"user"];
+        
         JNLog();
         if ((cachePolicy == kPFCachePolicyCacheThenNetwork ||
              cachePolicy == kPFCachePolicyCacheElseNetwork ||
