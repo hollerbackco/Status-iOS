@@ -12,4 +12,6 @@
 
 + (void)updateAppVersion;
 
++ (void)checkForUpdates;
+
 @end

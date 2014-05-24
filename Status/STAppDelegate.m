@@ -102,6 +102,8 @@
         [((STCreateStatusViewController*) self.statusNavigationController.topViewController) setupCamera];
     }
     
+    [STAppManager checkForUpdates];
+    
     [STAppManager updateAppVersion];
 }
 
