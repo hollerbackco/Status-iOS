@@ -12,6 +12,8 @@
 		0D5E5AB8192C3B9100F7DA7C /* STStatusFeedTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D5E5AB6192C3B9100F7DA7C /* STStatusFeedTableViewController.xib */; };
 		0D641A04192E6A6C002B3FD6 /* STCaptionOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D641A02192E6A6C002B3FD6 /* STCaptionOverlayViewController.m */; };
 		0D641A05192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D641A03192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib */; };
+		0D6784361931493200747111 /* STLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6784351931493200747111 /* STLogger.m */; };
+		0D67843919314A0F00747111 /* STTransferManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D67843819314A0F00747111 /* STTransferManager.m */; };
 		0DB0BD90192A85C9002F568F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD8F192A85C9002F568F /* Foundation.framework */; };
 		0DB0BD92192A85C9002F568F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD91192A85C9002F568F /* CoreGraphics.framework */; };
 		0DB0BD94192A85C9002F568F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD93192A85C9002F568F /* UIKit.framework */; };
@@ -92,6 +94,10 @@
 		0D641A01192E6A6C002B3FD6 /* STCaptionOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STCaptionOverlayViewController.h; path = Controllers/Status/STCaptionOverlayViewController.h; sourceTree = "<group>"; };
 		0D641A02192E6A6C002B3FD6 /* STCaptionOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STCaptionOverlayViewController.m; path = Controllers/Status/STCaptionOverlayViewController.m; sourceTree = "<group>"; };
 		0D641A03192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STCaptionOverlayViewController.xib; path = Controllers/Status/STCaptionOverlayViewController.xib; sourceTree = "<group>"; };
+		0D6784341931493200747111 /* STLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STLogger.h; path = Helpers/STLogger.h; sourceTree = "<group>"; };
+		0D6784351931493200747111 /* STLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STLogger.m; path = Helpers/STLogger.m; sourceTree = "<group>"; };
+		0D67843719314A0F00747111 /* STTransferManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTransferManager.h; sourceTree = "<group>"; };
+		0D67843819314A0F00747111 /* STTransferManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTransferManager.m; sourceTree = "<group>"; };
 		0DB0BD8C192A85C9002F568F /* Status.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Status.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DB0BD8F192A85C9002F568F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0DB0BD91192A85C9002F568F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -227,6 +233,8 @@
 			children = (
 				0D2054A6192D745900F584D7 /* STAppManager.h */,
 				0D2054A7192D745900F584D7 /* STAppManager.m */,
+				0D67843719314A0F00747111 /* STTransferManager.h */,
+				0D67843819314A0F00747111 /* STTransferManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -430,6 +438,8 @@
 			children = (
 				0DB0BE02192A980A002F568F /* STConstants.h */,
 				0DB0BE03192A980A002F568F /* STConstants.m */,
+				0D6784341931493200747111 /* STLogger.h */,
+				0D6784351931493200747111 /* STLogger.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -648,6 +658,7 @@
 				0DB0BDE8192A9605002F568F /* UIColor+JNHelper.m in Sources */,
 				0D5E5AB7192C3B9100F7DA7C /* STStatusFeedTableViewController.m in Sources */,
 				0DB0BE32192AB322002F568F /* AVCamRecorder.m in Sources */,
+				0D6784361931493200747111 /* STLogger.m in Sources */,
 				0DB0BDE7192A9605002F568F /* NSString+MD5.m in Sources */,
 				0DB0BDEF192A9605002F568F /* JNSimpleDataStore.m in Sources */,
 				0DB0BDE5192A9605002F568F /* JNViewController.m in Sources */,
@@ -662,6 +673,7 @@
 				0DB0BDEA192A9605002F568F /* UIImage+JNHelper.m in Sources */,
 				0DB0BDEE192A9605002F568F /* JNAppManager.m in Sources */,
 				0DB0BDF6192A9658002F568F /* STCreateStatusViewController.m in Sources */,
+				0D67843919314A0F00747111 /* STTransferManager.m in Sources */,
 				0DB0BE00192A968F002F568F /* STLoginViewController.m in Sources */,
 				0DB0BE3E192AC821002F568F /* STStatusTableViewCell.m in Sources */,
 				0DB0BDE1192A9605002F568F /* CGUtils.m in Sources */,

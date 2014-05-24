@@ -38,6 +38,9 @@
     
     [Crashlytics startWithAPIKey:@"1ed19e0f6100e773f794bf928ee1ef0b85ed4d6e"];
     
+    // configure logger
+    [[STLogger sharedInstance] configureFileLogger];
+    
     if ([STSession isLoggedIn]) {
         
         [self showCreateStatusAsRootViewController:YES];
@@ -105,6 +108,8 @@
     [STAppManager checkForUpdates];
     
     [STAppManager updateAppVersion];
+    
+    [STLogger sendDailyLog];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

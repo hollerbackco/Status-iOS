@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Signal. All rights reserved.
 //
 
+#import <Crashlytics/Crashlytics.h>
 #import <DDLog.h>
 #import <DDASLLogger.h>
 #import <DDTTYLogger.h>
@@ -31,11 +32,17 @@
  */
 #ifdef DEBUG
 #define JNLog(__FORMAT__, ...) { \
-NSLog((@"%s [%d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__); \
+\
+CLSNSLog((@"%s [%d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__); \
+DDLogCVerbose((@"%s [%d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__); \
+\
 }
 #else
 #define JNLog(__FORMAT__, ...) { \
-NSLog((@"%s [%d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__); \
+\
+CLSLog((@"%s [%d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__); \
+DDLogCVerbose((@"%s [%d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__); \
+\
 }
 #endif
 
@@ -67,6 +74,8 @@ DDLogCVerbose((@"" __FORMAT__), ##__VA_ARGS__);
 #define NSLogPoint(point)    NSLog(@"%s: %@", #point, NSStringFromCGPoint(point))
 
 @interface JNLogger : NSObject
+
+@property (nonatomic, strong) DDFileLogger *fileLogger;
 
 + (JNLogger*)sharedInstance;
 

@@ -49,7 +49,7 @@
 {
     // determine beta true or false (ie. enterprise build is beta, appstore is not beta)
     NSString *isBeta = nil;
-    if (kHBisEnterpriseBuild) {
+    if (kSTisEnterpriseBuild) {
         isBeta = @"true";
     } else {
         isBeta = @"false";

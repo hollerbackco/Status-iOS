@@ -18,6 +18,7 @@
 
 #import "STConstants.h"
 #import "JNLogger.h"
+#import "STLogger.h"
 #import "CGUtils.h"
 #import "NSObject+JNHelper.h"
 

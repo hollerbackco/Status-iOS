@@ -15,8 +15,6 @@
 
 @interface JNLogger ()
 
-@property (nonatomic, strong) DDFileLogger *fileLogger;
-
 @end
 
 @implementation JNLogger
@@ -68,20 +66,6 @@ static JNLogger *sharedInstance;
     self.fileLogger.maximumFileSize =  (5 * 1024 * 1024); // 5MB
     [DDLog addLogger:_fileLogger];
 }
-
-- (void)configureAllLoggers
-{
-    // CocoaLumberjack (Logging)
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    [self configureFileLogger];
-}
-
-//#pragma mark - AmazonServiceRequestDelegate
-//
-//-(void)request:(AmazonServiceRequest *)request didCompleteWithResponse:(AmazonServiceResponse *)response {}
-//
-//-(void)request:(AmazonServiceRequest *)request didFailWithError:(NSError *)error {}
 
 @end
 

@@ -9,10 +9,16 @@
 #import <Foundation/Foundation.h>
 
 #if ENTERPRISE
-#define kHBisEnterpriseBuild 1
+#define kSTisEnterpriseBuild 1
 #else
-#define kHBisEnterpriseBuild 0
+#define kSTisEnterpriseBuild 0
 #endif
+
+#define kSTAmazonS3AccessKeyID @"AKIAIRGS2GLW2KC6JVKQ"
+#define kSTAmazonS3SecretKey @"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"
+#define kSTAmazonS3LogBucket @"st-ios-logs"
+#define kSTTransferManagerTimeout 30.0
+
 
 @interface STConstants : NSObject
 

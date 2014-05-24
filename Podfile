@@ -2,7 +2,7 @@ platform :ios, '7.0'
 inhibit_all_warnings!
 
 pod 'AFNetworking', '~> 2.2'
-# pod 'AWSiOSSDK', '~> 1.7'
+pod 'AWSiOSSDK', :git => 'https://github.com/hollerbackco/aws-sdk-ios.git', :inhibit_warnings => true
 # pod 'CountryPicker', :git => 'https://github.com/hollerbackco/CountryPicker.git'
 pod 'CocoaLumberjack', '~> 1.8'
 # pod 'FMDB', '~> 2.3'
