@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#if ENTERPRISE
+#define kHBisEnterpriseBuild 1
+#else
+#define kHBisEnterpriseBuild 0
+#endif
+
 @interface STConstants : NSObject
 
 @end
