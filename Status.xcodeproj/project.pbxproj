@@ -67,6 +67,7 @@
 		0DB0BE3A192AC3EB002F568F /* STStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE39192AC3EB002F568F /* STStatus.m */; };
 		0DB0BE3E192AC821002F568F /* STStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */; };
 		0DB0BE3F192AC821002F568F /* STStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */; };
+		0DE3696E193138790084D330 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DE3696D193138790084D330 /* Crashlytics.framework */; };
 		0DFB825F192BD005008CD552 /* camera-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB825D192BD005008CD552 /* camera-button@2x.png */; };
 		0DFB8260192BD005008CD552 /* flip-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB825E192BD005008CD552 /* flip-icon@2x.png */; };
 		17CDFD3B33074CD4810ECC5A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A25DF608A844329BCEAFF56 /* libPods.a */; };
@@ -176,6 +177,7 @@
 		0DB0BE3B192AC821002F568F /* STStatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusTableViewCell.h; path = Controllers/Status/STStatusTableViewCell.h; sourceTree = "<group>"; };
 		0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusTableViewCell.m; path = Controllers/Status/STStatusTableViewCell.m; sourceTree = "<group>"; };
 		0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STStatusTableViewCell.xib; path = Controllers/Status/STStatusTableViewCell.xib; sourceTree = "<group>"; };
+		0DE3696D193138790084D330 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		0DFB825D192BD005008CD552 /* camera-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-button@2x.png"; sourceTree = "<group>"; };
 		0DFB825E192BD005008CD552 /* flip-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flip-icon@2x.png"; sourceTree = "<group>"; };
 		2A25DF608A844329BCEAFF56 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,6 +197,7 @@
 				0DB0BE15192A9D7A002F568F /* MobileCoreServices.framework in Frameworks */,
 				0DB0BE13192A9D72002F568F /* libz.1.1.3.dylib in Frameworks */,
 				0DB0BE11192A9D6B002F568F /* CoreLocation.framework in Frameworks */,
+				0DE3696E193138790084D330 /* Crashlytics.framework in Frameworks */,
 				0DB0BE0F192A9D61002F568F /* CFNetwork.framework in Frameworks */,
 				0DB0BE0D192A9D52002F568F /* AudioToolbox.framework in Frameworks */,
 				0DB0BD92192A85C9002F568F /* CoreGraphics.framework in Frameworks */,
@@ -251,6 +254,7 @@
 		0DB0BD8E192A85C9002F568F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0DE3696D193138790084D330 /* Crashlytics.framework */,
 				0DB0BE1E192A9E97002F568F /* Social.framework */,
 				0DB0BE1C192A9E53002F568F /* Security.framework */,
 				0DB0BE1A192A9D8F002F568F /* SystemConfiguration.framework */,
@@ -487,6 +491,7 @@
 				0DB0BD89192A85C9002F568F /* Frameworks */,
 				0DB0BD8A192A85C9002F568F /* Resources */,
 				8DD8CC6F248B443EB3D896BE /* Copy Pods Resources */,
+				0DE3696C1931383B0084D330 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -595,6 +600,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		0DE3696C1931383B0084D330 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 1ed19e0f6100e773f794bf928ee1ef0b85ed4d6e 0c35baf26b3f5bf0748b9d9179c34a3c624c62845c886caf62023cc1b005232f";
 		};
 		8DD8CC6F248B443EB3D896BE /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

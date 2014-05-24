@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
+#import <Crashlytics/Crashlytics.h>
+
 #import "STAppDelegate.h"
 
 #import "STCreateStatusViewController.h"
@@ -33,6 +35,8 @@
     
     // Initialize Parse's Facebook Utilities singleton. This uses the FacebookAppID we specified in our App bundle's plist.
     [PFFacebookUtils initializeFacebook];
+    
+    [Crashlytics startWithAPIKey:@"1ed19e0f6100e773f794bf928ee1ef0b85ed4d6e"];
     
     if ([STSession isLoggedIn]) {
         
