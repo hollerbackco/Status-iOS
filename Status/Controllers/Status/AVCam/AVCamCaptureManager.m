@@ -209,11 +209,23 @@
 //    
     // Add inputs and output to the capture session
     if ([newCaptureSession canAddInput:newVideoInput]) {
+        
         [newCaptureSession addInput:newVideoInput];
+        
+    } else {
+        
+        newCaptureSession.sessionPreset = AVCaptureSessionPreset640x480;
+        
+        if ([newCaptureSession canAddInput:newVideoInput]) {
+            
+            [newCaptureSession addInput:newVideoInput];
+        }
     }
+    
     if ([newCaptureSession canAddInput:newAudioInput]) {
         [newCaptureSession addInput:newAudioInput];
     }
+    
     if ([newCaptureSession canAddOutput:newStillImageOutput]) {
         [newCaptureSession addOutput:newStillImageOutput];
     }
