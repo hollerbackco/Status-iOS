@@ -8,8 +8,9 @@
 
 #import "JNViewController.h"
 
-#define kSTCaptionTextFieldBottomSpacingConstraint 226.0
-#define kSTCaptionTextFieldBottomSpacingConstraintOffset 94.0
+#define kSTCaptionTextViewBottomSpacingConstraint 224.0
+#define kSTCaptionTextViewBottomSpacingConstraintOffset 94.0
+#define kSTCaptionTextViewMaxTextSizeHeight 198.0
 #define kSTAttributesForCaptionTextFontSize 30.0
 
 @interface STCaptionOverlayViewController : JNViewController

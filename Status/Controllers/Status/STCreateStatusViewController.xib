@@ -8,7 +8,6 @@
             <connections>
                 <outlet property="cameraToggleButton" destination="VPb-Gv-Y0k" id="EY0-kT-Q2U"/>
                 <outlet property="captionButton" destination="XRL-Wa-2mC" id="l2a-C6-tjO"/>
-                <outlet property="progressView" destination="EyQ-0A-UCC" id="92I-j6-Lzp"/>
                 <outlet property="promptLabel" destination="JNq-md-IOR" id="2EK-Wh-ezZ"/>
                 <outlet property="stillButton" destination="a28-V9-h6P" id="c7A-l4-2NJ"/>
                 <outlet property="videoPreviewView" destination="Oey-zA-hJh" id="qua-JN-6oZ"/>
@@ -124,10 +123,6 @@
                         <constraint firstItem="VPb-Gv-Y0k" firstAttribute="leading" secondItem="a28-V9-h6P" secondAttribute="trailing" constant="41" id="skM-bM-pY1"/>
                     </constraints>
                 </view>
-                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="EyQ-0A-UCC">
-                    <rect key="frame" x="85" y="283" width="150" height="2"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </progressView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>

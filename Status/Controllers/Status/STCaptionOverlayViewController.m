@@ -10,10 +10,11 @@
 
 #import "STCaptionOverlayViewController.h"
 
-@interface STCaptionOverlayViewController () <UITextFieldDelegate>
+@interface STCaptionOverlayViewController () <UITextViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *captionTextField;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *captionTextFieldBottomSpacingConstraint;
+@property (weak, nonatomic) IBOutlet UITextView *captionTextView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *captionTextViewBottomSpacingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *captionTextViewHeightConstraint;
 
 - (IBAction)captionAction:(id)sender;
 
@@ -62,15 +63,15 @@
 
 - (NSString*)getCaption
 {
-    return self.captionTextField.text;
+    return self.captionTextView.text;
 }
 
 - (void)resetCaption
 {
-    self.captionTextFieldBottomSpacingConstraint.constant = kSTCaptionTextFieldBottomSpacingConstraint;
-    self.captionTextField.text = nil;
-    self.captionTextField.attributedText = nil;
-    self.captionTextField.alpha = 0.0;
+    self.captionTextViewBottomSpacingConstraint.constant = kSTCaptionTextViewBottomSpacingConstraint;
+    self.captionTextView.text = nil;
+    self.captionTextView.attributedText = nil;
+    self.captionTextView.alpha = 0.0;
 }
 
 #pragma mark - Views
@@ -81,83 +82,131 @@
     
     self.view.backgroundColor = JNClearColor;
     
-    self.captionTextField.delegate = self;
-    self.captionTextField.backgroundColor = JNClearColor;
-    self.captionTextField.text = nil;
-//    self.captionTextField.font = [UIFont primaryFontWithSize:30.0];
-//    self.captionTextField.textColor = JNWhiteColor;
-//    self.captionTextField.layer.shadowColor = JNBlackColor.CGColor;
-//    self.captionTextField.layer.shadowOffset = CGSizeMake(-1.0, 1.0);
-//    self.captionTextField.layer.shadowOpacity = 1.0;
-//    self.captionTextField.layer.shadowRadius = 1.0;
-    self.captionTextField.defaultTextAttributes = [self.class attributesForCaptionText];
-    self.captionTextField.attributedPlaceholder = [[NSAttributedString alloc]
-                                                   initWithString:@"SAY SOMETHING"
-                                                   attributes:[self.class attributesForPlaceholderCaptionText]];
-    self.captionTextField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
-    self.captionTextField.minimumFontSize = 10.0;
-    self.captionTextField.adjustsFontSizeToFitWidth = YES;
-    self.captionTextField.returnKeyType = UIReturnKeyDone;
-    self.captionTextField.alpha = 0.0;
+    self.captionTextView.delegate = self;
+    self.captionTextView.backgroundColor = [UIColor redColor];
+    self.captionTextView.text = nil;
+    self.captionTextView.typingAttributes = [self.class attributesForCaptionText];
+    self.captionTextView.returnKeyType = UIReturnKeyDone;
+    self.captionTextView.alpha = 0.0;
 }
 
 #pragma mark - Actions
 
 - (IBAction)captionAction:(id)sender
 {
-    BOOL captionTextFieldWasHidden = self.captionTextField.alpha == 0.0;
+    BOOL captionTextViewWasHidden = self.captionTextView.alpha == 0.0;
     
     [UIView animateWithBlock:^{
         
-        if (captionTextFieldWasHidden) {
-            self.captionTextField.alpha = 1.0;
+        if (captionTextViewWasHidden) {
+            self.captionTextView.alpha = 1.0;
         }
     }];
         
-    [self.captionTextField becomeFirstResponder];
+    [self.captionTextView becomeFirstResponder];
     
-    [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextField duration:UINavigationControllerHideShowBarDuration animations:^{
-        self.captionTextFieldBottomSpacingConstraint.constant = kSTCaptionTextFieldBottomSpacingConstraint;
+    [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextView duration:UINavigationControllerHideShowBarDuration animations:^{
+        self.captionTextViewBottomSpacingConstraint.constant = kSTCaptionTextViewBottomSpacingConstraint;
     } completion:^(BOOL finished) {
         ;
     }];
 }
 
-#pragma mark - UITextFieldDelegate
+#pragma mark - UITextViewDelegate
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (void)textViewDidEndEditing:(UITextView *)textView
 {
-    NSString *caption = textField.text;
+    NSString *caption = textView.text;
     
     if ([NSString isNullOrEmptyString:caption]) {
         
         [UIView animateWithBlock:^{
             
-            self.captionTextField.alpha = 0.0;
+            self.captionTextView.alpha = 0.0;
+        }];
+    } else {
+        
+        
+    }
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    NSRange resultRange = [text rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet] options:NSBackwardsSearch];
+    
+    if (text.length == 1 &&
+        resultRange.location != NSNotFound) {
+        
+        [self didReturnOnTextView:textView];
+        return NO;
+        
+    } else {
+        
+        if (text.length > 0) {
+            
+            NSString *fullText = [NSString stringWithFormat:@"%@%@", textView.text, text];
+            
+            if ([self.class isAtMaximumCaptionTextHeight:fullText textView:textView attributes:[self.class attributesForCaptionText]]) {
+                return NO;
+            }
+        }
+    }
+    return YES;
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if ([self.class isAtMaximumCaptionTextHeight:textView.text textView:textView attributes:[self.class attributesForCaptionText]]) {
+        return;
+    }
+    
+    if (textView.bounds.size.height != textView.contentSize.height) {
+        
+        [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextView duration:UINavigationControllerHideShowBarDuration animations:^{
+            
+            self.captionTextView.frame = CGRectSetHeight(self.captionTextView.frame, textView.contentSize.height);
+            self.captionTextViewHeightConstraint.constant = textView.contentSize.height;
         }];
     }
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
++ (BOOL)isAtMaximumCaptionTextHeight:(NSString*)text textView:(UITextView*)textView attributes:(NSDictionary*)attributes
 {
-    NSString *caption = textField.text;
+    CGRect rect =
+    [text
+     boundingRectWithSize:CGSizeMake(textView.bounds.size.width, MAXFLOAT)
+     options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
+     attributes:attributes
+     context:nil];
     
-    if ([NSString isNotEmptyString:caption]) {
+    if (ceilf(rect.size.height) > kSTCaptionTextViewMaxTextSizeHeight) {
         
-        [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextField duration:UINavigationControllerHideShowBarDuration animations:^{
-            self.captionTextFieldBottomSpacingConstraint.constant = kSTCaptionTextFieldBottomSpacingConstraint - kSTCaptionTextFieldBottomSpacingConstraintOffset;
+        return YES;
+    }
+    return NO;
+}
+
+- (void)didReturnOnTextView:(UITextView*)textView
+{
+    NSString *caption = textView.text;
+
+    if ([NSString isNotEmptyString:caption]) {
+
+        [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextView duration:UINavigationControllerHideShowBarDuration animations:^{
+            
+            self.captionTextViewBottomSpacingConstraint.constant = kSTCaptionTextViewBottomSpacingConstraint - kSTCaptionTextViewBottomSpacingConstraintOffset;
+            
         } completion:^(BOOL finished) {
             ;
         }];
-        
+
         if (self.didEnterCaptionBlock) {
+            
             self.didEnterCaptionBlock(caption);
         }
     }
     
-    [textField resignFirstResponder];
-    
-    return YES;
+    [textView resignFirstResponder];
 }
 
 @end

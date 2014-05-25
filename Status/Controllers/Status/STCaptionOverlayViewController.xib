@@ -6,8 +6,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="STCaptionOverlayViewController">
             <connections>
-                <outlet property="captionTextField" destination="ir4-Fp-lKS" id="En4-Yi-AhH"/>
-                <outlet property="captionTextFieldBottomSpacingConstraint" destination="7H0-Wq-IHO" id="0Y3-tr-rNJ"/>
+                <outlet property="captionTextView" destination="1Rf-c0-1qo" id="9QY-0u-b2e"/>
+                <outlet property="captionTextViewBottomSpacingConstraint" destination="gg8-r8-oOq" id="oKq-9Y-Nwg"/>
+                <outlet property="captionTextViewHeightConstraint" destination="f5r-O9-x58" id="rGv-dF-Q3H"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,22 +24,23 @@
                 <userLayoutGuide location="284" affinity="minY"/>
             </userGuides>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="CAPTION" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ir4-Fp-lKS">
-                    <rect key="frame" x="20" y="302" width="280" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1Rf-c0-1qo">
+                    <rect key="frame" x="0.0" y="288" width="320" height="56"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="HCS-r8-Jmx"/>
-                        <constraint firstAttribute="width" constant="280" id="Hbx-Dx-Otl"/>
+                        <constraint firstAttribute="width" constant="320" id="5ZK-h0-zZE"/>
+                        <constraint firstAttribute="height" constant="56" id="f5r-O9-x58"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="ir4-Fp-lKS" secondAttribute="bottom" constant="226" id="7H0-Wq-IHO"/>
-                <constraint firstAttribute="trailing" secondItem="ir4-Fp-lKS" secondAttribute="trailing" constant="20" id="Wdv-FZ-xlq"/>
-                <constraint firstItem="ir4-Fp-lKS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="abT-WN-1uI"/>
+                <constraint firstAttribute="trailing" secondItem="1Rf-c0-1qo" secondAttribute="trailing" id="NEH-OT-L0M"/>
+                <constraint firstAttribute="bottom" secondItem="1Rf-c0-1qo" secondAttribute="bottom" constant="224" id="gg8-r8-oOq"/>
+                <constraint firstItem="1Rf-c0-1qo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="p8m-io-Bgb"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
