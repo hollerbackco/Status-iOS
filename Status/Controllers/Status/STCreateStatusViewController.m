@@ -88,6 +88,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)setupCamera
 {
+    JNLog();
     if ([self captureManager] == nil) {
         AVCamCaptureManager *manager = [[AVCamCaptureManager alloc] init];
         [self setCaptureManager:manager];
@@ -152,6 +153,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)viewDidLoad
 {
+    JNLog();
     if (self.shouldLoadCamera) {
         [self setupCamera];
     }
@@ -193,6 +195,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    JNLog();
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = YES;
@@ -211,6 +214,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (IBAction)toggleCamera:(id)sender
 {
+    JNLog();
     // Toggle between cameras when there is more than one
     [[self captureManager] toggleCamera];
     
@@ -230,6 +234,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (IBAction)captureStillImage:(id)sender
 {
+    JNLog();
     // Capture a still image
     [[self stillButton] setEnabled:NO];
     
@@ -252,6 +257,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (IBAction)captionAction:(id)sender
 {
+    JNLog();
     if (self.captionOverlayViewController) {
         [self.captionOverlayViewController captionAction:sender];
     }
@@ -261,6 +267,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)didCaptureImage:(UIImage*)capturedImage
 {
+    JNLog();
     // push to feed
     [self pushToStatusFeedWithImage:capturedImage];
 }
@@ -269,6 +276,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)pushToStatusFeedWithImage:(UIImage*)image
 {
+    JNLog();
     [self setupStatusFeed];
     
     [self.navigationController pushViewController:self.statusFeedViewController animated:YES];

@@ -42,6 +42,8 @@
     
     [self fetchFriendIdsCompleted:^(NSArray *friendIds, NSError *error) {
         
+        JNLogPrimitive(friendIds.count);
+        
         PFUser *currentUser = [PFUser currentUser];
 //        currentUser[@"friendIds"] = friendIds;
 //        [currentUser saveEventually];
@@ -63,7 +65,6 @@
         
         [query includeKey:@"user"];
         
-        JNLog();
         if ((cachePolicy == kPFCachePolicyCacheThenNetwork ||
              cachePolicy == kPFCachePolicyCacheElseNetwork ||
              cachePolicy == kPFCachePolicyCacheOnly) &&
@@ -112,6 +113,8 @@
         if (!error) {
             // result will contain an array with your user's friends in the "data" key
             NSArray *friendObjects = [result objectForKey:@"data"];
+            JNLogPrimitive(friendObjects.count);
+            
             friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
             // Create a list of friends' Facebook IDs
             for (NSDictionary *friendObject in friendObjects) {
@@ -119,8 +122,9 @@
             }
         } else {
             
-            JNLogObject(error);
+            [JNLogger logExceptionWithName:THIS_METHOD reason:nil error:error];
         }
+        
         if (completed) {
             completed(friendIds, error);
         }
@@ -184,6 +188,11 @@
 //                 JNLogObject(image);
 //                 JNLogObject(error);
 //                 JNLogObject(@(cacheType));
+                     
+                     if (error) {
+                         
+                         [JNLogger logExceptionWithName:THIS_METHOD reason:nil error:error];
+                     }
                  }];
             }
         }];
