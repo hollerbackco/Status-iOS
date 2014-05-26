@@ -383,7 +383,6 @@ bail:
     return success;
 }
 
-
 #pragma mark Device Counts
 - (NSUInteger) cameraCount
 {
@@ -432,6 +431,47 @@ bail:
 			}
 		}
 	}
+}
+#pragma mark - Flash
+
+- (void)toggleFlash
+{
+    // Set torch and flash mode to auto
+	if ([[self backFacingCamera] hasFlash]) {
+        
+		if ([[self backFacingCamera] lockForConfiguration:nil]) {
+            
+            if (self.flashMode == AVCaptureFlashModeOff) {
+                
+                self.flashMode = AVCaptureFlashModeOn;
+                
+                if ([self isFlashModeSupported]) {
+                    [[self backFacingCamera] setFlashMode:AVCaptureFlashModeOn];
+                }
+            } else {
+                
+                self.flashMode = AVCaptureFlashModeOff;
+                
+                if ([self isFlashModeSupported]) {
+                    [[self backFacingCamera] setFlashMode:AVCaptureFlashModeOff];
+                }
+            }
+            
+			[[self backFacingCamera] unlockForConfiguration];
+		}
+	}
+}
+
+- (void)toggleFlashOff
+{
+    self.flashMode = AVCaptureFlashModeOn;
+    
+    [self toggleFlash];
+}
+
+- (BOOL)isFlashModeSupported
+{
+    return [[self backFacingCamera] isFlashModeSupported:AVCaptureFlashModeAuto];
 }
 
 @end

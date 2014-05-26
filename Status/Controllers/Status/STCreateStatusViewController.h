@@ -20,8 +20,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *promptLabel;
 @property (nonatomic, strong) IBOutlet UIButton *stillButton;
 @property (nonatomic, strong) IBOutlet UILabel *focusModeLabel;
-@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (weak, nonatomic) IBOutlet UIButton *captionButton;
+@property (weak, nonatomic) IBOutlet UIButton *toggleFlashButton;
 
 @property (nonatomic) BOOL shouldLoadCamera;
 
@@ -34,6 +34,7 @@
 - (IBAction)captureStillImage:(id)sender;
 - (IBAction)toggleCamera:(id)sender;
 - (IBAction)captionAction:(id)sender;
+- (IBAction)toggleFlashAction:(id)sender;
 
 #pragma mark - Captured Image
 

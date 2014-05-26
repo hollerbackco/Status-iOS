@@ -34,10 +34,12 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 @end
 
 @interface STCreateStatusViewController (InternalMethods)
+
 - (CGPoint)convertToPointOfInterestFromViewCoordinates:(CGPoint)viewCoordinates;
 - (void)tapToAutoFocus:(UIGestureRecognizer *)gestureRecognizer;
 - (void)tapToContinouslyAutoFocus:(UIGestureRecognizer *)gestureRecognizer;
 - (void)updateButtonStates;
+
 @end
 
 @interface STCreateStatusViewController (AVCamCaptureManagerDelegate) <AVCamCaptureManagerDelegate>
@@ -63,6 +65,10 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     if ([self.captureManager getDevicePosition] == AVCaptureDevicePositionBack) {
         [self.captureManager toggleCamera];
     }
+    
+    [self setupToggleFlash];
+    
+    [self.captureManager toggleFlashOff];
 }
 
 #pragma mark - Camera
@@ -90,6 +96,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 {
     JNLog();
     if ([self captureManager] == nil) {
+        
         AVCamCaptureManager *manager = [[AVCamCaptureManager alloc] init];
         [self setCaptureManager:manager];
         
@@ -149,13 +156,36 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     }
 }
 
+- (void)setupToggleFlash
+{
+    if (self.captureManager) {
+        
+        if ([self.captureManager isFlashModeSupported]) {
+        
+            FAKIonIcons *flashOffIcon = [FAKIonIcons ios7BoltOutlineIconWithSize:30.0];
+            [flashOffIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+            [self.toggleFlashButton setAttributedTitle:flashOffIcon.attributedString forState:UIControlStateNormal];
+            [self.toggleFlashButton applyDarkerShadowLayer];
+        } else {
+            
+            self.toggleFlashButton.alpha = 0.0;
+        }
+        
+    } else {
+        
+        self.toggleFlashButton.alpha = 0.0;
+    }
+}
+
 #pragma mark - Views
 
 - (void)viewDidLoad
 {
     JNLog();
     if (self.shouldLoadCamera) {
+        
         [self setupCamera];
+        [self setupToggleFlash];
     }
     
     [super viewDidLoad];
@@ -163,14 +193,13 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     self.view.backgroundColor = JNBlackColor;
     self.videoPreviewView.backgroundColor = JNBlackColor;
     
-    self.progressView.progress = 0.0;
-    self.progressView.alpha = 0.0;
-    
     FAKIonIcons *captionIcon = [FAKIonIcons ios7ComposeOutlineIconWithSize:40.0];
     [captionIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.captionButton setAttributedTitle:captionIcon.attributedString forState:UIControlStateNormal];
     
     [self setupCaptionOverlay];
+    
+    [self setupToggleFlash];
 }
 
 - (void)setupCaptionOverlay
@@ -263,6 +292,23 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     if (self.captionOverlayViewController) {
         [self.captionOverlayViewController captionAction:sender];
     }
+}
+
+- (IBAction)toggleFlashAction:(id)sender
+{
+    JNLog();
+    
+    if (self.captureManager.flashMode == AVCaptureFlashModeOff) {
+        
+        FAKIonIcons *flashOnIcon = [FAKIonIcons ios7BoltIconWithSize:30.0];
+        [flashOnIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+        [self.toggleFlashButton setAttributedTitle:flashOnIcon.attributedString forState:UIControlStateNormal];
+    } else {
+        
+        [self setupToggleFlash];
+    }
+    
+    [self.captureManager toggleFlash];
 }
 
 #pragma mark - Captured Image

@@ -64,6 +64,7 @@
 @property (nonatomic,assign) id deviceDisconnectedObserver;
 @property (nonatomic,assign) UIBackgroundTaskIdentifier backgroundRecordingID;
 @property (nonatomic,assign) id <AVCamCaptureManagerDelegate> delegate;
+@property (nonatomic) AVCaptureFlashMode flashMode;
 
 - (BOOL) setupSession;
 - (void) startRecording;
@@ -75,6 +76,12 @@
 - (NSUInteger) micCount;
 - (void) autoFocusAtPoint:(CGPoint)point;
 - (void) continuousFocusAtPoint:(CGPoint)point;
+
+#pragma mark - Flash
+
+- (void)toggleFlash;
+- (void)toggleFlashOff;
+- (BOOL)isFlashModeSupported;
 
 @end
 

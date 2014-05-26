@@ -10,6 +10,7 @@
                 <outlet property="captionButton" destination="XRL-Wa-2mC" id="l2a-C6-tjO"/>
                 <outlet property="promptLabel" destination="JNq-md-IOR" id="2EK-Wh-ezZ"/>
                 <outlet property="stillButton" destination="a28-V9-h6P" id="c7A-l4-2NJ"/>
+                <outlet property="toggleFlashButton" destination="QIn-8U-0Yj" id="hiB-Ln-F28"/>
                 <outlet property="videoPreviewView" destination="Oey-zA-hJh" id="qua-JN-6oZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -54,10 +55,28 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oey-zA-hJh" userLabel="videoPreviewView">
                     <rect key="frame" x="0.0" y="124" width="320" height="320"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIn-8U-0Yj">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="KFl-cc-4Tw"/>
+                                <constraint firstAttribute="height" constant="50" id="ane-G9-2lz"/>
+                            </constraints>
+                            <state key="normal" title="Button">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="toggleFlashAction:" destination="-1" eventType="touchUpInside" id="XaW-94-l8G"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="QIn-8U-0Yj" firstAttribute="top" secondItem="Oey-zA-hJh" secondAttribute="top" id="6wv-MD-7yc"/>
                         <constraint firstAttribute="width" constant="320" id="7S8-27-bRu"/>
                         <constraint firstAttribute="height" constant="320" id="g1f-Qi-40N"/>
+                        <constraint firstItem="QIn-8U-0Yj" firstAttribute="leading" secondItem="Oey-zA-hJh" secondAttribute="leading" id="yTs-fr-evx"/>
                     </constraints>
                 </view>
                 <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osy-ZC-hw2">
