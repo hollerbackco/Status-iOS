@@ -128,6 +128,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     
     [self.tableViewController.tableView scrollRectToVisible:CGRectMake(0.0, 0.0, 1.0, 1.0) animated:NO];
 }

@@ -199,6 +199,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = YES;
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     
     [self resetCreateStatus];
 }
@@ -208,6 +209,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [super viewWillDisappear:animated];
     
     self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 }
 
 #pragma mark - Actions
