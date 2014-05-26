@@ -117,6 +117,8 @@
         
         self.captionTextViewBottomSpacingConstraint.constant = kSTCaptionTextViewBottomSpacingConstraint;
         
+        self.captionTextView.backgroundColor = [JNBlackColor colorWithAlphaComponent:0.6];
+        
     } completion:^(BOOL finished) {
         ;
     }];
@@ -134,8 +136,8 @@
         }];
     } else {
         
-        
     }
+    self.captionTextView.backgroundColor = JNClearColor;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
