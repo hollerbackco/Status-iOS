@@ -70,6 +70,7 @@
 		0DB0BE3E192AC821002F568F /* STStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */; };
 		0DB0BE3F192AC821002F568F /* STStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */; };
 		0DE3696E193138790084D330 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DE3696D193138790084D330 /* Crashlytics.framework */; };
+		0DF150EF1932B3B2009565FD /* UIFont+STHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF150EE1932B3B2009565FD /* UIFont+STHelper.m */; };
 		0DFB825F192BD005008CD552 /* camera-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB825D192BD005008CD552 /* camera-button@2x.png */; };
 		0DFB8260192BD005008CD552 /* flip-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DFB825E192BD005008CD552 /* flip-icon@2x.png */; };
 		17CDFD3B33074CD4810ECC5A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A25DF608A844329BCEAFF56 /* libPods.a */; };
@@ -184,6 +185,8 @@
 		0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusTableViewCell.m; path = Controllers/Status/STStatusTableViewCell.m; sourceTree = "<group>"; };
 		0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STStatusTableViewCell.xib; path = Controllers/Status/STStatusTableViewCell.xib; sourceTree = "<group>"; };
 		0DE3696D193138790084D330 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		0DF150ED1932B3B2009565FD /* UIFont+STHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+STHelper.h"; path = "Helpers/UIFont+STHelper.h"; sourceTree = "<group>"; };
+		0DF150EE1932B3B2009565FD /* UIFont+STHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+STHelper.m"; path = "Helpers/UIFont+STHelper.m"; sourceTree = "<group>"; };
 		0DFB825D192BD005008CD552 /* camera-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-button@2x.png"; sourceTree = "<group>"; };
 		0DFB825E192BD005008CD552 /* flip-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flip-icon@2x.png"; sourceTree = "<group>"; };
 		2A25DF608A844329BCEAFF56 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -440,6 +443,8 @@
 				0DB0BE03192A980A002F568F /* STConstants.m */,
 				0D6784341931493200747111 /* STLogger.h */,
 				0D6784351931493200747111 /* STLogger.m */,
+				0DF150ED1932B3B2009565FD /* UIFont+STHelper.h */,
+				0DF150EE1932B3B2009565FD /* UIFont+STHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -673,6 +678,7 @@
 				0DB0BDEA192A9605002F568F /* UIImage+JNHelper.m in Sources */,
 				0DB0BDEE192A9605002F568F /* JNAppManager.m in Sources */,
 				0DB0BDF6192A9658002F568F /* STCreateStatusViewController.m in Sources */,
+				0DF150EF1932B3B2009565FD /* UIFont+STHelper.m in Sources */,
 				0D67843919314A0F00747111 /* STTransferManager.m in Sources */,
 				0DB0BE00192A968F002F568F /* STLoginViewController.m in Sources */,
 				0DB0BE3E192AC821002F568F /* STStatusTableViewCell.m in Sources */,

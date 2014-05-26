@@ -6,7 +6,10 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
+#import "UIFont+STHelper.h"
+
 #import "JNIcon.h"
+#import "JNAppManager.h"
 
 #import "STCaptionOverlayViewController.h"
 
@@ -26,7 +29,7 @@
 
 + (NSDictionary*)attributesForCaptionText
 {
-    return [self.class attributesForCaptionTextWithSize:kSTAttributesForCaptionTextFontSize];
+    return [self.class attributesForCaptionTextWithSize:kSTCaptionFontSize];
 }
 
 + (NSDictionary*)attributesForCaptionTextWithSize:(CGFloat)fontSize
@@ -39,7 +42,7 @@
     shadow.shadowBlurRadius = 3.0;
     shadow.shadowColor = JNBlackColor;
     
-    return @{NSFontAttributeName: [UIFont fontWithName:@"Futura-Medium" size:fontSize],
+    return @{NSFontAttributeName: [UIFont captionFont],
              NSForegroundColorAttributeName: JNWhiteColor,
              NSShadowAttributeName: shadow,
              NSParagraphStyleAttributeName: paragraphStyle};
@@ -55,7 +58,7 @@
     shadow.shadowBlurRadius = 1.0;
     shadow.shadowColor = JNGrayColor;
     
-    return @{NSFontAttributeName: [UIFont fontWithName:@"Futura-Medium" size:kSTAttributesForCaptionTextFontSize],
+    return @{NSFontAttributeName: [UIFont captionFont],
              NSForegroundColorAttributeName: [JNWhiteColor colorWithAlphaComponent:0.5],
              NSShadowAttributeName: shadow,
              NSParagraphStyleAttributeName: paragraphStyle};
@@ -83,7 +86,7 @@
     self.view.backgroundColor = JNClearColor;
     
     self.captionTextView.delegate = self;
-    self.captionTextView.backgroundColor = [UIColor redColor];
+    self.captionTextView.backgroundColor = JNClearColor;
     self.captionTextView.text = nil;
     self.captionTextView.typingAttributes = [self.class attributesForCaptionText];
     self.captionTextView.returnKeyType = UIReturnKeyDone;
@@ -104,15 +107,20 @@
     }];
         
     [self.captionTextView becomeFirstResponder];
-    
+}
+
+#pragma mark - UITextViewDelegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
     [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextView duration:UINavigationControllerHideShowBarDuration animations:^{
+        
         self.captionTextViewBottomSpacingConstraint.constant = kSTCaptionTextViewBottomSpacingConstraint;
+        
     } completion:^(BOOL finished) {
         ;
     }];
 }
-
-#pragma mark - UITextViewDelegate
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
@@ -179,6 +187,9 @@
      attributes:attributes
      context:nil];
     
+//    JNLog(@"textView.contentSize.height: %f textView.bounds.size.height: %f", textView.contentSize.height, textView.bounds.size.height);
+//    JNLogRect(rect);
+    
     if (ceilf(rect.size.height) > kSTCaptionTextViewMaxTextSizeHeight) {
         
         return YES;
@@ -194,7 +205,13 @@
 
         [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextView duration:UINavigationControllerHideShowBarDuration animations:^{
             
-            self.captionTextViewBottomSpacingConstraint.constant = kSTCaptionTextViewBottomSpacingConstraint - kSTCaptionTextViewBottomSpacingConstraintOffset;
+            if ([JNAppManager is3_5InchScreenSize]) {
+                
+                self.captionTextViewBottomSpacingConstraint.constant = kSTCaptionTextViewBottomSpacingConstraint - kSTCaptionTextViewBottomSpacingConstraintOffset3_5;
+            } else {
+                
+                self.captionTextViewBottomSpacingConstraint.constant = kSTCaptionTextViewBottomSpacingConstraint - kSTCaptionTextViewBottomSpacingConstraintOffset;
+            }
             
         } completion:^(BOOL finished) {
             ;

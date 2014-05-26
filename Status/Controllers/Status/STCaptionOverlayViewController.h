@@ -10,8 +10,8 @@
 
 #define kSTCaptionTextViewBottomSpacingConstraint 224.0
 #define kSTCaptionTextViewBottomSpacingConstraintOffset 94.0
+#define kSTCaptionTextViewBottomSpacingConstraintOffset3_5 138.0
 #define kSTCaptionTextViewMaxTextSizeHeight 198.0
-#define kSTAttributesForCaptionTextFontSize 30.0
 
 @interface STCaptionOverlayViewController : JNViewController
 
