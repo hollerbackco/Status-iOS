@@ -122,6 +122,8 @@
     } completion:^(BOOL finished) {
         ;
     }];
+    
+    self.captionTextView.spellCheckingType = UITextSpellCheckingTypeDefault;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
@@ -138,6 +140,8 @@
         
     }
     self.captionTextView.backgroundColor = JNClearColor;
+    
+    self.captionTextView.spellCheckingType = UITextSpellCheckingTypeNo;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
