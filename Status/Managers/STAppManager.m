@@ -30,17 +30,13 @@
             if ([userVersion compare:appVersion] == NSOrderedAscending) {
                 
                 currentUser[@"appVersion"] = [self.class getAppVersion];
-                [currentUser saveEventually];
-                
+                [currentUser saveInBackground];
             }
             
         } else {
             
             currentUser[@"appVersion"] = [self.class getAppVersion];
-            [currentUser saveEventually];
-            
-            [currentUser refresh];
-            
+            [currentUser saveInBackground];
         }
     }
 }
