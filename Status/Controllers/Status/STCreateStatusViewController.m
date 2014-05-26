@@ -271,6 +271,11 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 - (IBAction)captureStillImage:(id)sender
 {
     JNLog();
+    
+    [self.navigationController pushViewController:self.statusFeedViewController animated:YES];
+    
+    return;
+    
     // Capture a still image
     [[self stillButton] setEnabled:NO];
     

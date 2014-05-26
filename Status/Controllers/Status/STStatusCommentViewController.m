@@ -7,6 +7,7 @@
 //
 
 #import <UIImageView+WebCache.h>
+#import <ACEDrawingView.h>
 
 #import "JNIcon.h"
 
@@ -19,7 +20,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *changeColorButton;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
-@property (weak, nonatomic) IBOutlet UIView *drawingView;
+@property (weak, nonatomic) IBOutlet ACEDrawingView *drawingView;
+
+@property (nonatomic, strong) UIColor *drawingLineColor;
 
 - (IBAction)cancelAction:(id)sender;
 - (IBAction)changeColorAction:(id)sender;
@@ -52,7 +55,9 @@
     self.statusImageView.layer.masksToBounds = YES;
     [self setupStatusImageViewWithStatus:self.status];
     
+    self.drawingLineColor = kSTDrawingLineColor1;
     self.drawingView.backgroundColor = JNClearColor;
+    [self setupDrawingView];
 }
 
 - (void)setupStatusImageViewWithStatus:(STStatus*)status
@@ -75,6 +80,13 @@
      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
          ;
      }];
+}
+
+- (void)setupDrawingView
+{
+    self.drawingView.backgroundColor = JNClearColor;
+    self.drawingView.lineWidth = kSTDrawingLineWidth;
+    self.drawingView.lineColor = self.drawingLineColor;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -100,6 +112,38 @@
 
 - (IBAction)changeColorAction:(id)sender
 {
+    if (self.drawingLineColor == kSTDrawingLineColor1) {
+        
+        self.drawingLineColor = kSTDrawingLineColor2;
+        [self.changeColorButton setTitle:@"Blue" forState:UIControlStateNormal];
+        
+    } else if (self.drawingLineColor == kSTDrawingLineColor2) {
+        
+        self.drawingLineColor = kSTDrawingLineColor3;
+        [self.changeColorButton setTitle:@"Green" forState:UIControlStateNormal];
+        
+    } else if (self.drawingLineColor == kSTDrawingLineColor3) {
+        
+        self.drawingLineColor = kSTDrawingLineColor4;
+        [self.changeColorButton setTitle:@"Yellow" forState:UIControlStateNormal];
+        
+    } else if (self.drawingLineColor == kSTDrawingLineColor4) {
+        
+        self.drawingLineColor = kSTDrawingLineColor5;
+        [self.changeColorButton setTitle:@"White" forState:UIControlStateNormal];
+        
+    } else if (self.drawingLineColor == kSTDrawingLineColor5) {
+        
+        self.drawingLineColor = kSTDrawingLineColor1;
+        [self.changeColorButton setTitle:@"Red" forState:UIControlStateNormal];
+    } else {
+        
+        self.drawingLineColor = kSTDrawingLineColor1;
+        [self.changeColorButton setTitle:@"Red" forState:UIControlStateNormal];
+    }
+    
+    [self.changeColorButton setTitleColor:self.drawingLineColor forState:UIControlStateNormal];
+    self.drawingView.lineColor = self.drawingLineColor;
 }
 
 @end

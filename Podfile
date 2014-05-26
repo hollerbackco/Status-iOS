@@ -1,6 +1,7 @@
 platform :ios, '7.0'
 inhibit_all_warnings!
 
+pod 'ACEDrawingView', '~> 1.3'
 pod 'AFNetworking', '~> 2.2'
 pod 'AWSiOSSDK', :git => 'https://github.com/hollerbackco/aws-sdk-ios.git', :inhibit_warnings => true
 # pod 'CountryPicker', :git => 'https://github.com/hollerbackco/CountryPicker.git'
