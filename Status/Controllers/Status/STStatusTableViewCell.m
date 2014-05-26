@@ -76,9 +76,14 @@
         [self.spinnerView startAnimating];
     }
     
-    [self.photoImageView setImageWithURL:photoImageURL placeholderImage:nil options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+    [self.photoImageView
+     setImageWithURL:photoImageURL
+     placeholderImage:nil
+     options:SDWebImageRetryFailed
+     progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         ;
-    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+    }
+     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
         [UIView animateWithBlock:^{
             self.spinnerView.alpha = 0.0;
         }];
