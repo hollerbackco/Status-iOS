@@ -11,9 +11,7 @@
 #import "UIView+JNHelper.h"
 #import "JNAlertView.h"
 
-
 #import "STStatusFeedTableViewController.h"
-#import "STStatus.h"
 #import "STStatusTableViewCell.h"
 
 @interface STStatusFeedTableViewController ()
@@ -247,6 +245,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     STStatus *status = self.statuses[indexPath.row];
     
     STStatusTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     NSString *senderName = status[@"senderName"];
     if ([NSString isNotEmptyString:senderName]) {
@@ -289,7 +288,11 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (self.didSelectStatus) {
+        
+        STStatus *status = [self.statuses objectAtIndex:indexPath.row];
+        self.didSelectStatus(status);
+    }
 }
 
 @end

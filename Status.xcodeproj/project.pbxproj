@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D03815D1933D1880002F8BD /* STStatusCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D03815B1933D1880002F8BD /* STStatusCommentViewController.m */; };
+		0D03815E1933D1880002F8BD /* STStatusCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D03815C1933D1880002F8BD /* STStatusCommentViewController.xib */; };
 		0D2054A8192D745900F584D7 /* STAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2054A7192D745900F584D7 /* STAppManager.m */; };
 		0D5E5AB7192C3B9100F7DA7C /* STStatusFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5E5AB5192C3B9100F7DA7C /* STStatusFeedTableViewController.m */; };
 		0D5E5AB8192C3B9100F7DA7C /* STStatusFeedTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D5E5AB6192C3B9100F7DA7C /* STStatusFeedTableViewController.xib */; };
@@ -87,6 +89,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D03815A1933D1880002F8BD /* STStatusCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusCommentViewController.h; path = Controllers/Status/STStatusCommentViewController.h; sourceTree = "<group>"; };
+		0D03815B1933D1880002F8BD /* STStatusCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusCommentViewController.m; path = Controllers/Status/STStatusCommentViewController.m; sourceTree = "<group>"; };
+		0D03815C1933D1880002F8BD /* STStatusCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STStatusCommentViewController.xib; path = Controllers/Status/STStatusCommentViewController.xib; sourceTree = "<group>"; };
 		0D2054A6192D745900F584D7 /* STAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STAppManager.h; path = Managers/STAppManager.h; sourceTree = "<group>"; };
 		0D2054A7192D745900F584D7 /* STAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STAppManager.m; path = Managers/STAppManager.m; sourceTree = "<group>"; };
 		0D5E5AB4192C3B9100F7DA7C /* STStatusFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusFeedTableViewController.h; path = Controllers/Status/STStatusFeedTableViewController.h; sourceTree = "<group>"; };
@@ -422,6 +427,9 @@
 				0DB0BE3B192AC821002F568F /* STStatusTableViewCell.h */,
 				0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */,
 				0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */,
+				0D03815A1933D1880002F8BD /* STStatusCommentViewController.h */,
+				0D03815B1933D1880002F8BD /* STStatusCommentViewController.m */,
+				0D03815C1933D1880002F8BD /* STStatusCommentViewController.xib */,
 			);
 			name = Status;
 			sourceTree = "<group>";
@@ -585,6 +593,7 @@
 				0DFB8260192BD005008CD552 /* flip-icon@2x.png in Resources */,
 				0DFB825F192BD005008CD552 /* camera-button@2x.png in Resources */,
 				0D5E5AB8192C3B9100F7DA7C /* STStatusFeedTableViewController.xib in Resources */,
+				0D03815E1933D1880002F8BD /* STStatusCommentViewController.xib in Resources */,
 				0D641A05192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib in Resources */,
 				0DB0BDA2192A85C9002F568F /* Images.xcassets in Resources */,
 			);
@@ -664,6 +673,7 @@
 				0D5E5AB7192C3B9100F7DA7C /* STStatusFeedTableViewController.m in Sources */,
 				0DB0BE32192AB322002F568F /* AVCamRecorder.m in Sources */,
 				0D6784361931493200747111 /* STLogger.m in Sources */,
+				0D03815D1933D1880002F8BD /* STStatusCommentViewController.m in Sources */,
 				0DB0BDE7192A9605002F568F /* NSString+MD5.m in Sources */,
 				0DB0BDEF192A9605002F568F /* JNSimpleDataStore.m in Sources */,
 				0DB0BDE5192A9605002F568F /* JNViewController.m in Sources */,

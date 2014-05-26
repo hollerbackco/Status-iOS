@@ -6,9 +6,13 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
+#import "STStatus.h"
+
 @interface STStatusFeedTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSArray *statuses;
+
+@property (nonatomic, copy) void(^didSelectStatus)(STStatus *status);
 
 #pragma mark - Fetch
 

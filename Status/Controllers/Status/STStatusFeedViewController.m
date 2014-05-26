@@ -12,6 +12,7 @@
 
 #import "STStatusFeedViewController.h"
 #import "STStatusFeedTableViewController.h"
+#import "STStatusCommentViewController.h"
 
 #import "STStatusTableViewCell.h"
 #import "STStatus.h"
@@ -96,6 +97,10 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
         self.tableViewController = [[STStatusFeedTableViewController alloc] initWithNibName:@"STStatusFeedTableViewController" bundle:nil];
         [self addChildViewController:self.tableViewController];
     }
+    self.tableViewController.didSelectStatus = ^(STStatus *status) {
+        
+        [self didSelectStatus:status];
+    };
 }
 
 - (void)addTableViewControllerToContentView
@@ -152,6 +157,13 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     NSString *mailtoString = [NSString stringWithFormat:@"mailto:hello+status@hollerback.co?subject=Status%%20app%%20feedback"];
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mailtoString]];
+}
+
+- (void)didSelectStatus:(STStatus*)status
+{
+    STStatusCommentViewController *statusCommentViewController = [[STStatusCommentViewController alloc] initWithNib];
+    statusCommentViewController.status = status;
+    [self.navigationController presentViewController:statusCommentViewController animated:YES completion:nil];
 }
 
 #pragma mark - Create Status
