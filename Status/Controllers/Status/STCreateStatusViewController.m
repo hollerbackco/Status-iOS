@@ -66,7 +66,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         [self.captureManager toggleCamera];
     }
     
-    [self setupToggleFlashOn];
+    [self setupToggleFlash];
     
     [self.captureManager toggleFlashOff];
     
@@ -158,16 +158,16 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     }
 }
 
-- (void)setupToggleFlashOn
+- (void)setupToggleFlash
 {
+    FAKIonIcons *flashOffIcon = [FAKIonIcons ios7BoltOutlineIconWithSize:30.0];
+    [flashOffIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+    [self.toggleFlashButton setAttributedTitle:flashOffIcon.attributedString forState:UIControlStateNormal];
+    [self.toggleFlashButton applyDarkerShadowLayer];
+
     if (self.captureManager) {
         
         if ([self.captureManager isFlashModeSupported]) {
-        
-            FAKIonIcons *flashOffIcon = [FAKIonIcons ios7BoltOutlineIconWithSize:30.0];
-            [flashOffIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
-            [self.toggleFlashButton setAttributedTitle:flashOffIcon.attributedString forState:UIControlStateNormal];
-            [self.toggleFlashButton applyDarkerShadowLayer];
         } else {
             
             self.toggleFlashButton.alpha = 0.0;
@@ -188,7 +188,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         
         [self setupCamera];
         
-        [self setupToggleFlashOn];
+        [self setupToggleFlash];
     }
     
     [super viewDidLoad];
@@ -202,7 +202,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     [self setupCaptionOverlay];
     
-    [self setupToggleFlashOn];
+    [self setupToggleFlash];
 }
 
 - (void)setupCaptionOverlay
@@ -310,7 +310,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         [self.toggleFlashButton setAttributedTitle:flashOnIcon.attributedString forState:UIControlStateNormal];
     } else {
         
-        [self setupToggleFlashOn];
+        [self setupToggleFlash];
     }
     
     [self.captureManager toggleFlash];
