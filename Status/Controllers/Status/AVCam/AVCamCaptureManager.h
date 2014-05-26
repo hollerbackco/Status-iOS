@@ -65,6 +65,7 @@
 @property (nonatomic,assign) UIBackgroundTaskIdentifier backgroundRecordingID;
 @property (nonatomic,assign) id <AVCamCaptureManagerDelegate> delegate;
 @property (nonatomic) AVCaptureFlashMode flashMode;
+@property (nonatomic) AVCaptureDevicePosition devicePosition;
 
 - (BOOL) setupSession;
 - (void) startRecording;
@@ -80,6 +81,7 @@
 #pragma mark - Flash
 
 - (void)toggleFlash;
+- (void)toggleFlashOn;
 - (void)toggleFlashOff;
 - (BOOL)isFlashModeSupported;
 

@@ -353,12 +353,20 @@
         AVCaptureDeviceInput *newVideoInput;
         AVCaptureDevicePosition position = [[videoInput device] position];
         
-        if (position == AVCaptureDevicePositionBack)
+        if (position == AVCaptureDevicePositionBack) {
+            
+            self.devicePosition = AVCaptureDevicePositionFront;
             newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self frontFacingCamera] error:&error];
-        else if (position == AVCaptureDevicePositionFront)
+            
+        } else if (position == AVCaptureDevicePositionFront) {
+            
+            self.devicePosition = AVCaptureDevicePositionBack;
             newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self backFacingCamera] error:&error];
-        else
+            
+        } else {
+            
             goto bail;
+        }
         
         if (newVideoInput != nil) {
             [[self session] beginConfiguration];
@@ -460,6 +468,13 @@ bail:
 			[[self backFacingCamera] unlockForConfiguration];
 		}
 	}
+}
+
+- (void)toggleFlashOn
+{
+    self.flashMode = AVCaptureFlashModeOff;
+    
+    [self toggleFlash];
 }
 
 - (void)toggleFlashOff

@@ -66,9 +66,11 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         [self.captureManager toggleCamera];
     }
     
-    [self setupToggleFlash];
+    [self setupToggleFlashOn];
     
     [self.captureManager toggleFlashOff];
+    
+    self.toggleFlashButton.alpha = 0.0;
 }
 
 #pragma mark - Camera
@@ -156,7 +158,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     }
 }
 
-- (void)setupToggleFlash
+- (void)setupToggleFlashOn
 {
     if (self.captureManager) {
         
@@ -185,7 +187,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     if (self.shouldLoadCamera) {
         
         [self setupCamera];
-        [self setupToggleFlash];
+        
+        [self setupToggleFlashOn];
     }
     
     [super viewDidLoad];
@@ -199,7 +202,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     [self setupCaptionOverlay];
     
-    [self setupToggleFlash];
+    [self setupToggleFlashOn];
 }
 
 - (void)setupCaptionOverlay
@@ -251,17 +254,19 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     // Do an initial focus
     [[self captureManager] continuousFocusAtPoint:CGPointMake(.5f, .5f)];
+    
+    if (self.captureManager.devicePosition == AVCaptureDevicePositionBack) {
+        
+        [UIView animateWithBlock:^{
+            self.toggleFlashButton.alpha = 1.0;
+        }];
+    } else {
+        
+        [UIView animateWithBlock:^{
+            self.toggleFlashButton.alpha = 0.0;
+        }];
+    }
 }
-
-//- (IBAction)toggleRecording:(id)sender
-//{
-//    // Start recording if there isn't a recording running. Stop recording if there is.
-//    [[self recordButton] setEnabled:NO];
-//    if (![[[self captureManager] recorder] isRecording])
-//        [[self captureManager] startRecording];
-//    else
-//        [[self captureManager] stopRecording];
-//}
 
 - (IBAction)captureStillImage:(id)sender
 {
@@ -305,7 +310,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         [self.toggleFlashButton setAttributedTitle:flashOnIcon.attributedString forState:UIControlStateNormal];
     } else {
         
-        [self setupToggleFlash];
+        [self setupToggleFlashOn];
     }
     
     [self.captureManager toggleFlash];
