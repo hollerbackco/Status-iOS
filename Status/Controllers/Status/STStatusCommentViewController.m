@@ -7,6 +7,7 @@
 //
 
 #import <UIImageView+WebCache.h>
+#import <DLCPHuePicker.h>
 #import <ACEDrawingView.h>
 
 #import "JNIcon.h"
@@ -17,7 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
-@property (weak, nonatomic) IBOutlet UIButton *changeColorButton;
+@property (weak, nonatomic) IBOutlet DLCPHuePicker *huePicker;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
 @property (weak, nonatomic) IBOutlet ACEDrawingView *drawingView;
@@ -25,7 +26,7 @@
 @property (nonatomic, strong) UIColor *drawingLineColor;
 
 - (IBAction)cancelAction:(id)sender;
-- (IBAction)changeColorAction:(id)sender;
+- (IBAction)huePickerValueChanged:(id)sender;
 
 @end
 
@@ -46,8 +47,10 @@
     [icon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.cancelButton setAttributedTitle:icon.attributedString forState:UIControlStateNormal];
     
-    self.changeColorButton.titleLabel.font = [UIFont primaryFont];
-    [self.changeColorButton setTitleColor:JNWhiteColor forState:UIControlStateNormal];
+    self.drawingLineColor = kSTDefaultDrawingLineColor;
+    
+    self.huePicker.backgroundColor = JNClearColor;
+    self.huePicker.color = kSTDefaultDrawingLineColor;
     
     self.contentView.backgroundColor = JNBlackColor;
     
@@ -55,9 +58,10 @@
     self.statusImageView.layer.masksToBounds = YES;
     [self setupStatusImageViewWithStatus:self.status];
     
-    self.drawingLineColor = kSTDrawingLineColor1;
     self.drawingView.backgroundColor = JNClearColor;
     [self setupDrawingView];
+    
+    [self.huePicker addTarget:self action:@selector(huePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)setupStatusImageViewWithStatus:(STStatus*)status
@@ -86,7 +90,7 @@
 {
     self.drawingView.backgroundColor = JNClearColor;
     self.drawingView.lineWidth = kSTDrawingLineWidth;
-    self.drawingView.lineColor = self.drawingLineColor;
+    self.drawingView.lineColor = kSTDefaultDrawingLineColor;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -110,39 +114,14 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)changeColorAction:(id)sender
+- (IBAction)huePickerValueChanged:(id)sender
 {
-    if (self.drawingLineColor == kSTDrawingLineColor1) {
-        
-        self.drawingLineColor = kSTDrawingLineColor2;
-        [self.changeColorButton setTitle:@"Blue" forState:UIControlStateNormal];
-        
-    } else if (self.drawingLineColor == kSTDrawingLineColor2) {
-        
-        self.drawingLineColor = kSTDrawingLineColor3;
-        [self.changeColorButton setTitle:@"Green" forState:UIControlStateNormal];
-        
-    } else if (self.drawingLineColor == kSTDrawingLineColor3) {
-        
-        self.drawingLineColor = kSTDrawingLineColor4;
-        [self.changeColorButton setTitle:@"Yellow" forState:UIControlStateNormal];
-        
-    } else if (self.drawingLineColor == kSTDrawingLineColor4) {
-        
-        self.drawingLineColor = kSTDrawingLineColor5;
-        [self.changeColorButton setTitle:@"White" forState:UIControlStateNormal];
-        
-    } else if (self.drawingLineColor == kSTDrawingLineColor5) {
-        
-        self.drawingLineColor = kSTDrawingLineColor1;
-        [self.changeColorButton setTitle:@"Red" forState:UIControlStateNormal];
-    } else {
-        
-        self.drawingLineColor = kSTDrawingLineColor1;
-        [self.changeColorButton setTitle:@"Red" forState:UIControlStateNormal];
-    }
+    DLCPHuePicker *huePicker = (DLCPHuePicker*) sender;
     
-    [self.changeColorButton setTitleColor:self.drawingLineColor forState:UIControlStateNormal];
+    CGFloat hue, saturation, brightness, alpha;
+    [self.drawingLineColor getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
+    self.drawingLineColor = [UIColor colorWithHue:huePicker.hue saturation:saturation brightness:brightness alpha:alpha];
+    
     self.drawingView.lineColor = self.drawingLineColor;
 }
 

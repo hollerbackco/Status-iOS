@@ -6,6 +6,7 @@ pod 'AFNetworking', '~> 2.2'
 pod 'AWSiOSSDK', :git => 'https://github.com/hollerbackco/aws-sdk-ios.git', :inhibit_warnings => true
 # pod 'CountryPicker', :git => 'https://github.com/hollerbackco/CountryPicker.git'
 pod 'CocoaLumberjack', '~> 1.8'
+pod 'DLColorPicker', '~> 1.0'
 # pod 'FMDB', '~> 2.3'
 pod 'FontAwesomeKit/FontAwesome', '2.1.1'
 pod 'FontAwesomeKit/IonIcons', '2.1.1'

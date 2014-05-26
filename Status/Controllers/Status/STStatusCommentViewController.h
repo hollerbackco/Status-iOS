@@ -11,11 +11,7 @@
 #import "STStatus.h"
 
 #define kSTDrawingLineWidth 5.0
-#define kSTDrawingLineColor1 [UIColor redColor]
-#define kSTDrawingLineColor2 [UIColor blueColor]
-#define kSTDrawingLineColor3 [UIColor greenColor]
-#define kSTDrawingLineColor4 [UIColor yellowColor]
-#define kSTDrawingLineColor5 [UIColor whiteColor]
+#define kSTDefaultDrawingLineColor [UIColor redColor]
 
 @interface STStatusCommentViewController : JNViewController
 

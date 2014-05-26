@@ -7,10 +7,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="STStatusCommentViewController">
             <connections>
                 <outlet property="cancelButton" destination="2Hp-07-OCw" id="oPE-SF-Osd"/>
-                <outlet property="changeColorButton" destination="Ni1-UU-5Uk" id="4nk-12-9aV"/>
                 <outlet property="contentView" destination="xGJ-Sh-50R" id="lcJ-zD-Vd9"/>
                 <outlet property="drawingView" destination="uUc-FI-2KO" id="4gD-nz-rVg"/>
                 <outlet property="headerView" destination="7Gl-kE-H2y" id="XMp-VM-hRb"/>
+                <outlet property="huePicker" destination="a7g-kK-em3" id="gwx-vD-DNG"/>
                 <outlet property="statusImageView" destination="2LN-rn-sTL" id="SSj-y6-kaI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,21 +24,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="116"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ni1-UU-5Uk" userLabel="changeColorButton">
-                            <rect key="frame" x="100" y="66" width="120" height="50"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="Alf-Vx-zEo"/>
-                                <constraint firstAttribute="width" constant="120" id="wrT-UV-AxL"/>
-                            </constraints>
-                            <state key="normal" title="change color">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="changeColorAction:" destination="-1" eventType="touchUpInside" id="zL1-pl-qzv"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Hp-07-OCw">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Hp-07-OCw" userLabel="cancelButton">
                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="cancel">
@@ -48,12 +34,20 @@
                                 <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="iZt-xa-3Xc"/>
                             </connections>
                         </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7g-kK-em3" userLabel="huePicker" customClass="DLCPHuePicker">
+                            <rect key="frame" x="10" y="72" width="300" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="ETt-VX-0Fj"/>
+                                <constraint firstAttribute="width" constant="300" id="gxv-dw-Yvp"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="Ni1-UU-5Uk" secondAttribute="bottom" id="8gE-Ii-1FN"/>
-                        <constraint firstAttribute="trailing" secondItem="Ni1-UU-5Uk" secondAttribute="trailing" constant="100" id="Yhm-1Q-kQf"/>
-                        <constraint firstItem="Ni1-UU-5Uk" firstAttribute="leading" secondItem="7Gl-kE-H2y" secondAttribute="leading" constant="100" id="ecw-ax-FnH"/>
+                        <constraint firstAttribute="bottom" secondItem="a7g-kK-em3" secondAttribute="bottom" constant="4" id="B1h-Qd-qGh"/>
+                        <constraint firstItem="a7g-kK-em3" firstAttribute="leading" secondItem="7Gl-kE-H2y" secondAttribute="leading" constant="10" id="Lzg-Jp-mlJ"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xGJ-Sh-50R" userLabel="contentView">
@@ -63,14 +57,15 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2LN-rn-sTL" userLabel="statusImageView">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUc-FI-2KO" userLabel="drawingView" customClass="ACEDrawingView">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="2LN-rn-sTL" secondAttribute="trailing" id="2bc-i1-Q49"/>
                         <constraint firstItem="2LN-rn-sTL" firstAttribute="top" secondItem="xGJ-Sh-50R" secondAttribute="top" id="4WE-rQ-4wP"/>
@@ -96,5 +91,15 @@
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
+        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Eyq-rq-m8m">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <state key="normal" title="send">
+                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+            </state>
+            <connections>
+                <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="dAF-E5-UHO"/>
+            </connections>
+        </button>
     </objects>
 </document>
