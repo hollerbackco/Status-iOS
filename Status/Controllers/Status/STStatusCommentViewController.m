@@ -10,6 +10,8 @@
 #import <DLCPHuePicker.h>
 #import <ACEDrawingView.h>
 
+#import "UIColor+STHelper.h"
+
 #import "JNIcon.h"
 
 #import "STStatusCommentViewController.h"
@@ -18,15 +20,19 @@
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UIButton *undoButton;
 @property (weak, nonatomic) IBOutlet DLCPHuePicker *huePicker;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
 @property (weak, nonatomic) IBOutlet ACEDrawingView *drawingView;
+@property (weak, nonatomic) IBOutlet UIView *footerView;
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
 
 @property (nonatomic, strong) UIColor *drawingLineColor;
 
 - (IBAction)cancelAction:(id)sender;
-- (IBAction)huePickerValueChanged:(id)sender;
+- (IBAction)undoAction:(id)sender;
+- (IBAction)sendAction:(id)sender;
 
 @end
 
@@ -47,6 +53,13 @@
     [icon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.cancelButton setAttributedTitle:icon.attributedString forState:UIControlStateNormal];
     
+    [self.undoButton setTitle:nil forState:UIControlStateNormal];
+    FAKIonIcons *undoIcon = [FAKIonIcons refreshbeforeionRefreshingIconWithSize:28.0];
+    [undoIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+    [self.undoButton setAttributedTitle:undoIcon.attributedString forState:UIControlStateNormal];
+    
+    self.undoButton.alpha = 0.0;
+    
     self.drawingLineColor = kSTDefaultDrawingLineColor;
     
     self.huePicker.backgroundColor = JNClearColor;
@@ -62,6 +75,17 @@
     [self setupDrawingView];
     
     [self.huePicker addTarget:self action:@selector(huePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    self.footerView.backgroundColor = JNBlackColor;
+    
+    self.sendButton.titleLabel.font = [UIFont primaryFontWithSize:20.0];
+    self.sendButton.backgroundColor = STGreenButtonBackgroundColor;
+    [self.sendButton setTitleColor:JNWhiteColor forState:UIControlStateNormal];
+    [STStatus object:self.status fetchSenderNameCompleted:^(NSString *senderName) {
+        
+        NSString *sendButtonTitle = [NSString stringWithFormat:@"Send privately to %@", senderName];
+        [self.sendButton setTitle:sendButtonTitle forState:UIControlStateNormal];
+    }];
 }
 
 - (void)setupStatusImageViewWithStatus:(STStatus*)status
@@ -111,10 +135,15 @@
 
 - (IBAction)cancelAction:(id)sender
 {
+    JNLog();
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)huePickerValueChanged:(id)sender
+- (IBAction)undoAction:(id)sender
+{
+}
+
+- (void)huePickerValueChanged:(id)sender
 {
     DLCPHuePicker *huePicker = (DLCPHuePicker*) sender;
     
@@ -123,6 +152,11 @@
     self.drawingLineColor = [UIColor colorWithHue:huePicker.hue saturation:saturation brightness:brightness alpha:alpha];
     
     self.drawingView.lineColor = self.drawingLineColor;
+}
+
+- (IBAction)sendAction:(id)sender
+{
+    JNLog();
 }
 
 @end

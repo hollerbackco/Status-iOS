@@ -12,4 +12,6 @@
 
 + (STStatus*)new;
 
++ (void)object:(PFObject*)object fetchSenderNameCompleted:(void(^)(NSString *senderName))completed;
+
 @end

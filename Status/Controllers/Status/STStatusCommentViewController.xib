@@ -9,9 +9,12 @@
                 <outlet property="cancelButton" destination="2Hp-07-OCw" id="oPE-SF-Osd"/>
                 <outlet property="contentView" destination="xGJ-Sh-50R" id="lcJ-zD-Vd9"/>
                 <outlet property="drawingView" destination="uUc-FI-2KO" id="4gD-nz-rVg"/>
+                <outlet property="footerView" destination="Pht-IE-kah" id="Tkh-O1-O7w"/>
                 <outlet property="headerView" destination="7Gl-kE-H2y" id="XMp-VM-hRb"/>
                 <outlet property="huePicker" destination="a7g-kK-em3" id="gwx-vD-DNG"/>
+                <outlet property="sendButton" destination="kw9-Po-Vtq" id="Vib-n4-hXf"/>
                 <outlet property="statusImageView" destination="2LN-rn-sTL" id="SSj-y6-kaI"/>
+                <outlet property="undoButton" destination="LMc-Dd-ccS" id="knW-ub-4qF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,6 +35,16 @@
                             </state>
                             <connections>
                                 <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="iZt-xa-3Xc"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMc-Dd-ccS" userLabel="undoButton">
+                            <rect key="frame" x="270" y="0.0" width="50" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="undo">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="undoAction:" destination="-1" eventType="touchUpInside" id="1ex-qB-kTR"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7g-kK-em3" userLabel="huePicker" customClass="DLCPHuePicker">
@@ -79,27 +92,48 @@
                         <constraint firstAttribute="height" constant="320" id="zKn-ck-BeY"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pht-IE-kah">
+                    <rect key="frame" x="0.0" y="444" width="320" height="124"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kw9-Po-Vtq">
+                            <rect key="frame" x="0.0" y="74" width="320" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="Gja-BS-JwF"/>
+                                <constraint firstAttribute="width" constant="320" id="fWX-5G-l2X"/>
+                            </constraints>
+                            <state key="normal" title="Send privately">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="sendAction:" destination="-1" eventType="touchUpInside" id="Yiq-cB-jKm"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="kw9-Po-Vtq" secondAttribute="bottom" id="HnF-0X-hc3"/>
+                        <constraint firstAttribute="trailing" secondItem="kw9-Po-Vtq" secondAttribute="trailing" id="cgw-Ps-QOc"/>
+                        <constraint firstItem="kw9-Po-Vtq" firstAttribute="leading" secondItem="Pht-IE-kah" secondAttribute="leading" id="d2d-r1-Leb"/>
+                        <constraint firstAttribute="width" constant="320" id="rvr-Oh-vVj"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="7Gl-kE-H2y" secondAttribute="trailing" id="2j8-NE-XBN"/>
+                <constraint firstItem="Pht-IE-kah" firstAttribute="top" secondItem="xGJ-Sh-50R" secondAttribute="bottom" id="4cD-p4-GS9"/>
+                <constraint firstItem="Pht-IE-kah" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Eb8-aK-zG0"/>
+                <constraint firstAttribute="bottom" secondItem="Pht-IE-kah" secondAttribute="bottom" id="LOX-HN-dSh"/>
                 <constraint firstAttribute="centerX" secondItem="xGJ-Sh-50R" secondAttribute="centerX" id="MEf-Z6-LLe"/>
                 <constraint firstAttribute="centerY" secondItem="xGJ-Sh-50R" secondAttribute="centerY" id="Y8V-xu-v8S"/>
+                <constraint firstAttribute="trailing" secondItem="Pht-IE-kah" secondAttribute="trailing" id="mFM-O2-8H1"/>
                 <constraint firstItem="7Gl-kE-H2y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="owq-YJ-oH9"/>
                 <constraint firstItem="7Gl-kE-H2y" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="qyb-rg-RFg"/>
                 <constraint firstItem="xGJ-Sh-50R" firstAttribute="top" secondItem="7Gl-kE-H2y" secondAttribute="bottom" constant="8" id="sFG-Em-Fi6"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
-        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Eyq-rq-m8m">
-            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <state key="normal" title="send">
-                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-            </state>
-            <connections>
-                <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="dAF-E5-UHO"/>
-            </connections>
-        </button>
     </objects>
 </document>

@@ -7,6 +7,7 @@
 //
 
 #import <SDWebImageManager.h>
+#import <RACEXTScope.h>
 
 #import "UIView+JNHelper.h"
 #import "JNAlertView.h"
@@ -247,28 +248,14 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     STStatusTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    NSString *senderName = status[@"senderName"];
-    if ([NSString isNotEmptyString:senderName]) {
+    @weakify(cell);
+    [STStatus object:status fetchSenderNameCompleted:^(NSString *senderName) {
         
-        cell.senderName = senderName;
-        
-    } else {
-        
-        // old code
-        PFUser *user = status[@"user"];
-        if ([user isDataAvailable]) {
+        runOnMainQueue(^{
             
-            cell.senderName = user[@"fbName"];
-            
-        } else {
-            
-            [user fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                
-                cell.senderName = object[@"fbName"];
-                
-            }];
-        }
-    }
+            cell_weak_.senderName = senderName;
+        });
+    }];
     
     PFFile *imageFile = status[@"image"];
     if (imageFile) {

@@ -16,6 +16,7 @@
 		0D641A05192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D641A03192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib */; };
 		0D6784361931493200747111 /* STLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6784351931493200747111 /* STLogger.m */; };
 		0D67843919314A0F00747111 /* STTransferManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D67843819314A0F00747111 /* STTransferManager.m */; };
+		0DAF3E5C1933F895003E47AD /* UIColor+STHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF3E5B1933F895003E47AD /* UIColor+STHelper.m */; };
 		0DB0BD90192A85C9002F568F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD8F192A85C9002F568F /* Foundation.framework */; };
 		0DB0BD92192A85C9002F568F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD91192A85C9002F568F /* CoreGraphics.framework */; };
 		0DB0BD94192A85C9002F568F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD93192A85C9002F568F /* UIKit.framework */; };
@@ -104,6 +105,8 @@
 		0D6784351931493200747111 /* STLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STLogger.m; path = Helpers/STLogger.m; sourceTree = "<group>"; };
 		0D67843719314A0F00747111 /* STTransferManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTransferManager.h; sourceTree = "<group>"; };
 		0D67843819314A0F00747111 /* STTransferManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTransferManager.m; sourceTree = "<group>"; };
+		0DAF3E5A1933F895003E47AD /* UIColor+STHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+STHelper.h"; path = "Helpers/UIColor+STHelper.h"; sourceTree = "<group>"; };
+		0DAF3E5B1933F895003E47AD /* UIColor+STHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+STHelper.m"; path = "Helpers/UIColor+STHelper.m"; sourceTree = "<group>"; };
 		0DB0BD8C192A85C9002F568F /* Status.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Status.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DB0BD8F192A85C9002F568F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0DB0BD91192A85C9002F568F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -453,6 +456,8 @@
 				0D6784351931493200747111 /* STLogger.m */,
 				0DF150ED1932B3B2009565FD /* UIFont+STHelper.h */,
 				0DF150EE1932B3B2009565FD /* UIFont+STHelper.m */,
+				0DAF3E5A1933F895003E47AD /* UIColor+STHelper.h */,
+				0DAF3E5B1933F895003E47AD /* UIColor+STHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -664,6 +669,7 @@
 				0DB0BDFB192A966C002F568F /* STStatusFeedViewController.m in Sources */,
 				0D641A04192E6A6C002B3FD6 /* STCaptionOverlayViewController.m in Sources */,
 				0DB0BDE6192A9605002F568F /* NSObject+JNHelper.m in Sources */,
+				0DAF3E5C1933F895003E47AD /* UIColor+STHelper.m in Sources */,
 				0DB0BD9C192A85C9002F568F /* main.m in Sources */,
 				0DB0BDED192A9605002F568F /* JNLogger.m in Sources */,
 				0DB0BE34192AB322002F568F /* AVCamViewController.m in Sources */,

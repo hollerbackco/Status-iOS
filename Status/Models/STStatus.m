@@ -15,4 +15,35 @@
     return [super objectWithClassName:@"Status"];
 }
 
++ (void)object:(PFObject*)object fetchSenderNameCompleted:(void(^)(NSString *senderName))completed
+{
+    NSString *senderName = object[@"senderName"];
+    if ([NSString isNotEmptyString:senderName]) {
+        
+        if (completed) {
+            completed(senderName);
+        }
+        
+    } else {
+        
+        // old code
+        PFUser *user = object[@"user"];
+        if ([user isDataAvailable]) {
+            
+            if (completed) {
+                completed(user[@"fbName"]);
+            }
+            
+        } else {
+            
+            [user fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                
+                if (completed) {
+                    completed(object[@"fbName"]);
+                }
+            }];
+        }
+    }
+}
+
 @end
