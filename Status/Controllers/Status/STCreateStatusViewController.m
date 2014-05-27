@@ -569,14 +569,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         finalImage = image;
     }
     
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    [library
-     writeImageToSavedPhotosAlbum:finalImage.CGImage
-     orientation:(ALAssetOrientation) finalImage.imageOrientation
-     completionBlock:^(NSURL *assetURL, NSError *error) {
-         //         JNLogObject(assetURL);
-     }];
-    
     [self didCaptureImage:finalImage];
 }
 
