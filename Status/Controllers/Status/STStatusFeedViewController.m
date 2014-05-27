@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
-#import <RACExtScope.h>
+#import <RACEXTScope.h>
 
 #import "UIViewController+JNHelper.h"
 
@@ -294,25 +294,6 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 - (void)didCreateStatus:(STStatus*)status
 {
     JNLog();
-    // save to status history
-    PFObject *statusHistory = [PFObject objectWithClassName:@"StatusHistory"];
-    statusHistory[@"image"] = status[@"image"];
-    statusHistory[@"userFBId"] = status[@"userFBId"];
-    statusHistory[@"user"] = status[@"user"];
-    statusHistory[@"sentAt"] = status[@"sentAt"];
-    
-    [statusHistory saveEventually:^(BOOL succeeded, NSError *error) {
-        
-        if (error) {
-            
-            JNLogObject(error);
-            
-        } else {
-            
-//            JNLog(@"status history successfully saved");
-        }
-    }];
-    
     [self finishedCreateStatus];
     
     [self.tableViewController performFetchWithCachePolicy:kPFCachePolicyNetworkOnly];
