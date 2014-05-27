@@ -1,4 +1,9 @@
 /Podfile.lock
 /Pods/
-
 /Status.xcworkspace/
+/.ds_store
+/.DS_Store
+*.orig
+
+
+
