@@ -10,7 +10,7 @@
 
 @class AVCamCaptureManager, AVCamPreviewView, AVCaptureVideoPreviewLayer;
 
-@interface STCreateStatusViewController : JNViewController <UIImagePickerControllerDelegate>
+@interface STCreateStatusViewController : JNViewController <UIImagePickerControllerDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) AVCamCaptureManager *captureManager;
 @property (nonatomic, strong) IBOutlet UIView *videoPreviewView;
@@ -22,6 +22,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *focusModeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *captionButton;
 @property (weak, nonatomic) IBOutlet UIButton *toggleFlashButton;
+@property (weak, nonatomic) IBOutlet UIButton *historyButton;
 
 @property (nonatomic) BOOL shouldLoadCamera;
 
@@ -35,6 +36,7 @@
 - (IBAction)toggleCamera:(id)sender;
 - (IBAction)captionAction:(id)sender;
 - (IBAction)toggleFlashAction:(id)sender;
+- (IBAction)historyAction:(id)sender;
 
 #pragma mark - Captured Image
 

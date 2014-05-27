@@ -30,6 +30,7 @@
 
 @property (nonatomic, strong) UIColor *drawingLineColor;
 @property (nonatomic, strong) UIActivityIndicatorView *sendSpinnerView;
+@property (nonatomic, copy) NSString *sendToButtonText;
 
 - (IBAction)cancelAction:(id)sender;
 - (IBAction)undoAction:(id)sender;
@@ -84,8 +85,8 @@
     [self.sendButton setTitleColor:JNWhiteColor forState:UIControlStateNormal];
     [STStatus object:self.status fetchSenderNameCompleted:^(NSString *senderName) {
         
-        NSString *sendButtonTitle = [NSString stringWithFormat:@"Send privately to %@", senderName];
-        [self.sendButton setTitle:sendButtonTitle forState:UIControlStateNormal];
+        self.sendToButtonText = [NSString stringWithFormat:@"Send privately to %@", senderName];
+        [self.sendButton setTitle:self.sendToButtonText forState:UIControlStateNormal];
     }];
 }
 
@@ -192,30 +193,54 @@
     [imageFile
      saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
          
-         // create a new status object
-         STStatusComment *statusComment = [STStatusComment new];
-         statusComment[@"image"] = imageFile;
-         statusComment[@"userFBId"] = [[PFUser currentUser] objectForKey:@"fbId"];
-         statusComment[@"user"] = [PFUser currentUser];
-         statusComment[@"senderName"] = [PFUser currentUser][@"fbName"];
-         statusComment[@"sentAt"] = [NSDate date];
-         statusComment[@"status"] = self.status;
-
-         [statusComment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+         if (error) {
+             
+             [JNLogger logExceptionWithName:THIS_METHOD reason:@"image upload" error:error];
+             [self showError];
+             [self finishedCreateStatusCommentWithError];
+             
+         } else {
+             
+             PFQuery *statusHistoryQuery = [PFQuery queryWithClassName:@"StatusHistory"];
+             [statusHistoryQuery whereKey:@"statusId" equalTo:self.status.objectId];
+             [statusHistoryQuery orderByDescending:@"createdAt"];
+             [statusHistoryQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                 
+                 if (error) {
+                     
+                     [JNLogger logExceptionWithName:THIS_METHOD reason:@"status history get" error:error];
+                     [self showError];
+                     [self finishedCreateStatusCommentWithError];
+                     
+                 } else {
+                     
+                     // create a new status object
+                     STStatusComment *statusComment = [STStatusComment new];
+                     statusComment[@"image"] = imageFile;
+                     statusComment[@"userFBId"] = [[PFUser currentUser] objectForKey:@"fbId"];
+                     statusComment[@"user"] = [PFUser currentUser];
+                     statusComment[@"senderName"] = [PFUser currentUser][@"fbName"];
+                     statusComment[@"sentAt"] = [NSDate date];
+                     statusComment[@"parent"] = object;
+                     
+                     [statusComment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                         
+                         if (error) {
+                             
+                             [JNLogger logExceptionWithName:THIS_METHOD reason:@"status comment save" error:error];
+                             [self showError];
+                             [self finishedCreateStatusCommentWithError];
+                             
+                         } else {
+                             
+                             //                 JNLog(@"status comment successfully saved");
+                             [self didCreateStatusComment:statusComment];
+                         }
+                     }];
+                 }
+             }];
+         }
          
-             if (error) {
-                 
-                 JNLogObject(error);
-                 [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem saving your reply. Please try again."];
-                 
-                 [self finishedCreateStatusComment];
-                 
-             } else {
-                 
-//                 JNLog(@"status comment successfully saved");
-                 [self didCreateStatusComment:statusComment];
-             }
-        }];
      }
      progressBlock:^(int percentDone) {
          ;
@@ -240,6 +265,22 @@
     [UIView animateWithBlock:^{
         self.sendSpinnerView.alpha = 0.0;
     }];
+}
+
+- (void)finishedCreateStatusCommentWithError
+{
+    [self finishedCreateStatusComment];
+    
+    runOnMainQueue(^{
+        [self.sendButton setTitle:self.sendToButtonText forState:UIControlStateNormal];
+    });
+}
+
+- (void)showError
+{
+    runOnMainQueue(^{
+        [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem saving your reply. Please try again."];
+    });
 }
 
 @end

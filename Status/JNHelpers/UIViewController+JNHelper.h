@@ -104,6 +104,8 @@ extern CGFloat const kJNNavigationBarButtonLongWidth;
 
 - (void)applyCameraNavigationButtonWithTarget:(id)target action:(SEL)action;
 
+- (void)applyRightCameraNavigationButtonWithTarget:(id)target action:(SEL)action;
+
 - (void)applyGearNavigationButtonWithTarget:(id)target action:(SEL)action;
 
 - (void)applyNextNavigationButtonWithTarget:(id)target action:(SEL)action;

@@ -18,6 +18,12 @@
 		0D67843919314A0F00747111 /* STTransferManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D67843819314A0F00747111 /* STTransferManager.m */; };
 		0DAF3E5C1933F895003E47AD /* UIColor+STHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF3E5B1933F895003E47AD /* UIColor+STHelper.m */; };
 		0DAF3E5F19340AC4003E47AD /* STStatusComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF3E5E19340AC4003E47AD /* STStatusComment.m */; };
+		0DAF3E6319340FDE003E47AD /* STMyStatusHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF3E6119340FDE003E47AD /* STMyStatusHistoryViewController.m */; };
+		0DAF3E6419340FDE003E47AD /* STMyStatusHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DAF3E6219340FDE003E47AD /* STMyStatusHistoryViewController.xib */; };
+		0DAF3E681934109C003E47AD /* STStatusHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF3E661934109C003E47AD /* STStatusHistoryTableViewCell.m */; };
+		0DAF3E691934109C003E47AD /* STStatusHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DAF3E671934109C003E47AD /* STStatusHistoryTableViewCell.xib */; };
+		0DAF3E6C193411B2003E47AD /* STStatusHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF3E6B193411B2003E47AD /* STStatusHistory.m */; };
+		0DAF3E6F19341954003E47AD /* STRightToLeftTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF3E6E19341954003E47AD /* STRightToLeftTransitionAnimator.m */; };
 		0DB0BD90192A85C9002F568F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD8F192A85C9002F568F /* Foundation.framework */; };
 		0DB0BD92192A85C9002F568F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD91192A85C9002F568F /* CoreGraphics.framework */; };
 		0DB0BD94192A85C9002F568F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD93192A85C9002F568F /* UIKit.framework */; };
@@ -110,6 +116,16 @@
 		0DAF3E5B1933F895003E47AD /* UIColor+STHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+STHelper.m"; path = "Helpers/UIColor+STHelper.m"; sourceTree = "<group>"; };
 		0DAF3E5D19340AC3003E47AD /* STStatusComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusComment.h; path = Models/STStatusComment.h; sourceTree = "<group>"; };
 		0DAF3E5E19340AC4003E47AD /* STStatusComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusComment.m; path = Models/STStatusComment.m; sourceTree = "<group>"; };
+		0DAF3E6019340FDE003E47AD /* STMyStatusHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STMyStatusHistoryViewController.h; path = Controllers/Status/STMyStatusHistoryViewController.h; sourceTree = "<group>"; };
+		0DAF3E6119340FDE003E47AD /* STMyStatusHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STMyStatusHistoryViewController.m; path = Controllers/Status/STMyStatusHistoryViewController.m; sourceTree = "<group>"; };
+		0DAF3E6219340FDE003E47AD /* STMyStatusHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STMyStatusHistoryViewController.xib; path = Controllers/Status/STMyStatusHistoryViewController.xib; sourceTree = "<group>"; };
+		0DAF3E651934109C003E47AD /* STStatusHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusHistoryTableViewCell.h; path = Controllers/Status/STStatusHistoryTableViewCell.h; sourceTree = "<group>"; };
+		0DAF3E661934109C003E47AD /* STStatusHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusHistoryTableViewCell.m; path = Controllers/Status/STStatusHistoryTableViewCell.m; sourceTree = "<group>"; };
+		0DAF3E671934109C003E47AD /* STStatusHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STStatusHistoryTableViewCell.xib; path = Controllers/Status/STStatusHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		0DAF3E6A193411B2003E47AD /* STStatusHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusHistory.h; path = Models/STStatusHistory.h; sourceTree = "<group>"; };
+		0DAF3E6B193411B2003E47AD /* STStatusHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusHistory.m; path = Models/STStatusHistory.m; sourceTree = "<group>"; };
+		0DAF3E6D19341954003E47AD /* STRightToLeftTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STRightToLeftTransitionAnimator.h; path = Controllers/Status/STRightToLeftTransitionAnimator.h; sourceTree = "<group>"; };
+		0DAF3E6E19341954003E47AD /* STRightToLeftTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STRightToLeftTransitionAnimator.m; path = Controllers/Status/STRightToLeftTransitionAnimator.m; sourceTree = "<group>"; };
 		0DB0BD8C192A85C9002F568F /* Status.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Status.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DB0BD8F192A85C9002F568F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0DB0BD91192A85C9002F568F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -421,6 +437,8 @@
 				0DB0BDF3192A9658002F568F /* STCreateStatusViewController.h */,
 				0DB0BDF4192A9658002F568F /* STCreateStatusViewController.m */,
 				0DB0BDF5192A9658002F568F /* STCreateStatusViewController.xib */,
+				0DAF3E6D19341954003E47AD /* STRightToLeftTransitionAnimator.h */,
+				0DAF3E6E19341954003E47AD /* STRightToLeftTransitionAnimator.m */,
 				0D641A01192E6A6C002B3FD6 /* STCaptionOverlayViewController.h */,
 				0D641A02192E6A6C002B3FD6 /* STCaptionOverlayViewController.m */,
 				0D641A03192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib */,
@@ -436,6 +454,12 @@
 				0D03815A1933D1880002F8BD /* STStatusCommentViewController.h */,
 				0D03815B1933D1880002F8BD /* STStatusCommentViewController.m */,
 				0D03815C1933D1880002F8BD /* STStatusCommentViewController.xib */,
+				0DAF3E6019340FDE003E47AD /* STMyStatusHistoryViewController.h */,
+				0DAF3E6119340FDE003E47AD /* STMyStatusHistoryViewController.m */,
+				0DAF3E6219340FDE003E47AD /* STMyStatusHistoryViewController.xib */,
+				0DAF3E651934109C003E47AD /* STStatusHistoryTableViewCell.h */,
+				0DAF3E661934109C003E47AD /* STStatusHistoryTableViewCell.m */,
+				0DAF3E671934109C003E47AD /* STStatusHistoryTableViewCell.xib */,
 			);
 			name = Status;
 			sourceTree = "<group>";
@@ -472,6 +496,8 @@
 				0DB0BE22192AA1CA002F568F /* STSession.m */,
 				0DB0BE38192AC3EB002F568F /* STStatus.h */,
 				0DB0BE39192AC3EB002F568F /* STStatus.m */,
+				0DAF3E6A193411B2003E47AD /* STStatusHistory.h */,
+				0DAF3E6B193411B2003E47AD /* STStatusHistory.m */,
 				0DAF3E5D19340AC3003E47AD /* STStatusComment.h */,
 				0DAF3E5E19340AC4003E47AD /* STStatusComment.m */,
 			);
@@ -598,7 +624,9 @@
 				0DB0BE01192A968F002F568F /* STLoginViewController.xib in Resources */,
 				0DB0BE3F192AC821002F568F /* STStatusTableViewCell.xib in Resources */,
 				0DB0BE27192AA60B002F568F /* fb-login@2x.png in Resources */,
+				0DAF3E691934109C003E47AD /* STStatusHistoryTableViewCell.xib in Resources */,
 				0DB0BDFC192A966C002F568F /* STStatusFeedViewController.xib in Resources */,
+				0DAF3E6419340FDE003E47AD /* STMyStatusHistoryViewController.xib in Resources */,
 				0DB0BDF7192A9658002F568F /* STCreateStatusViewController.xib in Resources */,
 				0DFB8260192BD005008CD552 /* flip-icon@2x.png in Resources */,
 				0DFB825F192BD005008CD552 /* camera-button@2x.png in Resources */,
@@ -670,6 +698,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DAF3E6319340FDE003E47AD /* STMyStatusHistoryViewController.m in Sources */,
+				0DAF3E6C193411B2003E47AD /* STStatusHistory.m in Sources */,
 				0DB0BDE4192A9605002F568F /* JNIcon.m in Sources */,
 				0DB0BDFB192A966C002F568F /* STStatusFeedViewController.m in Sources */,
 				0D641A04192E6A6C002B3FD6 /* STCaptionOverlayViewController.m in Sources */,
@@ -678,6 +708,7 @@
 				0DB0BD9C192A85C9002F568F /* main.m in Sources */,
 				0DB0BDED192A9605002F568F /* JNLogger.m in Sources */,
 				0DB0BE34192AB322002F568F /* AVCamViewController.m in Sources */,
+				0DAF3E6F19341954003E47AD /* STRightToLeftTransitionAnimator.m in Sources */,
 				0DB0BE23192AA1CA002F568F /* STSession.m in Sources */,
 				0DB0BDEB192A9605002F568F /* UIView+JNHelper.m in Sources */,
 				0DB0BDE8192A9605002F568F /* UIColor+JNHelper.m in Sources */,
@@ -701,6 +732,7 @@
 				0DB0BDEE192A9605002F568F /* JNAppManager.m in Sources */,
 				0DB0BDF6192A9658002F568F /* STCreateStatusViewController.m in Sources */,
 				0DF150EF1932B3B2009565FD /* UIFont+STHelper.m in Sources */,
+				0DAF3E681934109C003E47AD /* STStatusHistoryTableViewCell.m in Sources */,
 				0D67843919314A0F00747111 /* STTransferManager.m in Sources */,
 				0DB0BE00192A968F002F568F /* STLoginViewController.m in Sources */,
 				0DB0BE3E192AC821002F568F /* STStatusTableViewCell.m in Sources */,

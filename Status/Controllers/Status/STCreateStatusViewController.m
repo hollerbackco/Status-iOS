@@ -19,6 +19,8 @@
 #import "STCreateStatusViewController.h"
 #import "STCaptionOverlayViewController.h"
 #import "STStatusFeedViewController.h"
+#import "STMyStatusHistoryViewController.h"
+#import "STRightToLeftTransitionAnimator.h"
 #import "STStatus.h"
 
 #define kSTAddCaptionToImageHeightOffset 20.0
@@ -28,8 +30,9 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 @interface STCreateStatusViewController () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) STStatusFeedViewController *statusFeedViewController;
 @property (nonatomic, strong) STCaptionOverlayViewController *captionOverlayViewController;
+@property (nonatomic, strong) STStatusFeedViewController *statusFeedViewController;
+@property (nonatomic, strong) STMyStatusHistoryViewController *myStatusHistoryViewController;
 
 @end
 
@@ -43,6 +46,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 @end
 
 @interface STCreateStatusViewController (AVCamCaptureManagerDelegate) <AVCamCaptureManagerDelegate>
+
 @end
 
 @implementation STCreateStatusViewController
@@ -50,7 +54,9 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 #pragma mark -
 
 - (void)initialize
-{
+{   
+    self.myStatusHistoryViewController = [[STMyStatusHistoryViewController alloc] initWithNibName:@"STMyStatusHistoryViewController" bundle:nil];
+    [self.myStatusHistoryViewController performFetchWithCachePolicy:kPFCachePolicyCacheThenNetwork];
 }
 
 #pragma mark - Reset
@@ -189,9 +195,14 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [super viewDidLoad];
     
     self.view.backgroundColor = JNBlackColor;
+    
+    FAKIonIcons *historyIcon = [FAKIonIcons ios7ClockOutlineIconWithSize:32.0];
+    [historyIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+    [self.historyButton setAttributedTitle:historyIcon.attributedString forState:UIControlStateNormal];
+    
     self.videoPreviewView.backgroundColor = JNBlackColor;
     
-    FAKIonIcons *captionIcon = [FAKIonIcons ios7ComposeOutlineIconWithSize:40.0];
+    FAKIonIcons *captionIcon = [FAKIonIcons ios7ComposeOutlineIconWithSize:32.0];
     [captionIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.captionButton setAttributedTitle:captionIcon.attributedString forState:UIControlStateNormal];
     
@@ -320,6 +331,12 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self.captureManager toggleFlash];
 }
 
+- (IBAction)historyAction:(id)sender
+{
+    JNLog();
+    [self pushToMyStatusHistory];
+}
+
 #pragma mark - Captured Image
 
 - (void)didCaptureImage:(UIImage*)capturedImage
@@ -349,6 +366,35 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     if (!self.statusFeedViewController) {
         self.statusFeedViewController = [[STStatusFeedViewController alloc] initWithNib];
     }
+}
+
+#pragma mark - Status History
+
+- (void)pushToMyStatusHistory
+{
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.myStatusHistoryViewController];
+    navigationController.transitioningDelegate = self;
+    navigationController.modalPresentationStyle = UIModalPresentationCustom;
+    [self.navigationController presentViewController:navigationController animated:YES completion:nil];
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                   presentingController:(UIViewController *)presenting
+                                                                       sourceController:(UIViewController *)source
+{
+    STRightToLeftTransitionAnimator *animator = [STRightToLeftTransitionAnimator new];
+    animator.presenting = YES;
+    return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    
+    STRightToLeftTransitionAnimator *animator = [STRightToLeftTransitionAnimator new];
+    return animator;
 }
 
 @end

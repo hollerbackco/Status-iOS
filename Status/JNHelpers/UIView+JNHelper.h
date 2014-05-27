@@ -18,6 +18,8 @@ typedef void(^HBViewComplete)(BOOL finished);
 
 + (void)animateWithBlock:(void (^)(void))animations;
 
++ (void)animateWithBlock:(void (^)(void))animations completion:(void (^)(BOOL finished))completion;
+
 /*
  helper for animating views with constraints
  e.g. 
