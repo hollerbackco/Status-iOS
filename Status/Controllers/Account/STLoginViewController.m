@@ -44,7 +44,7 @@
     [self performBlock:^{
         
         // Do the login
-        [STSession login:self];
+        [[STSession sharedInstance] login:self];
         
     } afterDelay:UINavigationControllerHideShowBarDuration];
 }

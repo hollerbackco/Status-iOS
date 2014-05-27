@@ -8,40 +8,89 @@
 
 #import "STSession.h"
 
+#define kSTMaxLoginRetryCount 3
+
+@interface STSession ()
+
+@property (nonatomic) NSUInteger loginRetryCount;
+
+@end
+
 @implementation STSession
 
-+ (BOOL)isLoggedIn
+#pragma mark - Singleton
+
++ (STSession*)sharedInstance
+{
+    static STSession *_sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedInstance = [[self alloc] init];
+        _sharedInstance.loginRetryCount = 0;
+    });
+    
+    return _sharedInstance;
+}
+
+#pragma mark -
+
+- (BOOL)isLoggedIn
 {
     return [PFUser currentUser] && [[PFUser currentUser] isAuthenticated];
 }
 
-+ (void)login:(id<STSessionDelegate>)delegate
+- (void)login:(id<STSessionDelegate>)delegate
 {
 	// Basic User information and your friends are part of the standard permissions
 	// so there is no reason to ask for additional permissions
 	[PFFacebookUtils logInWithPermissions:@[@"user_friends"] block:^(PFUser *user, NSError *error) {
 		// Was login successful ?
 		if (!user) {
+            
 			if (!error) {
-                NSLog(@"The user cancelled the Facebook login.");
+                JNLog(@"The user cancelled the Facebook login.");
                 
                 if ([delegate respondsToSelector:@selector(didLogin:)]) {
                     [delegate didLogin:NO];
                 }
                 
             } else {
-                NSLog(@"An error occurred: %@", error.localizedDescription);
+                
+                // workaround for "Error validating access token: The user has not authorized application 1453821264861331" bug
+                NSDictionary *userInfo = error.userInfo;
+                NSDictionary *parsedJSONResponse = userInfo[FBErrorParsedJSONResponseKey];
+                NSDictionary *errorJSON = parsedJSONResponse[@"body"][@"error"];
+                if (errorJSON) {
+                    
+                    NSNumber *code = errorJSON[@"code"];
+                    NSNumber *subCode = errorJSON[@"error_subcode"];
+                    if ([code isEqualToNumber:@(190)] && [subCode isEqualToNumber:@(458)]) {
+                        
+                        JNLog(@"   ---> SDK bug, will retry login <---   ");
+                        if (self.loginRetryCount < kSTMaxLoginRetryCount) {
+                            
+                            [self login:delegate];
+                            self.loginRetryCount++;
+                            
+                            return;
+                        }
+                    }
+                }
+                
+                [JNLogger logExceptionWithName:THIS_METHOD reason:@"facebook login" error:error];
                 
                 if ([delegate respondsToSelector:@selector(didNotLogin)]) {
+                    
                     [delegate didNotLogin];
                 }
             }
             
 		} else {
+            
 			if (user.isNew) {
-				NSLog(@"User signed up and logged in through Facebook!");
+				JNLog(@"User signed up and logged in through Facebook!");
 			} else {
-				NSLog(@"User logged in through Facebook!");
+				JNLog(@"User logged in through Facebook!");
 			}
             
 			[FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -62,6 +111,9 @@
                 }
             }];
 		}
+        
+        // reset login retry count
+        self.loginRetryCount = 0;
 	}];
 }
 

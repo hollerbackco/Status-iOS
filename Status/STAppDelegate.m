@@ -27,11 +27,6 @@
 {
     JNLog();
     
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    
     // Register our Parse Application.
     [Parse setApplicationId:@"OAawrd6K5rsKQWHGzh0cqtsVz8qnlMQvRewC8E8h" clientKey:@"ANovqbeOyoQ17I6RSGSVTps3FIrWIj9k1jHkMl4R"];
     
@@ -40,10 +35,14 @@
     
     [Crashlytics startWithAPIKey:@"1ed19e0f6100e773f794bf928ee1ef0b85ed4d6e"];
     
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
+    self.window.backgroundColor = [UIColor whiteColor];
+    
     // configure logger
     [[STLogger sharedInstance] configureFileLogger];
     
-    if ([STSession isLoggedIn]) {
+    if ([[STSession sharedInstance] isLoggedIn]) {
         
         [self showCreateStatusAsRootViewController:YES];
         
@@ -51,6 +50,8 @@
         STLoginViewController *loginViewController = [[STLoginViewController alloc] initWithNib];
         self.window.rootViewController = loginViewController;
     }
+    
+    [self.window makeKeyAndVisible];
     
     // Register for push notifications
     [application registerForRemoteNotificationTypes:
@@ -63,6 +64,7 @@
 
 - (void)showCreateStatusAsRootViewController:(BOOL)shouldLoadCamera
 {
+    JNLog();
     STCreateStatusViewController *createStatusViewController = [[STCreateStatusViewController alloc] initWithNib];
     
     createStatusViewController.shouldLoadCamera = shouldLoadCamera;
@@ -124,6 +126,7 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
+    JNLog();
     return [FBAppCall handleOpenURL:url
                   sourceApplication:sourceApplication
                         withSession:[PFFacebookUtils session]];

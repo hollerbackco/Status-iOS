@@ -19,9 +19,14 @@
 
 @interface STSession : NSObject
 
-+ (BOOL)isLoggedIn;
+#pragma mark - Singleton
 
-+ (void)login:(id<STSessionDelegate>)delegate;
++ (STSession*)sharedInstance;
+
+#pragma mark -
+
+- (BOOL)isLoggedIn;
+- (void)login:(id<STSessionDelegate>)delegate;
 
 @end
 
