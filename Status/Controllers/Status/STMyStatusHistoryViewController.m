@@ -199,7 +199,8 @@ static NSString *CellIdentifier = @"STStatusHistoryTableViewCell";
 //            cell_weak_.senderName = senderName;
 //        });
 //    }];
-    cell.senderName = statusHistory.updatedAt.description;
+    
+    cell.senderName = nil;
     
     PFFile *imageFile = statusHistory[@"image"];
     if (imageFile) {

@@ -29,7 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *nextCommentSpinnerView;
 
 @property (nonatomic, copy) NSString *originalStatusCommentSenderName;
-@property (nonatomic) NSUInteger statusCommentsCurrentIndex;
+@property (nonatomic) NSInteger statusCommentsCurrentIndex;
 
 @end
 
@@ -53,20 +53,27 @@
     self.spinnerView.alpha = 0.0;
     
     FAKIonIcons *prevIcon = [FAKIonIcons ios7ArrowBackIconWithSize:40.0];
-    [prevIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+    [prevIcon addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor]];
     [self.prevCommentButton setAttributedTitle:prevIcon.attributedString forState:UIControlStateNormal];
+    self.prevCommentButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 14.0, 0.0);
+//    [self.prevCommentButton.layer insertSublayer:[CALayer circleLayerWithSize:CGSizeMake(36.0, 36.0) strokeColor:nil fillColor:JNWhiteColor lineWidth:0.0] atIndex:0];
+    [self.prevCommentButton.layer insertSublayer:[CALayer circleLayerWithSize:CGSizeMake(36.0, 36.0) position:CGPointMake(27.0, 18.0) strokeColor:nil fillColor:JNWhiteColor lineWidth:0.0] atIndex:0];
     [self.prevCommentButton applyDarkerShadowLayer];
     self.prevCommentButton.alpha = 0.0;
     [self.prevCommentButton addTarget:self action:@selector(prevAction:) forControlEvents:UIControlEventTouchUpInside];
     
     FAKIonIcons *nextIcon = [FAKIonIcons ios7ArrowForwardIconWithSize:40.0];
-    [nextIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+    [nextIcon addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor]];
     [self.nextCommentButton setAttributedTitle:nextIcon.attributedString forState:UIControlStateNormal];
+    self.nextCommentButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 14.0, 10.0);
+    [self.nextCommentButton.layer insertSublayer:[CALayer circleLayerWithSize:CGSizeMake(36.0, 36.0) strokeColor:nil fillColor:JNWhiteColor lineWidth:0.0] atIndex:0];
     [self.nextCommentButton applyDarkerShadowLayer];
     self.nextCommentButton.alpha = 0.0;
     [self.nextCommentButton addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
     
     self.nextCommentSpinnerView.alpha = 0.0;
+    
+    self.statusCommentsCurrentIndex = -1;
 }
 
 - (void)prepareForReuse
@@ -85,7 +92,7 @@
     
     self.nextCommentSpinnerView.alpha = 0.0;
     
-    self.statusCommentsCurrentIndex = 0;
+    self.statusCommentsCurrentIndex = -1;
     
     self.statusComments = nil;
 }
@@ -156,6 +163,9 @@
     // where
     [query whereKey:@"parent" equalTo:statusHistory];
     
+    // order
+    [query orderByAscending:@"sentAt"];
+    
     // find
     @weakify(self);
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -194,24 +204,28 @@
         return;
     }
     
-    NSUInteger prevStatusCommentIndex;
-    prevStatusCommentIndex = self.statusCommentsCurrentIndex - 1;
+    self.statusCommentsCurrentIndex--;
     
-    if (prevStatusCommentIndex == 0) {
+    if (self.statusCommentsCurrentIndex < 0) {
         
         [UIView animateWithBlock:^{
             self.commentImageView.alpha = 0.0;
             self.senderNameLabel.alpha = 0.0;
         } completion:^(BOOL finished) {
+            
+            self.commentImageView.image = nil;
             self.senderName = self.originalStatusCommentSenderName;
+            
             [UIView animateWithBlock:^{
+                
                 self.senderNameLabel.alpha = 1.0;
+                self.prevCommentButton.alpha = 0.0;
             }];
         }];
         
     } else {
         
-        STStatusComment *statusComment = self.statusComments[prevStatusCommentIndex];
+        STStatusComment *statusComment = self.statusComments[self.statusCommentsCurrentIndex];
         PFFile *commentImageFile = statusComment[@"image"];
         NSURL *commentImageURL = [NSURL URLWithString:commentImageFile.url];
         
@@ -236,14 +250,14 @@
              }];
          }];
     }
-    
-    self.statusCommentsCurrentIndex--;
-    
-    if (self.statusCommentsCurrentIndex == 0) {
+
+    if (self.statusCommentsCurrentIndex < 0) {
         
         [UIView animateWithBlock:^{
             self.prevCommentButton.alpha = 0.0;
         }];
+        
+//        self.statusCommentsCurrentIndex = 0;
     }
     
     [UIView animateWithBlock:^{
@@ -254,53 +268,50 @@
 
 - (void)nextAction:(id)sender
 {
-    if ([NSArray isEmptyArray:self.statusComments] ||
-        self.statusCommentsCurrentIndex > self.statusComments.count) {
+    if ([NSArray isEmptyArray:self.statusComments]) {
         return;
     }
     
-    NSUInteger nextStatusCommentIndex;
-    if (self.statusComments.count == 1) {
-        nextStatusCommentIndex = 0;
-    } else {
-        nextStatusCommentIndex = self.statusCommentsCurrentIndex + 1;
-    }
-    
-    STStatusComment *statusComment = self.statusComments[nextStatusCommentIndex];
-    PFFile *commentImageFile = statusComment[@"image"];
-    NSURL *commentImageURL = [NSURL URLWithString:commentImageFile.url];
-    
-    @weakify(self);
-    [self.commentImageView
-     setImageWithURL:commentImageURL
-     placeholderImage:nil
-     options:SDWebImageRetryFailed
-     progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-     }
-     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-         
-         self_weak_.commentImageView.image = image;
-         self_weak_.commentImageView.alpha = 0.0;
-         
-         if (!self_weak_.originalStatusCommentSenderName) {
-             self_weak_.originalStatusCommentSenderName = self_weak_.senderNameLabel.text;
-         }
-         self_weak_.senderName = [NSString stringWithFormat:@"By %@", statusComment[@"senderName"]];
-         self_weak_.senderNameLabel.alpha = 0.0;
-         
-         [UIView animateWithBlock:^{
-             self_weak_.commentImageView.alpha = 1.0;
-             self_weak_.senderNameLabel.alpha = 1.0;
-         }];
-     }];
-    
     self.statusCommentsCurrentIndex++;
     
-    if (self.statusCommentsCurrentIndex > self.statusComments.count - 1) {
+    if (self.statusCommentsCurrentIndex <= self.statusComments.count - 1) {
+    
+        STStatusComment *statusComment = self.statusComments[self.statusCommentsCurrentIndex];
+        PFFile *commentImageFile = statusComment[@"image"];
+        NSURL *commentImageURL = [NSURL URLWithString:commentImageFile.url];
+        
+        @weakify(self);
+        [self.commentImageView
+         setImageWithURL:commentImageURL
+         placeholderImage:nil
+         options:SDWebImageRetryFailed
+         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+         }
+         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+             
+             self_weak_.commentImageView.image = image;
+             self_weak_.commentImageView.alpha = 0.0;
+             
+             if (!self_weak_.originalStatusCommentSenderName) {
+                 self_weak_.originalStatusCommentSenderName = self_weak_.senderNameLabel.text;
+             }
+             self_weak_.senderName = [NSString stringWithFormat:@"By %@", statusComment[@"senderName"]];
+             self_weak_.senderNameLabel.alpha = 0.0;
+             
+             [UIView animateWithBlock:^{
+                 self_weak_.commentImageView.alpha = 1.0;
+                 self_weak_.senderNameLabel.alpha = 1.0;
+             }];
+         }];
+    }
+    
+    if (self.statusCommentsCurrentIndex >= self.statusComments.count - 1) {
         
         [UIView animateWithBlock:^{
             self.nextCommentButton.alpha = 0.0;
         }];
+        
+//        self.statusCommentsCurrentIndex = self.statusComments.count - 1;
     }
     
     [UIView animateWithBlock:^{
