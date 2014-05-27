@@ -56,6 +56,8 @@
                 
             } else {
                 
+                [JNLogger logExceptionWithName:THIS_METHOD reason:@"facebook login" error:error];
+                
                 // workaround for "Error validating access token: The user has not authorized application 1453821264861331" bug
                 NSDictionary *userInfo = error.userInfo;
                 NSDictionary *parsedJSONResponse = userInfo[FBErrorParsedJSONResponseKey];
@@ -77,7 +79,7 @@
                     }
                 }
                 
-                [JNLogger logExceptionWithName:THIS_METHOD reason:@"facebook login" error:error];
+                [[STLogger sharedInstance] sendLogWithSuffix:@"fberror"];
                 
                 if ([delegate respondsToSelector:@selector(didNotLogin)]) {
                     
