@@ -280,6 +280,9 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+#warning Todo: disabled drawing
+    return;
+    
     if (self.didSelectStatus) {
         
         STStatus *status = [self.statuses objectAtIndex:indexPath.row];
