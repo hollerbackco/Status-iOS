@@ -79,11 +79,24 @@
                     }
                 }
                 
-                [[STLogger sharedInstance] sendLogWithSuffix:@"fberror"];
-                
-                if ([delegate respondsToSelector:@selector(didNotLogin)]) {
+                // check for declined permission
+                if ([error.userInfo[@"com.facebook.sdk:ErrorLoginFailedReason"]
+                     isEqualToString:@"com.facebook.sdk:SystemLoginDisallowedWithoutError"]) {
                     
-                    [delegate didNotLogin];
+                    JNLog(@"did not allow facebook permission");
+                    
+                    if ([delegate respondsToSelector:@selector(didNotAllowPermission)]) {
+                        
+                        [delegate didNotAllowPermission];
+                    }
+                } else {
+                    
+                    [[STLogger sharedInstance] sendLogWithSuffix:@"fberror"];
+                    
+                    if ([delegate respondsToSelector:@selector(didNotLogin)]) {
+                        
+                        [delegate didNotLogin];
+                    }
                 }
             }
             

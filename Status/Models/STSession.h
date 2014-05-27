@@ -14,6 +14,7 @@
 
 - (void)didLogin:(BOOL)loggedIn;
 - (void)didNotLogin;
+- (void)didNotAllowPermission;
 
 @end
 

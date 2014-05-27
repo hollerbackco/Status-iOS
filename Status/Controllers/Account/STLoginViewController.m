@@ -88,5 +88,20 @@
     }];
 }
 
+- (void)didNotAllowPermission
+{
+    // Show error alert
+    [[[UIAlertView alloc] initWithTitle:@"Facebook Permission"
+                                message:@"You have not allowed Status to use your Facebook account. To allow, go to Settings -> Facebook -> Turn on Status."
+                               delegate:nil
+                      cancelButtonTitle:@"Ok"
+                      otherButtonTitles:nil] show];
+    
+    [UIView animateWithBlock:^{
+        self.loginButton.alpha = 1.0;
+        self.loginSpinnerView.alpha = 0.0;
+    }];
+}
+
 @end
 
