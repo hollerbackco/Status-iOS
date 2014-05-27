@@ -85,7 +85,13 @@
 {
     JNLog();
     
-    self.shouldRestartCreateStatus = YES;
+    if ([[STSession sharedInstance] isLoggedIn]) {
+        
+        self.shouldRestartCreateStatus = YES;
+    } else {
+        
+        self.shouldRestartCreateStatus = NO;
+    }
     
     [self showCreateStatusAsRootViewController:NO];
 }

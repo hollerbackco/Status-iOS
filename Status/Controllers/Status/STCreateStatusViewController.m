@@ -93,7 +93,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)setupCamera
 {
-    JNLog();
+    JNLogPrimitive([self captureManager] == nil);
     if ([self captureManager] == nil) {
         
         AVCamCaptureManager *manager = [[AVCamCaptureManager alloc] init];
@@ -184,8 +184,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     if (self.shouldLoadCamera) {
         
         [self setupCamera];
-        
-        [self setupToggleFlash];
     }
     
     [super viewDidLoad];
@@ -201,12 +199,9 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     [self setupToggleFlash];
     
-    runOnAsyncDefaultQueue(^{
-        
-        [self setupStatusFeed];
-        
-        [self.statusFeedViewController performFetch];
-    });
+    [self setupStatusFeed];
+    
+    [self.statusFeedViewController performFetch];
 }
 
 - (void)setupCaptionOverlay

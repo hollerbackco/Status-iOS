@@ -168,6 +168,7 @@
 
 - (BOOL) setupSession
 {
+    JNLog();
     BOOL success = NO;
     
 	// Set torch and flash mode to auto
@@ -287,7 +288,8 @@
 }
 
 - (void) captureStillImage
-{   
+{
+    JNLog();
     AVCaptureConnection *stillImageConnection = [AVCamUtilities connectionWithMediaType:AVMediaTypeVideo fromConnections:[[self stillImageOutput] connections]];
     if ([stillImageConnection isVideoOrientationSupported])
         [stillImageConnection setVideoOrientation:orientation];
