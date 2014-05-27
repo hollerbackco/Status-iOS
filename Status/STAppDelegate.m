@@ -88,12 +88,13 @@
     if ([[STSession sharedInstance] isLoggedIn]) {
         
         self.shouldRestartCreateStatus = YES;
+        
+        [self showCreateStatusAsRootViewController:NO];
+        
     } else {
         
         self.shouldRestartCreateStatus = NO;
     }
-    
-    [self showCreateStatusAsRootViewController:NO];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
