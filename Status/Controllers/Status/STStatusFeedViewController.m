@@ -184,7 +184,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 {
     JNLog();
     NSData *imageData = UIImageJPEGRepresentation(image, 0.99f);
-    PFFile *imageFile = [PFFile fileWithName:@"img" data:imageData];
+    PFFile *imageFile = [PFFile fileWithName:@"img.jpg" data:imageData];
     
     // update file
     [imageFile
