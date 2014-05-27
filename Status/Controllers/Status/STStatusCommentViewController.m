@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 
 @property (nonatomic, strong) UIColor *drawingLineColor;
+@property (nonatomic, strong) UIActivityIndicatorView *sendSpinnerView;
 
 - (IBAction)cancelAction:(id)sender;
 - (IBAction)undoAction:(id)sender;
@@ -157,6 +158,88 @@
 - (IBAction)sendAction:(id)sender
 {
     JNLog();
+    [self performCreateStatusCommentWithImage:self.drawingView.image];
+}
+
+#pragma mark - Create Status Comment
+
+- (void)performCreateStatusCommentWithImage:(UIImage*)image
+{
+    JNLog();
+    [self.sendButton setTitle:nil forState:UIControlStateNormal];
+    
+    if (!self.sendSpinnerView) {
+        self.sendSpinnerView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        self.sendSpinnerView.center = self.sendButton.center;
+        [self.footerView addSubview:self.sendSpinnerView];
+    }
+    
+    [self.sendSpinnerView startAnimating];
+    [UIView animateWithBlock:^{
+        self.sendSpinnerView.alpha = 1.0;
+    }];
+    
+    [self createStatusCommentWithImage:image];
+}
+
+- (void)createStatusCommentWithImage:(UIImage*)image
+{
+    JNLog();
+    NSData *imageData = UIImagePNGRepresentation(image);
+    PFFile *imageFile = [PFFile fileWithName:@"img.png" data:imageData];
+    
+    // upload file
+    [imageFile
+     saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+         
+         // create a new status object
+         STStatusComment *statusComment = [STStatusComment new];
+         statusComment[@"image"] = imageFile;
+         statusComment[@"userFBId"] = [[PFUser currentUser] objectForKey:@"fbId"];
+         statusComment[@"user"] = [PFUser currentUser];
+         statusComment[@"senderName"] = [PFUser currentUser][@"fbName"];
+         statusComment[@"sentAt"] = [NSDate date];
+         statusComment[@"status"] = self.status;
+
+         [statusComment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+         
+             if (error) {
+                 
+                 JNLogObject(error);
+                 [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem saving your reply. Please try again."];
+                 
+                 [self finishedCreateStatusComment];
+                 
+             } else {
+                 
+//                 JNLog(@"status comment successfully saved");
+                 [self didCreateStatusComment:statusComment];
+             }
+        }];
+     }
+     progressBlock:^(int percentDone) {
+         ;
+     }];
+}
+
+- (void)didCreateStatusComment:(STStatusComment*)statusComment
+{
+    JNLog();
+    [self finishedCreateStatusComment];
+    
+    [self.sendButton setTitle:@"Sent!" forState:UIControlStateNormal];
+    
+    [self performBlock:^{
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } afterDelay:0.7];
+}
+
+- (void)finishedCreateStatusComment
+{
+    [UIView animateWithBlock:^{
+        self.sendSpinnerView.alpha = 0.0;
+    }];
 }
 
 @end

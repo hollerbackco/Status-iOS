@@ -9,6 +9,7 @@
 #import "JNViewController.h"
 
 #import "STStatus.h"
+#import "STStatusComment.h"
 
 #define kSTDrawingLineWidth 5.0
 #define kSTDefaultDrawingLineColor [UIColor redColor]

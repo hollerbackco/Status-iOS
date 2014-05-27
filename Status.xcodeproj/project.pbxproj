@@ -17,6 +17,7 @@
 		0D6784361931493200747111 /* STLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6784351931493200747111 /* STLogger.m */; };
 		0D67843919314A0F00747111 /* STTransferManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D67843819314A0F00747111 /* STTransferManager.m */; };
 		0DAF3E5C1933F895003E47AD /* UIColor+STHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF3E5B1933F895003E47AD /* UIColor+STHelper.m */; };
+		0DAF3E5F19340AC4003E47AD /* STStatusComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF3E5E19340AC4003E47AD /* STStatusComment.m */; };
 		0DB0BD90192A85C9002F568F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD8F192A85C9002F568F /* Foundation.framework */; };
 		0DB0BD92192A85C9002F568F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD91192A85C9002F568F /* CoreGraphics.framework */; };
 		0DB0BD94192A85C9002F568F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD93192A85C9002F568F /* UIKit.framework */; };
@@ -107,6 +108,8 @@
 		0D67843819314A0F00747111 /* STTransferManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTransferManager.m; sourceTree = "<group>"; };
 		0DAF3E5A1933F895003E47AD /* UIColor+STHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+STHelper.h"; path = "Helpers/UIColor+STHelper.h"; sourceTree = "<group>"; };
 		0DAF3E5B1933F895003E47AD /* UIColor+STHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+STHelper.m"; path = "Helpers/UIColor+STHelper.m"; sourceTree = "<group>"; };
+		0DAF3E5D19340AC3003E47AD /* STStatusComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusComment.h; path = Models/STStatusComment.h; sourceTree = "<group>"; };
+		0DAF3E5E19340AC4003E47AD /* STStatusComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusComment.m; path = Models/STStatusComment.m; sourceTree = "<group>"; };
 		0DB0BD8C192A85C9002F568F /* Status.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Status.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DB0BD8F192A85C9002F568F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0DB0BD91192A85C9002F568F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -469,6 +472,8 @@
 				0DB0BE22192AA1CA002F568F /* STSession.m */,
 				0DB0BE38192AC3EB002F568F /* STStatus.h */,
 				0DB0BE39192AC3EB002F568F /* STStatus.m */,
+				0DAF3E5D19340AC3003E47AD /* STStatusComment.h */,
+				0DAF3E5E19340AC4003E47AD /* STStatusComment.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -676,6 +681,7 @@
 				0DB0BE23192AA1CA002F568F /* STSession.m in Sources */,
 				0DB0BDEB192A9605002F568F /* UIView+JNHelper.m in Sources */,
 				0DB0BDE8192A9605002F568F /* UIColor+JNHelper.m in Sources */,
+				0DAF3E5F19340AC4003E47AD /* STStatusComment.m in Sources */,
 				0D5E5AB7192C3B9100F7DA7C /* STStatusFeedTableViewController.m in Sources */,
 				0DB0BE32192AB322002F568F /* AVCamRecorder.m in Sources */,
 				0D6784361931493200747111 /* STLogger.m in Sources */,
