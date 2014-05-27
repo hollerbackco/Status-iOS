@@ -51,9 +51,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)initialize
 {
-    [self setupStatusFeed];
-    
-    [self.statusFeedViewController performFetch];
 }
 
 #pragma mark - Reset
@@ -203,6 +200,13 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self setupCaptionOverlay];
     
     [self setupToggleFlash];
+    
+    runOnAsyncDefaultQueue(^{
+        
+        [self setupStatusFeed];
+        
+        [self.statusFeedViewController performFetch];
+    });
 }
 
 - (void)setupCaptionOverlay
@@ -346,6 +350,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)setupStatusFeed
 {
+    JNLog();
     if (!self.statusFeedViewController) {
         self.statusFeedViewController = [[STStatusFeedViewController alloc] initWithNib];
     }

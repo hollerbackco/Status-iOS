@@ -74,32 +74,37 @@
         
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
-            if (error) {
+            runOnMainQueue(^{
                 
-                JNLogObject(error);
-                [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem getting statuses. Please try again."];
+                if (error) {
+                    
+                    JNLogObject(error);
+                    [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem getting statuses. Please try again."];
+                    
+                } else {
+//                    JNLogObject(objects);
+                    self.statuses = [self sortedStatues:objects];
+                    
+                    runOnAsyncDefaultQueue(^{
+                        [self predownloadStatusData];
+                    });
+                    
+                    [self reloadTableView];
+                }
                 
-            } else {
-//                JNLogObject(objects);
-                self.statuses = [self sortedStatues:objects];
+                [self.tableSpinnerView stopAnimating];
+                [UIView animateWithBlock:^{
+                    self.tableSpinnerView.alpha = 0.0;
+                }];
                 
-                runOnAsyncDefaultQueue(^{
-                    [self predownloadStatusData];
-                });
-                
-                [self reloadTableView];
-            }
-            
-            [self.tableSpinnerView stopAnimating];
-            [UIView animateWithBlock:^{
-                self.tableSpinnerView.alpha = 0.0;
-            }];
-            
-            self.refreshControl.enabled = YES;
+                self.refreshControl.enabled = YES;
+            });
         }];
     }];
     
-    [self.refreshControl endRefreshing];
+    runOnMainQueue(^{
+        [self.refreshControl endRefreshing];
+    });
 }
 
 - (void)fetchFriendIdsCompleted:(void(^)(NSArray *friendIds, NSError *error))completed

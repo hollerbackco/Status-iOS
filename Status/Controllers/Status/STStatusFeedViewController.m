@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
+#import <RACExtScope.h>
+
 #import "UIViewController+JNHelper.h"
 
 #import "JNAlertView.h"
@@ -97,9 +99,11 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
         self.tableViewController = [[STStatusFeedTableViewController alloc] initWithNibName:@"STStatusFeedTableViewController" bundle:nil];
         [self addChildViewController:self.tableViewController];
     }
+    
+    @weakify(self);
     self.tableViewController.didSelectStatus = ^(STStatus *status) {
         
-        [self didSelectStatus:status];
+        [self_weak_ didSelectStatus:status];
     };
 }
 
