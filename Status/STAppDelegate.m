@@ -28,7 +28,7 @@
     JNLog();
     
     // Register our Parse Application.
-    [Parse setApplicationId:@"OAawrd6K5rsKQWHGzh0cqtsVz8qnlMQvRewC8E8h" clientKey:@"ANovqbeOyoQ17I6RSGSVTps3FIrWIj9k1jHkMl4R"];
+    [Parse setApplicationId:kSTParseAppId clientKey:kSTParseClientKey];
     
     // Initialize Parse's Facebook Utilities singleton. This uses the FacebookAppID we specified in our App bundle's plist.
     [PFFacebookUtils initializeFacebook];

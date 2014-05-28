@@ -34,7 +34,7 @@
 - (id)init
 {
     if (self = [super init]) {
-        _s3 = [[AmazonS3Client alloc] initWithAccessKey:kSTAmazonS3AccessKeyID withSecretKey:kSTAmazonS3SecretKey];
+        _s3 = [[AmazonS3Client alloc] initWithAccessKey:kSTAWSS3AccessKeyID withSecretKey:kSTAWSS3SecretKey];
         _s3.timeout = kSTTransferManagerTimeout;
         _s3.maxRetries = 1;
         _transferManager = [S3TransferManager new];

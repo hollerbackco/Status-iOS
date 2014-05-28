@@ -14,10 +14,51 @@
 #define kSTisEnterpriseBuild 0
 #endif
 
-#define kSTAmazonS3AccessKeyID @"AKIAIRGS2GLW2KC6JVKQ"
-#define kSTAmazonS3SecretKey @"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"
-#define kSTAmazonS3LogBucket @"st-ios-logs"
+#if DEV
+#define kSTiSDevBuild 1
+#else
+#define kSTiSDevBuild 0
+#endif
+
+
+// PARSE
+
+#if DEV
+
+#define kSTParseAppId @"PgEz1FsFytOqz0gfWrR91qs11FkmE6i5pnd9VdIZ"
+#define kSTParseClientKey @"NUfPm6IRKZxYd7CHxvKbCbuignEUH8RejLWTc0DY"
+
+#else
+
+#define kSTParseAppId @"OAawrd6K5rsKQWHGzh0cqtsVz8qnlMQvRewC8E8h"
+#define kSTParseClientKey @"ANovqbeOyoQ17I6RSGSVTps3FIrWIj9k1jHkMl4R"
+
+#endif
+
+
+// AWS S3 
+
+#define kSTAWSS3AccessKeyID @"AKIAIRGS2GLW2KC6JVKQ"
+#define kSTAWSS3SecretKey @"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"
 #define kSTTransferManagerTimeout 30.0
+
+#if DEV
+
+#define kSTAWSS3LogBucket @"st-ios-dev-logs"
+
+#else 
+
+#define kSTAWSS3LogBucket @"st-ios-logs"
+
+#endif
+
+
+
+
+
+
+
+
 
 
 @interface STConstants : NSObject

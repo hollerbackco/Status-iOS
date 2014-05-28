@@ -66,7 +66,7 @@
     NSData *errorLogData = [self getLast24hrErrorLogData];
     NSString *logFileName = [self generateLogFileNameWithSuffix:suffix];
     [[STTransferManager sharedInstance].transferManager uploadData:errorLogData
-                                                            bucket:kSTAmazonS3LogBucket
+                                                            bucket:kSTAWSS3LogBucket
                                                                key:logFileName];
 }
 
@@ -80,7 +80,7 @@
             // transfer
             [[STTransferManager sharedInstance].transferManager
              synchronouslyUploadData:errorLogData
-             bucket:kSTAmazonS3LogBucket
+             bucket:kSTAWSS3LogBucket
              key:logFileName];
         }
         @catch (NSException *exception) {
