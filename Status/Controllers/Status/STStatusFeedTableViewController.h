@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSArray *statuses;
 
 @property (nonatomic, copy) void(^didSelectStatus)(STStatus *status);
+@property (nonatomic, copy) void(^didTapShowShareActivityBlock)();
 
 #pragma mark - Fetch
 

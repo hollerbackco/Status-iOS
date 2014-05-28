@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerView;
 @property (weak, nonatomic) IBOutlet UILabel *savingLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewTopConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *footerButton;
 
 @property (nonatomic, strong) STStatusFeedTableViewController *tableViewController;
 
@@ -105,6 +106,11 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
         
         [self_weak_ didSelectStatus:status];
     };
+    
+    self.tableViewController.didTapShowShareActivityBlock = ^() {
+        
+        [self_weak_ showShareActivityView:nil];
+    };
 }
 
 - (void)addTableViewControllerToContentView
@@ -168,6 +174,24 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     STStatusCommentViewController *statusCommentViewController = [[STStatusCommentViewController alloc] initWithNib];
     statusCommentViewController.status = status;
     [self.navigationController presentViewController:statusCommentViewController animated:YES completion:nil];
+}
+
+- (void)showShareActivityView:(id)sender
+{
+    JNLog();
+    NSString *string = @"Try out Status!";
+    NSURL *URL = [NSURL URLWithString:@"http://bit.ly/statusapp"];
+    
+    UIActivityViewController *activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:@[string, URL]
+                                      applicationActivities:nil];
+    
+    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop, UIActivityTypePostToFacebook, UIActivityTypePostToFlickr, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo, UIActivityTypePostToWeibo];
+
+    [self.navigationController presentViewController:activityViewController
+                                       animated:YES
+                                     completion:^{
+                                     }];
 }
 
 #pragma mark - Create Status
