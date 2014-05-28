@@ -146,6 +146,7 @@
     JNLog();
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    currentInstallation[@"user"] = [PFUser currentUser];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation saveInBackground];
 }
