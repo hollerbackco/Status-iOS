@@ -180,7 +180,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 {
     JNLog();
     NSString *string = @"Try out Status!";
-    NSURL *URL = [NSURL URLWithString:@"http://bit.ly/statusapp"];
+    NSURL *URL = [NSURL URLWithString:@"http://statusapp.parseapp.com"];
     
     UIActivityViewController *activityViewController =
     [[UIActivityViewController alloc] initWithActivityItems:@[string, URL]
