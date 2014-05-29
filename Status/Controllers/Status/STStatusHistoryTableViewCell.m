@@ -62,6 +62,8 @@
     self.prevCommentButton.alpha = 0.0;
     [self.prevCommentButton addTarget:self action:@selector(prevAction:) forControlEvents:UIControlEventTouchUpInside];
     
+    self.prevCommentButton.alpha = 0.0;
+    
     FAKIonIcons *nextIcon = [FAKIonIcons ios7ArrowForwardIconWithSize:40.0];
     [nextIcon addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor]];
     [self.nextCommentButton setAttributedTitle:nextIcon.attributedString forState:UIControlStateNormal];
@@ -70,6 +72,8 @@
     [self.nextCommentButton applyDarkerShadowLayer];
     self.nextCommentButton.alpha = 0.0;
     [self.nextCommentButton addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.nextCommentButton.alpha = 0.0;
     
     self.nextCommentSpinnerView.alpha = 0.0;
     
@@ -155,7 +159,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"StatusComment"];
     
     // cache
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     if (!query.hasCachedResult) {
         query.cachePolicy = kPFCachePolicyNetworkOnly;
     }
@@ -171,7 +175,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         runOnMainQueue(^{
-            JNLogPrimitive(objects.count);
+//            JNLogPrimitive(objects.count);
             if (error) {
                 
                 [JNLogger logExceptionWithName:THIS_METHOD reason:@"status comments get" error:error];
@@ -182,9 +186,7 @@
                 
                 if (self_weak_.statusComments.count > 0) {
                     
-                    [UIView animateWithBlock:^{
-                        self_weak_.nextCommentButton.alpha = 1.0;
-                    }];
+                    self_weak_.nextCommentButton.alpha = 1.0;
                 }
             }
             
@@ -260,10 +262,7 @@
 //        self.statusCommentsCurrentIndex = 0;
     }
     
-    [UIView animateWithBlock:^{
-        self.nextCommentButton.alpha = 1.0;
-    }];
-    
+    self.nextCommentButton.alpha = 1.0;
 }
 
 - (void)nextAction:(id)sender
@@ -307,11 +306,7 @@
     
     if (self.statusCommentsCurrentIndex >= self.statusComments.count - 1) {
         
-        [UIView animateWithBlock:^{
-            self.nextCommentButton.alpha = 0.0;
-        }];
-        
-//        self.statusCommentsCurrentIndex = self.statusComments.count - 1;
+        self.nextCommentButton.alpha = 0.0;
     }
     
     [UIView animateWithBlock:^{
