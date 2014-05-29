@@ -87,12 +87,15 @@
                     [JNAlertView showWithTitle:@"Oopsy" body:@"There was a problem getting statuses. Please try again."];
                     
                 } else {
-//                    JNLogObject(objects);
-                    self.statuses = [self sortedStatues:objects];
+                    JNLogPrimitive(objects.count);
                     
-                    runOnAsyncDefaultQueue(^{
-                        [self predownloadStatusData];
-                    });
+                    if ([NSArray isNotEmptyArray:objects]) {
+                        self.statuses = [self sortedStatues:objects];
+                        
+                        runOnAsyncDefaultQueue(^{
+                            [self predownloadStatusData];
+                        });
+                    }
                     
                     [self reloadTableView];
                     
