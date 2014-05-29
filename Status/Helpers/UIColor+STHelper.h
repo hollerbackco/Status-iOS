@@ -10,7 +10,7 @@
 
 #import "UIColor+JNHelper.h"
 
-#define STGreenButtonBackgroundColor JNColorWithRGB(35,182,11,1)
+#define STGreenButtonBackgroundColor JNColorWithRGB(0,161,25,1)
 
 @interface UIColor (STHelper)
 
