@@ -180,13 +180,13 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 {
     JNLog();
     NSString *string = @"Try out Status!";
-    NSURL *URL = [NSURL URLWithString:@"http://statusapp.parseapp.com"];
+    NSURL *URL = [NSURL URLWithString:@"http://thestatusapp.com"];
     
     UIActivityViewController *activityViewController =
     [[UIActivityViewController alloc] initWithActivityItems:@[string, URL]
                                       applicationActivities:nil];
     
-    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop, UIActivityTypePostToFacebook, UIActivityTypePostToFlickr, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo, UIActivityTypePostToWeibo];
+    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop,UIActivityTypePostToFlickr, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo, UIActivityTypePostToWeibo];
 
     [self.navigationController presentViewController:activityViewController
                                        animated:YES
