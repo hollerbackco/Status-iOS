@@ -56,7 +56,7 @@
     
     [query orderByDescending:@"createdAt"];
     
-    query.limit = 10;
+    query.limit = 50;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
