@@ -108,7 +108,6 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     JNLog();
-    
     [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
     
     if ([STPushManager sharedInstance].willEnterFromPush) {
@@ -127,6 +126,17 @@
     [STAppManager updateAppVersion];
     
     [STLogger sendDailyLog];
+    
+    // store the current user if not exist
+    JNLogObject([PFUser currentUser]);
+    if ([PFUser currentUser]) {
+        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+        JNLogObject(currentInstallation[@"user"]);
+        if (!currentInstallation[@"user"]) {
+            currentInstallation[@"user"] = [PFUser currentUser];
+        }
+        [currentInstallation saveInBackground];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -154,7 +164,10 @@
     JNLog();
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    currentInstallation[@"user"] = [PFUser currentUser];
+    JNLogObject([PFUser currentUser]);
+    if ([PFUser currentUser]) {
+        currentInstallation[@"user"] = [PFUser currentUser];
+    }
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation saveInBackground];
 }
