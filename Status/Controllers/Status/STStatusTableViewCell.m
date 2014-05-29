@@ -29,6 +29,7 @@
     
     self.photoImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.photoImageView.layer.masksToBounds = YES;
+    self.photoImageView.tintColor = nil;
     
     [self.footerView applyGradientBackgroundWithTopColor:[JNBlackColor colorWithAlphaComponent:0.6] bottomColor:JNClearColor];
     
