@@ -67,7 +67,8 @@
             
         } else {
             
-            JNLogObject(objects);
+//            JNLogObject(objects);
+            JNLogPrimitive(objects.count);
             self.statusHistory = [self sortedStatues:objects];
             
             [self reloadTableView];
@@ -129,6 +130,9 @@ static NSString *CellIdentifier = @"STStatusHistoryTableViewCell";
 - (void)viewDidLoad
 {
     JNLog();
+    
+    self.title = @"History";
+    
     [super viewDidLoad];
     
     [self setupNavigationBar];
@@ -146,6 +150,8 @@ static NSString *CellIdentifier = @"STStatusHistoryTableViewCell";
 
 - (void)setupNavigationBar
 {
+    [self applyNavigationBarTitle:self.title];
+    
     [self applyRightCameraNavigationButtonWithTarget:self action:@selector(cameraAction:)];
 }
 
