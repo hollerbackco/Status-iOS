@@ -11,6 +11,8 @@
 
 #import "UIView+JNHelper.h"
 #import "UIFont+JNHelper.h"
+#import "UIColor+STHelper.h"
+#import "JNIcon.h"
 #import "JNAlertView.h"
 
 #import "STStatusFeedTableViewController.h"
@@ -263,12 +265,48 @@ static NSString *ExtraBottomCellIdentifier = @"ExtraBottomCellIdentifier";
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ExtraBottomCellIdentifier];
         
+        cell.contentView.backgroundColor = STGreenButtonBackgroundColor;
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        cell.textLabel.attributedText =
+        
+        NSMutableAttributedString *finalMessage = [[NSMutableAttributedString alloc] init];
+        
+        // line 1
+        NSAttributedString *inviteFriendsMessageLine1 =
         [[NSAttributedString alloc]
-         initWithString:@"You have no more Statuses!\n\nTap to share the app with your friends."
-         attributes:@{NSFontAttributeName: [UIFont primaryFontWithSize:20.0]}];
+         initWithString:@"more friends = more statuses"
+         attributes:@{NSFontAttributeName: [UIFont primaryFontWithSize:19.0],
+                      NSForegroundColorAttributeName: JNWhiteColor}];
+        [finalMessage appendAttributedString:inviteFriendsMessageLine1];
+        
+        // spacing
+        [finalMessage appendAttributedString:
+         [[NSAttributedString alloc]
+          initWithString:@"\n\n"
+          attributes:@{NSFontAttributeName: [UIFont primaryFontWithSize:18.0],
+                       NSForegroundColorAttributeName: JNWhiteColor}]];
+        
+        // icon
+        FAKIonIcons *invitePeopleIcon = [FAKIonIcons personAddIconWithSize:50.0];
+        [invitePeopleIcon addAttributes:@{NSForegroundColorAttributeName: JNWhiteColor}];
+        [finalMessage appendAttributedString:invitePeopleIcon.attributedString];
+    
+        // spacing
+        [finalMessage appendAttributedString:
+         [[NSAttributedString alloc]
+          initWithString:@"\n\n"
+          attributes:@{NSFontAttributeName: [UIFont primaryFontWithSize:18.0],
+                       NSForegroundColorAttributeName: JNWhiteColor}]];
+        
+        // line 2
+        NSAttributedString *inviteFriendsMessageLine2 =
+        [[NSAttributedString alloc]
+         initWithString:@"invite friends"
+         attributes:@{NSFontAttributeName: [UIFont primaryFontWithSize:28.0],
+                      NSForegroundColorAttributeName: JNWhiteColor}];
+        [finalMessage appendAttributedString:inviteFriendsMessageLine2];
+        
+        cell.textLabel.attributedText = finalMessage;
         
         return cell;
     }
@@ -305,6 +343,8 @@ static NSString *ExtraBottomCellIdentifier = @"ExtraBottomCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if (self.shouldDisplayExtraBottomCell && indexPath.row > self.statuses.count - 1) {
         
         if (self.didTapShowShareActivityBlock) {
@@ -319,8 +359,6 @@ static NSString *ExtraBottomCellIdentifier = @"ExtraBottomCellIdentifier";
             self.didSelectStatus(status);
         }
     }
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
