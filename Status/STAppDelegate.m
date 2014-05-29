@@ -13,6 +13,7 @@
 #import "STCreateStatusViewController.h"
 #import "STLoginViewController.h"
 #import "STAppManager.h"
+#import "STPushManager.h"
 
 @interface STAppDelegate ()
 
@@ -28,7 +29,7 @@
     JNLog();
     
     // Register our Parse Application.
-    [Parse setApplicationId:@"OAawrd6K5rsKQWHGzh0cqtsVz8qnlMQvRewC8E8h" clientKey:@"ANovqbeOyoQ17I6RSGSVTps3FIrWIj9k1jHkMl4R"];
+    [Parse setApplicationId:kSTParseAppId clientKey:kSTParseClientKey];
     
     // Initialize Parse's Facebook Utilities singleton. This uses the FacebookAppID we specified in our App bundle's plist.
     [PFFacebookUtils initializeFacebook];
@@ -100,13 +101,19 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     JNLog();
+    
+    [STPushManager sharedInstance].willEnterFromPush = NO;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     JNLog();
-    
     [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+    
+    if ([STPushManager sharedInstance].willEnterFromPush) {
+        
+        [STPushManager sharedInstance].willEnterFromPush = NO;
+    }
     
     if (self.shouldRestartCreateStatus) {
         self.shouldRestartCreateStatus = NO;
@@ -119,6 +126,17 @@
     [STAppManager updateAppVersion];
     
     [STLogger sendDailyLog];
+    
+    // store the current user if not exist
+    JNLogObject([PFUser currentUser]);
+    if ([PFUser currentUser]) {
+        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+        JNLogObject(currentInstallation[@"user"]);
+        if (!currentInstallation[@"user"]) {
+            currentInstallation[@"user"] = [PFUser currentUser];
+        }
+        [currentInstallation saveInBackground];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -146,6 +164,10 @@
     JNLog();
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    JNLogObject([PFUser currentUser]);
+    if ([PFUser currentUser]) {
+        currentInstallation[@"user"] = [PFUser currentUser];
+    }
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation saveInBackground];
 }
@@ -158,7 +180,28 @@
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [PFPush handlePush:userInfo];
+    JNLog();
+    [self application:application handleRemotePush:userInfo];
+}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    JNLog();
+    [self application:application handleRemotePush:userInfo];
+}
+
+- (void)application:(UIApplication *)application handleRemotePush:(NSDictionary*)userInfo
+{
+    JNLogObject(userInfo);
+    
+    [JNAppManager printAppState:application];
+    
+    [[STPushManager sharedInstance] handlePush:userInfo];
+    
+    [[STSession sharedInstance] setValue:@(YES) forKey:kSTSessionStoreHasNewComments];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSTSessionStoreHasNewComments object:nil userInfo:nil];
 }
 
 @end

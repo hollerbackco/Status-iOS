@@ -7,6 +7,7 @@
 //
 
 #import "STSession.h"
+#import "JNSimpleDataStore.h"
 
 #define kSTMaxLoginRetryCount 3
 
@@ -130,6 +131,18 @@
         // reset login retry count
         self.loginRetryCount = 0;
 	}];
+}
+
+#pragma mark - Key Value store
+
+- (void)setValue:(id)value forKey:(NSString*)key
+{
+    [JNSimpleDataStore setValue:value forKey:key];
+}
+
+- (id)getValueForKey:(NSString*)key
+{
+    return [JNSimpleDataStore getValueForKey:key];
 }
 
 @end

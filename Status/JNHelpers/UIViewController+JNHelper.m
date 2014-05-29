@@ -317,6 +317,17 @@ static UIImageView *_navigationBarLogoImageView;
     self.navigationItem.leftBarButtonItem = leftBarButtonItem;
 }
 
+- (void)applyRightCameraNavigationButtonWithTarget:(id)target action:(SEL)action
+{
+    UIImage *cancelImage = [JNIcon cameraImageIconWithSize:34.0 color:JNBlackColor];
+    UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, cancelImage.size.width, cancelImage.size.height)];
+    [cancelButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    [cancelButton setImage:cancelImage forState:UIControlStateNormal];
+    cancelButton.imageEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, -14.0);
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+}
+
 - (void)applyGearNavigationButtonWithTarget:(id)target action:(SEL)action
 {
     UIImage *cancelImage = [JNIcon gearImageIconWithSize:30.0 color:JNWhiteColor];

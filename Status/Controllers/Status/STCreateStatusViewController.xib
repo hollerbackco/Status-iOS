@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="cameraToggleButton" destination="VPb-Gv-Y0k" id="EY0-kT-Q2U"/>
                 <outlet property="captionButton" destination="XRL-Wa-2mC" id="l2a-C6-tjO"/>
+                <outlet property="historyButton" destination="1El-RW-mgH" id="gvQ-W0-UJg"/>
                 <outlet property="promptLabel" destination="JNq-md-IOR" id="2EK-Wh-ezZ"/>
                 <outlet property="stillButton" destination="a28-V9-h6P" id="c7A-l4-2NJ"/>
                 <outlet property="toggleFlashButton" destination="QIn-8U-0Yj" id="hiB-Ln-F28"/>
@@ -24,19 +25,29 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="JNq-md-IOR" userLabel="promptLabel">
-                            <rect key="frame" x="20" y="38" width="280" height="80"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1El-RW-mgH">
+                            <rect key="frame" x="0.0" y="20" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="80" id="2I5-9z-Rf0"/>
-                                <constraint firstAttribute="width" constant="280" id="ULS-Dc-q4K"/>
+                                <constraint firstAttribute="height" constant="50" id="Qnv-Id-YKc"/>
+                                <constraint firstAttribute="width" constant="50" id="RQe-Uy-lU9"/>
                             </constraints>
+                            <state key="normal" title="Button">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="historyAction:" destination="-1" eventType="touchUpInside" id="aa8-VV-IqC"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="JNq-md-IOR" userLabel="promptLabel">
+                            <rect key="frame" x="60" y="20" width="200" height="80"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <attributedString key="attributedText">
                                 <fragment content="Set your status to see your friends' statuses. Your new status replaces your last.">
                                     <attributes>
                                         <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <font key="NSFont" size="16" name="HelveticaNeue-Thin"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        <font key="NSFont" size="14" name="HelveticaNeue-Thin"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                     </attributes>
                                 </fragment>
                             </attributedString>
@@ -45,9 +56,8 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="JNq-md-IOR" secondAttribute="bottom" constant="6" id="HaH-dJ-cgO"/>
-                        <constraint firstAttribute="trailing" secondItem="JNq-md-IOR" secondAttribute="trailing" constant="20" id="KrX-WJ-dE4"/>
-                        <constraint firstItem="JNq-md-IOR" firstAttribute="leading" secondItem="N1D-Ja-ZsB" secondAttribute="leading" constant="20" id="Rcm-u9-I08"/>
+                        <constraint firstItem="1El-RW-mgH" firstAttribute="leading" secondItem="N1D-Ja-ZsB" secondAttribute="leading" id="M0h-9Q-wOg"/>
+                        <constraint firstItem="1El-RW-mgH" firstAttribute="top" secondItem="N1D-Ja-ZsB" secondAttribute="top" constant="20" id="VLg-Pf-Y0F"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="250" constant="64" id="oxa-Y9-pzn"/>
                         <constraint firstAttribute="height" relation="lessThanOrEqual" priority="250" constant="124" id="umq-dl-WQI"/>
                     </constraints>

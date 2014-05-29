@@ -8,6 +8,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <NSNotificationCenter+RACSupport.h>
 
 #import "AVCamViewController.h"
 #import "AVCamCaptureManager.h"
@@ -19,6 +20,8 @@
 #import "STCreateStatusViewController.h"
 #import "STCaptionOverlayViewController.h"
 #import "STStatusFeedViewController.h"
+#import "STMyStatusHistoryViewController.h"
+#import "STRightToLeftTransitionAnimator.h"
 #import "STStatus.h"
 
 #define kSTAddCaptionToImageHeightOffset 20.0
@@ -28,9 +31,11 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 @interface STCreateStatusViewController () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) STStatusFeedViewController *statusFeedViewController;
 @property (nonatomic, strong) STCaptionOverlayViewController *captionOverlayViewController;
+@property (nonatomic, strong) STStatusFeedViewController *statusFeedViewController;
+@property (nonatomic, strong) STMyStatusHistoryViewController *myStatusHistoryViewController;
 
+@property (nonatomic, strong) RACDisposable *aNewCommentObserverDisposable;
 @end
 
 @interface STCreateStatusViewController (InternalMethods)
@@ -43,6 +48,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 @end
 
 @interface STCreateStatusViewController (AVCamCaptureManagerDelegate) <AVCamCaptureManagerDelegate>
+
 @end
 
 @implementation STCreateStatusViewController
@@ -50,7 +56,14 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 #pragma mark -
 
 - (void)initialize
+{   
+    self.myStatusHistoryViewController = [[STMyStatusHistoryViewController alloc] initWithNibName:@"STMyStatusHistoryViewController" bundle:nil];
+    [self.myStatusHistoryViewController performFetchWithCachePolicy:kPFCachePolicyCacheThenNetwork];
+}
+
+- (void)dealloc
 {
+    [self removeNewCommentsNotificationObserver];
 }
 
 #pragma mark - Reset
@@ -189,9 +202,10 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [super viewDidLoad];
     
     self.view.backgroundColor = JNBlackColor;
+    
     self.videoPreviewView.backgroundColor = JNBlackColor;
     
-    FAKIonIcons *captionIcon = [FAKIonIcons ios7ComposeOutlineIconWithSize:40.0];
+    FAKIonIcons *captionIcon = [FAKIonIcons ios7ComposeOutlineIconWithSize:32.0];
     [captionIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.captionButton setAttributedTitle:captionIcon.attributedString forState:UIControlStateNormal];
     
@@ -202,6 +216,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self setupStatusFeed];
     
     [self.statusFeedViewController performFetch];
+    
+    [self observeNewCommentsNotification];
 }
 
 - (void)setupCaptionOverlay
@@ -233,6 +249,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     
     [self resetCreateStatus];
+    
+    [self toggleHistoryButton];
 }
 
 - (void)viewWillDisppear:(BOOL)animated
@@ -241,6 +259,67 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+}
+
+#pragma mark - History / New Comments button
+
+- (void)toggleHistoryButton
+{
+    NSNumber *hasNewComments = [[STSession sharedInstance] getValueForKey:kSTSessionStoreHasNewComments];
+    JNLogObject(hasNewComments);
+    
+    NSInteger badgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    JNLogPrimitive(badgeNumber);
+    
+    if (hasNewComments.boolValue || badgeNumber > 0) {
+        
+        [self setupNewCommentsButton];
+    } else {
+        
+        [self setupHistoryButton];
+    }
+}
+
+- (void)setupHistoryButton
+{
+    FAKIonIcons *historyIcon = [FAKIonIcons ios7ClockOutlineIconWithSize:32.0];
+    [historyIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+    [self.historyButton setAttributedTitle:historyIcon.attributedString forState:UIControlStateNormal];
+    self.historyButton.layer.shadowRadius = 0.0;
+}
+
+- (void)setupNewCommentsButton
+{
+    NSAttributedString *newCommentsString =
+    [[NSAttributedString alloc]
+     initWithString:@"NEW"
+     attributes:@{NSFontAttributeName: [UIFont primaryBoldFontWithSize:16.0]}];
+    [self.historyButton setAttributedTitle:newCommentsString forState:UIControlStateNormal];
+    [self.historyButton setTitleColor:JNWhiteColor forState:UIControlStateNormal];
+    self.historyButton.tintColor = JNWhiteColor;
+    self.historyButton.layer.shadowColor = JNColorWithRGB(0,255,255,1).CGColor;
+    self.historyButton.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    self.historyButton.layer.shadowOpacity = 1.0;
+    self.historyButton.layer.shadowRadius = 4.0;
+    self.historyButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
+}
+
+- (void)observeNewCommentsNotification
+{
+    self.aNewCommentObserverDisposable =
+    [[[NSNotificationCenter defaultCenter]
+      rac_addObserverForName:kSTSessionStoreHasNewComments object:nil]
+     subscribeNext:^(id x) {
+         JNLogObject(x);
+         [self toggleHistoryButton];
+     }];
+}
+
+- (void)removeNewCommentsNotificationObserver
+{
+    if (self.aNewCommentObserverDisposable) {
+        [self.aNewCommentObserverDisposable dispose];
+    }
 }
 
 #pragma mark - Actions
@@ -320,6 +399,24 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self.captureManager toggleFlash];
 }
 
+- (IBAction)historyAction:(id)sender
+{
+    JNLog();
+    
+    NSNumber *hasNewComments = [[STSession sharedInstance] getValueForKey:kSTSessionStoreHasNewComments];
+    if (hasNewComments.boolValue) {
+        
+        [[STSession sharedInstance] setValue:@(NO) forKeyPath:kSTSessionStoreHasNewComments];
+    }
+    
+    if ([UIApplication sharedApplication].applicationIconBadgeNumber) {
+        
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    }
+    
+    [self pushToMyStatusHistory];
+}
+
 #pragma mark - Captured Image
 
 - (void)didCaptureImage:(UIImage*)capturedImage
@@ -349,6 +446,37 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     if (!self.statusFeedViewController) {
         self.statusFeedViewController = [[STStatusFeedViewController alloc] initWithNib];
     }
+}
+
+#pragma mark - Status History
+
+- (void)pushToMyStatusHistory
+{
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.myStatusHistoryViewController];
+    navigationController.transitioningDelegate = self;
+    navigationController.modalPresentationStyle = UIModalPresentationCustom;
+    [self.navigationController presentViewController:navigationController animated:YES completion:nil];
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                   presentingController:(UIViewController *)presenting
+                                                                       sourceController:(UIViewController *)source
+{
+    STRightToLeftTransitionAnimator *animator = [STRightToLeftTransitionAnimator new];
+    animator.presenting = YES;
+    return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    [self toggleHistoryButton];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    
+    STRightToLeftTransitionAnimator *animator = [STRightToLeftTransitionAnimator new];
+    return animator;
 }
 
 @end
@@ -522,14 +650,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     } else {
         finalImage = image;
     }
-    
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    [library
-     writeImageToSavedPhotosAlbum:finalImage.CGImage
-     orientation:(ALAssetOrientation) finalImage.imageOrientation
-     completionBlock:^(NSURL *assetURL, NSError *error) {
-         //         JNLogObject(assetURL);
-     }];
     
     [self didCaptureImage:finalImage];
 }

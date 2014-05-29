@@ -29,5 +29,11 @@
 - (BOOL)isLoggedIn;
 - (void)login:(id<STSessionDelegate>)delegate;
 
+#pragma mark - Key Value store
+
+- (void)setValue:(id)value forKey:(NSString*)key;
+
+- (id)getValueForKey:(NSString*)key;
+
 @end
 

@@ -10,6 +10,7 @@
 #import <RACEXTScope.h>
 
 #import "UIView+JNHelper.h"
+#import "UIFont+JNHelper.h"
 #import "JNAlertView.h"
 
 #import "STStatusFeedTableViewController.h"
@@ -18,6 +19,8 @@
 @interface STStatusFeedTableViewController ()
 
 @property (strong, nonatomic) UIActivityIndicatorView *tableSpinnerView;
+
+@property (nonatomic) BOOL shouldDisplayExtraBottomCell;
 
 @end
 
@@ -90,6 +93,8 @@
                     });
                     
                     [self reloadTableView];
+                    
+                    self.shouldDisplayExtraBottomCell = YES;
                 }
                 
                 [self.tableSpinnerView stopAnimating];
@@ -212,6 +217,7 @@
 #pragma mark - Views
 
 static NSString *CellIdentifier = @"STStatusTableViewCell";
+static NSString *ExtraBottomCellIdentifier = @"ExtraBottomCellIdentifier";
 
 - (void)viewDidLoad
 {
@@ -223,6 +229,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     [self.tableView addSubview:self.tableSpinnerView];
     [self.tableSpinnerView startAnimating];
     
+    [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:ExtraBottomCellIdentifier];
     [self.tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:nil] forCellReuseIdentifier:CellIdentifier];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -242,12 +249,30 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.statuses.count;
+    NSUInteger count = self.statuses.count;
+    if (self.shouldDisplayExtraBottomCell) {
+        count++;
+    }
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.shouldDisplayExtraBottomCell && indexPath.row > self.statuses.count - 1) {
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ExtraBottomCellIdentifier];
+        
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.attributedText =
+        [[NSAttributedString alloc]
+         initWithString:@"You have no more Statuses!\n\nTap to share the app with your friends."
+         attributes:@{NSFontAttributeName: [UIFont primaryFontWithSize:20.0]}];
+        
+        return cell;
+    }
+    
     STStatus *status = self.statuses[indexPath.row];
     
     STStatusTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -280,14 +305,22 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-#warning Todo: disabled drawing
-    return;
-    
-    if (self.didSelectStatus) {
+    if (self.shouldDisplayExtraBottomCell && indexPath.row > self.statuses.count - 1) {
         
-        STStatus *status = [self.statuses objectAtIndex:indexPath.row];
-        self.didSelectStatus(status);
+        if (self.didTapShowShareActivityBlock) {
+            self.didTapShowShareActivityBlock();
+        }
+        
+    } else {
+    
+        if (self.didSelectStatus) {
+            
+            STStatus *status = [self.statuses objectAtIndex:indexPath.row];
+            self.didSelectStatus(status);
+        }
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

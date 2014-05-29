@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
-#import <RACExtScope.h>
+#import <RACEXTScope.h>
 
 #import "UIViewController+JNHelper.h"
 
@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerView;
 @property (weak, nonatomic) IBOutlet UILabel *savingLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewTopConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *footerButton;
 
 @property (nonatomic, strong) STStatusFeedTableViewController *tableViewController;
 
@@ -105,6 +106,11 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
         
         [self_weak_ didSelectStatus:status];
     };
+    
+    self.tableViewController.didTapShowShareActivityBlock = ^() {
+        
+        [self_weak_ showShareActivityView:nil];
+    };
 }
 
 - (void)addTableViewControllerToContentView
@@ -168,6 +174,24 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     STStatusCommentViewController *statusCommentViewController = [[STStatusCommentViewController alloc] initWithNib];
     statusCommentViewController.status = status;
     [self.navigationController presentViewController:statusCommentViewController animated:YES completion:nil];
+}
+
+- (void)showShareActivityView:(id)sender
+{
+    JNLog();
+    NSString *string = @"Try out Status!";
+    NSURL *URL = [NSURL URLWithString:@"http://thestatusapp.com"];
+    
+    UIActivityViewController *activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:@[string, URL]
+                                      applicationActivities:nil];
+    
+    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop,UIActivityTypePostToFlickr, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo, UIActivityTypePostToWeibo];
+
+    [self.navigationController presentViewController:activityViewController
+                                       animated:YES
+                                     completion:^{
+                                     }];
 }
 
 #pragma mark - Create Status
@@ -294,25 +318,6 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 - (void)didCreateStatus:(STStatus*)status
 {
     JNLog();
-    // save to status history
-    PFObject *statusHistory = [PFObject objectWithClassName:@"StatusHistory"];
-    statusHistory[@"image"] = status[@"image"];
-    statusHistory[@"userFBId"] = status[@"userFBId"];
-    statusHistory[@"user"] = status[@"user"];
-    statusHistory[@"sentAt"] = status[@"sentAt"];
-    
-    [statusHistory saveEventually:^(BOOL succeeded, NSError *error) {
-        
-        if (error) {
-            
-            JNLogObject(error);
-            
-        } else {
-            
-//            JNLog(@"status history successfully saved");
-        }
-    }];
-    
     [self finishedCreateStatus];
     
     [self.tableViewController performFetchWithCachePolicy:kPFCachePolicyNetworkOnly];
