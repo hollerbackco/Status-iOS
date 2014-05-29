@@ -8,6 +8,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <NSNotificationCenter+RACSupport.h>
 
 #import "AVCamViewController.h"
 #import "AVCamCaptureManager.h"
@@ -34,6 +35,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 @property (nonatomic, strong) STStatusFeedViewController *statusFeedViewController;
 @property (nonatomic, strong) STMyStatusHistoryViewController *myStatusHistoryViewController;
 
+@property (nonatomic, strong) RACDisposable *aNewCommentObserverDisposable;
 @end
 
 @interface STCreateStatusViewController (InternalMethods)
@@ -57,6 +59,11 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 {   
     self.myStatusHistoryViewController = [[STMyStatusHistoryViewController alloc] initWithNibName:@"STMyStatusHistoryViewController" bundle:nil];
     [self.myStatusHistoryViewController performFetchWithCachePolicy:kPFCachePolicyCacheThenNetwork];
+}
+
+- (void)dealloc
+{
+    [self removeNewCommentsNotificationObserver];
 }
 
 #pragma mark - Reset
@@ -196,10 +203,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     self.view.backgroundColor = JNBlackColor;
     
-    FAKIonIcons *historyIcon = [FAKIonIcons ios7ClockOutlineIconWithSize:32.0];
-    [historyIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
-    [self.historyButton setAttributedTitle:historyIcon.attributedString forState:UIControlStateNormal];
-    
     self.videoPreviewView.backgroundColor = JNBlackColor;
     
     FAKIonIcons *captionIcon = [FAKIonIcons ios7ComposeOutlineIconWithSize:32.0];
@@ -213,6 +216,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self setupStatusFeed];
     
     [self.statusFeedViewController performFetch];
+    
+    [self observeNewCommentsNotification];
 }
 
 - (void)setupCaptionOverlay
@@ -244,6 +249,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     
     [self resetCreateStatus];
+    
+    [self toggleHistoryButton];
 }
 
 - (void)viewWillDisppear:(BOOL)animated
@@ -252,6 +259,67 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+}
+
+#pragma mark - History / New Comments button
+
+- (void)toggleHistoryButton
+{
+    NSNumber *hasNewComments = [[STSession sharedInstance] getValueForKey:kSTSessionStoreHasNewComments];
+    JNLogObject(hasNewComments);
+    
+    NSInteger badgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    JNLogPrimitive(badgeNumber);
+    
+    if (hasNewComments.boolValue || badgeNumber > 0) {
+        
+        [self setupNewCommentsButton];
+    } else {
+        
+        [self setupHistoryButton];
+    }
+}
+
+- (void)setupHistoryButton
+{
+    FAKIonIcons *historyIcon = [FAKIonIcons ios7ClockOutlineIconWithSize:32.0];
+    [historyIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+    [self.historyButton setAttributedTitle:historyIcon.attributedString forState:UIControlStateNormal];
+    self.historyButton.layer.shadowRadius = 0.0;
+}
+
+- (void)setupNewCommentsButton
+{
+    NSAttributedString *newCommentsString =
+    [[NSAttributedString alloc]
+     initWithString:@"NEW"
+     attributes:@{NSFontAttributeName: [UIFont primaryBoldFontWithSize:16.0]}];
+    [self.historyButton setAttributedTitle:newCommentsString forState:UIControlStateNormal];
+    [self.historyButton setTitleColor:JNWhiteColor forState:UIControlStateNormal];
+    self.historyButton.tintColor = JNWhiteColor;
+    self.historyButton.layer.shadowColor = JNColorWithRGB(0,255,255,1).CGColor;
+    self.historyButton.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    self.historyButton.layer.shadowOpacity = 1.0;
+    self.historyButton.layer.shadowRadius = 4.0;
+    self.historyButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
+}
+
+- (void)observeNewCommentsNotification
+{
+    self.aNewCommentObserverDisposable =
+    [[[NSNotificationCenter defaultCenter]
+      rac_addObserverForName:kSTSessionStoreHasNewComments object:nil]
+     subscribeNext:^(id x) {
+         JNLogObject(x);
+         [self toggleHistoryButton];
+     }];
+}
+
+- (void)removeNewCommentsNotificationObserver
+{
+    if (self.aNewCommentObserverDisposable) {
+        [self.aNewCommentObserverDisposable dispose];
+    }
 }
 
 #pragma mark - Actions
@@ -334,6 +402,18 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 - (IBAction)historyAction:(id)sender
 {
     JNLog();
+    
+    NSNumber *hasNewComments = [[STSession sharedInstance] getValueForKey:kSTSessionStoreHasNewComments];
+    if (hasNewComments.boolValue) {
+        
+        [[STSession sharedInstance] setValue:@(NO) forKeyPath:kSTSessionStoreHasNewComments];
+    }
+    
+    if ([UIApplication sharedApplication].applicationIconBadgeNumber) {
+        
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    }
+    
     [self pushToMyStatusHistory];
 }
 
@@ -391,6 +471,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
 {
+    [self toggleHistoryButton];
+    
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     
     STRightToLeftTransitionAnimator *animator = [STRightToLeftTransitionAnimator new];

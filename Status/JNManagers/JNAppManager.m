@@ -107,7 +107,12 @@
 
 + (void)printAppState
 {
-    switch ([UIApplication sharedApplication].applicationState) {
+    [self.class printAppState:[UIApplication sharedApplication]];
+}
+
++ (void)printAppState:(UIApplication*)application
+{
+    switch (application.applicationState) {
         case UIApplicationStateInactive:
             JNLog(@"UIApplicationStateInactive");
             break;

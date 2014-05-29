@@ -22,4 +22,6 @@
 
 + (void)printAppState;
 
++ (void)printAppState:(UIApplication*)application;
+
 @end

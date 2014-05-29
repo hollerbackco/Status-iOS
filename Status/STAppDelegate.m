@@ -13,6 +13,7 @@
 #import "STCreateStatusViewController.h"
 #import "STLoginViewController.h"
 #import "STAppManager.h"
+#import "STPushManager.h"
 
 @interface STAppDelegate ()
 
@@ -100,6 +101,8 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     JNLog();
+    
+    [STPushManager sharedInstance].willEnterFromPush = NO;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -107,6 +110,11 @@
     JNLog();
     
     [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+    
+    if ([STPushManager sharedInstance].willEnterFromPush) {
+        
+        [STPushManager sharedInstance].willEnterFromPush = NO;
+    }
     
     if (self.shouldRestartCreateStatus) {
         self.shouldRestartCreateStatus = NO;
@@ -159,7 +167,28 @@
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [PFPush handlePush:userInfo];
+    JNLog();
+    [self application:application handleRemotePush:userInfo];
+}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    JNLog();
+    [self application:application handleRemotePush:userInfo];
+}
+
+- (void)application:(UIApplication *)application handleRemotePush:(NSDictionary*)userInfo
+{
+    JNLogObject(userInfo);
+    
+    [JNAppManager printAppState:application];
+    
+    [[STPushManager sharedInstance] handlePush:userInfo];
+    
+    [[STSession sharedInstance] setValue:@(YES) forKey:kSTSessionStoreHasNewComments];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSTSessionStoreHasNewComments object:nil userInfo:nil];
 }
 
 @end

@@ -150,6 +150,8 @@ static NSString *CellIdentifier = @"STStatusHistoryTableViewCell";
 
 - (void)setupNavigationBar
 {
+    [self applyOpaqueNavigationBarStyle];
+    
     [self applyNavigationBarTitle:self.title];
     
     [self applyRightCameraNavigationButtonWithTarget:self action:@selector(cameraAction:)];
