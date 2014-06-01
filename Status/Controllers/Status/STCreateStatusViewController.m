@@ -205,9 +205,27 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     self.videoPreviewView.backgroundColor = JNBlackColor;
     
+    [self.stillButton setTitle:nil forState:UIControlStateNormal];
+    [self.captionButton setTitle:nil forState:UIControlStateNormal];
+    [self.cameraToggleButton setTitle:nil forState:UIControlStateNormal];
+    [self.toggleFlashButton setTitle:nil forState:UIControlStateNormal];
+    [self.historyButton setTitle:nil forState:UIControlStateNormal];
+    [self.feedButton setTitle:nil forState:UIControlStateNormal];
+    
+    [self.stillButton setImage:[UIImage imageNamed:@"camera-button.png"] forState:UIControlStateNormal];
+    self.stillButton.tintColor = nil;
+    
+    [self.headerView applyBottomHalfGradientBackgroundWithTopColor:JNBlackColor bottomColor:JNClearColor];
+    
+    [self.footerView applyTopHalfGradientBackgroundWithTopColor:JNClearColor bottomColor:JNBlackColor];
+    
     FAKIonIcons *captionIcon = [FAKIonIcons ios7ComposeOutlineIconWithSize:32.0];
     [captionIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.captionButton setAttributedTitle:captionIcon.attributedString forState:UIControlStateNormal];
+    
+    FAKIonIcons *homeIcon = [FAKIonIcons homeIconWithSize:32.0];
+    [homeIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+    [self.feedButton setAttributedTitle:homeIcon.attributedString forState:UIControlStateNormal];
     
     [self setupCaptionOverlay];
     
@@ -417,6 +435,13 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self pushToMyStatusHistory];
 }
 
+- (IBAction)feedAction:(id)sender
+{
+    JNLog();
+    
+    [self pushToStatusFeedWithImage:nil];
+}
+
 #pragma mark - Captured Image
 
 - (void)didCaptureImage:(UIImage*)capturedImage
@@ -435,7 +460,9 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     [self.navigationController pushViewController:self.statusFeedViewController animated:YES];
     
-    [self.statusFeedViewController performCreateStatusWithImage:image];
+    if (image) {
+        [self.statusFeedViewController performCreateStatusWithImage:image];
+    }
 }
 
 #pragma mark - Status Feed

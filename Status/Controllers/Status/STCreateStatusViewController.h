@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) AVCamCaptureManager *captureManager;
 @property (nonatomic, strong) IBOutlet UIView *videoPreviewView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
 @property (nonatomic, strong) IBOutlet UIButton *cameraToggleButton;
 //@property (nonatomic, strong) IBOutlet UIBarButtonItem *recordButton;
@@ -23,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *captionButton;
 @property (weak, nonatomic) IBOutlet UIButton *toggleFlashButton;
 @property (weak, nonatomic) IBOutlet UIButton *historyButton;
+@property (weak, nonatomic) IBOutlet UIButton *feedButton;
 
 @property (nonatomic) BOOL shouldLoadCamera;
 
@@ -37,6 +40,7 @@
 - (IBAction)captionAction:(id)sender;
 - (IBAction)toggleFlashAction:(id)sender;
 - (IBAction)historyAction:(id)sender;
+- (IBAction)feedAction:(id)sender;
 
 #pragma mark - Captured Image
 

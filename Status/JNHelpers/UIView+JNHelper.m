@@ -160,6 +160,24 @@ CGFloat const kHBViewAnimationFastDuration = 0.3;
     [self.layer insertSublayer:gradientLayer atIndex:0];
 }
 
+- (void)applyBottomHalfGradientBackgroundWithTopColor:(UIColor *)topColor bottomColor:(UIColor *)bottomColor
+{
+    self.backgroundColor = [UIColor clearColor];
+    CAGradientLayer *gradientLayer = [UIColor gradientWithTopColor:topColor bottomColor:bottomColor];
+    gradientLayer.bounds = CGRectMake(0.0, 0.0, self.bounds.size.width, self.bounds.size.height * 2);
+    gradientLayer.position = CGPointMake(CGRectGetMidX(self.bounds), 0.0);
+    [self.layer insertSublayer:gradientLayer atIndex:0];
+}
+
+- (void)applyTopHalfGradientBackgroundWithTopColor:(UIColor *)topColor bottomColor:(UIColor *)bottomColor
+{
+    self.backgroundColor = [UIColor clearColor];
+    CAGradientLayer *gradientLayer = [UIColor gradientWithTopColor:topColor bottomColor:bottomColor];
+    gradientLayer.bounds = CGRectMake(0.0, 0.0, self.bounds.size.width, self.bounds.size.height * 2);
+    gradientLayer.position = CGPointMake(CGRectGetMidX(self.bounds), self.bounds.size.height);
+    [self.layer insertSublayer:gradientLayer atIndex:0];
+}
+
 - (void)removeAllSublayers
 {
     self.layer.sublayers = nil;

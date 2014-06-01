@@ -51,6 +51,8 @@ typedef void(^HBViewComplete)(BOOL finished);
 - (void)applyDarkerShadowLayer;
 - (void)applyDarkBottomShadowLayer;
 - (void)applyGradientBackgroundWithTopColor:(UIColor*)topColor bottomColor:(UIColor*)bottomColor;
+- (void)applyBottomHalfGradientBackgroundWithTopColor:(UIColor *)topColor bottomColor:(UIColor *)bottomColor;
+- (void)applyTopHalfGradientBackgroundWithTopColor:(UIColor *)topColor bottomColor:(UIColor *)bottomColor;
 
 - (void)removeAllSublayers;
 
