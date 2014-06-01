@@ -128,7 +128,7 @@
     [STLogger sendDailyLog];
     
     // store the current user if not exist
-    JNLogObject([PFUser currentUser]);
+//    JNLogObject([PFUser currentUser]);
     if ([PFUser currentUser]) {
         PFInstallation *currentInstallation = [PFInstallation currentInstallation];
         JNLogObject(currentInstallation[@"user"]);

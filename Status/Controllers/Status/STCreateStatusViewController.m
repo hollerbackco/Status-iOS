@@ -115,21 +115,31 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         [[self captureManager] setDelegate:self];
         
         if ([[self captureManager] setupSession]) {
+            
             // Create video preview layer and add it to the UI
-            AVCaptureVideoPreviewLayer *newCaptureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:[[self captureManager] session]];
+            AVCaptureVideoPreviewLayer *newCaptureVideoPreviewLayer =
+            [[AVCaptureVideoPreviewLayer alloc]
+             initWithSession:[[self captureManager] session]];
             UIView *view = [self videoPreviewView];
             CALayer *viewLayer = [view layer];
             [viewLayer setMasksToBounds:YES];
-            
+
             CGRect bounds = [view bounds];
             [newCaptureVideoPreviewLayer setFrame:bounds];
             
+            newCaptureVideoPreviewLayer.frame = view.bounds;
+            
             AVCaptureConnection *captureConnection = [AVCamUtilities connectionWithMediaType:AVMediaTypeVideo fromConnections:self.captureManager.stillImageOutput.connections];
             if ([captureConnection isVideoOrientationSupported]) {
-                captureConnection.videoOrientation = AVCaptureVideoOrientationPortrait;
+                captureConnection.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
             }
             
-            [newCaptureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+            CATransform3D rotate = CATransform3DMakeRotation(M_PI/2, 0, 0, 1);
+            CATransform3D scale = CATransform3DMakeScale(1136.0/640.0, 1136.0/640.0, 1136.0/640.0);
+            CATransform3D combined = CATransform3DConcat(rotate, scale);
+            newCaptureVideoPreviewLayer.transform = combined;
+            
+            [newCaptureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
             
             [viewLayer insertSublayer:newCaptureVideoPreviewLayer below:[[viewLayer sublayers] objectAtIndex:0]];
             
@@ -269,6 +279,11 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self resetCreateStatus];
     
     [self toggleHistoryButton];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisppear:(BOOL)animated
