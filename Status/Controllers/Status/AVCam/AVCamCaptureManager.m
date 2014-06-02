@@ -175,7 +175,7 @@
 	if ([[self backFacingCamera] hasFlash]) {
 		if ([[self backFacingCamera] lockForConfiguration:nil]) {
 			if ([[self backFacingCamera] isFlashModeSupported:AVCaptureFlashModeAuto]) {
-				[[self backFacingCamera] setFlashMode:AVCaptureFlashModeAuto];
+				[[self backFacingCamera] setFlashMode:AVCaptureFlashModeOff];
 			}
 			[[self backFacingCamera] unlockForConfiguration];
 		}
