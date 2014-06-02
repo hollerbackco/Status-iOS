@@ -113,7 +113,7 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextView duration:UINavigationControllerHideShowBarDuration animations:^{
+    [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextView duration:kJNDefaultAnimationDuration animations:^{
         
         self.captionTextViewBottomSpacingConstraint.constant = kSTCaptionTextViewBottomSpacingConstraint;
         
@@ -176,7 +176,7 @@
     
     if (textView.bounds.size.height != textView.contentSize.height) {
         
-        [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextView duration:UINavigationControllerHideShowBarDuration animations:^{
+        [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextView duration:kJNDefaultAnimationDuration animations:^{
             
             self.captionTextView.frame = CGRectSetHeight(self.captionTextView.frame, textView.contentSize.height);
             self.captionTextViewHeightConstraint.constant = textView.contentSize.height;
@@ -209,7 +209,7 @@
 
     if ([NSString isNotEmptyString:caption]) {
 
-        [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextView duration:UINavigationControllerHideShowBarDuration animations:^{
+        [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextView duration:kJNDefaultAnimationDuration animations:^{
             
             if ([JNAppManager is3_5InchScreenSize]) {
                 
