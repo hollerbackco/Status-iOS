@@ -84,7 +84,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQu-dY-HgZ" userLabel="stillButton">
-                    <rect key="frame" x="490" y="120" width="68" height="68"/>
+                    <rect key="frame" x="10" y="120" width="68" height="68"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="68" id="yvt-3w-kw3"/>
@@ -152,7 +152,7 @@
                 <constraint firstItem="lfG-5D-TfC" firstAttribute="trailing" secondItem="nRj-Vw-dZo" secondAttribute="trailing" id="SXH-dS-8Ij"/>
                 <constraint firstItem="928-8f-mlT" firstAttribute="bottom" secondItem="lfG-5D-TfC" secondAttribute="bottom" id="a47-bD-c5y"/>
                 <constraint firstItem="928-8f-mlT" firstAttribute="trailing" secondItem="lfG-5D-TfC" secondAttribute="trailing" id="gvP-7U-6Xm"/>
-                <constraint firstAttribute="trailing" secondItem="HQu-dY-HgZ" secondAttribute="trailing" constant="10" id="iGU-vV-S2H"/>
+                <constraint firstAttribute="trailing" secondItem="HQu-dY-HgZ" secondAttribute="trailing" constant="490" id="iGU-vV-S2H"/>
                 <constraint firstItem="928-8f-mlT" firstAttribute="leading" secondItem="lfG-5D-TfC" secondAttribute="leading" id="mZj-At-ApD"/>
                 <constraint firstItem="lfG-5D-TfC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="oKs-Gk-eiz"/>
                 <constraint firstItem="nRj-Vw-dZo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="x8u-cJ-2j1"/>

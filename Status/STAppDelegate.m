@@ -67,12 +67,8 @@
 {
     JNLog();
     STCreateStatusViewController *createStatusViewController = [[STCreateStatusViewController alloc] initWithNib];
-    
-    createStatusViewController.shouldLoadCamera = shouldLoadCamera;
-    
-    self.statusNavigationController = [[UINavigationController alloc] initWithRootViewController:createStatusViewController];
-    
-    self.window.rootViewController = self.statusNavigationController;
+    createStatusViewController.shouldLoadCamera = shouldLoadCamera;    
+    self.window.rootViewController = createStatusViewController;
 }
 
 #pragma mark - App Enter / Exit

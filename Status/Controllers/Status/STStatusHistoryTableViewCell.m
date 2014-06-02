@@ -54,23 +54,18 @@
     
     self.spinnerView.alpha = 0.0;
     
-    FAKIonIcons *prevIcon = [FAKIonIcons ios7ArrowBackIconWithSize:40.0];
-    [prevIcon addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor]];
+    FAKIonIcons *prevIcon = [FAKIonIcons chevronLeftIconWithSize:40.0];
+    [prevIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.prevCommentButton setAttributedTitle:prevIcon.attributedString forState:UIControlStateNormal];
-    self.prevCommentButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 14.0, 0.0);
-//    [self.prevCommentButton.layer insertSublayer:[CALayer circleLayerWithSize:CGSizeMake(36.0, 36.0) strokeColor:nil fillColor:JNWhiteColor lineWidth:0.0] atIndex:0];
-    [self.prevCommentButton.layer insertSublayer:[CALayer circleLayerWithSize:CGSizeMake(36.0, 36.0) position:CGPointMake(27.0, 18.0) strokeColor:nil fillColor:JNWhiteColor lineWidth:0.0] atIndex:0];
     [self.prevCommentButton applyDarkerShadowLayer];
     self.prevCommentButton.alpha = 0.0;
     [self.prevCommentButton addTarget:self action:@selector(prevAction:) forControlEvents:UIControlEventTouchUpInside];
     
     self.prevCommentButton.alpha = 0.0;
     
-    FAKIonIcons *nextIcon = [FAKIonIcons ios7ArrowForwardIconWithSize:40.0];
-    [nextIcon addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor]];
+    FAKIonIcons *nextIcon = [FAKIonIcons chevronRightIconWithSize:40.0];
+    [nextIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.nextCommentButton setAttributedTitle:nextIcon.attributedString forState:UIControlStateNormal];
-    self.nextCommentButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 14.0, 10.0);
-    [self.nextCommentButton.layer insertSublayer:[CALayer circleLayerWithSize:CGSizeMake(36.0, 36.0) strokeColor:nil fillColor:JNWhiteColor lineWidth:0.0] atIndex:0];
     [self.nextCommentButton applyDarkerShadowLayer];
     self.nextCommentButton.alpha = 0.0;
     [self.nextCommentButton addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -298,6 +293,12 @@
              }
              self_weak_.senderName = [NSString stringWithFormat:@"By %@", statusComment[@"senderName"]];
              self_weak_.senderNameLabel.alpha = 0.0;
+             
+             // content mode according to image size
+             if (image.size.width/image.size.height == 1.0) {
+                 
+                 self.commentImageView.contentMode = UIViewContentModeScaleAspectFit;
+             }
              
              [UIView animateWithBlock:^{
                  self_weak_.commentImageView.alpha = 1.0;

@@ -6,13 +6,15 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
+#import "UIView+JNHelper.h"
+
 #import "STRightToLeftTransitionAnimator.h"
 
 @implementation STRightToLeftTransitionAnimator
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
-    return 0.3;
+    return kJNDefaultAnimationDuration;
 }
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
@@ -46,13 +48,18 @@
         [transitionContext.containerView addSubview:fromViewController.view];
         [transitionContext.containerView addSubview:toViewController.view];
         
-        fromViewController.view.frame = CGRectMake(0.0, 0.0, fromViewController.view.bounds.size.width, fromViewController.view.bounds.size.height);
-        toViewController.view.frame = CGRectMake(-toViewController.view.bounds.size.width, 0.0, toViewController.view.bounds.size.width, toViewController.view.bounds.size.height);
+        
+        fromViewController.view.frame = CGRectMake(0.0, 0.0,
+                                                   fromViewController.view.bounds.size.height, fromViewController.view.bounds.size.width);
+        toViewController.view.frame = CGRectMake(0.0, toViewController.view.bounds.size.width,
+                                                 toViewController.view.bounds.size.height, toViewController.view.bounds.size.width);
         
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
             
-            fromViewController.view.frame = CGRectMake(fromViewController.view.bounds.size.width, 0.0, fromViewController.view.bounds.size.width, fromViewController.view.bounds.size.height);
-            toViewController.view.frame = CGRectMake(0.0, 0.0, toViewController.view.bounds.size.width, toViewController.view.bounds.size.height);
+            fromViewController.view.frame = CGRectMake(0.0, -fromViewController.view.bounds.size.width,
+                                                       fromViewController.view.bounds.size.height, fromViewController.view.bounds.size.width);
+            toViewController.view.frame = CGRectMake(0.0, 0.0,
+                                                     toViewController.view.bounds.size.height, toViewController.view.bounds.size.width);
             
         } completion:^(BOOL finished) {
             
@@ -66,13 +73,18 @@
         [transitionContext.containerView addSubview:fromViewController.view];
         [transitionContext.containerView addSubview:toViewController.view];
         
-        fromViewController.view.frame = CGRectMake(0.0, 0.0, fromViewController.view.bounds.size.width, fromViewController.view.bounds.size.height);
-        toViewController.view.frame = CGRectMake(fromViewController.view.bounds.size.width, 0.0, toViewController.view.bounds.size.width, toViewController.view.bounds.size.height);
+        
+        fromViewController.view.frame = CGRectMake(0.0, 0.0,
+                                                   fromViewController.view.bounds.size.height, fromViewController.view.bounds.size.width);
+        toViewController.view.frame = CGRectMake(0.0, -toViewController.view.bounds.size.width,
+                                                 toViewController.view.bounds.size.height, toViewController.view.bounds.size.width);
         
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
             
-            fromViewController.view.frame = CGRectMake(-fromViewController.view.bounds.size.width, 0.0, fromViewController.view.bounds.size.width, fromViewController.view.bounds.size.height);
-            toViewController.view.frame = CGRectMake(0.0, 0.0, toViewController.view.bounds.size.width, toViewController.view.bounds.size.height);
+            fromViewController.view.frame = CGRectMake(0.0, fromViewController.view.bounds.size.width,
+                                                       fromViewController.view.bounds.size.height, fromViewController.view.bounds.size.width);
+            toViewController.view.frame = CGRectMake(0.0, 0.0,
+                                                     toViewController.view.bounds.size.height, toViewController.view.bounds.size.width);
             
         } completion:^(BOOL finished) {
             

@@ -57,8 +57,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)initialize
 {   
-    self.myStatusHistoryViewController = [[STMyStatusHistoryViewController alloc] initWithNibName:@"STMyStatusHistoryViewController" bundle:nil];
-    [self.myStatusHistoryViewController performFetchWithCachePolicy:kPFCachePolicyCacheThenNetwork];
+    self.myStatusHistoryViewController = [[STMyStatusHistoryViewController alloc] initWithNib];
+    [self.myStatusHistoryViewController performFetch];
 }
 
 - (void)dealloc
@@ -289,9 +289,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 - (void)viewWillDisppear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    self.navigationController.navigationBarHidden = NO;
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 }
 
 #pragma mark - History / New Comments button
@@ -383,20 +380,16 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 {
     JNLog();
     
-//    [self.navigationController pushViewController:self.statusFeedViewController animated:YES];
-//    
-//    return;
-    
     // Capture a still image
     [[self stillButton] setEnabled:NO];
     
     [[self captureManager] captureStillImage];
     
-    // Flash the screen white and fade it out to give UI feedback that a still image was taken
-    UIView *flashView = [[UIView alloc] initWithFrame:[[self videoPreviewView] frame]];
-    [flashView setBackgroundColor:[UIColor whiteColor]];
-    [[[self view] window] addSubview:flashView];
     
+    // Flash the screen white and fade it out to give UI feedback that a still image was taken
+    UIView *flashView = [[UIView alloc] initWithFrame:self.videoPreviewView.frame];
+    flashView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:flashView];
     [UIView animateWithDuration:.4f
                      animations:^{
                          [flashView setAlpha:0.f];
@@ -494,10 +487,9 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)pushToMyStatusHistory
 {
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.myStatusHistoryViewController];
-    navigationController.transitioningDelegate = self;
-    navigationController.modalPresentationStyle = UIModalPresentationCustom;
-    [self.navigationController presentViewController:navigationController animated:YES completion:nil];
+    self.myStatusHistoryViewController.transitioningDelegate = self;
+    self.myStatusHistoryViewController.modalPresentationStyle = UIModalPresentationCustom;
+    [self presentViewController:self.myStatusHistoryViewController animated:YES completion:nil];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
