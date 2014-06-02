@@ -9,6 +9,8 @@
                 <outlet property="cameraButton" destination="ayq-xi-piE" id="Vbr-VC-v75"/>
                 <outlet property="contentView" destination="FOA-wZ-4NP" id="Hy0-8m-D69"/>
                 <outlet property="footerView" destination="5Gl-fw-S5h" id="d29-SE-1xo"/>
+                <outlet property="headerLabel" destination="3ZY-OV-AQh" id="j17-Xc-ac0"/>
+                <outlet property="headerView" destination="n6e-k1-nTS" id="XXI-dQ-ivh"/>
                 <outlet property="settingsButton" destination="dIU-L2-h72" id="WaT-Qr-P0s"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,6 +24,29 @@
                     <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6e-k1-nTS" userLabel="headerView">
+                    <rect key="frame" x="0.0" y="0.0" width="568" height="54"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History + Comments" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ZY-OV-AQh" userLabel="headerLabel">
+                            <rect key="frame" x="20" y="6" width="528" height="26"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="26" id="9sR-ej-slx"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="3ZY-OV-AQh" firstAttribute="top" secondItem="n6e-k1-nTS" secondAttribute="top" constant="6" id="JdZ-JH-x2s"/>
+                        <constraint firstAttribute="trailing" secondItem="3ZY-OV-AQh" secondAttribute="trailing" constant="20" id="dm5-cF-pVH"/>
+                        <constraint firstAttribute="height" constant="54" id="f8i-e0-qxz"/>
+                        <constraint firstItem="3ZY-OV-AQh" firstAttribute="leading" secondItem="n6e-k1-nTS" secondAttribute="leading" constant="20" id="li2-Tw-aea"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Gl-fw-S5h" userLabel="footerView">
                     <rect key="frame" x="0.0" y="266" width="568" height="54"/>
@@ -68,12 +93,15 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="n6e-k1-nTS" secondAttribute="trailing" id="2lh-6q-vd6"/>
                 <constraint firstItem="FOA-wZ-4NP" firstAttribute="leading" secondItem="5Gl-fw-S5h" secondAttribute="leading" id="4ZO-bk-roB"/>
                 <constraint firstAttribute="bottom" secondItem="5Gl-fw-S5h" secondAttribute="bottom" id="88O-rB-3FJ"/>
                 <constraint firstAttribute="trailing" secondItem="FOA-wZ-4NP" secondAttribute="trailing" id="CaQ-Fa-OSa"/>
                 <constraint firstItem="5Gl-fw-S5h" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="HrN-Eb-HZG"/>
                 <constraint firstItem="FOA-wZ-4NP" firstAttribute="bottom" secondItem="5Gl-fw-S5h" secondAttribute="bottom" id="Jbf-7D-QbV"/>
                 <constraint firstItem="FOA-wZ-4NP" firstAttribute="trailing" secondItem="5Gl-fw-S5h" secondAttribute="trailing" id="K4k-AA-5RH"/>
+                <constraint firstItem="n6e-k1-nTS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="U6J-sG-32S"/>
+                <constraint firstItem="n6e-k1-nTS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ULp-gA-OJE"/>
                 <constraint firstItem="FOA-wZ-4NP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XCj-8T-lHz"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>

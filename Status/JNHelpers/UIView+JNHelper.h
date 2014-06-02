@@ -10,7 +10,7 @@
 
 #define kJNDefaultAnimationDuration 0.3
 #define kJNPortraitKeyboardHeight 216.0
-#define kJNPortraitKeyboardHeight 162.0
+#define kJNLandscapeKeyboardHeight 162.0
 
 extern CGFloat const kHBViewAnimationFastDuration;
 

@@ -11,6 +11,7 @@
 #import "UIViewController+JNHelper.h"
 
 #import "JNAlertView.h"
+#import "JNIcon.h"
 
 #import "STStatusFeedViewController.h"
 #import "STStatusFeedTableViewController.h"
@@ -22,17 +23,22 @@
 
 @interface STStatusFeedViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerView;
 @property (weak, nonatomic) IBOutlet UILabel *savingLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewTopConstraint;
-@property (weak, nonatomic) IBOutlet UIButton *footerButton;
+@property (weak, nonatomic) IBOutlet JNViewWithTouchableSubviews *footerView;
+@property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 
 @property (nonatomic, strong) STStatusFeedTableViewController *tableViewController;
 
 @property (nonatomic, strong) NSArray *statuses;
+
+- (IBAction)cameraAction:(id)sender;
 
 @end
 
@@ -62,17 +68,28 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     JNLog();
     self.title = @"Status";
     
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationItem.hidesBackButton = YES;
+//    self.navigationController.navigationBarHidden = NO;
+//    self.navigationItem.hidesBackButton = YES;
     
     [super viewDidLoad];
-
-    [self setupNavigationBar];
+    
+    [self.headerView applyBottomHalfGradientBackgroundWithTopColor:JNBlackColor bottomColor:JNClearColor];
+    self.headerLabel.backgroundColor = JNClearColor;
+    self.headerLabel.textColor = JNWhiteColor;
+    [self.headerLabel applyDarkShadowLayer];
     
     self.tableHeaderView.backgroundColor = JNGrayBackgroundColor;
     self.savingLabel.textColor = JNBlackTextColor;
     self.spinnerView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     self.progressView.progress = 0.0;
+
+    self.footerView.backgroundColor = JNClearColor;
+    
+    [self.cameraButton applyDarkerShadowLayer];
+    
+    FAKIonIcons *cameraIcon = [FAKIonIcons cameraIconWithSize:32.0];
+    [cameraIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+    [self.cameraButton setAttributedTitle:cameraIcon.attributedString forState:UIControlStateNormal];
     
     [self hideTableHeaderViewAnimated:NO];
     
@@ -81,16 +98,6 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     [self addTableViewControllerToContentView];
     
     [self.tableViewController performFetchWithCachePolicy:kPFCachePolicyCacheThenNetwork];
-}
-
-- (void)setupNavigationBar
-{
-    [self applyCameraNavigationButtonWithTarget:self action:@selector(cameraAction:)];
-    
-    [self applyNavigationBarRightButtonWithText:@"feedback"
-                                         target:self
-                                         action:@selector(feedbackAction:)
-                                     edgeInsets:UIEdgeInsetsMake(1.0, -10.0, 0.0, -28.0)];
 }
 
 - (void)setupTableViewController
@@ -142,8 +149,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     JNLog();
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBarHidden = NO;
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     
     [self.tableViewController.tableView scrollRectToVisible:CGRectMake(0.0, 0.0, 1.0, 1.0) animated:NO];
 }
@@ -152,7 +158,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)cameraAction:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)feedbackAction:(id)sender
@@ -173,7 +179,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 {
     STStatusCommentViewController *statusCommentViewController = [[STStatusCommentViewController alloc] initWithNib];
     statusCommentViewController.status = status;
-    [self.navigationController presentViewController:statusCommentViewController animated:YES completion:nil];
+    [self presentViewController:statusCommentViewController animated:YES completion:nil];
 }
 
 - (void)showShareActivityView:(id)sender

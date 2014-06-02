@@ -237,6 +237,7 @@ static NSString *ExtraBottomCellIdentifier = @"ExtraBottomCellIdentifier";
     [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:ExtraBottomCellIdentifier];
     [self.tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:nil] forCellReuseIdentifier:CellIdentifier];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.pagingEnabled = YES;
     
     [self setupRefreshControl];
 }
@@ -333,6 +334,18 @@ static NSString *ExtraBottomCellIdentifier = @"ExtraBottomCellIdentifier";
         
         cell.photoImageURL = [NSURL URLWithString:imageFile.url];
     }
+    
+    // compose action
+    @weakify(self);
+    cell.didTapComposeOnCell = ^(STStatusTableViewCell *cell) {
+        JNLog();
+        NSIndexPath *indexPath = [self_weak_.tableView indexPathForCell:cell];
+        JNLogObject(indexPath);
+        STStatus *status = [self.statuses objectAtIndex:indexPath.row];
+        if (self_weak_.didSelectStatus) {
+            self_weak_.didSelectStatus(status);
+        }
+    };
     
     return cell;
 }

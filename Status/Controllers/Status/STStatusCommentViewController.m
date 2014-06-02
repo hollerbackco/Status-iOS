@@ -78,7 +78,7 @@
     
     [self.huePicker addTarget:self action:@selector(huePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
     
-    self.footerView.backgroundColor = JNBlackColor;
+    self.footerView.backgroundColor = JNClearColor;
     
     self.sendButton.titleLabel.font = [UIFont primaryFontWithSize:20.0];
     self.sendButton.backgroundColor = STGreenButtonBackgroundColor;
@@ -122,15 +122,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 }
 
 #pragma mark - Actions

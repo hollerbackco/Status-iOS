@@ -22,7 +22,7 @@
 #import "STCaptionOverlayViewController.h"
 #import "STStatusFeedViewController.h"
 #import "STMyStatusHistoryViewController.h"
-#import "STRightToLeftTransitionAnimator.h"
+#import "STSlideTransitionAnimator.h"
 #import "STStatus.h"
 
 #define kSTAddCaptionToImageHeightOffset 20.0
@@ -478,7 +478,9 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     JNLog();
     [self setupStatusFeed];
     
-    [self.navigationController pushViewController:self.statusFeedViewController animated:YES];
+    self.statusFeedViewController.transitioningDelegate = self;
+    self.statusFeedViewController.modalPresentationStyle = UIModalPresentationCustom;
+    [self presentViewController:self.statusFeedViewController animated:YES completion:nil];
     
     if (image) {
         [self.statusFeedViewController performCreateStatusWithImage:image];
@@ -510,8 +512,15 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
                                                                    presentingController:(UIViewController *)presenting
                                                                        sourceController:(UIViewController *)source
 {
-    STRightToLeftTransitionAnimator *animator = [STRightToLeftTransitionAnimator new];
+    STSlideTransitionAnimator *animator = [STSlideTransitionAnimator new];
+    
+    if ([presented isKindOfClass:[STMyStatusHistoryViewController class]]) {
+        animator.slideDirection = kSTSlideDirectionLeftToRight;
+    } else {
+        animator.slideDirection = kSTSlideDirectionRightToLeft;
+    }
     animator.presenting = YES;
+    
     return animator;
 }
 
@@ -521,7 +530,14 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     
-    STRightToLeftTransitionAnimator *animator = [STRightToLeftTransitionAnimator new];
+    STSlideTransitionAnimator *animator = [STSlideTransitionAnimator new];
+    
+    if ([dismissed isKindOfClass:[STMyStatusHistoryViewController class]]) {
+        animator.slideDirection = kSTSlideDirectionLeftToRight;
+    } else {
+        animator.slideDirection = kSTSlideDirectionRightToLeft;
+    }
+    
     return animator;
 }
 

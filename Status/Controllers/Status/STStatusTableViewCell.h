@@ -13,5 +13,6 @@
 @property (nonatomic, strong) UIImage *photoImage;
 @property (nonatomic, copy) NSURL *photoImageURL;
 @property (nonatomic, copy) NSString *senderName;
+@property (nonatomic, copy) void(^didTapComposeOnCell)(STStatusTableViewCell *cell);
 
 @end

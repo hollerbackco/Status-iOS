@@ -25,7 +25,7 @@
 		0DAF3E681934109C003E47AD /* STStatusHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF3E661934109C003E47AD /* STStatusHistoryTableViewCell.m */; };
 		0DAF3E691934109C003E47AD /* STStatusHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DAF3E671934109C003E47AD /* STStatusHistoryTableViewCell.xib */; };
 		0DAF3E6C193411B2003E47AD /* STStatusHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF3E6B193411B2003E47AD /* STStatusHistory.m */; };
-		0DAF3E6F19341954003E47AD /* STRightToLeftTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF3E6E19341954003E47AD /* STRightToLeftTransitionAnimator.m */; };
+		0DAF3E6F19341954003E47AD /* STSlideTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF3E6E19341954003E47AD /* STSlideTransitionAnimator.m */; };
 		0DB0BD90192A85C9002F568F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD8F192A85C9002F568F /* Foundation.framework */; };
 		0DB0BD92192A85C9002F568F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD91192A85C9002F568F /* CoreGraphics.framework */; };
 		0DB0BD94192A85C9002F568F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB0BD93192A85C9002F568F /* UIKit.framework */; };
@@ -130,8 +130,8 @@
 		0DAF3E671934109C003E47AD /* STStatusHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STStatusHistoryTableViewCell.xib; path = Controllers/Status/STStatusHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		0DAF3E6A193411B2003E47AD /* STStatusHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusHistory.h; path = Models/STStatusHistory.h; sourceTree = "<group>"; };
 		0DAF3E6B193411B2003E47AD /* STStatusHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusHistory.m; path = Models/STStatusHistory.m; sourceTree = "<group>"; };
-		0DAF3E6D19341954003E47AD /* STRightToLeftTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STRightToLeftTransitionAnimator.h; path = Controllers/Status/STRightToLeftTransitionAnimator.h; sourceTree = "<group>"; };
-		0DAF3E6E19341954003E47AD /* STRightToLeftTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STRightToLeftTransitionAnimator.m; path = Controllers/Status/STRightToLeftTransitionAnimator.m; sourceTree = "<group>"; };
+		0DAF3E6D19341954003E47AD /* STSlideTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STSlideTransitionAnimator.h; path = Controllers/Status/STSlideTransitionAnimator.h; sourceTree = "<group>"; };
+		0DAF3E6E19341954003E47AD /* STSlideTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STSlideTransitionAnimator.m; path = Controllers/Status/STSlideTransitionAnimator.m; sourceTree = "<group>"; };
 		0DB0BD8C192A85C9002F568F /* Status.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Status.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DB0BD8F192A85C9002F568F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0DB0BD91192A85C9002F568F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -447,8 +447,8 @@
 				0DB0BDF3192A9658002F568F /* STCreateStatusViewController.h */,
 				0DB0BDF4192A9658002F568F /* STCreateStatusViewController.m */,
 				0DB0BDF5192A9658002F568F /* STCreateStatusViewController.xib */,
-				0DAF3E6D19341954003E47AD /* STRightToLeftTransitionAnimator.h */,
-				0DAF3E6E19341954003E47AD /* STRightToLeftTransitionAnimator.m */,
+				0DAF3E6D19341954003E47AD /* STSlideTransitionAnimator.h */,
+				0DAF3E6E19341954003E47AD /* STSlideTransitionAnimator.m */,
 				0D641A01192E6A6C002B3FD6 /* STCaptionOverlayViewController.h */,
 				0D641A02192E6A6C002B3FD6 /* STCaptionOverlayViewController.m */,
 				0D641A03192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib */,
@@ -723,7 +723,7 @@
 				0DB0BDED192A9605002F568F /* JNLogger.m in Sources */,
 				0D106F19193CC96F0047796F /* STMyStatusHistoryViewController.m in Sources */,
 				0DB0BE34192AB322002F568F /* AVCamViewController.m in Sources */,
-				0DAF3E6F19341954003E47AD /* STRightToLeftTransitionAnimator.m in Sources */,
+				0DAF3E6F19341954003E47AD /* STSlideTransitionAnimator.m in Sources */,
 				0DB0BE23192AA1CA002F568F /* STSession.m in Sources */,
 				0DB0BDEB192A9605002F568F /* UIView+JNHelper.m in Sources */,
 				0DB0BDE8192A9605002F568F /* UIColor+JNHelper.m in Sources */,

@@ -47,7 +47,8 @@
     self.commentImageView.backgroundColor = JNClearColor;
     self.commentImageView.tintColor = nil;
     
-    [self.footerView applyGradientBackgroundWithTopColor:[JNBlackColor colorWithAlphaComponent:0.6] bottomColor:JNClearColor];
+    [self.footerView applyTopHalfGradientBackgroundWithTopColor:JNClearColor bottomColor:JNBlackColor];
+    self.footerView.layer.masksToBounds = YES;
     
     self.senderNameLabel.textColor = JNWhiteColor;
     self.senderNameLabel.text = nil;

@@ -10,6 +10,8 @@
 #import "UIColor+JNHelper.h"
 #import "UIView+JNHelper.h"
 
+#import "JNIcon.h"
+
 #import "STStatusTableViewCell.h"
 
 @interface STStatusTableViewCell ()
@@ -18,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UILabel *senderNameLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerView;
+@property (weak, nonatomic) IBOutlet UIButton *composeButton;
 
 @end
 
@@ -31,12 +34,18 @@
     self.photoImageView.layer.masksToBounds = YES;
     self.photoImageView.tintColor = nil;
     
-    [self.footerView applyGradientBackgroundWithTopColor:[JNBlackColor colorWithAlphaComponent:0.6] bottomColor:JNClearColor];
+    [self.footerView applyTopHalfGradientBackgroundWithTopColor:JNClearColor bottomColor:JNBlackColor];
+    self.footerView.layer.masksToBounds = YES;
     
     self.senderNameLabel.textColor = JNWhiteColor;
     self.senderNameLabel.text = nil;
     
     self.spinnerView.alpha = 0.0;
+    
+    FAKIonIcons *composeIcon = [FAKIonIcons ios7ComposeOutlineIconWithSize:32.0];
+    [composeIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+    [self.composeButton setAttributedTitle:composeIcon.attributedString forState:UIControlStateNormal];
+    [self.composeButton addTarget:self action:@selector(composeAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)prepareForReuse
@@ -90,6 +99,15 @@
         }];
         [self.spinnerView stopAnimating];
     }];
+}
+
+#pragma mark - Actions
+
+- (void)composeAction:(id)sender
+{
+    if (self.didTapComposeOnCell) {
+        self.didTapComposeOnCell(self);
+    }
 }
 
 @end

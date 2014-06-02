@@ -14,6 +14,8 @@
 @interface STMyStatusHistoryViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
@@ -44,15 +46,22 @@
 {
     [super viewDidLoad];
     
-    [self.footerView applyTopHalfGradientBackgroundWithTopColor:JNClearColor bottomColor:JNBlackColor];
+    [self.headerView applyBottomHalfGradientBackgroundWithTopColor:JNBlackColor bottomColor:JNClearColor];
+    self.headerLabel.backgroundColor = JNClearColor;
+    self.headerLabel.textColor = JNWhiteColor;
+    [self.headerLabel applyDarkShadowLayer];
+    
+    self.footerView.backgroundColor = JNClearColor;
     
     FAKIonIcons *cameraIcon = [FAKIonIcons cameraIconWithSize:32.0];
     [cameraIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.cameraButton setAttributedTitle:cameraIcon.attributedString forState:UIControlStateNormal];
+    [self.cameraButton applyDarkerShadowLayer];
     
     FAKIonIcons *gearIcon = [FAKIonIcons gearBIconWithSize:32.0];
     [gearIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.settingsButton setAttributedTitle:gearIcon.attributedString forState:UIControlStateNormal];
+    [self.settingsButton applyDarkerShadowLayer];
     
     [self setupTableView];
 }
