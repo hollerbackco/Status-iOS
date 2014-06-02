@@ -91,6 +91,7 @@
     self.captionTextView.typingAttributes = [self.class attributesForCaptionText];
     self.captionTextView.returnKeyType = UIReturnKeyDone;
     self.captionTextView.alpha = 0.0;
+    self.captionTextView.textContainerInset = UIEdgeInsetsMake(0.0, kSTCaptionTextViewHorizontalPadding, 0.0, kSTCaptionTextViewHorizontalPadding);
 }
 
 #pragma mark - Actions
@@ -124,6 +125,10 @@
     }];
     
     self.captionTextView.spellCheckingType = UITextSpellCheckingTypeDefault;
+    
+    if (self.didBeingEditing) {
+        self.didBeingEditing();
+    }
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
@@ -142,6 +147,10 @@
     self.captionTextView.backgroundColor = JNClearColor;
     
     self.captionTextView.spellCheckingType = UITextSpellCheckingTypeNo;
+    
+    if (self.didEndEditing) {
+        self.didEndEditing();
+    }
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
@@ -176,6 +185,9 @@
     
     if (textView.bounds.size.height != textView.contentSize.height) {
         
+//        JNLogRect(textView.bounds);
+//        JNLogSize(textView.contentSize);
+        
         [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextView duration:kJNDefaultAnimationDuration animations:^{
             
             self.captionTextView.frame = CGRectSetHeight(self.captionTextView.frame, textView.contentSize.height);
@@ -188,15 +200,14 @@
 {
     CGRect rect =
     [text
-     boundingRectWithSize:CGSizeMake(textView.bounds.size.width, MAXFLOAT)
+     boundingRectWithSize:CGSizeMake(textView.bounds.size.width - 2 * kSTCaptionTextViewHorizontalPadding, MAXFLOAT)
      options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
      attributes:attributes
      context:nil];
     
-//    JNLog(@"textView.contentSize.height: %f textView.bounds.size.height: %f", textView.contentSize.height, textView.bounds.size.height);
 //    JNLogRect(rect);
     
-    if (ceilf(rect.size.height) > kSTCaptionTextViewMaxTextSizeHeight) {
+    if (ceilf(rect.size.height) >= kSTCaptionTextViewMaxTextSizeHeight) {
         
         return YES;
     }
@@ -211,13 +222,7 @@
 
         [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.captionTextView duration:kJNDefaultAnimationDuration animations:^{
             
-            if ([JNAppManager is3_5InchScreenSize]) {
-                
-                self.captionTextViewBottomSpacingConstraint.constant = kSTCaptionTextViewBottomSpacingConstraint - kSTCaptionTextViewBottomSpacingConstraintOffset3_5;
-            } else {
-                
-                self.captionTextViewBottomSpacingConstraint.constant = kSTCaptionTextViewBottomSpacingConstraint - kSTCaptionTextViewBottomSpacingConstraintOffset;
-            }
+            self.captionTextViewBottomSpacingConstraint.constant = self.view.bounds.size.height/2 - textView.bounds.size.height/2;
             
         } completion:^(BOOL finished) {
             ;

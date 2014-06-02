@@ -9,6 +9,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <NSNotificationCenter+RACSupport.h>
+#import "RACEXTScope.h"
 
 #import "AVCamViewController.h"
 #import "AVCamCaptureManager.h"
@@ -404,7 +405,18 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 {
     JNLog();
     if (self.captionOverlayViewController) {
+        
         [self.captionOverlayViewController captionAction:sender];
+        
+        @weakify(self);
+        self.captionOverlayViewController.didBeingEditing = ^() {
+        };
+        
+        self.captionOverlayViewController.didEndEditing = ^() {
+            [self_weak_.view bringSubviewToFront:self_weak_.stillButton];
+            [self_weak_.view bringSubviewToFront:self_weak_.headerView];
+            [self_weak_.view bringSubviewToFront:self_weak_.footerView];
+        };
     }
 }
 

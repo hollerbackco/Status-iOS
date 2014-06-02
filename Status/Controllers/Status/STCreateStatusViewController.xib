@@ -29,7 +29,7 @@
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BV8-pv-gJL" userLabel="toggleFlashButton">
-                    <rect key="frame" x="10" y="64" width="44" height="44"/>
+                    <rect key="frame" x="514" y="64" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="3Ta-tk-pFl"/>
@@ -76,6 +76,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="ruH-R1-2Ig" secondAttribute="bottom" id="18j-MW-Tg0"/>
+                        <constraint firstAttribute="height" constant="54" id="KAE-Me-GSC"/>
                         <constraint firstItem="Q4e-Xd-ABO" firstAttribute="top" secondItem="ruH-R1-2Ig" secondAttribute="top" id="bZA-fj-C5z"/>
                         <constraint firstAttribute="trailing" secondItem="ruH-R1-2Ig" secondAttribute="trailing" id="hae-EZ-D77"/>
                         <constraint firstItem="Q4e-Xd-ABO" firstAttribute="leading" secondItem="nRj-Vw-dZo" secondAttribute="leading" id="sow-lt-I4H"/>
@@ -84,10 +85,11 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQu-dY-HgZ" userLabel="stillButton">
-                    <rect key="frame" x="10" y="120" width="68" height="68"/>
+                    <rect key="frame" x="10" y="126" width="68" height="68"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="68" id="yvt-3w-kw3"/>
+                        <constraint firstAttribute="width" constant="68" id="9Lh-gb-EJc"/>
+                        <constraint firstAttribute="height" constant="68" id="GS4-On-wxw"/>
                     </constraints>
                     <state key="normal" image="camera-button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -131,6 +133,7 @@
                     <constraints>
                         <constraint firstItem="K3E-Pa-cbR" firstAttribute="top" secondItem="928-8f-mlT" secondAttribute="top" id="4c8-yG-q4j"/>
                         <constraint firstAttribute="bottom" secondItem="K3E-Pa-cbR" secondAttribute="bottom" id="6OB-eI-FSb"/>
+                        <constraint firstAttribute="height" constant="54" id="F8E-kf-NO1"/>
                         <constraint firstItem="gF2-l7-LA6" firstAttribute="top" secondItem="K3E-Pa-cbR" secondAttribute="top" id="GdC-4M-wmB"/>
                         <constraint firstItem="K3E-Pa-cbR" firstAttribute="leading" secondItem="928-8f-mlT" secondAttribute="leading" id="TWM-Xl-9mX"/>
                         <constraint firstAttribute="trailing" secondItem="gF2-l7-LA6" secondAttribute="trailing" id="tDC-8Z-qAu"/>
@@ -143,18 +146,16 @@
                 <constraint firstItem="lfG-5D-TfC" firstAttribute="leading" secondItem="nRj-Vw-dZo" secondAttribute="leading" id="2Jy-tN-2nd"/>
                 <constraint firstItem="BV8-pv-gJL" firstAttribute="top" secondItem="nRj-Vw-dZo" secondAttribute="bottom" constant="10" id="48t-qC-uBt"/>
                 <constraint firstItem="nRj-Vw-dZo" firstAttribute="top" secondItem="lfG-5D-TfC" secondAttribute="top" id="4Kb-AF-2lo"/>
-                <constraint firstItem="928-8f-mlT" firstAttribute="top" secondItem="HQu-dY-HgZ" secondAttribute="bottom" constant="78" id="4fr-AK-aAc"/>
                 <constraint firstAttribute="bottom" secondItem="lfG-5D-TfC" secondAttribute="bottom" id="69d-TW-E5y"/>
-                <constraint firstItem="BV8-pv-gJL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="7Q5-Ad-1QD"/>
-                <constraint firstItem="HQu-dY-HgZ" firstAttribute="top" secondItem="nRj-Vw-dZo" secondAttribute="bottom" constant="66" id="GXV-jv-v5b"/>
-                <constraint firstItem="BV8-pv-gJL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="QnI-Rm-Y4P"/>
+                <constraint firstItem="HQu-dY-HgZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Ivd-6f-bwu"/>
                 <constraint firstAttribute="trailing" secondItem="lfG-5D-TfC" secondAttribute="trailing" id="RdS-sc-MfU"/>
                 <constraint firstItem="lfG-5D-TfC" firstAttribute="trailing" secondItem="nRj-Vw-dZo" secondAttribute="trailing" id="SXH-dS-8Ij"/>
+                <constraint firstAttribute="centerY" secondItem="HQu-dY-HgZ" secondAttribute="centerY" id="WLF-5d-k7I"/>
                 <constraint firstItem="928-8f-mlT" firstAttribute="bottom" secondItem="lfG-5D-TfC" secondAttribute="bottom" id="a47-bD-c5y"/>
                 <constraint firstItem="928-8f-mlT" firstAttribute="trailing" secondItem="lfG-5D-TfC" secondAttribute="trailing" id="gvP-7U-6Xm"/>
-                <constraint firstAttribute="trailing" secondItem="HQu-dY-HgZ" secondAttribute="trailing" constant="490" id="iGU-vV-S2H"/>
                 <constraint firstItem="928-8f-mlT" firstAttribute="leading" secondItem="lfG-5D-TfC" secondAttribute="leading" id="mZj-At-ApD"/>
                 <constraint firstItem="lfG-5D-TfC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="oKs-Gk-eiz"/>
+                <constraint firstAttribute="trailing" secondItem="BV8-pv-gJL" secondAttribute="trailing" constant="10" id="pOp-1Z-FxJ"/>
                 <constraint firstItem="nRj-Vw-dZo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="x8u-cJ-2j1"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>

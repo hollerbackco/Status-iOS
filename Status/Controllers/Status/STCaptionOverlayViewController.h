@@ -8,13 +8,16 @@
 
 #import "JNViewController.h"
 
-#define kSTCaptionTextViewBottomSpacingConstraint 224.0
+#define kSTCaptionTextViewHorizontalPadding 78.0
+#define kSTCaptionTextViewBottomSpacingConstraint 162.0
 #define kSTCaptionTextViewBottomSpacingConstraintOffset 94.0
 #define kSTCaptionTextViewBottomSpacingConstraintOffset3_5 138.0
-#define kSTCaptionTextViewMaxTextSizeHeight 198.0
+#define kSTCaptionTextViewMaxTextSizeHeight 164.0
 
 @interface STCaptionOverlayViewController : JNViewController
 
+@property (nonatomic, copy) void(^didBeingEditing)();
+@property (nonatomic, copy) void(^didEndEditing)();
 @property (nonatomic, copy) void(^didEnterCaptionBlock)(NSString *caption);
 
 #pragma mark - Captions
