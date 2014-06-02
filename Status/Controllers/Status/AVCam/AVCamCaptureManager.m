@@ -191,7 +191,7 @@
 	
     // Init the device inputs
     AVCaptureDeviceInput *newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self frontFacingCamera] error:nil];
-    AVCaptureDeviceInput *newAudioInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self audioDevice] error:nil];
+//    AVCaptureDeviceInput *newAudioInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self audioDevice] error:nil];
     
 	
     // Setup the still image file output
@@ -223,9 +223,9 @@
         }
     }
     
-    if ([newCaptureSession canAddInput:newAudioInput]) {
-        [newCaptureSession addInput:newAudioInput];
-    }
+//    if ([newCaptureSession canAddInput:newAudioInput]) {
+//        [newCaptureSession addInput:newAudioInput];
+//    }
     
     if ([newCaptureSession canAddOutput:newStillImageOutput]) {
         [newCaptureSession addOutput:newStillImageOutput];
@@ -233,12 +233,12 @@
     
     [self setStillImageOutput:newStillImageOutput];
     [self setVideoInput:newVideoInput];
-    [self setAudioInput:newAudioInput];
+//    [self setAudioInput:newAudioInput];
     [self setSession:newCaptureSession];
     
     [newStillImageOutput release];
     [newVideoInput release];
-    [newAudioInput release];
+//    [newAudioInput release];
     [newCaptureSession release];
     
 	// Set up the movie file output
@@ -501,6 +501,8 @@ bail:
 - (void)deviceOrientationDidChange
 {	
 	UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
+    
+    JNLogPrimitive(deviceOrientation);
     
 	if (deviceOrientation == UIDeviceOrientationPortrait)
 		orientation = AVCaptureVideoOrientationPortrait;
