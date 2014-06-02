@@ -27,12 +27,12 @@ CGFloat const kHBViewAnimationFastDuration = 0.3;
 
 + (void)animateWithBlock:(void (^)(void))animations
 {
-    [UIView animateWithDuration:UINavigationControllerHideShowBarDuration animations:animations];
+    [UIView animateWithDuration:kJNDefaultAnimationDuration animations:animations];
 }
 
 + (void)animateWithBlock:(void (^)(void))animations completion:(void (^)(BOOL finished))completion
 {
-    [UIView animateWithDuration:UINavigationControllerHideShowBarDuration animations:animations completion:completion];
+    [UIView animateWithDuration:kJNDefaultAnimationDuration animations:animations completion:completion];
 }
 
 + (void)animateLayoutConstraintsWithContainerView:(UIView*)containerView

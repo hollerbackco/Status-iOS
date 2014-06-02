@@ -121,7 +121,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)showTableHeaderViewAnimated:(BOOL)animated
 {
-    CGFloat duration = animated ? UINavigationControllerHideShowBarDuration : 0.0;
+    CGFloat duration = animated ? kJNDefaultAnimationDuration : 0.0;
     [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.tableHeaderView duration:duration animations:^{
         self.headerViewTopConstraint.constant = 0.0;
     }];
@@ -131,7 +131,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
 - (void)hideTableHeaderViewAnimated:(BOOL)animated
 {
-    CGFloat duration = animated ? UINavigationControllerHideShowBarDuration : 0.0;
+    CGFloat duration = animated ? kJNDefaultAnimationDuration : 0.0;
     [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.tableHeaderView duration:duration animations:^{
         self.headerViewTopConstraint.constant = -self.tableHeaderView.frame.size.height;
     }];

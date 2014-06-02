@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define kJNDefaultAnimationDuration 0.3
+
 extern CGFloat const kHBViewAnimationFastDuration;
 
 typedef void(^HBViewComplete)(BOOL finished);

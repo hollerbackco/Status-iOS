@@ -46,7 +46,7 @@
         // Do the login
         [[STSession sharedInstance] login:self];
         
-    } afterDelay:UINavigationControllerHideShowBarDuration];
+    } afterDelay:kJNDefaultAnimationDuration];
 }
 
 #pragma mark - STSessionDelegate
