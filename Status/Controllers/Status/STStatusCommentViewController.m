@@ -25,7 +25,6 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
 @property (weak, nonatomic) IBOutlet ACEDrawingView *drawingView;
-@property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 
 @property (nonatomic, strong) UIColor *drawingLineColor;
@@ -48,7 +47,7 @@
     
     self.view.backgroundColor = JNBlackColor;
     
-    self.headerView.backgroundColor = JNClearColor;
+    [self.headerView applyBottomHalfGradientBackgroundWithTopColor:JNBlackColor bottomColor:JNClearColor];
     
     [self.cancelButton setTitle:nil forState:UIControlStateNormal];
     FAKIonIcons *closeIcon = [FAKIonIcons closeIconWithSize:28.0];
@@ -80,11 +79,10 @@
     
     [self.huePicker addTarget:self action:@selector(huePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
     
-    self.footerView.backgroundColor = JNClearColor;
-    
-    self.sendButton.titleLabel.font = [UIFont primaryFontWithSize:20.0];
-    self.sendButton.backgroundColor = STGreenButtonBackgroundColor;
+    self.sendButton.titleLabel.font = [UIFont primaryFontWithSize:15.0];
+    self.sendButton.backgroundColor = [STGreenButtonBackgroundColor colorWithAlphaComponent:0.5];;
     [self.sendButton setTitleColor:JNWhiteColor forState:UIControlStateNormal];
+    self.sendButton.layer.cornerRadius = 8.0;
     [STStatus object:self.status fetchSenderNameCompleted:^(NSString *senderName) {
         
         self.sendToButtonText = [NSString stringWithFormat:@"Send privately to %@", senderName];
@@ -170,7 +168,7 @@
     if (!self.sendSpinnerView) {
         self.sendSpinnerView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         self.sendSpinnerView.center = self.sendButton.center;
-        [self.footerView addSubview:self.sendSpinnerView];
+        [self.view addSubview:self.sendSpinnerView];
     }
     
     [self.sendSpinnerView startAnimating];
