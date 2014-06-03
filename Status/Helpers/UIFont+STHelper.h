@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define kSTCaptionFontName @"Avenir-Medium"
+#define kSTCaptionFontName @"Gotham Rounded"
 #define kSTCaptionFontSize 30.0
 
 #import "UIFont+JNHelper.h"
