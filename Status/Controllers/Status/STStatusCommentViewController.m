@@ -51,14 +51,16 @@
     self.headerView.backgroundColor = JNClearColor;
     
     [self.cancelButton setTitle:nil forState:UIControlStateNormal];
-    FAKIonIcons *icon = [FAKIonIcons closeIconWithSize:28.0];
-    [icon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
-    [self.cancelButton setAttributedTitle:icon.attributedString forState:UIControlStateNormal];
+    FAKIonIcons *closeIcon = [FAKIonIcons closeIconWithSize:28.0];
+    [closeIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+    [self.cancelButton setAttributedTitle:closeIcon.attributedString forState:UIControlStateNormal];
+    [self.cancelButton applyDarkerShadowLayer];
     
     [self.undoButton setTitle:nil forState:UIControlStateNormal];
     FAKIonIcons *undoIcon = [FAKIonIcons refreshbeforeionRefreshingIconWithSize:28.0];
     [undoIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.undoButton setAttributedTitle:undoIcon.attributedString forState:UIControlStateNormal];
+    [self.undoButton applyDarkerShadowLayer];
     
     self.undoButton.alpha = 0.0;
     

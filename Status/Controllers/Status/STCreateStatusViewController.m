@@ -225,6 +225,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     [self.stillButton setImage:[UIImage imageNamed:@"camera-button.png"] forState:UIControlStateNormal];
     self.stillButton.tintColor = nil;
+    [self.stillButton applyDarkerShadowLayer];
     
     [self.headerView applyBottomHalfGradientBackgroundWithTopColor:JNBlackColor bottomColor:JNClearColor];
     
@@ -233,10 +234,12 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     FAKIonIcons *captionIcon = [FAKIonIcons ios7ComposeOutlineIconWithSize:32.0];
     [captionIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.captionButton setAttributedTitle:captionIcon.attributedString forState:UIControlStateNormal];
+    [self.captionButton applyDarkerShadowLayer];
     
     FAKIonIcons *homeIcon = [FAKIonIcons homeIconWithSize:32.0];
     [homeIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.feedButton setAttributedTitle:homeIcon.attributedString forState:UIControlStateNormal];
+    [self.feedButton applyDarkerShadowLayer];
     
     [self setupCaptionOverlay];
     
@@ -317,6 +320,9 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [historyIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.historyButton setAttributedTitle:historyIcon.attributedString forState:UIControlStateNormal];
     self.historyButton.layer.shadowRadius = 0.0;
+    self.historyButton.layer.shadowRadius = 0.0;
+    self.historyButton.layer.shadowColor = JNClearColor.CGColor;
+    [self.historyButton applyDarkerShadowLayer];
 }
 
 - (void)setupNewCommentsButton

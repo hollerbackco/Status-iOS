@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import <FAKIonIcons.h>
+#import <FAKFontAwesome.h>
 
 @interface JNIcon : NSObject
 

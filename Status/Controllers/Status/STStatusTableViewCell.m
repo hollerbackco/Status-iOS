@@ -42,10 +42,11 @@
     
     self.spinnerView.alpha = 0.0;
     
-    FAKIonIcons *composeIcon = [FAKIonIcons ios7ComposeOutlineIconWithSize:32.0];
-    [composeIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
-    [self.composeButton setAttributedTitle:composeIcon.attributedString forState:UIControlStateNormal];
+    FAKFontAwesome *pencilIcon = [FAKFontAwesome pencilIconWithSize:28.0];
+    [pencilIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
+    [self.composeButton setAttributedTitle:pencilIcon.attributedString forState:UIControlStateNormal];
     [self.composeButton addTarget:self action:@selector(composeAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.composeButton applyDarkerShadowLayer];
 }
 
 - (void)prepareForReuse
