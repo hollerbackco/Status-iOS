@@ -28,7 +28,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *nextCommentButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *nextCommentSpinnerView;
 
-@property (nonatomic, copy) NSString *originalStatusCommentSenderName;
 @property (nonatomic) NSInteger statusCommentsCurrentIndex;
 
 @end
@@ -214,7 +213,7 @@
         } completion:^(BOOL finished) {
             
             self.commentImageView.image = nil;
-            self.senderName = self.originalStatusCommentSenderName;
+            self.senderName = nil;
             
             [UIView animateWithBlock:^{
                 
@@ -289,9 +288,6 @@
              self_weak_.commentImageView.image = image;
              self_weak_.commentImageView.alpha = 0.0;
              
-             if (!self_weak_.originalStatusCommentSenderName) {
-                 self_weak_.originalStatusCommentSenderName = self_weak_.senderNameLabel.text;
-             }
              self_weak_.senderName = [NSString stringWithFormat:@"By %@", statusComment[@"senderName"]];
              self_weak_.senderNameLabel.alpha = 0.0;
              
