@@ -26,11 +26,11 @@
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
-@property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
+@property (weak, nonatomic) IBOutlet UIView *savingBarView;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerView;
 @property (weak, nonatomic) IBOutlet UILabel *savingLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *savingBarViewTopConstraint;
 @property (weak, nonatomic) IBOutlet JNViewWithTouchableSubviews *footerView;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 
@@ -74,11 +74,12 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     [super viewDidLoad];
     
     [self.headerView applyBottomHalfGradientBackgroundWithTopColor:JNBlackColor bottomColor:JNClearColor];
+    self.headerView.layer.masksToBounds = YES;
     self.headerLabel.backgroundColor = JNClearColor;
     self.headerLabel.textColor = JNWhiteColor;
     [self.headerLabel applyDarkShadowLayer];
     
-    self.tableHeaderView.backgroundColor = JNGrayBackgroundColor;
+    self.savingBarView.backgroundColor = JNGrayBackgroundColor;
     self.savingLabel.textColor = JNBlackTextColor;
     self.spinnerView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     self.progressView.progress = 0.0;
@@ -91,7 +92,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     [cameraIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.cameraButton setAttributedTitle:cameraIcon.attributedString forState:UIControlStateNormal];
     
-    [self hideTableHeaderViewAnimated:NO];
+    [self hideSavingBarViewAnimated:NO];
     
     [self setupTableViewController];
     
@@ -126,21 +127,21 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     [self.contentView addSubview:self.tableViewController.view];
 }
 
-- (void)showTableHeaderViewAnimated:(BOOL)animated
+- (void)showSavingBarViewAnimated:(BOOL)animated
 {
     CGFloat duration = animated ? kJNDefaultAnimationDuration : 0.0;
-    [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.tableHeaderView duration:duration animations:^{
-        self.headerViewTopConstraint.constant = 0.0;
+    [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.savingBarView duration:duration animations:^{
+        self.savingBarViewTopConstraint.constant = 0.0;
     }];
 
     self.spinnerView.alpha = 0.0;
 }
 
-- (void)hideTableHeaderViewAnimated:(BOOL)animated
+- (void)hideSavingBarViewAnimated:(BOOL)animated
 {
     CGFloat duration = animated ? kJNDefaultAnimationDuration : 0.0;
-    [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.tableHeaderView duration:duration animations:^{
-        self.headerViewTopConstraint.constant = -self.tableHeaderView.frame.size.height;
+    [UIView animateLayoutConstraintsWithContainerView:self.view childView:self.savingBarView duration:duration animations:^{
+        self.savingBarViewTopConstraint.constant = -self.savingBarView.frame.size.height;
     }];
 }
 
@@ -193,11 +194,11 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
                                       applicationActivities:nil];
     
     activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop,UIActivityTypePostToFlickr, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo, UIActivityTypePostToWeibo];
-
-    [self.navigationController presentViewController:activityViewController
-                                       animated:YES
-                                     completion:^{
-                                     }];
+    
+    [self presentViewController:activityViewController
+                       animated:YES
+                     completion:^{
+                     }];
 }
 
 #pragma mark - Create Status
@@ -205,7 +206,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 - (void)performCreateStatusWithImage:(UIImage*)image
 {
     JNLog();
-    [self showTableHeaderViewAnimated:YES];
+    [self showSavingBarViewAnimated:YES];
     
     self.savingLabel.text = @"Saving...";
     self.progressView.progress = 0.0;
@@ -335,7 +336,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
         self.spinnerView.alpha = 0.0;
     }];
     
-    [self hideTableHeaderViewAnimated:YES];
+    [self hideSavingBarViewAnimated:YES];
 }
 
 @end

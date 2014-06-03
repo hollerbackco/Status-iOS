@@ -366,14 +366,6 @@ static NSString *ExtraBottomCellIdentifier = @"ExtraBottomCellIdentifier";
         if (self.didTapShowShareActivityBlock) {
             self.didTapShowShareActivityBlock();
         }
-        
-    } else {
-    
-        if (self.didSelectStatus) {
-            
-            STStatus *status = [self.statuses objectAtIndex:indexPath.row];
-            self.didSelectStatus(status);
-        }
     }
 }
 
