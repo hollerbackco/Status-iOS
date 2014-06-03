@@ -88,6 +88,8 @@
         
         [self showCreateStatusAsRootViewController:NO];
         
+        [[STSession sharedInstance] setValue:@(NO) forKey:kSTSessionStoreHasCreatedStatus];
+        
     } else {
         
         self.shouldRestartCreateStatus = NO;

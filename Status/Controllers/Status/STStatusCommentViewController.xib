@@ -32,7 +32,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUc-FI-2KO" userLabel="drawingView" customClass="ACEDrawingView">
-                            <rect key="frame" x="0.0" y="54" width="568" height="266"/>
+                            <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -40,7 +40,7 @@
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="2LN-rn-sTL" secondAttribute="trailing" id="0sm-wM-4vJ"/>
-                        <constraint firstItem="uUc-FI-2KO" firstAttribute="top" secondItem="xGJ-Sh-50R" secondAttribute="top" constant="54" id="D92-7e-R6d"/>
+                        <constraint firstItem="uUc-FI-2KO" firstAttribute="top" secondItem="xGJ-Sh-50R" secondAttribute="top" id="D92-7e-R6d"/>
                         <constraint firstItem="uUc-FI-2KO" firstAttribute="trailing" secondItem="2LN-rn-sTL" secondAttribute="trailing" id="Qa5-tJ-bX8"/>
                         <constraint firstItem="uUc-FI-2KO" firstAttribute="leading" secondItem="2LN-rn-sTL" secondAttribute="leading" id="R3j-nR-nTW"/>
                         <constraint firstAttribute="bottom" secondItem="uUc-FI-2KO" secondAttribute="bottom" id="jog-l2-Phn"/>

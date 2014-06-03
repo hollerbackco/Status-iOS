@@ -57,6 +57,7 @@
 // Key Value store keys
 
 #define kSTSessionStoreHasNewComments @"kSTSessionStoreHasNewComments"
+#define kSTSessionStoreHasCreatedStatus @"kSTSessionStoreHasCreatedStatus"
 
 
 

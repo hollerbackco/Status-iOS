@@ -241,6 +241,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self.feedButton setAttributedTitle:homeIcon.attributedString forState:UIControlStateNormal];
     [self.feedButton applyDarkerShadowLayer];
     
+    self.feedButton.alpha = 0.0;
+    
     [self setupCaptionOverlay];
     
     [self setupToggleFlash];
@@ -532,7 +534,20 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
 {
+    [self resetCreateStatus];
+    
     [self toggleHistoryButton];
+    
+    NSNumber *hasCreatedStatus = [[STSession sharedInstance] getValueForKey:kSTSessionStoreHasCreatedStatus];
+    if (hasCreatedStatus.boolValue) {
+        [UIView animateWithBlock:^{
+            self.feedButton.alpha = 1.0;
+        }];
+    } else {
+        [UIView animateWithBlock:^{
+            self.feedButton.alpha = 0.0;
+        }];
+    }
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     

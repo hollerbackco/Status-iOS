@@ -320,6 +320,9 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
          });
          
      }];
+    
+    // set session var
+    [[STSession sharedInstance] setValue:@(YES) forKey:kSTSessionStoreHasCreatedStatus];
 }
 
 - (void)didCreateStatus:(STStatus*)status
