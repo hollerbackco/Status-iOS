@@ -116,7 +116,9 @@
     if (self.shouldRestartCreateStatus) {
         self.shouldRestartCreateStatus = NO;
         
-        [((STCreateStatusViewController*) self.statusNavigationController.topViewController) setupCamera];
+        if ([self.window.rootViewController isKindOfClass:[STCreateStatusViewController class]]) {
+            [((STCreateStatusViewController*) self.window.rootViewController) setupCamera];
+        }
     }
     
     [STAppManager checkForUpdates];
