@@ -66,6 +66,12 @@
     }
 }
 
+- (void)endGeneratingDeviceOrientationNotifications
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+	[[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+}
+
 - (void)deviceOrientationDidChange
 {
     self.orientation = [self currentCaptureVideoOrientation];

@@ -16,6 +16,8 @@
 
 - (void)beginGeneratingDeviceOrientationNotificationsCompleted:(void(^)())completed;
 
+- (void)endGeneratingDeviceOrientationNotifications;
+
 - (BOOL)isCorrectDeviceOrientation;
 
 - (BOOL)isDeviceOrientationLandscapeLeft;

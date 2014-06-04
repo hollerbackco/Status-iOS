@@ -95,6 +95,9 @@
         
         self.shouldRestartCreateStatus = NO;
     }
+    
+    // end device orientation observing
+    [[STOrientationManager sharedInstance] endGeneratingDeviceOrientationNotifications];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -129,16 +132,18 @@
     [STLogger sendDailyLog];
     
     // store the current user if not exist
-//    JNLogObject([PFUser currentUser]);
-    if ([PFUser currentUser]) {
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        JNLogObject(currentUser.objectId);
         PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-        JNLogObject(currentInstallation[@"user"]);
+        JNLogObject(currentInstallation.objectId);
         if (!currentInstallation[@"user"]) {
-            currentInstallation[@"user"] = [PFUser currentUser];
+            currentInstallation[@"user"] = currentUser;
         }
         [currentInstallation saveInBackground];
     }
     
+    // start device orientation observing
     [[STOrientationManager sharedInstance] beginGeneratingDeviceOrientationNotificationsCompleted:nil];
 }
 
