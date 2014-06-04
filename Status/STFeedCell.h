@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+
+extern NSString * STFeedCellIdent;
+extern const CGSize STFeedCellSize;
 
 @interface STFeedCell : UICollectionViewCell
+
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, copy) NSString *imageURL;
 
 @end
