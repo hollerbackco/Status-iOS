@@ -10,6 +10,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <NSNotificationCenter+RACSupport.h>
 #import "RACEXTScope.h"
+#import "UIImage+JNHelper.h"
 
 #import "AVCamViewController.h"
 #import "AVCamCaptureManager.h"
@@ -18,8 +19,8 @@
 
 #import "JNIcon.h"
 
+#import "STMovableTextOverlay.h"
 #import "STCreateStatusViewController.h"
-#import "STCaptionOverlayViewController.h"
 #import "STStatusFeedViewController.h"
 #import "STMyStatusHistoryViewController.h"
 #import "STSlideTransitionAnimator.h"
@@ -32,11 +33,11 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 @interface STCreateStatusViewController () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) STCaptionOverlayViewController *captionOverlayViewController;
+@property (nonatomic, strong) STMovableTextOverlay *textOverlay;
 @property (nonatomic, strong) STStatusFeedViewController *statusFeedViewController;
 @property (nonatomic, strong) STMyStatusHistoryViewController *myStatusHistoryViewController;
-
 @property (nonatomic, strong) RACDisposable *aNewCommentObserverDisposable;
+
 @end
 
 @interface STCreateStatusViewController (InternalMethods)
@@ -71,7 +72,11 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)resetCreateStatus
 {
-    [self.captionOverlayViewController resetCaption];
+    if (self.textOverlay) {
+        
+        [self.textOverlay removeFromSuperview];
+        self.textOverlay = nil;
+    }
     
     if ([self.captureManager getDevicePosition] == AVCaptureDevicePositionBack) {
         [self.captureManager toggleCamera];
@@ -243,8 +248,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     self.feedButton.alpha = 0.0;
     
-    [self setupCaptionOverlay];
-    
     [self setupToggleFlash];
     
     [self setupStatusFeed];
@@ -252,16 +255,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self.statusFeedViewController performFetch];
     
     [self observeNewCommentsNotification];
-}
-
-- (void)setupCaptionOverlay
-{
-    if (!self.captionOverlayViewController) {
-        self.captionOverlayViewController = [[STCaptionOverlayViewController alloc] initWithNib];
-        [self addChildViewController:self.captionOverlayViewController];
-        self.captionOverlayViewController.view.frame = self.view.bounds;
-        [self.view addSubview:self.captionOverlayViewController.view];
-    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -412,20 +405,26 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 - (IBAction)captionAction:(id)sender
 {
     JNLog();
-    if (self.captionOverlayViewController) {
+    
+    if (!self.textOverlay) {
         
-        [self.captionOverlayViewController captionAction:sender];
-        
-        @weakify(self);
-        self.captionOverlayViewController.didBeingEditing = ^() {
-        };
-        
-        self.captionOverlayViewController.didEndEditing = ^() {
-            [self_weak_.view bringSubviewToFront:self_weak_.stillButton];
-            [self_weak_.view bringSubviewToFront:self_weak_.headerView];
-            [self_weak_.view bringSubviewToFront:self_weak_.footerView];
-        };
+        CGRect bounds = [self.view bounds];
+        CGRect insetRect = UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, 50.0f, 0, 50.0f));
+        self.textOverlay = [[STMovableTextOverlay alloc] initWithFrame:insetRect];
+        [self.view insertSubview:self.textOverlay belowSubview:self.stillButton];
     }
+
+    BOOL selectText = NO;
+
+    if ([[self.textOverlay text] isEmptyString] && ![self.textOverlay isEditing]) {
+        
+        [self.textOverlay setText:@"Caption"];
+        [self.textOverlay centerText];
+
+        selectText = YES;
+    }
+    
+    [self.textOverlay beginEditing:selectText];
 }
 
 - (IBAction)toggleFlashAction:(id)sender
@@ -720,20 +719,19 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 //    });
 }
 
-- (void)captureManagerStillImageCaptured:(AVCamCaptureManager *)captureManager image:(UIImage *)image
+- (void)captureManagerStillImageCaptured:(AVCamCaptureManager *)captureManager image:(UIImage *)captureImage
 {
     CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopCommonModes, ^(void) {
         [[self stillButton] setEnabled:YES];
     });
     
-    UIImage *finalImage;
-    NSString *caption = [self.captionOverlayViewController getCaption];
+    BOOL isFrontFacing = ([captureManager getDevicePosition] == AVCaptureDevicePositionFront);
+    UIImage *image = (isFrontFacing) ? [captureImage flipHorizontal] : captureImage;
+    UIImage *finalImage = image;
+    NSString *caption = [self.textOverlay text];
     if ([NSString isNotEmptyString:caption]) {
         finalImage = [self addCaptionToImage:image];
-    } else {
-        finalImage = image;
     }
-    
     [self didCaptureImage:finalImage];
 }
 
@@ -745,16 +743,28 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 - (UIImage*)addCaptionToImage:(UIImage*)image
 {
     // get caption image
-    UIImage *captionImage = [self getCaptionImage];
-    
     UIImage *result;
-    
-    UIGraphicsBeginImageContext(image.size);
-    
+    UIImage *captionImage = [self getCaptionImage];
+
+    CGSize captionSize = [captionImage size];
+    CGSize imageSize = [image size];
+
+    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0.0f);
+
     // draw image
-    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    [image drawInRect:CGRectMake(0, 0, imageSize.width, imageSize.height)];
+
+    if (captionImage) {
     
-    [captionImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+        // draw caption
+        CGRect captionRect;
+        CGFloat scale = [[UIScreen mainScreen] scale];
+        captionRect.size.width = captionSize.width * scale;
+        captionRect.size.height = captionSize.height * scale;
+        captionRect.origin.x = floor(0.5 * (imageSize.width - captionRect.size.width));
+        captionRect.origin.y = floor(0.5 * (imageSize.height - captionRect.size.height));
+        [captionImage drawInRect:captionRect];
+    }
     
     result = UIGraphicsGetImageFromCurrentImageContext();
     
@@ -765,20 +775,17 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (UIImage*)getCaptionImage
 {
-    UIImage *captionImage;
+    UIImage *captionImage = nil;
     
-    UIGraphicsBeginImageContextWithOptions(self.captionOverlayViewController.view.bounds.size, NO, 0.0f);
-    
-    CGContextRef contextRef = UIGraphicsGetCurrentContext();
-    
-    CGContextClearRect(contextRef, self.captionOverlayViewController.view.bounds);
-    
-    [self.captionOverlayViewController.view drawViewHierarchyInRect:self.captionOverlayViewController.view.bounds afterScreenUpdates:NO];
-    
-    captionImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
+    if (self.textOverlay) {
+
+        CGRect bounds = [self.textOverlay bounds];
+        UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0.0f);
+        [self.textOverlay drawViewHierarchyInRect:bounds afterScreenUpdates:NO];
+        captionImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+     
     return captionImage;
 }
 

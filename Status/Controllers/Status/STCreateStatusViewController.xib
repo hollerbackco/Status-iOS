@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -84,20 +84,6 @@
                         <constraint firstItem="ruH-R1-2Ig" firstAttribute="top" secondItem="nRj-Vw-dZo" secondAttribute="top" id="zZ6-oj-qdW"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQu-dY-HgZ" userLabel="stillButton">
-                    <rect key="frame" x="10" y="126" width="68" height="68"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="68" id="9Lh-gb-EJc"/>
-                        <constraint firstAttribute="height" constant="68" id="GS4-On-wxw"/>
-                    </constraints>
-                    <state key="normal" image="camera-button.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="captureStillImage:" destination="-1" eventType="touchUpInside" id="Mk9-co-geE"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="928-8f-mlT" userLabel="footerView">
                     <rect key="frame" x="0.0" y="266" width="568" height="54"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -140,6 +126,20 @@
                         <constraint firstItem="K3E-Pa-cbR" firstAttribute="bottom" secondItem="gF2-l7-LA6" secondAttribute="bottom" id="zUG-ic-3ef"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQu-dY-HgZ" userLabel="stillButton">
+                    <rect key="frame" x="10" y="126" width="68" height="68"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="68" id="9Lh-gb-EJc"/>
+                        <constraint firstAttribute="height" constant="68" id="GS4-On-wxw"/>
+                    </constraints>
+                    <state key="normal" image="camera-button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="captureStillImage:" destination="-1" eventType="touchUpInside" id="Mk9-co-geE"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
