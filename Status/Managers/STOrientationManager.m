@@ -89,6 +89,16 @@
     [self currentDeviceOrientation] == UIDeviceOrientationFaceUp;
 }
 
+- (BOOL)isDeviceOrientationLandscapeLeft
+{
+    return [self currentDeviceOrientation] == UIDeviceOrientationLandscapeLeft;
+}
+
+- (BOOL)isDeviceOrientationLandscapeRight
+{
+    return [self currentDeviceOrientation] == UIDeviceOrientationLandscapeRight;
+}
+
 - (void)showRotatePhoneViewInWindow:(UIWindow*)window
 {
     if (!self.rotatePhoneImageView) {

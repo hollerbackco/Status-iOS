@@ -18,6 +18,10 @@
 
 - (BOOL)isCorrectDeviceOrientation;
 
+- (BOOL)isDeviceOrientationLandscapeLeft;
+
+- (BOOL)isDeviceOrientationLandscapeRight;
+
 - (void)showRotatePhoneViewInWindow:(UIWindow*)window;
 
 @end

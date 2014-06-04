@@ -24,6 +24,7 @@
 #import "STMyStatusHistoryViewController.h"
 #import "STSlideTransitionAnimator.h"
 #import "STStatus.h"
+#import "STOrientationManager.h"
 
 #define kSTAddCaptionToImageHeightOffset 20.0
 #define kSTAddCaptionToImageCenterYOffset 250.0
@@ -522,11 +523,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 {
     STSlideTransitionAnimator *animator = [STSlideTransitionAnimator new];
     
-    if ([presented isKindOfClass:[STMyStatusHistoryViewController class]]) {
-        animator.slideDirection = kSTSlideDirectionLeftToRight;
-    } else {
-        animator.slideDirection = kSTSlideDirectionRightToLeft;
-    }
+    animator.slideDirection = [self slideDirectionForViewController:presented];
+
     animator.presenting = YES;
     
     return animator;
@@ -553,13 +551,60 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     STSlideTransitionAnimator *animator = [STSlideTransitionAnimator new];
     
-    if ([dismissed isKindOfClass:[STMyStatusHistoryViewController class]]) {
-        animator.slideDirection = kSTSlideDirectionLeftToRight;
-    } else {
-        animator.slideDirection = kSTSlideDirectionRightToLeft;
-    }
+    animator.slideDirection = [self slideDirectionForViewController:dismissed];
     
     return animator;
+}
+
+
+- (kSTSlideDirection)slideDirectionForViewController:(UIViewController*)viewController
+{
+    if ([viewController isKindOfClass:[STMyStatusHistoryViewController class]]) {
+        
+        if ([[STOrientationManager sharedInstance] isDeviceOrientationLandscapeLeft]) {
+            
+            return kSTSlideDirectionRightToLeft;
+            
+        } else if ([[STOrientationManager sharedInstance] isDeviceOrientationLandscapeRight]) {
+            
+            return kSTSlideDirectionLeftToRight;
+        } else {
+            
+            JNLogPrimitive(self.interfaceOrientation);
+            
+            if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+                
+                return kSTSlideDirectionLeftToRight;
+                
+            } else {
+                
+                return kSTSlideDirectionRightToLeft;
+            }
+        }
+        
+    } else {
+        
+        if ([[STOrientationManager sharedInstance] isDeviceOrientationLandscapeLeft]) {
+            
+            return kSTSlideDirectionLeftToRight;
+            
+        } else if ([[STOrientationManager sharedInstance] isDeviceOrientationLandscapeRight]) {
+            
+            return kSTSlideDirectionRightToLeft;
+        } else {
+            
+            JNLogPrimitive(self.interfaceOrientation);
+            
+            if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+                
+                return kSTSlideDirectionRightToLeft;
+                
+            } else {
+                
+                return kSTSlideDirectionLeftToRight;
+            }
+        }
+    }
 }
 
 @end
