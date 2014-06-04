@@ -144,6 +144,19 @@ UIImage *rotatedImage(UIImage *image, CGFloat rotation)
 {
     return rotatedImage(image, theta);
 }
+
+- (UIImage *) flipHorizontal
+{
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(context, self.size.width, 0.0);
+    CGContextScaleCTM(context, -1.0, 1.0);
+    [self drawInRect:CGRectMake(0, 0, self.size.width, self.size.height)];
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return result;
+}
+
 @end
 
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B4D0A89193E733600E0E325 /* STMovableTextOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D0A88193E733600E0E325 /* STMovableTextOverlay.m */; };
+		0B4D0A8C193E75C500E0E325 /* NSString+AttributedText.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D0A8B193E75C500E0E325 /* NSString+AttributedText.m */; };
 		0D03815D1933D1880002F8BD /* STStatusCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D03815B1933D1880002F8BD /* STStatusCommentViewController.m */; };
 		0D03815E1933D1880002F8BD /* STStatusCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D03815C1933D1880002F8BD /* STStatusCommentViewController.xib */; };
 		0D106F19193CC96F0047796F /* STMyStatusHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D106F17193CC96F0047796F /* STMyStatusHistoryViewController.m */; };
@@ -22,8 +24,6 @@
 		0D375BBF193E7BE2006D8768 /* rotate-alert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D375BBE193E7BE2006D8768 /* rotate-alert@2x.png */; };
 		0D5E5AB7192C3B9100F7DA7C /* STStatusFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5E5AB5192C3B9100F7DA7C /* STStatusFeedTableViewController.m */; };
 		0D5E5AB8192C3B9100F7DA7C /* STStatusFeedTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D5E5AB6192C3B9100F7DA7C /* STStatusFeedTableViewController.xib */; };
-		0D641A04192E6A6C002B3FD6 /* STCaptionOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D641A02192E6A6C002B3FD6 /* STCaptionOverlayViewController.m */; };
-		0D641A05192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D641A03192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib */; };
 		0D6784361931493200747111 /* STLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6784351931493200747111 /* STLogger.m */; };
 		0D67843919314A0F00747111 /* STTransferManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D67843819314A0F00747111 /* STTransferManager.m */; };
 		0DAF3E5C1933F895003E47AD /* UIColor+STHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF3E5B1933F895003E47AD /* UIColor+STHelper.m */; };
@@ -108,6 +108,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B4D0A87193E733600E0E325 /* STMovableTextOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STMovableTextOverlay.h; sourceTree = "<group>"; };
+		0B4D0A88193E733600E0E325 /* STMovableTextOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMovableTextOverlay.m; sourceTree = "<group>"; };
+		0B4D0A8A193E75C500E0E325 /* NSString+AttributedText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+AttributedText.h"; sourceTree = "<group>"; };
+		0B4D0A8B193E75C500E0E325 /* NSString+AttributedText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+AttributedText.m"; sourceTree = "<group>"; };
 		0D03815A1933D1880002F8BD /* STStatusCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusCommentViewController.h; path = Controllers/Status/STStatusCommentViewController.h; sourceTree = "<group>"; };
 		0D03815B1933D1880002F8BD /* STStatusCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusCommentViewController.m; path = Controllers/Status/STStatusCommentViewController.m; sourceTree = "<group>"; };
 		0D03815C1933D1880002F8BD /* STStatusCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STStatusCommentViewController.xib; path = Controllers/Status/STStatusCommentViewController.xib; sourceTree = "<group>"; };
@@ -128,9 +132,6 @@
 		0D5E5AB4192C3B9100F7DA7C /* STStatusFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusFeedTableViewController.h; path = Controllers/Status/STStatusFeedTableViewController.h; sourceTree = "<group>"; };
 		0D5E5AB5192C3B9100F7DA7C /* STStatusFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusFeedTableViewController.m; path = Controllers/Status/STStatusFeedTableViewController.m; sourceTree = "<group>"; };
 		0D5E5AB6192C3B9100F7DA7C /* STStatusFeedTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STStatusFeedTableViewController.xib; path = Controllers/Status/STStatusFeedTableViewController.xib; sourceTree = "<group>"; };
-		0D641A01192E6A6C002B3FD6 /* STCaptionOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STCaptionOverlayViewController.h; path = Controllers/Status/STCaptionOverlayViewController.h; sourceTree = "<group>"; };
-		0D641A02192E6A6C002B3FD6 /* STCaptionOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STCaptionOverlayViewController.m; path = Controllers/Status/STCaptionOverlayViewController.m; sourceTree = "<group>"; };
-		0D641A03192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STCaptionOverlayViewController.xib; path = Controllers/Status/STCaptionOverlayViewController.xib; sourceTree = "<group>"; };
 		0D6784341931493200747111 /* STLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STLogger.h; path = Helpers/STLogger.h; sourceTree = "<group>"; };
 		0D6784351931493200747111 /* STLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STLogger.m; path = Helpers/STLogger.m; sourceTree = "<group>"; };
 		0D67843719314A0F00747111 /* STTransferManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTransferManager.h; sourceTree = "<group>"; };
@@ -474,32 +475,31 @@
 				0DB0BDF3192A9658002F568F /* STCreateStatusViewController.h */,
 				0DB0BDF4192A9658002F568F /* STCreateStatusViewController.m */,
 				0DB0BDF5192A9658002F568F /* STCreateStatusViewController.xib */,
-				0DAF3E6D19341954003E47AD /* STSlideTransitionAnimator.h */,
-				0DAF3E6E19341954003E47AD /* STSlideTransitionAnimator.m */,
-				0D641A01192E6A6C002B3FD6 /* STCaptionOverlayViewController.h */,
-				0D641A02192E6A6C002B3FD6 /* STCaptionOverlayViewController.m */,
-				0D641A03192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib */,
-				0DB0BDF8192A966C002F568F /* STStatusFeedViewController.h */,
-				0DB0BDF9192A966C002F568F /* STStatusFeedViewController.m */,
-				0DB0BDFA192A966C002F568F /* STStatusFeedViewController.xib */,
-				0D5E5AB4192C3B9100F7DA7C /* STStatusFeedTableViewController.h */,
-				0D5E5AB5192C3B9100F7DA7C /* STStatusFeedTableViewController.m */,
-				0D5E5AB6192C3B9100F7DA7C /* STStatusFeedTableViewController.xib */,
-				0DB0BE3B192AC821002F568F /* STStatusTableViewCell.h */,
-				0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */,
-				0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */,
-				0D03815A1933D1880002F8BD /* STStatusCommentViewController.h */,
-				0D03815B1933D1880002F8BD /* STStatusCommentViewController.m */,
-				0D03815C1933D1880002F8BD /* STStatusCommentViewController.xib */,
+				0B4D0A87193E733600E0E325 /* STMovableTextOverlay.h */,
+				0B4D0A88193E733600E0E325 /* STMovableTextOverlay.m */,
 				0D106F16193CC96F0047796F /* STMyStatusHistoryViewController.h */,
 				0D106F17193CC96F0047796F /* STMyStatusHistoryViewController.m */,
 				0D106F18193CC96F0047796F /* STMyStatusHistoryViewController.xib */,
-				0DAF3E6019340FDE003E47AD /* STStatusHistoryTableViewController.h */,
-				0DAF3E6119340FDE003E47AD /* STStatusHistoryTableViewController.m */,
-				0DAF3E6219340FDE003E47AD /* STStatusHistoryTableViewController.xib */,
+				0DAF3E6D19341954003E47AD /* STSlideTransitionAnimator.h */,
+				0DAF3E6E19341954003E47AD /* STSlideTransitionAnimator.m */,
+				0D03815A1933D1880002F8BD /* STStatusCommentViewController.h */,
+				0D03815B1933D1880002F8BD /* STStatusCommentViewController.m */,
+				0D03815C1933D1880002F8BD /* STStatusCommentViewController.xib */,
+				0D5E5AB4192C3B9100F7DA7C /* STStatusFeedTableViewController.h */,
+				0D5E5AB5192C3B9100F7DA7C /* STStatusFeedTableViewController.m */,
+				0D5E5AB6192C3B9100F7DA7C /* STStatusFeedTableViewController.xib */,
+				0DB0BDF8192A966C002F568F /* STStatusFeedViewController.h */,
+				0DB0BDF9192A966C002F568F /* STStatusFeedViewController.m */,
+				0DB0BDFA192A966C002F568F /* STStatusFeedViewController.xib */,
 				0DAF3E651934109C003E47AD /* STStatusHistoryTableViewCell.h */,
 				0DAF3E661934109C003E47AD /* STStatusHistoryTableViewCell.m */,
 				0DAF3E671934109C003E47AD /* STStatusHistoryTableViewCell.xib */,
+				0DAF3E6019340FDE003E47AD /* STStatusHistoryTableViewController.h */,
+				0DAF3E6119340FDE003E47AD /* STStatusHistoryTableViewController.m */,
+				0DAF3E6219340FDE003E47AD /* STStatusHistoryTableViewController.xib */,
+				0DB0BE3B192AC821002F568F /* STStatusTableViewCell.h */,
+				0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */,
+				0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */,
 			);
 			name = Status;
 			sourceTree = "<group>";
@@ -517,14 +517,16 @@
 		0DB0BE05192A9813002F568F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0B4D0A8A193E75C500E0E325 /* NSString+AttributedText.h */,
+				0B4D0A8B193E75C500E0E325 /* NSString+AttributedText.m */,
 				0DB0BE02192A980A002F568F /* STConstants.h */,
 				0DB0BE03192A980A002F568F /* STConstants.m */,
 				0D6784341931493200747111 /* STLogger.h */,
 				0D6784351931493200747111 /* STLogger.m */,
-				0DF150ED1932B3B2009565FD /* UIFont+STHelper.h */,
-				0DF150EE1932B3B2009565FD /* UIFont+STHelper.m */,
 				0DAF3E5A1933F895003E47AD /* UIColor+STHelper.h */,
 				0DAF3E5B1933F895003E47AD /* UIColor+STHelper.m */,
+				0DF150ED1932B3B2009565FD /* UIFont+STHelper.h */,
+				0DF150EE1932B3B2009565FD /* UIFont+STHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -757,7 +759,6 @@
 				0DAF3E6C193411B2003E47AD /* STStatusHistory.m in Sources */,
 				0DB0BDE4192A9605002F568F /* JNIcon.m in Sources */,
 				0DB0BDFB192A966C002F568F /* STStatusFeedViewController.m in Sources */,
-				0D641A04192E6A6C002B3FD6 /* STCaptionOverlayViewController.m in Sources */,
 				0DB0BDE6192A9605002F568F /* NSObject+JNHelper.m in Sources */,
 				0DAF3E5C1933F895003E47AD /* UIColor+STHelper.m in Sources */,
 				0DB0BD9C192A85C9002F568F /* main.m in Sources */,
@@ -766,6 +767,7 @@
 				0DB0BE34192AB322002F568F /* AVCamViewController.m in Sources */,
 				0D375BBD193E49D5006D8768 /* STOrientationManager.m in Sources */,
 				0DAF3E6F19341954003E47AD /* STSlideTransitionAnimator.m in Sources */,
+				0B4D0A89193E733600E0E325 /* STMovableTextOverlay.m in Sources */,
 				0DB0BE23192AA1CA002F568F /* STSession.m in Sources */,
 				0DB0BDEB192A9605002F568F /* UIView+JNHelper.m in Sources */,
 				0DB0BDE8192A9605002F568F /* UIColor+JNHelper.m in Sources */,
@@ -774,6 +776,7 @@
 				0DB0BE32192AB322002F568F /* AVCamRecorder.m in Sources */,
 				0D6784361931493200747111 /* STLogger.m in Sources */,
 				0D03815D1933D1880002F8BD /* STStatusCommentViewController.m in Sources */,
+				0B4D0A8C193E75C500E0E325 /* NSString+AttributedText.m in Sources */,
 				0DB0BDE7192A9605002F568F /* NSString+MD5.m in Sources */,
 				0DB0BDEF192A9605002F568F /* JNSimpleDataStore.m in Sources */,
 				0DB0BDE5192A9605002F568F /* JNViewController.m in Sources */,
@@ -883,8 +886,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_PREFIX = com.status;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Will Dennis (28S6U8566M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Will Dennis (28S6U8566M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -901,7 +904,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "${SOURCE_ROOT}/Framework/Classes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C1742F14-D4E0-46BC-9526-851EB5816DCD";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -967,8 +970,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_PREFIX = com.status;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: moziy, inc.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: moziy, inc.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -985,7 +988,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "${SOURCE_ROOT}/Framework/Classes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "EB398EA5-656E-4E5D-8A94-F0C1322C37E3";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1053,8 +1056,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_PREFIX = com.status.appstore.dev;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Will Dennis (CD856775Q2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Will Dennis (CD856775Q2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1072,7 +1075,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "${SOURCE_ROOT}/Framework/Classes";
 				PRODUCT_NAME = "$(TARGET_NAME)Dev";
-				PROVISIONING_PROFILE = "C6C10C7D-D67C-4EB5-A7E2-594B10B7C6D7";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Debug AppStore Dev";
@@ -1144,8 +1147,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_PREFIX = com.status.dev;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Will Dennis (28S6U8566M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Will Dennis (28S6U8566M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1163,7 +1166,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "${SOURCE_ROOT}/Framework/Classes";
 				PRODUCT_NAME = "$(TARGET_NAME)Dev";
-				PROVISIONING_PROFILE = "A79882D2-7B4D-4351-A1AB-977498EAC7B1";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Debug Dev";
@@ -1229,8 +1232,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_PREFIX = com.status.appstore.dev;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Will Dennis (CD856775Q2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Will Dennis (CD856775Q2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1248,7 +1251,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "${SOURCE_ROOT}/Framework/Classes";
 				PRODUCT_NAME = "$(TARGET_NAME)Dev";
-				PROVISIONING_PROFILE = "C6C10C7D-D67C-4EB5-A7E2-594B10B7C6D7";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Release AppStore Dev";
@@ -1310,8 +1313,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_PREFIX = com.status.dev;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Will Dennis (28S6U8566M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Will Dennis (28S6U8566M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1329,7 +1332,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "${SOURCE_ROOT}/Framework/Classes";
 				PRODUCT_NAME = "$(TARGET_NAME)Dev";
-				PROVISIONING_PROFILE = "9E8D72B2-7F2E-4F6F-AC2D-EA59467E17F1";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Release Dev";
@@ -1429,8 +1432,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_PREFIX = com.status.appstore;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Will Dennis (CD856775Q2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Will Dennis (CD856775Q2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1447,7 +1450,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "${SOURCE_ROOT}/Framework/Classes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C6C10C7D-D67C-4EB5-A7E2-594B10B7C6D7";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Debug AppStore";
@@ -1459,8 +1462,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_PREFIX = com.status.appstore;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: moziy, inc. (TQZW3JYHA5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: moziy, inc. (TQZW3JYHA5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1477,7 +1480,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "${SOURCE_ROOT}/Framework/Classes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F55A9F91-9771-46D2-98CA-7D49028708AA";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Release AppStore";

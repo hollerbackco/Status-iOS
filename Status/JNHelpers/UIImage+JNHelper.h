@@ -32,6 +32,7 @@ UIImage *rotatedImage(UIImage *image, CGFloat rotation);
 @interface UIImage (Rotation)
 - (UIImage *) rotateBy: (CGFloat) theta;
 + (UIImage *) image: (UIImage *) image rotatedBy: (CGFloat) theta;
+- (UIImage *) flipHorizontal;
 
 @property (nonatomic, readonly) BOOL isLandscape;
 @property (nonatomic, readonly) BOOL isPortrait;
