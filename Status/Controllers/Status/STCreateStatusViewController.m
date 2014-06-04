@@ -532,7 +532,11 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     self.statusFeedViewController.transitioningDelegate = self;
     self.statusFeedViewController.modalPresentationStyle = UIModalPresentationCustom;
-    self.statusFeedViewController.view.frame = self.view.bounds;
+    
+    if (CGPointEqualToPoint(self.statusFeedViewController.view.frame.origin, CGPointZero)) {
+        self.statusFeedViewController.view.frame = self.view.bounds;
+    }
+    
     [self presentViewController:self.statusFeedViewController animated:YES completion:nil];
     
     if (image) {
@@ -556,7 +560,11 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 {
     self.myStatusHistoryViewController.transitioningDelegate = self;
     self.myStatusHistoryViewController.modalPresentationStyle = UIModalPresentationCustom;
-    self.myStatusHistoryViewController.view.frame = self.view.bounds;
+    
+    if (CGPointEqualToPoint(self.myStatusHistoryViewController.view.frame.origin, CGPointZero)) {
+        self.myStatusHistoryViewController.view.frame = self.view.bounds;
+    }
+    
     [self presentViewController:self.myStatusHistoryViewController animated:YES completion:nil];
 }
 
