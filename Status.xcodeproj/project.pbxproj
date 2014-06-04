@@ -13,6 +13,8 @@
 		0D106F1A193CC96F0047796F /* STMyStatusHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D106F18193CC96F0047796F /* STMyStatusHistoryViewController.xib */; };
 		0D2054A8192D745900F584D7 /* STAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2054A7192D745900F584D7 /* STAppManager.m */; };
 		0D375BBA193E2C30006D8768 /* GothamRnd-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D375BB9193E2C30006D8768 /* GothamRnd-Medium.otf */; };
+		0D375BBD193E49D5006D8768 /* STOrientationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D375BBC193E49D5006D8768 /* STOrientationManager.m */; };
+		0D375BBF193E7BE2006D8768 /* rotate-alert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D375BBE193E7BE2006D8768 /* rotate-alert@2x.png */; };
 		0D5E5AB7192C3B9100F7DA7C /* STStatusFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5E5AB5192C3B9100F7DA7C /* STStatusFeedTableViewController.m */; };
 		0D5E5AB8192C3B9100F7DA7C /* STStatusFeedTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D5E5AB6192C3B9100F7DA7C /* STStatusFeedTableViewController.xib */; };
 		0D641A04192E6A6C002B3FD6 /* STCaptionOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D641A02192E6A6C002B3FD6 /* STCaptionOverlayViewController.m */; };
@@ -110,6 +112,9 @@
 		0D2054A6192D745900F584D7 /* STAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STAppManager.h; path = Managers/STAppManager.h; sourceTree = "<group>"; };
 		0D2054A7192D745900F584D7 /* STAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STAppManager.m; path = Managers/STAppManager.m; sourceTree = "<group>"; };
 		0D375BB9193E2C30006D8768 /* GothamRnd-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRnd-Medium.otf"; sourceTree = "<group>"; };
+		0D375BBB193E49D5006D8768 /* STOrientationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STOrientationManager.h; path = Managers/STOrientationManager.h; sourceTree = "<group>"; };
+		0D375BBC193E49D5006D8768 /* STOrientationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STOrientationManager.m; path = Managers/STOrientationManager.m; sourceTree = "<group>"; };
+		0D375BBE193E7BE2006D8768 /* rotate-alert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rotate-alert@2x.png"; sourceTree = "<group>"; };
 		0D5E5AB4192C3B9100F7DA7C /* STStatusFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusFeedTableViewController.h; path = Controllers/Status/STStatusFeedTableViewController.h; sourceTree = "<group>"; };
 		0D5E5AB5192C3B9100F7DA7C /* STStatusFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusFeedTableViewController.m; path = Controllers/Status/STStatusFeedTableViewController.m; sourceTree = "<group>"; };
 		0D5E5AB6192C3B9100F7DA7C /* STStatusFeedTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STStatusFeedTableViewController.xib; path = Controllers/Status/STStatusFeedTableViewController.xib; sourceTree = "<group>"; };
@@ -277,6 +282,8 @@
 				0D67843819314A0F00747111 /* STTransferManager.m */,
 				0DD1418619368304005EBCD6 /* STPushManager.h */,
 				0DD1418719368304005EBCD6 /* STPushManager.m */,
+				0D375BBB193E49D5006D8768 /* STOrientationManager.h */,
+				0D375BBC193E49D5006D8768 /* STOrientationManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -539,6 +546,7 @@
 		0DB0BE25192AA60B002F568F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0D375BBE193E7BE2006D8768 /* rotate-alert@2x.png */,
 				0DB0BE26192AA60B002F568F /* fb-login@2x.png */,
 				0DFB825D192BD005008CD552 /* camera-button@2x.png */,
 				0DFB825E192BD005008CD552 /* flip-icon@2x.png */,
@@ -646,6 +654,7 @@
 			files = (
 				0D106F1A193CC96F0047796F /* STMyStatusHistoryViewController.xib in Resources */,
 				0DB0BD9A192A85C9002F568F /* InfoPlist.strings in Resources */,
+				0D375BBF193E7BE2006D8768 /* rotate-alert@2x.png in Resources */,
 				0DB0BE01192A968F002F568F /* STLoginViewController.xib in Resources */,
 				0DB0BE3F192AC821002F568F /* STStatusTableViewCell.xib in Resources */,
 				0DB0BE27192AA60B002F568F /* fb-login@2x.png in Resources */,
@@ -735,6 +744,7 @@
 				0DB0BDED192A9605002F568F /* JNLogger.m in Sources */,
 				0D106F19193CC96F0047796F /* STMyStatusHistoryViewController.m in Sources */,
 				0DB0BE34192AB322002F568F /* AVCamViewController.m in Sources */,
+				0D375BBD193E49D5006D8768 /* STOrientationManager.m in Sources */,
 				0DAF3E6F19341954003E47AD /* STSlideTransitionAnimator.m in Sources */,
 				0DB0BE23192AA1CA002F568F /* STSession.m in Sources */,
 				0DB0BDEB192A9605002F568F /* UIView+JNHelper.m in Sources */,

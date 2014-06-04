@@ -14,6 +14,7 @@
 #import "STLoginViewController.h"
 #import "STAppManager.h"
 #import "STPushManager.h"
+#import "STOrientationManager.h"
 
 @interface STAppDelegate ()
 
@@ -137,6 +138,8 @@
         }
         [currentInstallation saveInBackground];
     }
+    
+    [[STOrientationManager sharedInstance] beginGeneratingDeviceOrientationNotificationsCompleted:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
