@@ -3,6 +3,7 @@
 /Status.xcworkspace/
 /.ds_store
 /.DS_Store
+*.xcuserdatad/
 *.orig
 
 
