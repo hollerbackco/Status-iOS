@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *toggleFlashButton;
 @property (weak, nonatomic) IBOutlet UIButton *historyButton;
 @property (weak, nonatomic) IBOutlet UIButton *feedButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *stillButtonBottomSuperviewConstraint;
 
 @property (nonatomic) BOOL shouldLoadCamera;
 

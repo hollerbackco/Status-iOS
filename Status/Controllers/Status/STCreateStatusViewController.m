@@ -287,15 +287,21 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         [self rotatePreviewLayer:self.captureVideoPreviewLayer
                 videoOrientation:AVCaptureVideoOrientationLandscapeLeft];
         
+        self.stillButtonBottomSuperviewConstraint.constant = 10.0;
+        
     } else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
         
         [self rotatePreviewLayer:self.captureVideoPreviewLayer
                 videoOrientation:AVCaptureVideoOrientationLandscapeRight];
         
+        self.stillButtonBottomSuperviewConstraint.constant = [UIScreen mainScreen].bounds.size.height - 10.0 - self.stillButton.bounds.size.width;
+        
     } else {
         
         [self rotatePreviewLayer:self.captureVideoPreviewLayer
                 videoOrientation:AVCaptureVideoOrientationLandscapeLeft];
+        
+        self.stillButtonBottomSuperviewConstraint.constant = 10.0;
     }
 }
 
