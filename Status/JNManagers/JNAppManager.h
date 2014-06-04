@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define kJNiPhoneHeight3_5inch 480.0
+
 @interface JNAppManager : NSObject
 
 + (NSString*)getAppVersion;

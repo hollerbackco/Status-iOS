@@ -12,8 +12,6 @@
 
 #import "JNAppManager.h"
 
-#define kJNiPhoneHeight3_5inch 480.0
-
 @implementation JNAppManager
 
 + (NSString*)getAppVersion

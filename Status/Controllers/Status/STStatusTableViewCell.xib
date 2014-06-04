@@ -13,26 +13,26 @@
                 <rect key="frame" x="0.0" y="0.0" width="568" height="319"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hy8-EQ-FYN">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hy8-EQ-FYN">
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
-                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="6jZ-Df-mS3">
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="6jZ-Df-mS3">
                         <rect key="frame" x="274" y="150" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </activityIndicatorView>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3vt-BX-sN0" userLabel="footerView">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3vt-BX-sN0" userLabel="footerView">
                         <rect key="frame" x="0.0" y="266" width="568" height="54"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARV-Ba-pe6" userLabel="senderNameLabel">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARV-Ba-pe6" userLabel="senderNameLabel">
                                 <rect key="frame" x="64" y="26" width="440" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VdL-qp-9cc" userLabel="composeButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VdL-qp-9cc" userLabel="composeButton">
                                 <rect key="frame" x="514" y="0.0" width="54" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button">
@@ -41,9 +41,31 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VdL-qp-9cc" firstAttribute="leading" secondItem="ARV-Ba-pe6" secondAttribute="trailing" constant="10" id="Atj-h6-AnJ"/>
+                            <constraint firstAttribute="bottom" secondItem="VdL-qp-9cc" secondAttribute="bottom" id="HLT-qx-zB9"/>
+                            <constraint firstItem="VdL-qp-9cc" firstAttribute="top" secondItem="3vt-BX-sN0" secondAttribute="top" id="JxZ-ww-KWc"/>
+                            <constraint firstItem="ARV-Ba-pe6" firstAttribute="top" secondItem="3vt-BX-sN0" secondAttribute="top" constant="26" id="PfJ-mN-rKy"/>
+                            <constraint firstItem="ARV-Ba-pe6" firstAttribute="leading" secondItem="3vt-BX-sN0" secondAttribute="leading" constant="64" id="WbF-im-qqS"/>
+                            <constraint firstAttribute="bottom" secondItem="ARV-Ba-pe6" secondAttribute="bottom" constant="8" id="qoy-35-esh"/>
+                            <constraint firstItem="ARV-Ba-pe6" firstAttribute="centerX" secondItem="3vt-BX-sN0" secondAttribute="centerX" id="uew-6w-0Qw"/>
+                            <constraint firstAttribute="trailing" secondItem="VdL-qp-9cc" secondAttribute="trailing" id="wH2-g7-4NF"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="hy8-EQ-FYN" firstAttribute="leading" secondItem="3vt-BX-sN0" secondAttribute="leading" id="1eg-pd-a2S"/>
+                    <constraint firstItem="hy8-EQ-FYN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="4PH-fC-cmi"/>
+                    <constraint firstItem="6jZ-Df-mS3" firstAttribute="centerX" secondItem="3vt-BX-sN0" secondAttribute="centerX" id="IpW-uB-auw"/>
+                    <constraint firstItem="hy8-EQ-FYN" firstAttribute="bottom" secondItem="3vt-BX-sN0" secondAttribute="bottom" id="eUx-2d-aw3"/>
+                    <constraint firstAttribute="trailing" secondItem="3vt-BX-sN0" secondAttribute="trailing" id="hdh-0f-IUL"/>
+                    <constraint firstItem="3vt-BX-sN0" firstAttribute="top" secondItem="6jZ-Df-mS3" secondAttribute="bottom" constant="96" id="ijc-IO-Jda"/>
+                    <constraint firstItem="hy8-EQ-FYN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="oKE-q1-96j"/>
+                    <constraint firstItem="6jZ-Df-mS3" firstAttribute="centerY" secondItem="hy8-EQ-FYN" secondAttribute="centerY" id="sui-Dx-T05"/>
+                    <constraint firstItem="hy8-EQ-FYN" firstAttribute="trailing" secondItem="3vt-BX-sN0" secondAttribute="trailing" id="vbK-6U-Ix9"/>
+                    <constraint firstAttribute="bottom" secondItem="hy8-EQ-FYN" secondAttribute="bottom" constant="-1" id="ypB-cO-pZn"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="composeButton" destination="VdL-qp-9cc" id="nVt-dY-HNC"/>

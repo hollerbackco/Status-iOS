@@ -180,6 +180,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 {
     STStatusCommentViewController *statusCommentViewController = [[STStatusCommentViewController alloc] initWithNib];
     statusCommentViewController.status = status;
+    statusCommentViewController.view.frame = self.view.bounds;
     [self presentViewController:statusCommentViewController animated:YES completion:nil];
 }
 
