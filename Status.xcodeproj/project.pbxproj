@@ -12,6 +12,11 @@
 		0D106F19193CC96F0047796F /* STMyStatusHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D106F17193CC96F0047796F /* STMyStatusHistoryViewController.m */; };
 		0D106F1A193CC96F0047796F /* STMyStatusHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D106F18193CC96F0047796F /* STMyStatusHistoryViewController.xib */; };
 		0D2054A8192D745900F584D7 /* STAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2054A7192D745900F584D7 /* STAppManager.m */; };
+		0D27793A193FAFAE0032F367 /* caption-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D277936193FAFAE0032F367 /* caption-button@2x.png */; };
+		0D27793B193FAFAE0032F367 /* comments-nav-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D277937193FAFAE0032F367 /* comments-nav-button@2x.png */; };
+		0D27793C193FAFAE0032F367 /* flip-cam-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D277938193FAFAE0032F367 /* flip-cam-button@2x.png */; };
+		0D27793D193FAFAE0032F367 /* statuses-nav-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D277939193FAFAE0032F367 /* statuses-nav-button@2x.png */; };
+		0D27793F193FB4040032F367 /* new-comments-nav-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D27793E193FB4040032F367 /* new-comments-nav-button@2x.png */; };
 		0D375BBA193E2C30006D8768 /* GothamRnd-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D375BB9193E2C30006D8768 /* GothamRnd-Medium.otf */; };
 		0D375BBD193E49D5006D8768 /* STOrientationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D375BBC193E49D5006D8768 /* STOrientationManager.m */; };
 		0D375BBF193E7BE2006D8768 /* rotate-alert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D375BBE193E7BE2006D8768 /* rotate-alert@2x.png */; };
@@ -111,6 +116,11 @@
 		0D106F18193CC96F0047796F /* STMyStatusHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STMyStatusHistoryViewController.xib; path = Controllers/Status/STMyStatusHistoryViewController.xib; sourceTree = "<group>"; };
 		0D2054A6192D745900F584D7 /* STAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STAppManager.h; path = Managers/STAppManager.h; sourceTree = "<group>"; };
 		0D2054A7192D745900F584D7 /* STAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STAppManager.m; path = Managers/STAppManager.m; sourceTree = "<group>"; };
+		0D277936193FAFAE0032F367 /* caption-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "caption-button@2x.png"; sourceTree = "<group>"; };
+		0D277937193FAFAE0032F367 /* comments-nav-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comments-nav-button@2x.png"; sourceTree = "<group>"; };
+		0D277938193FAFAE0032F367 /* flip-cam-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flip-cam-button@2x.png"; sourceTree = "<group>"; };
+		0D277939193FAFAE0032F367 /* statuses-nav-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "statuses-nav-button@2x.png"; sourceTree = "<group>"; };
+		0D27793E193FB4040032F367 /* new-comments-nav-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-comments-nav-button@2x.png"; sourceTree = "<group>"; };
 		0D375BB9193E2C30006D8768 /* GothamRnd-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRnd-Medium.otf"; sourceTree = "<group>"; };
 		0D375BBB193E49D5006D8768 /* STOrientationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STOrientationManager.h; path = Managers/STOrientationManager.h; sourceTree = "<group>"; };
 		0D375BBC193E49D5006D8768 /* STOrientationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STOrientationManager.m; path = Managers/STOrientationManager.m; sourceTree = "<group>"; };
@@ -546,6 +556,11 @@
 		0DB0BE25192AA60B002F568F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0D277936193FAFAE0032F367 /* caption-button@2x.png */,
+				0D277937193FAFAE0032F367 /* comments-nav-button@2x.png */,
+				0D27793E193FB4040032F367 /* new-comments-nav-button@2x.png */,
+				0D277938193FAFAE0032F367 /* flip-cam-button@2x.png */,
+				0D277939193FAFAE0032F367 /* statuses-nav-button@2x.png */,
 				0D375BBE193E7BE2006D8768 /* rotate-alert@2x.png */,
 				0DB0BE26192AA60B002F568F /* fb-login@2x.png */,
 				0DFB825D192BD005008CD552 /* camera-button@2x.png */,
@@ -659,13 +674,18 @@
 				0DB0BE3F192AC821002F568F /* STStatusTableViewCell.xib in Resources */,
 				0DB0BE27192AA60B002F568F /* fb-login@2x.png in Resources */,
 				0DAF3E691934109C003E47AD /* STStatusHistoryTableViewCell.xib in Resources */,
+				0D27793B193FAFAE0032F367 /* comments-nav-button@2x.png in Resources */,
 				0DB0BDFC192A966C002F568F /* STStatusFeedViewController.xib in Resources */,
+				0D27793C193FAFAE0032F367 /* flip-cam-button@2x.png in Resources */,
 				0DAF3E6419340FDE003E47AD /* STStatusHistoryTableViewController.xib in Resources */,
+				0D27793F193FB4040032F367 /* new-comments-nav-button@2x.png in Resources */,
+				0D27793A193FAFAE0032F367 /* caption-button@2x.png in Resources */,
 				0DB0BDF7192A9658002F568F /* STCreateStatusViewController.xib in Resources */,
 				0DFB8260192BD005008CD552 /* flip-icon@2x.png in Resources */,
 				0DFB825F192BD005008CD552 /* camera-button@2x.png in Resources */,
 				0D5E5AB8192C3B9100F7DA7C /* STStatusFeedTableViewController.xib in Resources */,
 				0D03815E1933D1880002F8BD /* STStatusCommentViewController.xib in Resources */,
+				0D27793D193FAFAE0032F367 /* statuses-nav-button@2x.png in Resources */,
 				0D375BBA193E2C30006D8768 /* GothamRnd-Medium.otf in Resources */,
 				0D641A05192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib in Resources */,
 				0DB0BDA2192A85C9002F568F /* Images.xcassets in Resources */,

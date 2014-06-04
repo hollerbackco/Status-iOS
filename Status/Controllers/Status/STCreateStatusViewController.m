@@ -215,32 +215,21 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     
     self.videoPreviewView.backgroundColor = JNBlackColor;
     
-    [self.stillButton setTitle:nil forState:UIControlStateNormal];
+    [self.headerView applyBottomHalfGradientBackgroundWithTopColor:JNBlackColor bottomColor:JNClearColor];
+    
+    [self.footerView applyTopHalfGradientBackgroundWithTopColor:JNClearColor bottomColor:JNBlackColor];
+    
     [self.captionButton setTitle:nil forState:UIControlStateNormal];
     [self.cameraToggleButton setTitle:nil forState:UIControlStateNormal];
     [self.toggleFlashButton setTitle:nil forState:UIControlStateNormal];
     [self.historyButton setTitle:nil forState:UIControlStateNormal];
     [self.feedButton setTitle:nil forState:UIControlStateNormal];
+    [self.stillButton setTitle:nil forState:UIControlStateNormal];
     
+    [self.captionButton setImage:[UIImage imageNamed:@"caption-button.png"] forState:UIControlStateNormal];
+    [self.cameraToggleButton setImage:[UIImage imageNamed:@"flip-cam-button.png"] forState:UIControlStateNormal];
+    [self.feedButton setImage:[UIImage imageNamed:@"statuses-nav-button.png"] forState:UIControlStateNormal];
     [self.stillButton setImage:[UIImage imageNamed:@"camera-button.png"] forState:UIControlStateNormal];
-    self.stillButton.tintColor = nil;
-    [self.stillButton applyDarkerShadowLayer];
-    
-    [self.headerView applyBottomHalfGradientBackgroundWithTopColor:JNBlackColor bottomColor:JNClearColor];
-    
-    [self.footerView applyTopHalfGradientBackgroundWithTopColor:JNClearColor bottomColor:JNBlackColor];
-    
-    FAKIonIcons *captionIcon = [FAKIonIcons ios7ComposeOutlineIconWithSize:32.0];
-    [captionIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
-    [self.captionButton setAttributedTitle:captionIcon.attributedString forState:UIControlStateNormal];
-    [self.captionButton applyDarkerShadowLayer];
-    
-    FAKIonIcons *homeIcon = [FAKIonIcons homeIconWithSize:32.0];
-    [homeIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
-    [self.feedButton setAttributedTitle:homeIcon.attributedString forState:UIControlStateNormal];
-    [self.feedButton applyDarkerShadowLayer];
-    
-    self.feedButton.alpha = 0.0;
     
     [self setupCaptionOverlay];
     
@@ -362,29 +351,12 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)setupHistoryButton
 {
-    FAKIonIcons *historyIcon = [FAKIonIcons ios7ClockOutlineIconWithSize:32.0];
-    [historyIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
-    [self.historyButton setAttributedTitle:historyIcon.attributedString forState:UIControlStateNormal];
-    self.historyButton.layer.shadowRadius = 0.0;
-    self.historyButton.layer.shadowRadius = 0.0;
-    self.historyButton.layer.shadowColor = JNClearColor.CGColor;
-    [self.historyButton applyDarkerShadowLayer];
+    [self.historyButton setImage:[UIImage imageNamed:@"comments-nav-button.png"] forState:UIControlStateNormal];
 }
 
 - (void)setupNewCommentsButton
 {
-    NSAttributedString *newCommentsString =
-    [[NSAttributedString alloc]
-     initWithString:@"NEW"
-     attributes:@{NSFontAttributeName: [UIFont primaryBoldFontWithSize:16.0]}];
-    [self.historyButton setAttributedTitle:newCommentsString forState:UIControlStateNormal];
-    [self.historyButton setTitleColor:JNWhiteColor forState:UIControlStateNormal];
-    self.historyButton.tintColor = JNWhiteColor;
-    self.historyButton.layer.shadowColor = JNColorWithRGB(0,255,255,1).CGColor;
-    self.historyButton.layer.shadowOffset = CGSizeMake(0.0, 0.0);
-    self.historyButton.layer.shadowOpacity = 1.0;
-    self.historyButton.layer.shadowRadius = 4.0;
-    self.historyButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
+    [self.historyButton setImage:[UIImage imageNamed:@"new-comments-nav-button.png"] forState:UIControlStateNormal];
 }
 
 - (void)observeNewCommentsNotification
@@ -466,8 +438,10 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         
         self.captionOverlayViewController.didEndEditing = ^() {
             [self_weak_.view bringSubviewToFront:self_weak_.stillButton];
-            [self_weak_.view bringSubviewToFront:self_weak_.headerView];
-            [self_weak_.view bringSubviewToFront:self_weak_.footerView];
+            [self_weak_.view bringSubviewToFront:self_weak_.captionButton];
+            [self_weak_.view bringSubviewToFront:self_weak_.cameraToggleButton];
+            [self_weak_.view bringSubviewToFront:self_weak_.historyButton];
+            [self_weak_.view bringSubviewToFront:self_weak_.feedButton];
         };
     }
 }
