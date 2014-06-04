@@ -136,10 +136,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
                 captureConnection.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
             }
             
-            CATransform3D rotate = CATransform3DMakeRotation(M_PI/2, 0, 0, 1);
-            CATransform3D scale = CATransform3DMakeScale(1136.0/640.0, 1136.0/640.0, 1136.0/640.0);
-            CATransform3D combined = CATransform3DConcat(rotate, scale);
-            newCaptureVideoPreviewLayer.transform = combined;
+            // rotate and scale the preview
+            [self rotatePreviewLayer:newCaptureVideoPreviewLayer videoOrientation:captureConnection.videoOrientation];
             
             [newCaptureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
             
@@ -296,6 +294,51 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 - (void)viewWillDisppear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+}
+
+#pragma mark - UIViewControllerRotation
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+        
+        [self rotatePreviewLayer:self.captureVideoPreviewLayer
+                videoOrientation:AVCaptureVideoOrientationLandscapeLeft];
+        
+    } else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+        
+        [self rotatePreviewLayer:self.captureVideoPreviewLayer
+                videoOrientation:AVCaptureVideoOrientationLandscapeRight];
+        
+    } else {
+        
+        [self rotatePreviewLayer:self.captureVideoPreviewLayer
+                videoOrientation:AVCaptureVideoOrientationLandscapeLeft];
+    }
+}
+
+- (void)rotatePreviewLayer:(AVCaptureVideoPreviewLayer*)previewLayer videoOrientation:(AVCaptureVideoOrientation)videoOrientation
+{
+    // disable rotation animation
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    
+    if (videoOrientation == AVCaptureVideoOrientationLandscapeLeft) {
+        
+        CATransform3D rotate = CATransform3DMakeRotation(M_PI/2, 0, 0, 1);
+        CATransform3D scale = CATransform3DMakeScale(1136.0/640.0, 1136.0/640.0, 1136.0/640.0);
+        CATransform3D combined = CATransform3DConcat(rotate, scale);
+        previewLayer.transform = combined;
+        
+    } else {
+        
+        CATransform3D rotate = CATransform3DMakeRotation(-M_PI/2, 0, 0, 1);
+        CATransform3D scale = CATransform3DMakeScale(1136.0/640.0, 1136.0/640.0, 1136.0/640.0);
+        CATransform3D combined = CATransform3DConcat(rotate, scale);
+        previewLayer.transform = combined;
+    }
+    
+    [CATransaction commit];
 }
 
 #pragma mark - History / New Comments button
