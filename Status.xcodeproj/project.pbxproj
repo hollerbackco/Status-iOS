@@ -689,7 +689,6 @@
 				0D03815E1933D1880002F8BD /* STStatusCommentViewController.xib in Resources */,
 				0D27793D193FAFAE0032F367 /* statuses-nav-button@2x.png in Resources */,
 				0D375BBA193E2C30006D8768 /* GothamRnd-Medium.otf in Resources */,
-				0D641A05192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib in Resources */,
 				0DB0BDA2192A85C9002F568F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
