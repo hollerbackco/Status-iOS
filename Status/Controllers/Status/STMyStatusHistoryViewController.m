@@ -52,16 +52,13 @@
     [self.headerLabel applyDarkShadowLayer];
     
     self.footerView.backgroundColor = JNClearColor;
+    self.footerView.userInteractionEnabled = NO;
     
-    FAKIonIcons *cameraIcon = [FAKIonIcons cameraIconWithSize:32.0];
-    [cameraIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
-    [self.cameraButton setAttributedTitle:cameraIcon.attributedString forState:UIControlStateNormal];
-    [self.cameraButton applyDarkerShadowLayer];
+    [self.settingsButton setTitle:nil forState:UIControlStateNormal];
+    [self.cameraButton setTitle:nil forState:UIControlStateNormal];
     
-    FAKIonIcons *gearIcon = [FAKIonIcons gearBIconWithSize:32.0];
-    [gearIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
-    [self.settingsButton setAttributedTitle:gearIcon.attributedString forState:UIControlStateNormal];
-    [self.settingsButton applyDarkerShadowLayer];
+    [self.settingsButton setImage:[UIImage imageNamed:@"settings-nav-button.png"] forState:UIControlStateNormal];
+    [self.cameraButton setImage:[UIImage imageNamed:@"camera-right-nav-button.png"] forState:UIControlStateNormal];
     
     [self setupTableView];
 }

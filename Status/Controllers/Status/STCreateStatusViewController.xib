@@ -51,6 +51,17 @@
                         <constraint firstAttribute="height" constant="54" id="1oX-Cm-PaE"/>
                     </constraints>
                 </view>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Your Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ttb-ly-GML" userLabel="headerLabel">
+                    <rect key="frame" x="20" y="6" width="528" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="26" id="UsB-PK-3nm"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="26" id="yKa-zp-pgx"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="928-8f-mlT" userLabel="footerView">
                     <rect key="frame" x="0.0" y="266" width="568" height="54"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -137,6 +148,8 @@
                 <constraint firstItem="lfG-5D-TfC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="9r4-08-HJt"/>
                 <constraint firstAttribute="trailing" secondItem="ruH-R1-2Ig" secondAttribute="trailing" constant="10" id="Azr-Ac-Ih4"/>
                 <constraint firstAttribute="trailing" secondItem="gF2-l7-LA6" secondAttribute="trailing" constant="10" id="Bnr-iv-WM0"/>
+                <constraint firstItem="Ttb-ly-GML" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="C7F-6H-FPV"/>
+                <constraint firstAttribute="trailing" secondItem="Ttb-ly-GML" secondAttribute="trailing" constant="20" id="Eaz-FC-kAZ"/>
                 <constraint firstAttribute="trailing" secondItem="lfG-5D-TfC" secondAttribute="trailing" id="HDa-zC-w9D"/>
                 <constraint firstItem="nRj-Vw-dZo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="QOj-xc-6Wh"/>
                 <constraint firstItem="K3E-Pa-cbR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="SjS-fh-XJc"/>
@@ -144,6 +157,7 @@
                 <constraint firstAttribute="bottom" secondItem="gF2-l7-LA6" secondAttribute="bottom" constant="10" id="WD2-uN-5Cb"/>
                 <constraint firstItem="Q4e-Xd-ABO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="YmN-wg-5pK"/>
                 <constraint firstItem="HQu-dY-HgZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Z4w-8o-DPi"/>
+                <constraint firstItem="Ttb-ly-GML" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="6" id="b7M-p4-fz2"/>
                 <constraint firstItem="ruH-R1-2Ig" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="ffG-OI-ISu"/>
                 <constraint firstAttribute="bottom" secondItem="lfG-5D-TfC" secondAttribute="bottom" id="fiE-59-JXQ"/>
                 <constraint firstAttribute="bottom" secondItem="928-8f-mlT" secondAttribute="bottom" id="h35-gm-D1T"/>

@@ -39,7 +39,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="26" id="ZRX-9G-cX4"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -92,9 +92,13 @@
                     <rect key="frame" x="0.0" y="266" width="568" height="54"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lq-aJ-oO8" userLabel="cameraButton">
-                            <rect key="frame" x="0.0" y="0.0" width="54" height="54"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lq-aJ-oO8" userLabel="cameraButton">
+                            <rect key="frame" x="10" y="4" width="129" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="129" id="4n0-pa-0WM"/>
+                                <constraint firstAttribute="height" constant="40" id="q5z-Sy-OmB"/>
+                            </constraints>
                             <state key="normal" title="Button">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -105,6 +109,8 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="6lq-aJ-oO8" secondAttribute="bottom" constant="10" id="654-J2-0sP"/>
+                        <constraint firstItem="6lq-aJ-oO8" firstAttribute="leading" secondItem="W7G-lj-7l6" secondAttribute="leading" constant="10" id="X78-I4-V3S"/>
                         <constraint firstAttribute="height" constant="54" id="mNz-gY-son"/>
                     </constraints>
                 </view>

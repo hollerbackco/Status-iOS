@@ -80,7 +80,7 @@
     [self.huePicker addTarget:self action:@selector(huePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
     
     self.sendButton.titleLabel.font = [UIFont primaryFontWithSize:15.0];
-    self.sendButton.backgroundColor = [STGreenButtonBackgroundColor colorWithAlphaComponent:0.5];;
+    self.sendButton.backgroundColor = [STGreenButtonBackgroundColor colorWithAlphaComponent:0.8];
     [self.sendButton setTitleColor:JNWhiteColor forState:UIControlStateNormal];
     self.sendButton.layer.cornerRadius = 8.0;
     [STStatus object:self.status fetchSenderNameCompleted:^(NSString *senderName) {

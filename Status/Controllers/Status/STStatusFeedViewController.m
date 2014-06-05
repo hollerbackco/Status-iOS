@@ -86,11 +86,8 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 
     self.footerView.backgroundColor = JNClearColor;
     
-    [self.cameraButton applyDarkerShadowLayer];
-    
-    FAKIonIcons *cameraIcon = [FAKIonIcons cameraIconWithSize:32.0];
-    [cameraIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
-    [self.cameraButton setAttributedTitle:cameraIcon.attributedString forState:UIControlStateNormal];
+    [self.cameraButton setTitle:nil forState:UIControlStateNormal];
+    [self.cameraButton setImage:[UIImage imageNamed:@"camera-left-nav-button.png"] forState:UIControlStateNormal];
     
     [self hideSavingBarViewAnimated:NO];
     
