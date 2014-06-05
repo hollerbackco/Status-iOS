@@ -61,6 +61,11 @@
      UIRemoteNotificationTypeAlert |
      UIRemoteNotificationTypeSound];
     
+    if ([[STSession sharedInstance] isLoggedIn]) {
+        
+        [[STSession sharedInstance] setValue:@(NO) forKey:kSTSessionStoreHasCreatedStatus];
+    }
+    
     return YES;
 }
 

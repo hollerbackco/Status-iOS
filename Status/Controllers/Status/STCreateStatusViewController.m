@@ -243,6 +243,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self.statusFeedViewController performFetch];
     
     [self observeNewCommentsNotification];
+    
+    self.feedButton.alpha = 0.0;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -567,6 +569,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self toggleHistoryButton];
     
     NSNumber *hasCreatedStatus = [[STSession sharedInstance] getValueForKey:kSTSessionStoreHasCreatedStatus];
+    JNLogPrimitive(hasCreatedStatus.boolValue);
     if (hasCreatedStatus.boolValue) {
         [UIView animateWithBlock:^{
             self.feedButton.alpha = 1.0;
