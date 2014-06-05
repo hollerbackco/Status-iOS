@@ -59,6 +59,20 @@
                         <constraint firstAttribute="height" constant="54" id="JT4-1s-X8S"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQu-dY-HgZ" userLabel="stillButton">
+                    <rect key="frame" x="10" y="126" width="68" height="68"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="68" id="nlJ-YR-3iX"/>
+                        <constraint firstAttribute="width" constant="68" id="sK3-h0-y3h"/>
+                    </constraints>
+                    <state key="normal" image="camera-button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="captureStillImage:" destination="-1" eventType="touchUpInside" id="Mk9-co-geE"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4e-Xd-ABO" userLabel="captionButton">
                     <rect key="frame" x="10" y="10" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -113,20 +127,6 @@
                     </state>
                     <connections>
                         <action selector="feedAction:" destination="-1" eventType="touchUpInside" id="DSB-4w-zAd"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQu-dY-HgZ" userLabel="stillButton">
-                    <rect key="frame" x="10" y="126" width="68" height="68"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="68" id="nlJ-YR-3iX"/>
-                        <constraint firstAttribute="width" constant="68" id="sK3-h0-y3h"/>
-                    </constraints>
-                    <state key="normal" image="camera-button.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="captureStillImage:" destination="-1" eventType="touchUpInside" id="Mk9-co-geE"/>
                     </connections>
                 </button>
             </subviews>
