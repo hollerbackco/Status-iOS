@@ -22,6 +22,10 @@
 		0D375BBA193E2C30006D8768 /* GothamRnd-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D375BB9193E2C30006D8768 /* GothamRnd-Medium.otf */; };
 		0D375BBD193E49D5006D8768 /* STOrientationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D375BBC193E49D5006D8768 /* STOrientationManager.m */; };
 		0D375BBF193E7BE2006D8768 /* rotate-alert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D375BBE193E7BE2006D8768 /* rotate-alert@2x.png */; };
+		0D44290F193FFD320016D8FF /* camera-right-nav-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D44290C193FFD320016D8FF /* camera-right-nav-button@2x.png */; };
+		0D442910193FFD320016D8FF /* view-comments-nav-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D44290D193FFD320016D8FF /* view-comments-nav-button@2x.png */; };
+		0D442911193FFD320016D8FF /* settings-nav-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D44290E193FFD320016D8FF /* settings-nav-button@2x.png */; };
+		0D442913194000F70016D8FF /* camera-left-nav-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D442912194000F70016D8FF /* camera-left-nav-button@2x.png */; };
 		0D5E5AB7192C3B9100F7DA7C /* STStatusFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D5E5AB5192C3B9100F7DA7C /* STStatusFeedTableViewController.m */; };
 		0D5E5AB8192C3B9100F7DA7C /* STStatusFeedTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D5E5AB6192C3B9100F7DA7C /* STStatusFeedTableViewController.xib */; };
 		0D6784361931493200747111 /* STLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6784351931493200747111 /* STLogger.m */; };
@@ -129,6 +133,10 @@
 		0D375BBB193E49D5006D8768 /* STOrientationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STOrientationManager.h; path = Managers/STOrientationManager.h; sourceTree = "<group>"; };
 		0D375BBC193E49D5006D8768 /* STOrientationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STOrientationManager.m; path = Managers/STOrientationManager.m; sourceTree = "<group>"; };
 		0D375BBE193E7BE2006D8768 /* rotate-alert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rotate-alert@2x.png"; sourceTree = "<group>"; };
+		0D44290C193FFD320016D8FF /* camera-right-nav-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-right-nav-button@2x.png"; sourceTree = "<group>"; };
+		0D44290D193FFD320016D8FF /* view-comments-nav-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "view-comments-nav-button@2x.png"; sourceTree = "<group>"; };
+		0D44290E193FFD320016D8FF /* settings-nav-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-nav-button@2x.png"; sourceTree = "<group>"; };
+		0D442912194000F70016D8FF /* camera-left-nav-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-left-nav-button@2x.png"; sourceTree = "<group>"; };
 		0D5E5AB4192C3B9100F7DA7C /* STStatusFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusFeedTableViewController.h; path = Controllers/Status/STStatusFeedTableViewController.h; sourceTree = "<group>"; };
 		0D5E5AB5192C3B9100F7DA7C /* STStatusFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusFeedTableViewController.m; path = Controllers/Status/STStatusFeedTableViewController.m; sourceTree = "<group>"; };
 		0D5E5AB6192C3B9100F7DA7C /* STStatusFeedTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STStatusFeedTableViewController.xib; path = Controllers/Status/STStatusFeedTableViewController.xib; sourceTree = "<group>"; };
@@ -567,6 +575,10 @@
 				0DB0BE26192AA60B002F568F /* fb-login@2x.png */,
 				0DFB825D192BD005008CD552 /* camera-button@2x.png */,
 				0DFB825E192BD005008CD552 /* flip-icon@2x.png */,
+				0D44290C193FFD320016D8FF /* camera-right-nav-button@2x.png */,
+				0D442912194000F70016D8FF /* camera-left-nav-button@2x.png */,
+				0D44290D193FFD320016D8FF /* view-comments-nav-button@2x.png */,
+				0D44290E193FFD320016D8FF /* settings-nav-button@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -670,6 +682,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D106F1A193CC96F0047796F /* STMyStatusHistoryViewController.xib in Resources */,
+				0D442913194000F70016D8FF /* camera-left-nav-button@2x.png in Resources */,
 				0DB0BD9A192A85C9002F568F /* InfoPlist.strings in Resources */,
 				0D375BBF193E7BE2006D8768 /* rotate-alert@2x.png in Resources */,
 				0DB0BE01192A968F002F568F /* STLoginViewController.xib in Resources */,
@@ -684,8 +697,11 @@
 				0D27793A193FAFAE0032F367 /* caption-button@2x.png in Resources */,
 				0DB0BDF7192A9658002F568F /* STCreateStatusViewController.xib in Resources */,
 				0DFB8260192BD005008CD552 /* flip-icon@2x.png in Resources */,
+				0D442910193FFD320016D8FF /* view-comments-nav-button@2x.png in Resources */,
 				0DFB825F192BD005008CD552 /* camera-button@2x.png in Resources */,
 				0D5E5AB8192C3B9100F7DA7C /* STStatusFeedTableViewController.xib in Resources */,
+				0D44290F193FFD320016D8FF /* camera-right-nav-button@2x.png in Resources */,
+				0D442911193FFD320016D8FF /* settings-nav-button@2x.png in Resources */,
 				0D03815E1933D1880002F8BD /* STStatusCommentViewController.xib in Resources */,
 				0D27793D193FAFAE0032F367 /* statuses-nav-button@2x.png in Resources */,
 				0D375BBA193E2C30006D8768 /* GothamRnd-Medium.otf in Resources */,
