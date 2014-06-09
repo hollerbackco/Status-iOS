@@ -20,7 +20,7 @@
 
 @implementation STFeedGridViewController
 
-@synthesize collectionView, refreshControl, statuses, shouldDisplayExtraBottomCell;
+@synthesize collectionView, refreshControl, shouldDisplayExtraBottomCell;
 
 static NSString *ExtraBottomCellIdentifier = @"ExtraBottomCellIdentifier";
 
@@ -130,7 +130,7 @@ static NSString *ExtraBottomCellIdentifier = @"ExtraBottomCellIdentifier";
     }
     
     STFeedCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:STFeedCellIdent forIndexPath:indexPath];
-    STStatus *status = [statuses objectAtIndex:[indexPath item]];
+    STStatus *status = [self.statuses objectAtIndex:[indexPath item]];
     PFFile *imageFile = [status objectForKey:@"image"];
     [cell setImageURL:[imageFile url]];
     
@@ -155,7 +155,7 @@ static NSString *ExtraBottomCellIdentifier = @"ExtraBottomCellIdentifier";
         }
     } else {
         
-        STStatus *status = [statuses objectAtIndex:[indexPath item]];
+        STStatus *status = [self.statuses objectAtIndex:[indexPath item]];
         STStatusCommentViewController *statusCommentViewController = [[STStatusCommentViewController alloc] initWithNib];
         statusCommentViewController.status = status;
         [self presentViewController:statusCommentViewController animated:YES completion:nil];
@@ -270,7 +270,6 @@ static NSString *ExtraBottomCellIdentifier = @"ExtraBottomCellIdentifier";
         NSDate *sentAt2 = status2[@"sentAt"];
         NSDate *updatedAt1 = status1.updatedAt;
         NSDate *updatedAt2 = status2.updatedAt;
-        return [sentAt2 compare:sentAt1];
         
         NSComparisonResult result;
         if (sentAt1 && sentAt2) {
