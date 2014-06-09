@@ -9,7 +9,7 @@
 #import <RACEXTScope.h>
 
 #import "UIImageView+WebCache.h"
-#import "UIColor+JNHelper.h"
+#import "UIColor+STHelper.h"
 #import "UIView+JNHelper.h"
 
 #import "JNIcon.h"
@@ -54,18 +54,27 @@
     
     self.spinnerView.alpha = 0.0;
     
-    FAKIonIcons *prevIcon = [FAKIonIcons chevronLeftIconWithSize:40.0];
+    FAKIonIcons *prevIcon = [FAKIonIcons chevronLeftIconWithSize:32.0];
     [prevIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.prevCommentButton setAttributedTitle:prevIcon.attributedString forState:UIControlStateNormal];
+    [self.prevCommentButton.layer insertSublayer:
+     [CALayer circleLayerWithSize:self.prevCommentButton.bounds.size
+                      strokeColor:nil
+                        fillColor:STGreenButtonBackgroundColor
+                        lineWidth:0.0] atIndex:0];
     [self.prevCommentButton applyDarkerShadowLayer];
     self.prevCommentButton.alpha = 0.0;
     [self.prevCommentButton addTarget:self action:@selector(prevAction:) forControlEvents:UIControlEventTouchUpInside];
     
     self.prevCommentButton.alpha = 0.0;
-    
-    FAKIonIcons *nextIcon = [FAKIonIcons chevronRightIconWithSize:40.0];
+    FAKIonIcons *nextIcon = [FAKIonIcons chevronRightIconWithSize:32.0];
     [nextIcon addAttribute:NSForegroundColorAttributeName value:JNWhiteColor];
     [self.nextCommentButton setAttributedTitle:nextIcon.attributedString forState:UIControlStateNormal];
+    [self.nextCommentButton.layer insertSublayer:
+     [CALayer circleLayerWithSize:self.nextCommentButton.bounds.size
+                      strokeColor:nil
+                        fillColor:STGreenButtonBackgroundColor
+                        lineWidth:0.0] atIndex:0];
     [self.nextCommentButton applyDarkerShadowLayer];
     self.nextCommentButton.alpha = 0.0;
     [self.nextCommentButton addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];

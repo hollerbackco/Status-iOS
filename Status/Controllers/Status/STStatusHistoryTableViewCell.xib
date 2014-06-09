@@ -26,7 +26,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </activityIndicatorView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAE-4z-74y">
-                        <rect key="frame" x="0.0" y="135" width="50" height="50"/>
+                        <rect key="frame" x="10" y="135" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="Ypa-UF-nD5"/>
@@ -36,11 +36,11 @@
                         </state>
                     </button>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="IgG-YG-Kb3">
-                        <rect key="frame" x="533" y="150" width="20" height="20"/>
+                        <rect key="frame" x="523" y="150" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </activityIndicatorView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZv-IS-Zhe">
-                        <rect key="frame" x="518" y="135" width="50" height="50"/>
+                        <rect key="frame" x="508" y="135" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" title=">">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -70,24 +70,24 @@
                 <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="TMz-PY-Iu4" firstAttribute="centerX" secondItem="FSi-3V-IA1" secondAttribute="centerX" id="1oV-kq-b6e"/>
-                    <constraint firstItem="ZZv-IS-Zhe" firstAttribute="trailing" secondItem="uNg-1q-5A2" secondAttribute="trailing" id="2GZ-LD-JfD"/>
+                    <constraint firstItem="ZZv-IS-Zhe" firstAttribute="trailing" secondItem="uNg-1q-5A2" secondAttribute="trailing" constant="-10" id="2GZ-LD-JfD"/>
                     <constraint firstItem="TMz-PY-Iu4" firstAttribute="centerY" secondItem="VCW-zB-FQd" secondAttribute="centerY" id="2w5-mb-11l"/>
                     <constraint firstItem="FSi-3V-IA1" firstAttribute="top" secondItem="sAE-4z-74y" secondAttribute="bottom" constant="81" id="76D-Kk-H4w"/>
                     <constraint firstItem="VCW-zB-FQd" firstAttribute="leading" secondItem="uNg-1q-5A2" secondAttribute="leading" id="81E-K4-v0B"/>
                     <constraint firstAttribute="bottom" secondItem="uNg-1q-5A2" secondAttribute="bottom" constant="-1" id="BFG-eU-7Zm"/>
-                    <constraint firstAttribute="trailing" secondItem="ZZv-IS-Zhe" secondAttribute="trailing" id="Gmw-wL-Y4o"/>
-                    <constraint firstItem="sAE-4z-74y" firstAttribute="leading" secondItem="LLB-lg-rkN" secondAttribute="leading" id="I1I-vw-fum"/>
+                    <constraint firstAttribute="trailing" secondItem="ZZv-IS-Zhe" secondAttribute="trailing" constant="10" id="Gmw-wL-Y4o"/>
+                    <constraint firstItem="sAE-4z-74y" firstAttribute="leading" secondItem="LLB-lg-rkN" secondAttribute="leading" constant="10" id="I1I-vw-fum"/>
                     <constraint firstItem="IgG-YG-Kb3" firstAttribute="centerX" secondItem="ZZv-IS-Zhe" secondAttribute="centerX" id="P7s-Ml-wb2"/>
                     <constraint firstItem="FSi-3V-IA1" firstAttribute="top" secondItem="TMz-PY-Iu4" secondAttribute="bottom" constant="96" id="PCD-kB-TTA"/>
-                    <constraint firstItem="sAE-4z-74y" firstAttribute="leading" secondItem="FSi-3V-IA1" secondAttribute="leading" id="TLT-3f-XbD"/>
+                    <constraint firstItem="sAE-4z-74y" firstAttribute="leading" secondItem="FSi-3V-IA1" secondAttribute="leading" constant="10" id="TLT-3f-XbD"/>
                     <constraint firstItem="uNg-1q-5A2" firstAttribute="trailing" secondItem="VCW-zB-FQd" secondAttribute="trailing" id="U3V-Ww-lqh"/>
                     <constraint firstItem="FSi-3V-IA1" firstAttribute="leading" secondItem="uNg-1q-5A2" secondAttribute="leading" id="e7D-QA-hQx"/>
                     <constraint firstItem="VCW-zB-FQd" firstAttribute="top" secondItem="uNg-1q-5A2" secondAttribute="top" id="gT0-07-H0v"/>
                     <constraint firstItem="sAE-4z-74y" firstAttribute="top" secondItem="ZZv-IS-Zhe" secondAttribute="top" id="jVg-bQ-zPK"/>
                     <constraint firstItem="ZZv-IS-Zhe" firstAttribute="bottom" secondItem="sAE-4z-74y" secondAttribute="bottom" id="jnP-3k-xFf"/>
                     <constraint firstItem="FSi-3V-IA1" firstAttribute="bottom" secondItem="VCW-zB-FQd" secondAttribute="bottom" id="k9g-jg-yZ5"/>
-                    <constraint firstItem="FSi-3V-IA1" firstAttribute="trailing" secondItem="ZZv-IS-Zhe" secondAttribute="trailing" id="oUK-ky-T3t"/>
-                    <constraint firstAttribute="trailing" secondItem="IgG-YG-Kb3" secondAttribute="trailing" constant="15" id="pSv-AG-QR2"/>
+                    <constraint firstItem="FSi-3V-IA1" firstAttribute="trailing" secondItem="ZZv-IS-Zhe" secondAttribute="trailing" constant="10" id="oUK-ky-T3t"/>
+                    <constraint firstAttribute="trailing" secondItem="IgG-YG-Kb3" secondAttribute="trailing" constant="25" id="pSv-AG-QR2"/>
                     <constraint firstItem="VCW-zB-FQd" firstAttribute="top" secondItem="LLB-lg-rkN" secondAttribute="top" id="q6F-g4-f1i"/>
                     <constraint firstItem="IgG-YG-Kb3" firstAttribute="centerY" secondItem="ZZv-IS-Zhe" secondAttribute="centerY" id="qUo-fT-DmS"/>
                     <constraint firstItem="TMz-PY-Iu4" firstAttribute="top" secondItem="IgG-YG-Kb3" secondAttribute="top" id="yjW-bu-GG6"/>
