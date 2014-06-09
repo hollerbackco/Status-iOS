@@ -243,8 +243,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self.statusFeedViewController performFetch];
     
     [self observeNewCommentsNotification];
-    
-    self.feedButton.alpha = 0.0;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -498,6 +496,10 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 - (void)didCaptureImage:(UIImage*)capturedImage
 {
     JNLog();
+    
+    // set session var
+    [[STSession sharedInstance] setValue:@(YES) forKey:kSTSessionStoreHasCreatedStatus];
+    
     // push to feed
     [self pushToStatusFeedWithImage:capturedImage];
 }
@@ -567,18 +569,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     [self resetCreateStatus];
     
     [self toggleHistoryButton];
-    
-    NSNumber *hasCreatedStatus = [[STSession sharedInstance] getValueForKey:kSTSessionStoreHasCreatedStatus];
-    JNLogPrimitive(hasCreatedStatus.boolValue);
-    if (hasCreatedStatus.boolValue) {
-        [UIView animateWithBlock:^{
-            self.feedButton.alpha = 1.0;
-        }];
-    } else {
-        [UIView animateWithBlock:^{
-            self.feedButton.alpha = 0.0;
-        }];
-    }
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     

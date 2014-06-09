@@ -150,6 +150,58 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     
     [self.tableViewController.tableView scrollRectToVisible:CGRectMake(0.0, 0.0, 1.0, 1.0) animated:NO];
+    
+    if ([self shouldDisplayFeedOverlay]) {
+        
+        [self showFeedOverlay];
+        
+        [self.view bringSubviewToFront:self.footerView];
+
+        self.tableViewController.tableView.userInteractionEnabled = NO;
+    } else {
+        
+        [self hideFeedOverlay];
+        
+        self.tableViewController.tableView.userInteractionEnabled = YES;
+    }
+}
+
+- (BOOL)shouldDisplayFeedOverlay
+{
+    NSNumber *hasCreatedStatus = [[STSession sharedInstance] getValueForKey:kSTSessionStoreHasCreatedStatus];
+    JNLogPrimitive(hasCreatedStatus.boolValue);
+    return !hasCreatedStatus.boolValue;
+}
+
+static NSUInteger kSTFeedOverlayView = 8172318;
+
+- (void)showFeedOverlay
+{
+    JNLog();
+    JNBlurView *overlayView = [[JNBlurView alloc] initWithFrame:self.view.bounds];
+    overlayView.tag = kSTFeedOverlayView;
+    
+    UILabel *overlayLabel = [[UILabel alloc] initWithFrame:overlayView.bounds];
+    overlayLabel.textAlignment = NSTextAlignmentCenter;
+    overlayLabel.font = [UIFont primaryFontWithSize:24.0];
+    overlayLabel.text =
+    @"Set your status to see your friend's statuses.\n\n"
+    "Each status you post will replace the previous one.\n\n"
+    "Your Facebook friends who have the app\n"
+    "will be shown in this feed.";
+    overlayLabel.numberOfLines = 0;
+    overlayLabel.textColor = JNBlackColor;
+    [overlayView addSubview:overlayLabel];
+    
+    [self.view addSubview:overlayView];
+}
+
+- (void)hideFeedOverlay
+{
+    UIView *overlayView = [self.view viewWithTag:kSTFeedOverlayView];
+    if (overlayView) {
+        [overlayView removeFromSuperview];
+    }
 }
 
 #pragma mark - Actions
@@ -204,6 +256,7 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 - (void)performCreateStatusWithImage:(UIImage*)image
 {
     JNLog();
+    
     [self showSavingBarViewAnimated:YES];
     
     self.savingLabel.text = @"Saving...";
@@ -318,9 +371,6 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
          });
          
      }];
-    
-    // set session var
-    [[STSession sharedInstance] setValue:@(YES) forKey:kSTSessionStoreHasCreatedStatus];
 }
 
 - (void)didCreateStatus:(STStatus*)status
