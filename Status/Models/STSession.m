@@ -133,6 +133,11 @@
 	}];
 }
 
+- (void)logout
+{
+    [PFUser logOut];
+}
+
 #pragma mark - Key Value store
 
 - (void)setValue:(id)value forKey:(NSString*)key

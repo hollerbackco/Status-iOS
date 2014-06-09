@@ -6,10 +6,15 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
-#import "STMyStatusHistoryViewController.h"
-#import "STStatusHistoryTableViewController.h"
+#import <UIActionSheet+RACSignalSupport.h>
+
+#import "UIViewController+STShareActivity.h"
 
 #import "JNIcon.h"
+
+#import "STMyStatusHistoryViewController.h"
+#import "STStatusHistoryTableViewController.h"
+#import "STAppDelegate.h"
 
 @interface STMyStatusHistoryViewController ()
 
@@ -80,7 +85,41 @@
 
 - (IBAction)settingsAction:(id)sender
 {
+    UIActionSheet *settingsActionSheet =
+    [[UIActionSheet alloc]
+     initWithTitle:@"Settings"
+     delegate:nil
+     cancelButtonTitle:@"Cancel"
+     destructiveButtonTitle:nil
+     otherButtonTitles:@"Invite Friends", @"Log out", nil];
     
+    [settingsActionSheet showInView:self.view];
+    
+    [[settingsActionSheet rac_buttonClickedSignal] subscribeNext:^(id x) {
+        JNLogObject(x);
+        switch (((NSNumber*) x).integerValue) {
+            case 0:
+                // invite friends
+                [self showShareActivityView:nil];
+                break;
+            case 1:
+                // log out
+                [self logout];
+                break;
+            case 2:
+                // cancel
+                break;
+            default:
+                break;
+        }
+    }];
+}
+
+- (void)logout
+{
+    [[STSession sharedInstance] logout];
+    
+    [((STAppDelegate*) [UIApplication sharedApplication].delegate) resetToLogin];
 }
 
 - (IBAction)cameraAction:(id)sender

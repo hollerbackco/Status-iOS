@@ -28,6 +28,7 @@
 
 - (BOOL)isLoggedIn;
 - (void)login:(id<STSessionDelegate>)delegate;
+- (void)logout;
 
 #pragma mark - Key Value store
 

@@ -14,4 +14,6 @@
 
 - (void)showCreateStatusAsRootViewController:(BOOL)shouldLoadCamera;
 
+- (void)resetToLogin;
+
 @end

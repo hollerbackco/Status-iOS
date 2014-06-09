@@ -77,6 +77,12 @@
     self.window.rootViewController = createStatusViewController;
 }
 
+- (void)resetToLogin
+{
+    STLoginViewController *loginViewController = [[STLoginViewController alloc] initWithNib];
+    self.window.rootViewController = loginViewController;
+}
+
 #pragma mark - App Enter / Exit
 
 - (void)applicationWillResignActive:(UIApplication *)application
