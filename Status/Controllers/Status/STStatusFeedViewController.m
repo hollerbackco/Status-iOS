@@ -9,6 +9,7 @@
 #import <RACEXTScope.h>
 
 #import "UIViewController+JNHelper.h"
+#import "UIViewController+STShareActivity.h"
 
 #import "JNAlertView.h"
 #import "JNIcon.h"
@@ -234,24 +235,6 @@ static NSUInteger kSTFeedOverlayView = 8172318;
     statusCommentViewController.status = status;
     statusCommentViewController.view.frame = self.view.bounds;
     [self presentViewController:statusCommentViewController animated:YES completion:nil];
-}
-
-- (void)showShareActivityView:(id)sender
-{
-    JNLog();
-    NSString *string = @"Try out Status!";
-    NSURL *URL = [NSURL URLWithString:@"http://thestatusapp.com"];
-    
-    UIActivityViewController *activityViewController =
-    [[UIActivityViewController alloc] initWithActivityItems:@[string, URL]
-                                      applicationActivities:nil];
-    
-    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop,UIActivityTypePostToFlickr, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo, UIActivityTypePostToWeibo];
-    
-    [self presentViewController:activityViewController
-                       animated:YES
-                     completion:^{
-                     }];
 }
 
 #pragma mark - Create Status

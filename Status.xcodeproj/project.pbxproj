@@ -93,6 +93,7 @@
 		0DB0BE3A192AC3EB002F568F /* STStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE39192AC3EB002F568F /* STStatus.m */; };
 		0DB0BE3E192AC821002F568F /* STStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */; };
 		0DB0BE3F192AC821002F568F /* STStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */; };
+		0DBE6F14194646670075F8E5 /* UIViewController+STShareActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE6F13194646670075F8E5 /* UIViewController+STShareActivity.m */; };
 		0DD1418819368304005EBCD6 /* STPushManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD1418719368304005EBCD6 /* STPushManager.m */; };
 		0DE3696E193138790084D330 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DE3696D193138790084D330 /* Crashlytics.framework */; };
 		0DF150EF1932B3B2009565FD /* UIFont+STHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF150EE1932B3B2009565FD /* UIFont+STHelper.m */; };
@@ -243,6 +244,8 @@
 		0DB0BE3B192AC821002F568F /* STStatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusTableViewCell.h; path = Controllers/Status/STStatusTableViewCell.h; sourceTree = "<group>"; };
 		0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STStatusTableViewCell.m; path = Controllers/Status/STStatusTableViewCell.m; sourceTree = "<group>"; };
 		0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STStatusTableViewCell.xib; path = Controllers/Status/STStatusTableViewCell.xib; sourceTree = "<group>"; };
+		0DBE6F12194646670075F8E5 /* UIViewController+STShareActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+STShareActivity.h"; path = "Helpers/UIViewController+STShareActivity.h"; sourceTree = "<group>"; };
+		0DBE6F13194646670075F8E5 /* UIViewController+STShareActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+STShareActivity.m"; path = "Helpers/UIViewController+STShareActivity.m"; sourceTree = "<group>"; };
 		0DD1418619368304005EBCD6 /* STPushManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STPushManager.h; path = Helpers/STPushManager.h; sourceTree = "<group>"; };
 		0DD1418719368304005EBCD6 /* STPushManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STPushManager.m; path = Helpers/STPushManager.m; sourceTree = "<group>"; };
 		0DE3696D193138790084D330 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -525,6 +528,8 @@
 		0DB0BE05192A9813002F568F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0DBE6F12194646670075F8E5 /* UIViewController+STShareActivity.h */,
+				0DBE6F13194646670075F8E5 /* UIViewController+STShareActivity.m */,
 				0B4D0A8A193E75C500E0E325 /* NSString+AttributedText.h */,
 				0B4D0A8B193E75C500E0E325 /* NSString+AttributedText.m */,
 				0DB0BE02192A980A002F568F /* STConstants.h */,
@@ -800,6 +805,7 @@
 				0DD1418819368304005EBCD6 /* STPushManager.m in Sources */,
 				0D2054A8192D745900F584D7 /* STAppManager.m in Sources */,
 				0DB0BDA0192A85C9002F568F /* STAppDelegate.m in Sources */,
+				0DBE6F14194646670075F8E5 /* UIViewController+STShareActivity.m in Sources */,
 				0DB0BE33192AB322002F568F /* AVCamUtilities.m in Sources */,
 				0DB0BDEC192A9605002F568F /* UIViewController+JNHelper.m in Sources */,
 				0DB0BE31192AB322002F568F /* AVCamCaptureManager.m in Sources */,
