@@ -253,6 +253,8 @@
     [self performBlock:^{
         
         [self dismissViewControllerAnimated:YES completion:nil];
+        self.headerView.alpha = 0.0;
+        
     } afterDelay:0.7];
 }
 
