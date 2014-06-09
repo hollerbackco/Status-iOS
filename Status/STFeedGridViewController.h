@@ -1,5 +1,5 @@
 //
-//  STFeedViewController.h
+//  STFeedGridViewController.h
 //  Status
 //
 //  Created by Nick Jensen on 6/4/14.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <SDWebImage/SDWebImageManager.h>
 
-@interface STFeedViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate> {
+@interface STFeedGridViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate> {
     
     BOOL isRefreshing;
 }
@@ -17,5 +17,7 @@
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSArray *statuses;
+
+- (void)performFetchWithCachePolicy:(PFCachePolicy)cachePolicy;
 
 @end

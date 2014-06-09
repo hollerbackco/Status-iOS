@@ -1,18 +1,18 @@
 //
-//  STFeedViewController.m
+//  STFeedGridViewController.m
 //  Status
 //
 //  Created by Nick Jensen on 6/4/14.
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
-#import "STFeedViewController.h"
+#import "STFeedGridViewController.h"
 #import "STFeedCell.h"
 #import "STStatus.h"
 #import "JNAlertView.h"
 #import "STStatusCommentViewController.h"
 
-@implementation STFeedViewController
+@implementation STFeedGridViewController
 
 @synthesize collectionView, refreshControl, statuses;
 
@@ -45,16 +45,9 @@
     [self.collectionView addSubview:self.refreshControl];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    
-    [self loadDataFromServer];
-}
-
 - (void)handlePullToRefresh:(UIRefreshControl *)refreshControl {
     
-    [self loadDataFromServer];
+    [self performFetchWithCachePolicy:kPFCachePolicyNetworkElseCache];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView_ {
@@ -86,14 +79,14 @@
 
 #pragma mark - Data Loading
 
-- (void)loadDataFromServer {
+- (void)performFetchWithCachePolicy:(PFCachePolicy)cachePolicy {
     
     if (!isRefreshing) {
         
         isRefreshing = YES;
 
         PFQuery *query = [PFQuery queryWithClassName:@"Status"];
-        [query setCachePolicy:kPFCachePolicyNetworkElseCache];
+        [query setCachePolicy:cachePolicy];
         
         [self fetchFriendIdsCompleted:^(NSArray *friendIds, NSError *error) {
             
@@ -112,6 +105,14 @@
             }
             
             [query includeKey:@"user"];
+            
+            if ((cachePolicy == kPFCachePolicyCacheThenNetwork ||
+                 cachePolicy == kPFCachePolicyCacheElseNetwork ||
+                 cachePolicy == kPFCachePolicyCacheOnly) && !query.hasCachedResult) {
+                
+                query.cachePolicy = kPFCachePolicyNetworkOnly;
+            }
+            
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 
                 if (!error) {

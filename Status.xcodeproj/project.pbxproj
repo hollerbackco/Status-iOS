@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B4D0A89193E733600E0E325 /* STMovableTextOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D0A88193E733600E0E325 /* STMovableTextOverlay.m */; };
 		0B4D0A8C193E75C500E0E325 /* NSString+AttributedText.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D0A8B193E75C500E0E325 /* NSString+AttributedText.m */; };
-		0BA5BD5E193FC4C400A3E6A3 /* STFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5BD5D193FC4C400A3E6A3 /* STFeedViewController.m */; };
+		0BA5BD5E193FC4C400A3E6A3 /* STFeedGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5BD5D193FC4C400A3E6A3 /* STFeedGridViewController.m */; };
 		0BA5BD61193FC6FA00A3E6A3 /* STFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA5BD60193FC6FA00A3E6A3 /* STFeedCell.m */; };
 		0D03815D1933D1880002F8BD /* STStatusCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D03815B1933D1880002F8BD /* STStatusCommentViewController.m */; };
 		0D03815E1933D1880002F8BD /* STStatusCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D03815C1933D1880002F8BD /* STStatusCommentViewController.xib */; };
@@ -114,8 +114,8 @@
 		0B4D0A88193E733600E0E325 /* STMovableTextOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STMovableTextOverlay.m; sourceTree = "<group>"; };
 		0B4D0A8A193E75C500E0E325 /* NSString+AttributedText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+AttributedText.h"; sourceTree = "<group>"; };
 		0B4D0A8B193E75C500E0E325 /* NSString+AttributedText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+AttributedText.m"; sourceTree = "<group>"; };
-		0BA5BD5C193FC4C400A3E6A3 /* STFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFeedViewController.h; sourceTree = "<group>"; };
-		0BA5BD5D193FC4C400A3E6A3 /* STFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFeedViewController.m; sourceTree = "<group>"; };
+		0BA5BD5C193FC4C400A3E6A3 /* STFeedGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFeedGridViewController.h; sourceTree = "<group>"; };
+		0BA5BD5D193FC4C400A3E6A3 /* STFeedGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFeedGridViewController.m; sourceTree = "<group>"; };
 		0BA5BD5F193FC6FA00A3E6A3 /* STFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFeedCell.h; sourceTree = "<group>"; };
 		0BA5BD60193FC6FA00A3E6A3 /* STFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFeedCell.m; sourceTree = "<group>"; };
 		0D03815A1933D1880002F8BD /* STStatusCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STStatusCommentViewController.h; path = Controllers/Status/STStatusCommentViewController.h; sourceTree = "<group>"; };
@@ -506,8 +506,8 @@
 				0DB0BE3B192AC821002F568F /* STStatusTableViewCell.h */,
 				0DB0BE3C192AC821002F568F /* STStatusTableViewCell.m */,
 				0DB0BE3D192AC821002F568F /* STStatusTableViewCell.xib */,
-				0BA5BD5C193FC4C400A3E6A3 /* STFeedViewController.h */,
-				0BA5BD5D193FC4C400A3E6A3 /* STFeedViewController.m */,
+				0BA5BD5C193FC4C400A3E6A3 /* STFeedGridViewController.h */,
+				0BA5BD5D193FC4C400A3E6A3 /* STFeedGridViewController.m */,
 				0BA5BD5F193FC6FA00A3E6A3 /* STFeedCell.h */,
 				0BA5BD60193FC6FA00A3E6A3 /* STFeedCell.m */,
 			);
@@ -699,7 +699,6 @@
 				0D03815E1933D1880002F8BD /* STStatusCommentViewController.xib in Resources */,
 				0D27793D193FAFAE0032F367 /* statuses-nav-button@2x.png in Resources */,
 				0D375BBA193E2C30006D8768 /* GothamRnd-Medium.otf in Resources */,
-				0D641A05192E6A6C002B3FD6 /* STCaptionOverlayViewController.xib in Resources */,
 				0DB0BDA2192A85C9002F568F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -805,7 +804,7 @@
 				0DB0BDF6192A9658002F568F /* STCreateStatusViewController.m in Sources */,
 				0DF150EF1932B3B2009565FD /* UIFont+STHelper.m in Sources */,
 				0DAF3E681934109C003E47AD /* STStatusHistoryTableViewCell.m in Sources */,
-				0BA5BD5E193FC4C400A3E6A3 /* STFeedViewController.m in Sources */,
+				0BA5BD5E193FC4C400A3E6A3 /* STFeedGridViewController.m in Sources */,
 				0D67843919314A0F00747111 /* STTransferManager.m in Sources */,
 				0DB0BE00192A968F002F568F /* STLoginViewController.m in Sources */,
 				0DB0BE3E192AC821002F568F /* STStatusTableViewCell.m in Sources */,
