@@ -16,6 +16,7 @@
 
 #import "STStatusFeedViewController.h"
 #import "STStatusFeedTableViewController.h"
+#import "STFeedGridViewController.h"
 #import "STStatusCommentViewController.h"
 
 #import "STStatusTableViewCell.h"
@@ -35,7 +36,7 @@
 @property (weak, nonatomic) IBOutlet JNViewWithTouchableSubviews *footerView;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 
-@property (nonatomic, strong) STStatusFeedTableViewController *tableViewController;
+@property (nonatomic, strong) STFeedGridViewController *gridViewController;
 
 @property (nonatomic, strong) NSArray *statuses;
 
@@ -65,7 +66,7 @@
     JNLog();
     [self setupTableViewController];
     
-    [self.tableViewController performFetchWithCachePolicy:kPFCachePolicyCacheThenNetwork];
+    [self.gridViewController performFetchWithCachePolicy:kPFCachePolicyCacheThenNetwork];
 }
 
 #pragma mark - Views
@@ -101,33 +102,35 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     
     [self addTableViewControllerToContentView];
     
-    [self.tableViewController performFetchWithCachePolicy:kPFCachePolicyCacheThenNetwork];
+    [self.gridViewController performFetchWithCachePolicy:kPFCachePolicyCacheThenNetwork];
 }
 
 - (void)setupTableViewController
 {
     JNLog();
-    if (!self.tableViewController) {
-        self.tableViewController = [[STStatusFeedTableViewController alloc] initWithNibName:@"STStatusFeedTableViewController" bundle:nil];
-        [self addChildViewController:self.tableViewController];
+    if (!self.gridViewController) {
+        self.gridViewController = [[STFeedGridViewController alloc] init];
+        [self addChildViewController:self.gridViewController];
     }
     
-    @weakify(self);
-    self.tableViewController.didSelectStatus = ^(STStatus *status) {
-        
-        [self_weak_ didSelectStatus:status];
-    };
-    
-    self.tableViewController.didTapShowShareActivityBlock = ^() {
-        
-        [self_weak_ showShareActivityView:nil];
-    };
+// TODO: This isn't needed on the grid, remove. -nick
+//
+//  @weakify(self);
+//  self.tableViewController.didSelectStatus = ^(STStatus *status) {
+//      [self_weak_ didSelectStatus:status];
+//  };
+//
+// TODO: The share item still needs to be added to the grid and hooked up. -nick
+//
+//  self.tableViewController.didTapShowShareActivityBlock = ^() {
+//      [self_weak_ showShareActivityView:nil];
+//  };
 }
 
 - (void)addTableViewControllerToContentView
 {
-    self.tableViewController.view.frame = self.contentView.bounds;
-    [self.contentView addSubview:self.tableViewController.view];
+    self.gridViewController.view.frame = self.contentView.bounds;
+    [self.contentView addSubview:self.gridViewController.view];
 }
 
 - (void)showSavingBarViewAnimated:(BOOL)animated
@@ -364,7 +367,7 @@ static NSUInteger kSTFeedOverlayView = 8172318;
     JNLog();
     [self finishedCreateStatus];
     
-    [self.tableViewController performFetchWithCachePolicy:kPFCachePolicyNetworkOnly];
+    [self.gridViewController performFetchWithCachePolicy:kPFCachePolicyNetworkOnly];
 }
 
 - (void)finishedCreateStatus
