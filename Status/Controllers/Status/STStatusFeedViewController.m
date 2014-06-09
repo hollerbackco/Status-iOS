@@ -188,8 +188,8 @@ static NSUInteger kSTFeedOverlayView = 8172318;
     overlayLabel.textAlignment = NSTextAlignmentCenter;
     overlayLabel.font = [UIFont primaryFontWithSize:24.0];
     overlayLabel.text =
-    @"Set your status to see your friend's statuses.\n\n"
-    "Each status you post will replace the previous one.\n\n"
+    @"Set your status to see the statuses of your friends.\n\n"
+    "Each status you post replaces your last.\n\n"
     "Your Facebook friends who have the app\n"
     "will be shown in this feed.";
     overlayLabel.numberOfLines = 0;
