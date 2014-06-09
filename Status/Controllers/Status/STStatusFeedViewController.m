@@ -55,9 +55,9 @@
 
 - (void)resetView
 {
-    if (self.tableViewController && self.tableViewController.tableView) {
+    if (self.gridViewController && self.gridViewController.collectionView) {
         
-        [self.tableViewController.tableView scrollRectToVisible:CGRectMake(0.0, 0.0, 1.0, 1.0) animated:NO];
+        [self.gridViewController.collectionView scrollRectToVisible:CGRectMake(0.0, 0.0, 1.0, 1.0) animated:NO];
     }
 }
 
@@ -113,18 +113,10 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
         [self addChildViewController:self.gridViewController];
     }
     
-// TODO: This isn't needed on the grid, remove. -nick
-//
-//  @weakify(self);
-//  self.tableViewController.didSelectStatus = ^(STStatus *status) {
-//      [self_weak_ didSelectStatus:status];
-//  };
-//
-// TODO: The share item still needs to be added to the grid and hooked up. -nick
-//
-//  self.tableViewController.didTapShowShareActivityBlock = ^() {
-//      [self_weak_ showShareActivityView:nil];
-//  };
+    @weakify(self);
+    self.gridViewController.didTapShowShareActivityBlock = ^() {
+        [self_weak_ showShareActivityView:nil];
+    };
 }
 
 - (void)addTableViewControllerToContentView
@@ -164,12 +156,12 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
         
         [self.view bringSubviewToFront:self.footerView];
 
-        self.tableViewController.tableView.userInteractionEnabled = NO;
+        self.gridViewController.collectionView.userInteractionEnabled = NO;
     } else {
         
         [self hideFeedOverlay];
         
-        self.tableViewController.tableView.userInteractionEnabled = YES;
+        self.gridViewController.collectionView.userInteractionEnabled = YES;
     }
 }
 

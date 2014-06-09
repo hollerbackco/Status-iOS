@@ -6,14 +6,19 @@
 //  Copyright (c) 2014 Status. All rights reserved.
 //
 
+#import "UIView+JNHelper.h"
+#import "UIColor+JNHelper.h"
+#import "UIFont+JNHelper.h"
+
 #import "STFeedCell.h"
 
 NSString * STFeedCellIdent = @"STFeedCellIdent";
 CGSize const STFeedCellSize = { 284.0f, 160.0f };
+CGFloat const STFeedCellNameLabelHeight = 20.0;
 
 @implementation STFeedCell
 
-@synthesize imageView, imageURL;
+@synthesize imageView, imageURL, nameLabel, senderName;
 
 - (id)initWithFrame:(CGRect)frame {
     
@@ -25,8 +30,24 @@ CGSize const STFeedCellSize = { 284.0f, 160.0f };
         [imageView setContentMode:UIViewContentModeScaleAspectFill];
         [imageView setClipsToBounds:YES];
         [self addSubview:imageView];
+        
+        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, STFeedCellNameLabelHeight)];
+        nameLabel.center = CGPointMake(CGRectGetMidX(frame), frame.size.height - STFeedCellNameLabelHeight/2);
+        nameLabel.backgroundColor = JNClearColor;
+        [nameLabel applyTopHalfGradientBackgroundWithTopColor:JNClearColor bottomColor:JNBlackColor];
+        nameLabel.font = [UIFont primaryFontWithSize:14.0];
+        nameLabel.textAlignment = NSTextAlignmentCenter;
+        nameLabel.textColor = JNWhiteColor;
+        [nameLabel applyDarkerShadowLayer];
+        nameLabel.clipsToBounds = YES;
+        [self addSubview:nameLabel];
     }
     return self;
+}
+
+- (void)prepareForReuse
+{
+//    
 }
 
 - (void)setImageURL:(NSString *)newURL {
@@ -66,6 +87,16 @@ CGSize const STFeedCellSize = { 284.0f, 160.0f };
                 }
             }];
         }
+    }
+}
+
+- (void)setSenderName:(NSString *)newSenderName
+{
+    if (![senderName isEqualToString:newSenderName]) {
+        
+        senderName = newSenderName;
+        
+        nameLabel.text = newSenderName;
     }
 }
 

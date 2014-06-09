@@ -18,6 +18,9 @@
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSArray *statuses;
 
+@property (nonatomic) BOOL shouldDisplayExtraBottomCell;
+@property (nonatomic, copy) void(^didTapShowShareActivityBlock)();
+
 - (void)performFetchWithCachePolicy:(PFCachePolicy)cachePolicy;
 
 @end

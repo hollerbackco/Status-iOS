@@ -16,5 +16,7 @@ extern const CGSize STFeedCellSize;
 
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, copy) NSString *imageURL;
+@property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, copy) NSString *senderName;
 
 @end
