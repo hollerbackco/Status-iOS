@@ -511,6 +511,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     JNLog();
     [self setupStatusFeed];
     
+    [self.statusFeedViewController resetView];
+    
     self.statusFeedViewController.transitioningDelegate = self;
     self.statusFeedViewController.modalPresentationStyle = UIModalPresentationCustom;
     

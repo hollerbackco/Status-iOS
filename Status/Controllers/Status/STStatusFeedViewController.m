@@ -51,6 +51,14 @@
 
 #pragma mark - 
 
+- (void)resetView
+{
+    if (self.tableViewController && self.tableViewController.tableView) {
+        
+        [self.tableViewController.tableView scrollRectToVisible:CGRectMake(0.0, 0.0, 1.0, 1.0) animated:NO];
+    }
+}
+
 - (void)performFetch
 {
     JNLog();
@@ -67,9 +75,6 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
 {
     JNLog();
     self.title = @"Status";
-    
-//    self.navigationController.navigationBarHidden = NO;
-//    self.navigationItem.hidesBackButton = YES;
     
     [super viewDidLoad];
     
@@ -148,8 +153,6 @@ static NSString *CellIdentifier = @"STStatusTableViewCell";
     [super viewWillAppear:animated];
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
-    
-    [self.tableViewController.tableView scrollRectToVisible:CGRectMake(0.0, 0.0, 1.0, 1.0) animated:NO];
     
     if ([self shouldDisplayFeedOverlay]) {
         

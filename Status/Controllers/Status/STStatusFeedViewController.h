@@ -10,6 +10,8 @@
 
 @interface STStatusFeedViewController : JNViewController
 
+- (void)resetView;
+
 - (void)performFetch;
 
 - (void)performCreateStatusWithImage:(UIImage*)image;
