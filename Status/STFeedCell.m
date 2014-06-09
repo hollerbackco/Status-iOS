@@ -38,7 +38,7 @@ CGFloat const STFeedCellNameLabelHeight = 20.0;
         nameLabel.font = [UIFont primaryFontWithSize:14.0];
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.textColor = JNWhiteColor;
-        [nameLabel applyDarkerShadowLayer];
+        [nameLabel applyDarkShadowLayer];
         nameLabel.clipsToBounds = YES;
         [self addSubview:nameLabel];
     }
