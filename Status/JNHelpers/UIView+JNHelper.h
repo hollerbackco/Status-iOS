@@ -145,3 +145,23 @@ typedef void(^HBViewComplete)(BOOL finished);
 @end
 
 
+
+
+
+
+
+
+
+
+#pragma mark - Blur View
+
+@interface JNBlurView : UIView
+
+// Use the following property to set the tintColor. Set it to nil to reset.
+@property (nonatomic, strong) UIColor *blurTintColor;
+
+@end
+
+
+
+
