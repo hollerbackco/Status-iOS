@@ -11,6 +11,7 @@
 
 extern NSString * STFeedCellIdent;
 extern const CGSize STFeedCellSize;
+extern const CGSize STFeedCell35Size;
 
 @interface STFeedCell : UICollectionViewCell
 

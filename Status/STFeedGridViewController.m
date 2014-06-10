@@ -11,6 +11,7 @@
 #import "UIColor+STHelper.h"
 
 #import "JNIcon.h"
+#import "JNAppManager.h"
 
 #import "STFeedGridViewController.h"
 #import "STFeedCell.h"
@@ -35,7 +36,12 @@ static NSString *ExtraBottomCellIdentifier = @"ExtraBottomCellIdentifier";
     [layout setMinimumLineSpacing:0.0f];
     [layout setMinimumInteritemSpacing:0.0f];
     [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    [layout setItemSize:STFeedCellSize];
+    
+    if ([JNAppManager is3_5InchScreenSize]) {
+        [layout setItemSize:STFeedCell35Size];
+    } else {
+        [layout setItemSize:STFeedCellSize];
+    }
     
     self.collectionView = [[UICollectionView alloc] initWithFrame:bounds collectionViewLayout:layout];
     [self.collectionView setBackgroundColor:[UIColor whiteColor]];
@@ -81,7 +87,14 @@ static NSString *ExtraBottomCellIdentifier = @"ExtraBottomCellIdentifier";
         
         cell.contentView.backgroundColor = STGreenButtonBackgroundColor;
 
-        UILabel *textLabel = [[UILabel alloc] initWithFrame:(CGRect) {CGPointZero, STFeedCellSize}];
+        CGSize cellSize = CGSizeZero;
+        if ([JNAppManager is3_5InchScreenSize]) {
+            cellSize = STFeedCell35Size;
+        } else {
+            cellSize = STFeedCellSize;
+        }
+        
+        UILabel *textLabel = [[UILabel alloc] initWithFrame:(CGRect) {CGPointZero, cellSize}];
         textLabel.numberOfLines = 0;
         textLabel.textAlignment = NSTextAlignmentCenter;
         

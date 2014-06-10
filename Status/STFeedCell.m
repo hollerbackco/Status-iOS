@@ -14,6 +14,7 @@
 
 NSString * STFeedCellIdent = @"STFeedCellIdent";
 CGSize const STFeedCellSize = { 284.0f, 160.0f };
+CGSize const STFeedCell35Size = { 240.0f, 160.0f };
 CGFloat const STFeedCellNameLabelHeight = 20.0;
 
 @implementation STFeedCell
@@ -31,16 +32,18 @@ CGFloat const STFeedCellNameLabelHeight = 20.0;
         [imageView setClipsToBounds:YES];
         [self addSubview:imageView];
         
-        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, STFeedCellNameLabelHeight)];
-        nameLabel.center = CGPointMake(CGRectGetMidX(frame), frame.size.height - STFeedCellNameLabelHeight/2);
-        nameLabel.backgroundColor = JNClearColor;
-        [nameLabel applyTopHalfGradientBackgroundWithTopColor:JNClearColor bottomColor:JNBlackColor];
+        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, STFeedCellNameLabelHeight)];
+        footerView.center = CGPointMake(CGRectGetMidX(frame), frame.size.height - STFeedCellNameLabelHeight/2);
+        footerView.backgroundColor = JNClearColor;
+        [footerView applyTopHalfGradientBackgroundWithTopColor:JNClearColor bottomColor:JNBlackColor];
+        footerView.clipsToBounds = YES;
+        [self addSubview:footerView];
+        
+        nameLabel = [[UILabel alloc] initWithFrame:footerView.bounds];
         nameLabel.font = [UIFont primaryFontWithSize:14.0];
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.textColor = JNWhiteColor;
-        [nameLabel applyDarkShadowLayer];
-        nameLabel.clipsToBounds = YES;
-        [self addSubview:nameLabel];
+        [footerView addSubview:nameLabel];
     }
     return self;
 }
